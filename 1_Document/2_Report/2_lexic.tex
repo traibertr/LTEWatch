@@ -1,0 +1,83 @@
+\documentclass[Report.tex]{subfiles}
+
+\begin{document}
+
+\chapter*{Acknowledgments}
+
+\addcontentsline{toc}{chapter}{Acknowledgments}
+
+\setcounter{page}{1}
+
+I would like to express my deepest gratitude to \textsc{Medard Rieder} who gave me the necessary support and advice to help me complete this project as well as his confidence in the successful outcome of my work and for allowing me great autonomy in the management of the project.\\
+
+A special gratitude is also addressed to \textsc{Patrice Rudaz} whose contribution in terms of material accessibility, advice and dedication to help me familiarize myself with the project and coordinate my work as well as his precious help with the realization of the software part of the project.\\
+
+I also express my gratitude to \textsc{Steve Gallay} for his invaluable help, dedication and collaboration in helping me complete the hardware part of the project by supporting the rooting and orders of the \textit{PCBs}.
+
+\newpage
+
+\chapter*{Abbreviations}
+
+\addcontentsline{toc}{chapter}{Lexicon}
+\section*{TM}
+
+\begin{sortedlist}
+\sortitem{\textbf{SAW} : Surface Acoustic Wave}
+\sortitem{\textbf{LCD} : Liquid Crystal Display}
+\sortitem{\textbf{MIP} : Memory In Pixel}
+\sortitem{\textbf{RF} : Radio Frequency}
+\sortitem{\textbf{GNSS}\cite{gnssDef} : General term that encompasses any satellite constellation providing PNT services on a global or regional basis. Including BeiDou-BDS (China), Galileo (Europe), GLONASS (Russia), IRNSS-NavIC (India) and QZSS (Japan)}
+\sortitem{\textbf{PNT}\cite{gpsDef} : Positioning, Navigation and Timing}
+\sortitem{\textbf{GPS}\cite{gpsDef} : Global Positioning System ; U.S. proprietary PNT utility divided in three segments, the Space segment (U.S. Space Force), the Control segment (U.S. Space Force) and the User segment}
+\sortitem{\textbf{RHCP}\cite{rhcpDef} : Right Handed Circular Polarization; Circular polarization signals are transmitted on both horizontal and vertical planes with $90\degree$ phase shift, which induce a rotation of the signal wave. Right handed mean that the rotation is in the clockwise or anti-trigonometric.}
+\sortitem{\textbf{NLOS}\cite{nlosDef} : Non-Line Of Sight; Partial or complete obstruction of RF's path of propagation by an obstacle, such as buildings, trees, landscapes or high-voltage power conductors that can reflect or absorb the signal and thus limit the transmission efficiency.}
+\sortitem{\textbf{TTM} : Time to Market}
+\sortitem{\textbf{WPC} : Wireless Power Consortium is consortium that create and promote wide market adoption of \textit{Qi} interface standards}
+\sortitem{\textbf{QI} : \textit{QI} is an open wireless power transfer interface standard using inductive charging.}
+\end{sortedlist}
+
+
+\newpage
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+\section*{About Nordic Semiconductor\cite{aboutNordicSemi}}
+
+\textsc{Nordic Semiconductor} is a fabless semiconductor company from Norway specialized in wireless communication technologies and more particularly in \textit{Internet of things} (\textit{IoT}). The company is well known for its pioneer role in \textit{ultra low power wireless} solutions development such as \textit{Bluetooth Low Energy} (\textit{BLE}). They later implemented other technologies, such as: \textit{ANT+}, \textit{Thread}, \textit{Zigbee}, Low power and compact \textit{LTE-M/NB-IoT} cellular \textit{IoT} solutions, \textit{Wi-Fi technology}, \textit{GSMA}.
+
+\section*{Goal of the project}
+
+\textsc{Nordic Semiconductor} has developed the \textit{nRF91} family of \textit{cellular LTE-M/NB-IoT} communication devices. The goal of this Master Thesis is to develop the prototype of an analog wristwatch using a such device. There are many challenges to overcome in this project, to name just the most difficult ones as the mechanical as well the energy consumption constraints.
+
+\pagebreak
+
+\section*{Main tasks of the project}
+
+\begin{enumerate}
+\item \textbf{Specification:} Elaborate the exact specification of the wristwatch (number of hands, battery lifetime, user interface, size, recharging mechanism, case)
+\item \textbf{Antenna study:} The antenna of this device is particularly delicate. Since the communication is actually using 800 MHz, the antenna can not be as small as one would like it. So there has to be done a study how to solve this problems showing several innovative approaches how to solve this problem. At the conclusion of the study, a solution has to chosen for later implementation.
+\item \textbf{Hardware conception:}
+\begin{enumerate}
+	\item Component selection (Cellular communication, motors and so on)
+	\item Schematic and PCB realization of a prototype board 
+	\item Fabrication and electrical test of the prototype
+\end{enumerate} 
+\item \textbf{Software development}: Design and develop a simple watch application that must implement
+\begin{enumerate}
+\item Motorized clock’s hands
+\item Buttons
+\item LCD screen
+\item \textit{LTE-M/NB-IoT} data reception and transmission with MQTT
+\item \textit{GNSS} signal reception for position tracking and smart-watch time accuracy
+\item Battery monitoring, battery charging configuration and level monitoring
+\item Accelerometer usage
+\end{enumerate}
+\item \textbf{Prototype validation:} Test of the entire development
+\item \textbf{Documentation:} Establish a technical report enabling further developments
+\end{enumerate}
+
+
+
+
+
+\end{document}

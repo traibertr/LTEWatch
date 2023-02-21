@@ -1,0 +1,101 @@
+\documentclass[Report.tex]{subfiles}
+
+\begin{document}
+
+\chapter{Introduction}
+
+\section{About Nordic Semiconductor\cite{aboutNordicSemi}}
+
+\textsc{Nordic Semiconductor} is a fabless semiconductor company from Norway specialized in wireless communication technologies and more particularly in \textit{Internet of things} (\textit{IoT}). The company is well known for its pioneer role in \textit{ultra low power wireless} solutions development such as \textit{Bluetooth Low Energy} (\textit{BLE}). They later implemented other technologies, such as: \textit{ANT+}, \textit{Thread}, \textit{Zigbee}, Low power and compact \textit{LTE-M/NB-IoT} cellular \textit{IoT} solutions, \textit{Wi-Fi technology}, \textit{GSMA}.
+
+\section{Aim of Study}
+
+\textsc{Nordic Semiconductor} has developed the \textit{nRF91} family of \textit{cellular LTE-M/NB-IoT} communication devices. The goal of this Master Thesis is to develop the prototype of an analog wristwatch using a such device. There are many challenges to overcome in this project, to name just the most difficult ones as the mechanical as well the energy consumption constraints.
+
+\subsection{Description of the project}
+
+The project consist in the conception and the realization of a prototype board of a \textit{LTE-M/NB-IoT} and \textit{GNSS} \textit{hybrid smart-watch}. The project is quiet ambitious and, firstly from its multiple tasks that must be achieved and secondly because it covers a wide range subjects and require multiple skills such as:
+\begin{itemize}
+\item \textbf{Research and literature reviewing:}
+	\begin{itemize}
+		\item State of art of wearable application and current available solution and technologies.
+		\item Understanding main constraints of wearable low power applications
+		\item Understanding basics of low power \textit{cellular LTE-M/NB-IoT} and GNSS technologies
+	\end{itemize}
+\item \textbf{Hardware conception: }
+	\begin{itemize}
+		\item Decomposition of the system in functional blocs.
+		\item Component selection with current market's constraints (component shortage, time limits, etc...).
+		\item Schematic and PCB conception and realization.
+		\item Powering up and validating the prototype board.
+	\end{itemize}
+\item \textbf{Software development:} Understand, use or implement:
+	\begin{itemize}
+		\item \textit{nRF Connect for Desktop\cite{nRFConnectForDesktop}} development environment 
+		\item \textit{nRF Connect SKD\cite{nRFConnectSDK}} from \textsc{Nordic Semi}.
+		\item \textit{nrfx\cite{nrfx}} and \textit{nrfxlib\cite{nrfxlib}} modules from \textsc{Nordic Semi}.
+		\item \textit{Zephyr RTOS} from \textit{Zephyr Project\cite{zephyrProject}}.
+		\item Motor driver source files from Patrice Rudaz.
+		\item \textit{Soprod} project source files and librairies from Patrice Rudaz.
+		\item \textit{nRF91 AT Commands} from \textsc{Nordic Semi}.
+		\item \textit{LTE-M/NB-IoT} receiver and transmitter.
+		\item \textit{GNSS} receiver.
+		\item Multiple peripherals implementation (accelerometer, buttons, LCD screen, etc...).
+		\item Implement and use a \textit{LTE-M/NB-IoT} server for data collecting and visualization.
+		\item Develop a small watch application that demonstrate implemented functionality.
+	\end{itemize}
+\item \textbf{Test and measure:}
+	\begin{itemize}
+		\item Electrical test and validation of the prototype board.
+		\item Modification or correction of possible conception mistakes.
+		\item Consumption and performance test.
+	\end{itemize}
+\end{itemize}
+
+\subsection{Objectives of the project}
+
+The objectives of the project is to achieve the full conception of a prototype board of a  This project expect to achieve the following tasks and objectives:
+
+\begin{enumerate}
+\item \textbf{Specification:} Elaborate the exact specification of the wristwatch (number of hands, battery lifetime, user interface, size, recharging mechanism, case)
+\item \textbf{Antenna study:} The antenna of this device is particularly delicate. Since the communication is actually using 800 MHz, the antenna can not be as small as one would like it. So there has to be done a study how to solve this problems showing several innovative approaches how to solve this problem. At the conclusion of the study, a solution has to chosen for later implementation.
+\item \textbf{Hardware conception:}
+\begin{enumerate}
+	\item Component selection (Cellular communication, motors and so on)
+	\item Schematic and PCB realization of a prototype board 
+	\item Fabrication and electrical test of the prototype
+\end{enumerate} 
+\item \textbf{Software development}: Design and develop a simple watch application that must implement:
+\begin{enumerate}
+\item Clock hands motors
+\item Buttons
+\item LCD screen
+\item \textit{LTE-M/NB-IoT} data reception and transmission
+\item GNSS tracking and timing reception
+\item Accelerometer usage
+\end{enumerate}
+\item \textbf{Prototype validation:} Test of the entire development
+\item \textbf{Documentation:} Establish a technical report enabling further developments
+\end{enumerate}
+
+\subsection{Prerequisites}
+This project requires a wide range of knowledges and skills, such as:
+\begin{itemize}
+\item Electronic engineering (user interface, motors, schematic and PCB)
+\item A few mechanical knowledge (watch case, 3d printing)
+\item Embedded software engineering (communication protocols, RTOS, UML, C / C++, watch application)
+\item Preindustrialisation of consumer electronics
+\item Radio frequency engineering (antenna)
+\end{itemize}
+
+\section{Scope and Limitation of Study}
+
+\textit{LTEWatch} project consist in the design and the fabrication of an "hybrid" Smart-Watch. The "hybrid" qualification consist in integration of mechanical watch hands ($\mathbf{H:M:S}$) in a smart connected wearable device.\\
+
+ Since the project deserve a large amount of work, the idea is to first create a prototype board as a Proof Of Concept (\textit{POC}) enabling the design and development of the Smart-Watch application software and also to test and have a better idea of the device consumption and performance.\\
+ 
+This project is a Master-Thesis, which involves multiple constraints that partly limit the expected result of the project. Because this is an academic project, it is subject to a relatively limited time constraint and limited resources that require finding solutions that are accessible, available quickly and more secure.
+
+
+\end{document}
+

@@ -1,0 +1,76 @@
+\section{tableau}
+% Inclure un tableau
+\begin{table}[H]
+\centering
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    11 & 12 & 13 & 15 & 15  \\
+    \hline
+    21 & 22 & 23 & 24 & 25  \\
+    \hline
+    31 & 32 & 33 & 34 & 35  \\
+    \hline
+    41 & 42 & 43 & 44 & 45  \\      
+    \hline
+    \end{tabular}
+    \caption{Légende}
+    \label{table:Name}
+\end{table}
+
+\section{équation}
+% Inclure une équation
+\begin{equation}
+    \label{eq:Name}
+    (a+b)^2 = a^2 + 2 \cdot a \cdot b + b^2 
+\end{equation}
+\myequations{Titre de l'équation}
+
+\section{figure}
+% Inclure une figure
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Include/Figure/logo/SignatureTR.png}
+    \caption{Légende}
+    \label{fig:Name}
+\end{figure}
+
+\section{PDF}
+% Inclure un fichier PDF
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Include/Figure/logo/mse-full-cropped.pdf}
+\end{figure}
+
+\section{itemize}
+\begin{itemize}
+  \item One
+  \item Two
+\end{itemize}
+
+\section{enumerate}
+\begin{enumerate}
+    \item
+        \subitem
+\end{enumerate}
+
+% Commentaire sur plusieurs lignes
+\iffalse 
+    Texte à mettre en commentaire
+\fi
+
+\section{lstlisting}
+\begin{lstlisting}[language=c++,caption={Exemple d'un bon programme d'allocation dynamique}]
+code
+\end{lstlisting}
+
+\begin{lstlisting}[style=c,label={lst:xxx},caption={}]
+ code C
+\end{lstlisting}
+
+\begin{lstlisting}[style=console,label={lst:xxx},caption={}]
+ code bash
+\end{lstlisting}
+
+%\begin{lstlisting}[style=txt,label={lst:xxx},caption={}]
+% Text
+%\end{lstlisting}
