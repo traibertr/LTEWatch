@@ -1,0 +1,446 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% HEIG-VD
+%%
+%% Modèle Latex pour laboratoire
+%% 
+%% Fichiers à changer : 
+%%            - constantes.tex
+%%            - Tous les fichiers du corps du rapport 
+%%
+%% Auteur : TTR
+%% Date   : 24.03.2020
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Paramétrage du papier utilisé
+\documentclass[a4paper,12pt,oneside]{report}
+
+% Ne pas toucher, nécessaire à la mise en forme
+\usepackage[utf8x]{inputenc} 
+\usepackage[T1]{fontenc} 		% Nouvelle norme pour codage des caractères
+\usepackage{titlesec, blindtext, color}
+\newcommand{\hsp}{\hspace{20pt}}
+\titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter \hsp}{0pt}{\Huge\bfseries}
+\titlespacing*{\chapter}{0pt}{-10pt}{\baselineskip}% see titlesec manual
+\usepackage{lmodern} 			% Nouvelle forme de la fonte ComputerModern
+\usepackage[english,french]{babel} 		% Règles typographiques françaises, césures
+\frenchbsetup{GlobalLayoutFrench=false}
+\usepackage{gensymb}  			% Afficher le ° $^{\circ}$
+\usepackage{graphicx} 			% Insertion images
+\usepackage{epstopdf} 			% Convertir les images eps vers pdf
+\epstopdfsetup{outdir=./Images/converted_to_pdf/} % Dossier de sortie des images converties
+\pagenumbering{arabic}
+\usepackage[top=3cm, bottom=3cm, left=3cm, right=3cm, showframe=false]{geometry}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{color}
+\usepackage{lscape}
+\usepackage{tocloft}
+\usepackage{float}
+\usepackage{textcomp}
+\usepackage{markdown}
+\usepackage{tabto}
+\usepackage{makecell}
+\usepackage{pdfpages}
+\usepackage{hyperref}
+\usepackage{xurl}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\renewcommand\tabularxcolumn[1]{m{#1}}% for vertical centering text in X column
+\usepackage{siunitx}
+\usepackage{subfiles}
+\usepackage{relsize}
+\usepackage{pdflscape}
+
+\usepackage{rotating}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{trees}
+
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usepackage{arydshln}
+\usepackage{blindtext}
+
+\usepackage{afterpage}
+\usepackage{bbding}
+
+\usepackage{multirow}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+%\usepackage{verbatim}
+
+\usepackage{amssymb}% http://ctan.org/pkg/amssymb
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+% Enumerate style
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
+\renewcommand{\labelenumiv}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic{enumiv}}
+
+% Directory tree package
+\usepackage{dirtree}
+
+\definecolor{mygray}{gray}{0.95}
+
+\newcommand{\tree}[4]{
+\begin{figure}[H] 
+\renewcommand\figurename{Tree}
+\centering 
+\setlength{\fboxsep}{0pt}%
+\setlength{\fboxrule}{0pt}%
+\fbox{\colorbox{mygray}{
+\begin{minipage}[t]{#1\linewidth}
+ \dirtree{#4}	 
+ \end{minipage}
+ }}
+ \caption{#3}
+ \label{tree:#2}
+\end{figure}}
+
+\definecolor{myOrange}{rgb}{1,0.93,0.86}
+
+\newcommand{\warning}[1]{%
+\begin{center}
+\setlength{\fboxsep}{4pt}%
+\setlength{\fboxrule}{0pt}%
+\fbox{\colorbox{myOrange}{\parbox{0.95\linewidth}{\centering{#1}}}}
+\end{center}
+}
+
+\definecolor{myblue}{rgb}{0.8,0.9,1}
+
+\newcommand{\link}[1]{%
+\begin{center}
+\setlength{\fboxsep}{4pt}%
+\setlength{\fboxrule}{0pt}%
+\fbox{\colorbox{myblue}{\parbox{0.95\linewidth}{\centering \url{#1}}}}
+\end{center}
+}
+
+% Sorted List
+
+\usepackage{datatool}% http://ctan.org/pkg/datatool
+\newcommand{\sortitem}[1]{%
+  \DTLnewrow{list}% Create a new entry
+  \DTLnewdbentry{list}{description}{#1}% Add entry as description
+}
+\newenvironment{sortedlist}{%
+  \DTLifdbexists{list}{\DTLcleardb{list}}{\DTLnewdb{list}}% Create new/discard old list
+}{\DTLsort{description}{list}% Sort list
+  \begin{itemize}%
+    \DTLforeach*{list}{\theDesc=description}{%
+      \item \theDesc}% Print each item
+  \end{itemize}%
+}
+
+% Code in one line\
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{xparse}
+% Bash listing style
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {Ã}{{\~A}}1 {ã}{{\~a}}1 {Õ}{{\~O}}1 {õ}{{\~o}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+
+\lstdefinestyle{C}{
+	backgroundcolor=\color{mygray},   		% choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+	basicstyle=\footnotesize\ttfamily,  	% the size of the fonts that arexy used for the code
+	belowcaptionskip=1\baselineskip,
+	breakatwhitespace=true,         		% sets if automatic breaks should only happen at whitespace
+	breaklines=true,                 		% sets automatic line breaking
+	postbreak=\raisebox{0ex}[0ex][0ex]{$\hookrightarrow\;$},
+	captionpos=b,                    		% sets the caption-position to bottom
+	commentstyle=\color{green!40!black},,   % comment style
+	deletekeywords={...},            		% if you want to delete keywords from the given language
+	escapeinside={\%*}{*)},          		% if you want to add LaTeX within your code
+	extendedchars=true,              		% lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+	firstnumber=1,                			% start line enumeration with line 1
+	frame=leftline,	                   
+	identifierstyle=\color{blue!50!black},
+	keepspaces=true,                 		% keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+	keywordstyle=\bfseries\color{violet},   % keyword style
+	language=C,                 			% the language of the code
+	morekeywords={*,...},            		% if you want to add more keywords to the set
+	numbers=left,                    		% where to put the line-numbers; possible values are (none, left, right)
+	numbersep=10pt,                   		% how far the line-numbers are from the code
+	numberstyle=\tiny\color{gray}, 			% the style that is used for the line-numbers
+	rulecolor=\color{black},         		% if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+	showspaces=false,                		% show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+	showstringspaces=false,          		% underline spaces within strings only
+	showtabs=false,                  		% show tabs within strings adding particular underscores
+	stepnumber=1,                    		% the step between two line-numbers. If it's 1, each line will be numbered
+	stringstyle=\color{orange},
+	tabsize=2,	                   			% sets default tabsize to 2 spaces
+	title=\lstname,
+	%xleftmargin=1.5cm,
+	 xleftmargin=\parindent,
+}
+
+\definecolor{mygreen}{rgb}{0.1,0.4,0.1}
+\lstdefinestyle{console}{
+	backgroundcolor=\color{mygray},
+	basicstyle=\footnotesize\ttfamily\color{black},
+	commentstyle=\color{mygreen},
+	keywordstyle=\color{blue},
+    numberstyle=\tiny\color{gray},
+    stringstyle=\color{purple},
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    language=bash,
+    xleftmargin=\parindent,
+}
+%\lstset{language=Bash,keywordstyle={\bfseries \color{black}}}
+%\NewDocumentCommand{\codeword}{v}{\texttt{\colorbox{lightgray}{\textcolor{black}{#1}}}}
+
+\NewDocumentCommand{\codeword}{v}{\textcolor{blue}{#1}}
+
+%-------------------------------------------------------------------------------------
+
+\newcommand{\codetxt}[1]{\textcolor{blue}{\texttt{\path{#1}}}}
+
+%-------------------------------------------------------------------------------------
+
+\newcommand{\eme}{\ieme{ }}
+\newcommand{\er}{\ier{ }}
+\newcommand{\ere}{\iere{ }}
+
+\usepackage{float,graphicx}
+
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+
+%Figure
+\newcommand{\figc}[3]{%
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=#1\textwidth]{Include/Figure/#2.png}
+    \caption{#3}
+    \label{fig:#2}
+  \end{figure}}
+  
+  \newcommand{\figpdf}[3]{%
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=#1\textwidth]{Include/Figure/#2.pdf}
+    \caption{#3}
+    \label{fig:#2}
+  \end{figure}}
+  
+
+\newcommand{\figl}[4]{
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{l X}
+    \centered{\includegraphics[width=#1\textwidth]{Include/Figure/#2.png}} & \begin{tabular}{#3}#4\end{tabular}
+\end{tabularx}
+\end{table}}
+
+\newcommand{\figr}[4]{
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{X r}
+	\begin{tabular}{#3} #4 \end{tabular} & \centered{\includegraphics[width=#1\textwidth]{Include/Figure/#2.png}}
+\end{tabularx}
+\end{table}}
+
+\newcommand{\figcjpg}[3]{%
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=#1\textwidth]{Include/Figure/#2.jpg}
+    \caption{#3}
+    \label{fig:#2}
+  \end{figure}}
+  
+\newcommand{\figljpg}[4]{
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{l X}
+    \centered{\includegraphics[width=#1\textwidth]{Include/Figure/#2.jpg}} & \begin{tabular}{#3}#4\end{tabular}
+\end{tabularx}
+\end{table}}
+  
+\newcommand{\figrjpg}[4]{
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{X r}
+	\begin{tabular}{#3} #4 \end{tabular} & \centered{\includegraphics[width=#1\textwidth]{Include/Figure/#2.jpg}}
+\end{tabularx}
+\end{table}}
+
+\newcommand{\centered}[1]{\begin{tabular}{l} #1 \end{tabular}}
+
+\newcommand{\tbox}[1]{
+\begin{tabular}{|c|}
+\hline #1 \\[4pt]\hline
+\end{tabular}}
+
+\newcommand{\ii}[1]{%
+\begin{itemize}[\;]%
+\item #1%
+\end{itemize}}
+
+%TO DO
+\newcommand{\todo}[1]{\begin{center}
+\colorbox{orange!50}{\Large #1}
+\end{center}}
+
+\newcommand{\listequationsname}{\Large{Liste des équations}}
+\newlistof{myequations}{equ}{\listequationsname}
+\newcommand{\myequations}[1]{%
+\addcontentsline{equ}{myequations}{\protect\numberline{\theequation}#1}\par}
+
+\newcommand{\ddl}[1]{\underline{\underline{#1}}}
+
+
+% fichier avec les constantes (à adapter pour les étudiants)
+\input{0_constantes}
+
+% Entête et pieds de page (A ADAPTER)
+\pagestyle{empty}
+\usepackage{fancyhdr}
+\setlength{\headheight}{25pt}
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{#1}}
+
+% Entête :
+\fancypagestyle{plain}{}
+\renewcommand\headrulewidth{1pt}
+\fancyhead[L]{\includegraphics[height=8mm]{Include/Figure/logo/mse-small-logo.png}}
+\fancyhead[R]{\textsc{\nomAuteur} \\ \begin{otherlanguage}{english} \today \end{otherlanguage}}
+\fancyhead[C]{\nameLabo \\ \shortTitre}
+% Pied de page
+\fancyfoot{} % clear all footer fields
+\renewcommand{\footrulewidth}{1pt}
+\fancyfoot[R]{\thepage} 
+\fancyfoot[L]{\textsc{\leftmark}}
+
+\newcommand{\specialcell}[2][l]{%
+  \begin{tabular}[#1]{@{}l@{}}#2\end{tabular}}
+
+% Début du corps du rapport 
+\begin{document}	
+
+	\pagenumbering{Roman}
+	
+	% première page
+	\input{1_premiere_page.tex}
+	% enlève le numéro sur la première page
+	\newpage
+	
+	\subfile{2_lexic.tex}
+
+	\newpage
+
+	\begin{otherlanguage}{english}
+		\chapter*{Table of Contents}
+		\addcontentsline{toc}{chapter}{Table of Contents}
+		\renewcommand\contentsname{} % the empty name
+		\begingroup
+			\let\clearpage\relax
+			\vspace{-3.5cm} % the removed space. Set as appropriate
+			\tableofcontents
+		\endgroup
+	\end{otherlanguage}
+
+	\newpage	
+	
+	
+	\pagenumbering{arabic}
+	\setcounter{page}{1}
+	
+	\subfile{3_introduction.tex}
+		
+	\newpage
+	
+	\subfile{4_research_part.tex}
+	
+	\newpage
+	
+	\subfile{4_b_solution_part.tex}
+	
+	\newpage	
+	
+	\subfile{4_1_hardware_part.tex}
+
+	\newpage
+	
+	\subfile{4_2_antenna_part.tex}	
+		
+	\newpage
+	
+	\subfile{4_3_software_part.tex}	
+
+	\newpage	
+	
+	\subfile{5_experimental_part.tex}
+	
+%	\newpage
+	
+%	\subfile{6_result.tex}
+	
+	\newpage
+	
+	\subfile{7_discussion.tex}
+	
+	\newpage
+	
+	\subfile{8_conclusion.tex}
+	
+	%\newpage 
+	
+	%\subfile{report_struct.tex}
+	
+	%Section pour la signature
+	\section*{Signatures}
+  	\;\\[-20pt]
+    %\vspace{2cm}
+    
+    \tabto{8cm}Lausanne, \today\\
+    \tabto{8cm}Tristan Traiber \\
+    
+    \begin{flushright}
+    \begin{figure}[H]
+       \tabto{8cm} \includegraphics[width=4.0cm]{Include/Figure/logo/SignatureTR.PNG}
+    \end{figure}
+    \end{flushright}
+
+\begin{otherlanguage}{english}
+	\bibliographystyle{unsrt}
+	\bibliography{bibliographie.bib}
+\end{otherlanguage}
+
+
+\begin{otherlanguage}{english}
+	\listoffigures
+	\listoftables
+\end{otherlanguage}    
+   
+	
+	\newpage
+	\subfile{9_annexes}
+	
+	\newpage
+	%\input{__Exemple_include}
+	
+%Fin du document
+\end{document}
