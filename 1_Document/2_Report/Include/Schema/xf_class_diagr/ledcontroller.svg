@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="762px" preserveAspectRatio="none" style="width:1037px;height:762px;background:#FFFFFF;" version="1.1" viewBox="0 0 1037 762" width="1037px" zoomAndPan="magnify"><defs><filter height="300%" id="f1jyu6cm5zti" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[a2a7b5d9d77e171f70f4c81a84f6a345]
+class LedController--><rect codeLine="1" fill="#FEFECE" filter="url(#f1jyu6cm5zti)" height="559.9297" id="LedController" style="stroke:#A80036;stroke-width:1.5;" width="1014" x="9" y="7"/><ellipse cx="474.25" cy="23" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M477.0156,18.875 Q477.1719,18.6563 477.3594,18.5469 Q477.5469,18.4375 477.7656,18.4375 Q478.1406,18.4375 478.375,18.6953 Q478.6094,18.9531 478.6094,19.5625 L478.6094,21.0156 Q478.6094,21.625 478.375,21.8906 Q478.1406,22.1563 477.7656,22.1563 Q477.4219,22.1563 477.2188,21.9531 Q477.0156,21.7656 476.9063,21.25 Q476.8594,20.8906 476.6719,20.7031 Q476.3438,20.3281 475.7344,20.1094 Q475.125,19.8906 474.5,19.8906 Q473.7344,19.8906 473.1016,20.2188 Q472.4688,20.5469 471.9766,21.2969 Q471.4844,22.0469 471.4844,23.0781 L471.4844,24.1719 Q471.4844,25.4063 472.375,26.2266 Q473.2656,27.0469 474.8594,27.0469 Q475.7969,27.0469 476.4531,26.7969 Q476.8438,26.6406 477.2656,26.2031 Q477.5313,25.9375 477.6797,25.8594 Q477.8281,25.7813 478.0313,25.7813 Q478.3594,25.7813 478.6172,26.0391 Q478.875,26.2969 478.875,26.6406 Q478.875,26.9844 478.5313,27.3906 Q478.0313,27.9688 477.2344,28.2969 Q476.1563,28.75 474.8594,28.75 Q473.3438,28.75 472.1406,28.125 Q471.1563,27.625 470.4688,26.5547 Q469.7813,25.4844 469.7813,24.2031 L469.7813,23.0469 Q469.7813,21.7188 470.3984,20.5703 Q471.0156,19.4219 472.1094,18.8047 Q473.2031,18.1875 474.4375,18.1875 Q475.1719,18.1875 475.8203,18.3516 Q476.4688,18.5156 477.0156,18.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="75" x="494.75" y="27.9102">LedController</text><line style="stroke:#A80036;stroke-width:1.5;" x1="10" x2="1022" y1="39" y2="39"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="17" y="47"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="177" x="29" y="54.4189">DEFAULT_TIME_ON_TICKS : uint32_t</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="0" x="32" y="68.2549"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="17" y="74.6719"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="124" x="29" y="82.0908">_currentState : eLedState</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="17" y="88.5078"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="66" x="29" y="95.9268">_index : short</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="17" y="102.3438"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="89" x="29" y="109.7627">_ticksOn : uint32_t</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="17" y="116.1797"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="91" x="29" y="123.5986">_ticksOff : uint32_t</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="17" y="130.0156"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="56" x="29" y="137.4346">_blink : bool</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="17" y="143.8516"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="100" x="29" y="151.2705">_isTimerActive : bool</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="17" y="157.6875"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="117" x="29" y="165.1064">_quickOnTicks : uint32_t</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="17" y="171.5234"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="119" x="29" y="178.9424">_quickOffTicks : uint32_t</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="17" y="185.3594"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="107" x="29" y="192.7783">_stdOnTicks : uint32_t</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="17" y="199.1953"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="109" x="29" y="206.6143">_stdOffTicks : uint32_t</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="17" y="213.0313"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="116" x="29" y="220.4502">_slowOnTicks : uint32_t</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="17" y="226.8672"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="118" x="29" y="234.2861">_slowOffTicks : uint32_t</text><line style="stroke:#A80036;stroke-width:1.5;" x1="10" x2="1022" y1="240.7031" y2="240.7031"/><ellipse cx="20" cy="251.7031" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="72" x="29" y="256.1221">LedController()</text><ellipse cx="20" cy="265.5391" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" font-style="italic" lengthAdjust="spacing" textLength="81" x="29" y="269.958">~LedController()</text><ellipse cx="20" cy="279.375" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="353" x="29" y="283.7939">initialize(index : uint8_t, ticksOn : uint32_t , totalTimeTicks : uint32_t) : void</text><ellipse cx="20" cy="293.2109" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="85" x="29" y="297.6299">lodOn(void) : void</text><ellipse cx="20" cy="307.0469" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="87" x="29" y="311.4658">ledOff(void) : void</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="0" x="32" y="325.3018"/><ellipse cx="20" cy="334.7188" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="301" x="29" y="339.1377">{inline} setTimings(timeOn : uint16_t, totalTime : uint16_t ) : void</text><ellipse cx="20" cy="348.5547" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="332" x="29" y="352.9736">{inline} setTicksTimings(ticksOn : uint32_t, totalTicks : uint32_t ) : void</text><ellipse cx="20" cy="362.3906" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="988" x="29" y="366.8096">setTimerTicksforQuickStandardAndSlowBlinkingState(ticksOnQuick : uint32_t, totalTicksQuick : uint32_t , ticksOnStd : uint32_t, totalTicksStd : uint32_t, ticksOnSlow : uint32_t, totalTicksSlow : uint32_t) : void</text><ellipse cx="20" cy="376.2266" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="136" x="29" y="380.6455">{inline} isBlinking(void) : bool</text><ellipse cx="20" cy="390.0625" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="117" x="29" y="394.4814">{inline}  isOn(void) : bool</text><ellipse cx="20" cy="403.8984" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="121" x="29" y="408.3174">startBlinking(force : bool)</text><ellipse cx="20" cy="417.7344" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="142" x="29" y="422.1533">startQuickBlinking(void) : void</text><ellipse cx="20" cy="431.5703" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="159" x="29" y="435.9893">startStandardBlinking(void) : void</text><ellipse cx="20" cy="445.4063" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="140" x="29" y="449.8252">startSlowBlinking(void) : void</text><ellipse cx="20" cy="459.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="86" x="29" y="463.6611">toggle(void) : void</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="0" x="32" y="477.4971"/><polygon fill="#FFFF44" points="20,481.9141,24,485.9141,20,489.9141,16,485.9141" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" font-style="italic" lengthAdjust="spacing" textLength="162" x="29" y="491.333">processEvent(void) : EventStatus</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="17" y="497.75"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="255" x="29" y="505.1689">_setInternalTimings(on : uint32_t, off : uint32_t) : void</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="17" y="511.5859"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="100" x="29" y="519.0049">_stopBlinking() : void</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="17" y="525.4219"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="101" x="29" y="532.8408">_startBlinking() : void</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="17" y="539.2578"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="144" x="29" y="546.6768">_ST_LED_OFF_Action() : void</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="17" y="553.0938"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="139" x="29" y="560.5127">_ST_LED_ON_Action() : void</text><!--MD5=[624bf9356675bcda5b52ed58c354c833]
+class eTimeoutId--><rect codeLine="43" fill="#FEFECE" filter="url(#f1jyu6cm5zti)" height="75.6719" id="eTimeoutId" style="stroke:#A80036;stroke-width:1.5;" width="112" x="388" y="658.5"/><ellipse cx="411.1" cy="674.5" fill="#EB937F" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M409.9594,675.2969 L409.9594,677.7969 L414.2875,677.7969 L414.2875,676.875 Q414.2875,676.2656 414.5297,676 Q414.7719,675.7344 415.1469,675.7344 Q415.5219,675.7344 415.7563,676 Q415.9906,676.2656 415.9906,676.875 L415.9906,679.5 L407.9906,679.5 Q407.3656,679.5 407.1078,679.2656 Q406.85,679.0313 406.85,678.6406 Q406.85,678.2656 407.1156,678.0313 Q407.3813,677.7969 407.9906,677.7969 L408.2563,677.7969 L408.2563,671.1406 L407.9906,671.1406 Q407.3656,671.1406 407.1078,670.9063 Q406.85,670.6719 406.85,670.2813 Q406.85,669.9063 407.1078,669.6719 Q407.3656,669.4375 407.9906,669.4375 L415.6156,669.4375 L415.6156,672.0313 Q415.6156,672.6406 415.3891,672.8984 Q415.1625,673.1563 414.7719,673.1563 Q414.3969,673.1563 414.1625,672.8984 Q413.9281,672.6406 413.9281,672.0313 L413.9281,671.1406 L409.9594,671.1406 L409.9594,673.5938 L411.4438,673.5938 Q411.4438,672.9375 411.5688,672.75 Q411.8344,672.3438 412.3031,672.3438 Q412.6781,672.3438 412.9125,672.6016 Q413.1469,672.8594 413.1469,673.4688 L413.1469,675.4375 Q413.1469,675.9844 413.0219,676.1719 Q412.7563,676.5625 412.3031,676.5625 Q411.8344,676.5625 411.5688,676.1563 Q411.4438,675.9688 411.4438,675.2969 L409.9594,675.2969 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="62" x="426.9" y="679.4102">eTimeoutId</text><line style="stroke:#A80036;stroke-width:1.5;" x1="389" x2="499" y1="690.5" y2="690.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="100" x="394" y="705.9189">Timeout_LED_id  := 1</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="96" x="394" y="719.7549">Timeout_end_of_list</text><line style="stroke:#A80036;stroke-width:1.5;" x1="389" x2="499" y1="726.1719" y2="726.1719"/><!--MD5=[928d5c4e31c84505d8c1fc948d50f8de]
+class eLedState--><rect codeLine="48" fill="#FEFECE" filter="url(#f1jyu6cm5zti)" height="103.3438" id="eLedState" style="stroke:#A80036;stroke-width:1.5;" width="105" x="535.5" y="645"/><ellipse cx="558.15" cy="661" fill="#EB937F" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M557.0094,661.7969 L557.0094,664.2969 L561.3375,664.2969 L561.3375,663.375 Q561.3375,662.7656 561.5797,662.5 Q561.8219,662.2344 562.1969,662.2344 Q562.5719,662.2344 562.8063,662.5 Q563.0406,662.7656 563.0406,663.375 L563.0406,666 L555.0406,666 Q554.4156,666 554.1578,665.7656 Q553.9,665.5313 553.9,665.1406 Q553.9,664.7656 554.1656,664.5313 Q554.4313,664.2969 555.0406,664.2969 L555.3063,664.2969 L555.3063,657.6406 L555.0406,657.6406 Q554.4156,657.6406 554.1578,657.4063 Q553.9,657.1719 553.9,656.7813 Q553.9,656.4063 554.1578,656.1719 Q554.4156,655.9375 555.0406,655.9375 L562.6656,655.9375 L562.6656,658.5313 Q562.6656,659.1406 562.4391,659.3984 Q562.2125,659.6563 561.8219,659.6563 Q561.4469,659.6563 561.2125,659.3984 Q560.9781,659.1406 560.9781,658.5313 L560.9781,657.6406 L557.0094,657.6406 L557.0094,660.0938 L558.4938,660.0938 Q558.4938,659.4375 558.6188,659.25 Q558.8844,658.8438 559.3531,658.8438 Q559.7281,658.8438 559.9625,659.1016 Q560.1969,659.3594 560.1969,659.9688 L560.1969,661.9375 Q560.1969,662.4844 560.0719,662.6719 Q559.8063,663.0625 559.3531,663.0625 Q558.8844,663.0625 558.6188,662.6563 Q558.4938,662.4688 558.4938,661.7969 L557.0094,661.7969 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="56" x="573.85" y="665.9102">eLedState</text><line style="stroke:#A80036;stroke-width:1.5;" x1="536.5" x2="639.5" y1="677" y2="677"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="93" x="541.5" y="692.4189">ST_UNKNOWN := 0</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="36" x="541.5" y="706.2549">ST_INIT</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="64" x="541.5" y="720.0908">ST_LED_OFF</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="59" x="541.5" y="733.9268">ST_LED_ON</text><line style="stroke:#A80036;stroke-width:1.5;" x1="536.5" x2="639.5" y1="740.3438" y2="740.3438"/><!--MD5=[83d371c0bf7a057216d163b37be3de39]
+link LedController to eTimeoutId--><path codeLine="55" d="M466.68,567.12 C460.8,600.43 455.47,630.61 451.45,653.32 " fill="none" id="LedController-to-eTimeoutId" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="450.56,658.35,456.0659,650.1839,451.4306,653.4264,448.1881,648.791,450.56,658.35" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="468,601.6758,472,605.6758,468,609.6758,464,605.6758" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="56" x="475" y="611.4951">«typedef»</text><!--MD5=[6d810836ab2fd7bd317d058c5444574b]
+link LedController to eLedState--><path codeLine="56" d="M565.32,567.12 C570.09,594.11 574.49,619.04 578.13,639.62 " fill="none" id="LedController-to-eLedState" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="579.03,644.75,581.4019,635.191,578.1594,639.8264,573.5241,636.5839,579.03,644.75" style="stroke:#A80036;stroke-width:1.0;"/><ellipse cx="578" cy="606.6758" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;fill:none;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="56" x="585" y="611.4951">«typedef»</text><!--MD5=[28bfdc9e12da7f5c89893e49bb31e635]
+@startuml LedController
+class LedController{
+    + LedController() 
+    + {abstract} ~LedController()
+    + initialize(index : uint8_t, ticksOn : uint32_t , totalTimeTicks : uint32_t) : void
+    + lodOn(void) : void
+    + ledOff(void) : void
+
+    + {inline} setTimings(timeOn : uint16_t, totalTime : uint16_t ) : void
+    + {inline} setTicksTimings(ticksOn : uint32_t, totalTicks : uint32_t ) : void
+    + setTimerTicksforQuickStandardAndSlowBlinkingState(ticksOnQuick : uint32_t, totalTicksQuick : uint32_t , ticksOnStd : uint32_t, totalTicksStd : uint32_t, ticksOnSlow : uint32_t, totalTicksSlow : uint32_t) : void
+    + {inline} isBlinking(void) : bool
+    + {inline}  isOn(void) : bool
+    + startBlinking(force : bool)
+    + startQuickBlinking(void) : void
+    + startStandardBlinking(void) : void
+    + startSlowBlinking(void) : void
+    + toggle(void) : void
+
+    'Protected
+    # {abstract} processEvent(void) : EventStatus
+    'Private 
+    - {static}  DEFAULT_TIME_ON_TICKS : uint32_t
+
+    - _currentState : eLedState
+    - _index : short
+    - _ticksOn : uint32_t
+    - _ticksOff : uint32_t
+    - _blink : bool
+    - _isTimerActive : bool
+    - _quickOnTicks : uint32_t
+    - _quickOffTicks : uint32_t
+    - _stdOnTicks : uint32_t
+    - _stdOffTicks : uint32_t
+    - _slowOnTicks : uint32_t
+    - _slowOffTicks : uint32_t
+    - _setInternalTimings(on : uint32_t, off : uint32_t) : void
+    - _stopBlinking() : void
+    - _startBlinking() : void
+    - _ST_LED_OFF_Action() : void
+    - _ST_LED_ON_Action() : void
+}
+
+enum eTimeoutId{
+    Timeout_LED_id  := 1
+    Timeout_end_of_list
+}
+
+enum eLedState{
+    ST_UNKNOWN := 0
+    ST_INIT
+    ST_LED_OFF
+    ST_LED_ON
+}
+
+LedController -d-> eTimeoutId : # <<typedef>>
+LedController -d-> eLedState  : + <<typedef>>
+
+@enduml 
+
+@startuml LedController
+class LedController{
+    + LedController() 
+    + {abstract} ~LedController()
+    + initialize(index : uint8_t, ticksOn : uint32_t , totalTimeTicks : uint32_t) : void
+    + lodOn(void) : void
+    + ledOff(void) : void
+
+    + {inline} setTimings(timeOn : uint16_t, totalTime : uint16_t ) : void
+    + {inline} setTicksTimings(ticksOn : uint32_t, totalTicks : uint32_t ) : void
+    + setTimerTicksforQuickStandardAndSlowBlinkingState(ticksOnQuick : uint32_t, totalTicksQuick : uint32_t , ticksOnStd : uint32_t, totalTicksStd : uint32_t, ticksOnSlow : uint32_t, totalTicksSlow : uint32_t) : void
+    + {inline} isBlinking(void) : bool
+    + {inline}  isOn(void) : bool
+    + startBlinking(force : bool)
+    + startQuickBlinking(void) : void
+    + startStandardBlinking(void) : void
+    + startSlowBlinking(void) : void
+    + toggle(void) : void
+
+    # {abstract} processEvent(void) : EventStatus
+    - {static}  DEFAULT_TIME_ON_TICKS : uint32_t
+
+    - _currentState : eLedState
+    - _index : short
+    - _ticksOn : uint32_t
+    - _ticksOff : uint32_t
+    - _blink : bool
+    - _isTimerActive : bool
+    - _quickOnTicks : uint32_t
+    - _quickOffTicks : uint32_t
+    - _stdOnTicks : uint32_t
+    - _stdOffTicks : uint32_t
+    - _slowOnTicks : uint32_t
+    - _slowOffTicks : uint32_t
+    - _setInternalTimings(on : uint32_t, off : uint32_t) : void
+    - _stopBlinking() : void
+    - _startBlinking() : void
+    - _ST_LED_OFF_Action() : void
+    - _ST_LED_ON_Action() : void
+}
+
+enum eTimeoutId{
+    Timeout_LED_id  := 1
+    Timeout_end_of_list
+}
+
+enum eLedState{
+    ST_UNKNOWN := 0
+    ST_INIT
+    ST_LED_OFF
+    ST_LED_ON
+}
+
+LedController -d-> eTimeoutId : # <<typedef>>
+LedController -d-> eLedState  : + <<typedef>>
+
+@enduml 
+
+PlantUML version 1.2022.0(Tue Jan 11 17:16:42 CET 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) Client VM
+Default Encoding: Cp1252
+Language: fr
+Country: CH
+--></g></svg>

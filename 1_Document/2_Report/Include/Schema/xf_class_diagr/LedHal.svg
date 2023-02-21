@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="165px" preserveAspectRatio="none" style="width:200px;height:165px;background:#FFFFFF;" version="1.1" viewBox="0 0 200 165" width="200px" zoomAndPan="magnify"><defs><filter height="300%" id="f17c21zcakatkf" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[16750e131d524c0e41143ae53ee9a467]
+class LedHal--><rect codeLine="1" fill="#FEFECE" filter="url(#f17c21zcakatkf)" height="144.8516" id="LedHal" style="stroke:#A80036;stroke-width:1.5;" width="179" x="7" y="7"/><ellipse cx="72.25" cy="23" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M75.0156,18.875 Q75.1719,18.6563 75.3594,18.5469 Q75.5469,18.4375 75.7656,18.4375 Q76.1406,18.4375 76.375,18.6953 Q76.6094,18.9531 76.6094,19.5625 L76.6094,21.0156 Q76.6094,21.625 76.375,21.8906 Q76.1406,22.1563 75.7656,22.1563 Q75.4219,22.1563 75.2188,21.9531 Q75.0156,21.7656 74.9063,21.25 Q74.8594,20.8906 74.6719,20.7031 Q74.3438,20.3281 73.7344,20.1094 Q73.125,19.8906 72.5,19.8906 Q71.7344,19.8906 71.1016,20.2188 Q70.4688,20.5469 69.9766,21.2969 Q69.4844,22.0469 69.4844,23.0781 L69.4844,24.1719 Q69.4844,25.4063 70.375,26.2266 Q71.2656,27.0469 72.8594,27.0469 Q73.7969,27.0469 74.4531,26.7969 Q74.8438,26.6406 75.2656,26.2031 Q75.5313,25.9375 75.6797,25.8594 Q75.8281,25.7813 76.0313,25.7813 Q76.3594,25.7813 76.6172,26.0391 Q76.875,26.2969 76.875,26.6406 Q76.875,26.9844 76.5313,27.3906 Q76.0313,27.9688 75.2344,28.2969 Q74.1563,28.75 72.8594,28.75 Q71.3438,28.75 70.1406,28.125 Q69.1563,27.625 68.4688,26.5547 Q67.7813,25.4844 67.7813,24.2031 L67.7813,23.0469 Q67.7813,21.7188 68.3984,20.5703 Q69.0156,19.4219 70.1094,18.8047 Q71.2031,18.1875 72.4375,18.1875 Q73.1719,18.1875 73.8203,18.3516 Q74.4688,18.5156 75.0156,18.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="40" x="92.75" y="27.9102">LedHal</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="185" y1="39" y2="39"/><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="185" y1="47" y2="47"/><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="55"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="94" x="27" y="62.4189">initLeds(void) : bool</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="68.8359"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="135" x="27" y="76.2549">initLed(index : uint8_t) : bool</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="82.6719"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="153" x="27" y="90.0908">setLedOff(index : uint8_t) : bool</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="96.5078"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="151" x="27" y="103.9268">setLedOn(index : uint8_t) : bool</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="110.3438"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="151" x="27" y="117.7627">toggleLed(index : uint8_t) : bool</text><polygon fill="#FFFF44" points="18,122.1797,22,126.1797,18,130.1797,14,126.1797" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="41" x="27" y="131.5986">LedHal()</text><polygon fill="#FFFF44" points="18,136.0156,22,140.0156,18,144.0156,14,140.0156" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="47" x="27" y="145.4346">~LedHal()</text><!--MD5=[326e0146f6baac0211955d02eeddc3ee]
+@startuml LedHal
+class LedHal{
+'Public
+    - {static} initLeds(void) : bool
+    - {static} initLed(index : uint8_t) : bool
+    - {static} setLedOff(index : uint8_t) : bool
+    - {static} setLedOn(index : uint8_t) : bool
+    - {static} toggleLed(index : uint8_t) : bool
+'Procted 
+    # LedHal()
+    # ~LedHal()
+'Private
+}
+@enduml
+
+@startuml LedHal
+class LedHal{
+    - {static} initLeds(void) : bool
+    - {static} initLed(index : uint8_t) : bool
+    - {static} setLedOff(index : uint8_t) : bool
+    - {static} setLedOn(index : uint8_t) : bool
+    - {static} toggleLed(index : uint8_t) : bool
+    # LedHal()
+    # ~LedHal()
+}
+@enduml
+
+PlantUML version 1.2022.0(Tue Jan 11 17:16:42 CET 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) Client VM
+Default Encoding: Cp1252
+Language: fr
+Country: CH
+--></g></svg>

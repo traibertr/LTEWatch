@@ -1,0 +1,401 @@
+@startuml : XFTimeoutManager
+object typedef{
+    TimeoutList : IsList<XFTimeout *>
+}
+class XFTimeoutManager{
+'Public --------------------------------------------------
+    + XFTimeoutManager()
+    + {abstract} ~XFTimeoutManager()
+    + {static}  getInstance(void) : XFTimeoutManager*
+    + start(void) : void
+    + unscheduleTimeout(timeoutId : uint8_t, pReactive : IXFReactive*) : void
+    + timeout(void) : void
+'Protected --------------------------------------------------
+    # {static} _pInstance : XFTimeoutManager* 
+    # _timeouts : TimeoutList 'Use isList.hpp
+    # addTimeout(pNewTimeout : XFTimeout*) : void
+    # removeTimeouts(timeoutId : uint8_t, pReactive : IXFReactive*) : void
+    # returnTimeout(pTimeout : XFTimeout*) : void
+'Private --------------------------------------------------
+    - _startXfTimer() : void
+}   
+XFTimeoutManager-r->typedef : _timeouts
+@enduml
+
+@startuml xf_adapter
+namespace tools{
+    class SDKTools{
+    'protected:
+        # SDKTools()
+        # ~SDKTools()
+    'public: 
+        + init() : void
+        + appTimerCreate(timerId : void const*, timerMode : uint8_t , callback : void*) : static uint32_t             
+        + appTimerStart(timerId : void*, timeout : uint32_t, context : void*, rtcValue = NULL : uint32_t*) : static uint32_t             
+        + appTimerStop(timerId : void*, rtcValue = NULL : uint32_t*) : static uint32_t             
+        + appTimerCounterDiff(ticksTo : uint32_t, ticksFrom : uint32_t) : static uint32_t             
+        + appTimerCounterDiffInMs(ticksTo : uint32_t, ticksFrom : uint32_t) : static float                
+        + appTimerStopAll() : static inline uint32_t      '{ return app_timer_stop_all(); }
+        + appTimerGetCounter() : static inline uint32_t   '{ return app_timer_cnt_get(); }
+    'private:
+        - _appTimerInit() :  static uint32_t 
+    }
+}
+
+namespace adapters{
+    interface xf_adapter{
+        _is_xfTimer_started : extern bool
+        _xf_rtc_value : extern uint32_t
+        xfTimerEvent(p_context : void*) :void
+
+        xf_timer_clock_frequency     =  APP_TIMER_CLOCK_FREQ                        : static const uint64_t 
+        xf_timer_rtc_frequency_ms    = (APP_TIMER_CONFIG_RTC_FREQUENCY + 1) * 1000  : static const uint64_t 
+        xf_timer_rtc_frequency_tms   =  xf_timer_rtc_frequency_ms * 10              : static const uint64_t 
+        xf_timer_max_counter_value   =  XF_TIMER_MAX_COUNTER_VAL                    : static const uint32_t 
+
+        xfTimerInit() : void
+        xfTimerStart(timerTicks : unsigned int) void
+        xfTimerStop() : void
+        xfTimerRestart(uduration : nsigned int) : inline void 
+        '{ xfTimerStop(); xfTimerStart(duration); }
+        xfTimerGetElapsedTime() : unsigned int 
+        xfTimerGetElapsedTimerTicks(): unsigned int
+        interval2TimerTick(interval : unsigned int) : unsigned int 
+        timerTick2Interval(ticks : unsigned int) : unsigned int
+        xfHookOnIdle() : void
+        '#if (XF_HOOK_PREEXECUTE_ENABLED != 0)
+        xfPreExecuteHook() : void
+        '#if (XF_HOOK_POSTEXECUTE_ENABLED != 0)
+        xfPostExecuteHook() : void
+    }
+    enum rtc_available_ticks_in_s{
+
+    }
+    entity intFloatUnion_t{
+        i : int
+        f : float
+    }
+}
+
+adapters.xf_adapter --* adapters.rtc_available_ticks_in_s
+adapters.xf_adapter --* adapters.intFloatUnion_t
+
+adapters.xf_adapter -u-o tools.SDKTools
+@enduml
+
+@startuml new_xf_adapter
+namespace adapters{
+    interface xf_adapter{
+        {extern} _is_xfTimer_started    : bool    
+        {extern} _xf_timeout_ticks      : k_ticks_t  
+
+        xfTimerInit() : void 
+        xfTimerStart(unsigned int timerTicks) : void
+        xfTimerStop() : void 
+        {inline} xfTimerRestart(unsigned int duration)  : void
+        xfTimerGetElapsedTime()                         : unsigned int
+        xfTimerGetElapsedTimerTicks()                   : unsigned int
+        interval2TimerTick(unsigned int interval)       : unsigned int
+        timerTick2Interval(unsigned int ticks)          : unsigned int
+
+        xfHookOnIdle() : void
+    }
+}
+@enduml
+
+@startuml ledcontroller
+ class LedController { 
+    'heritate from public XFReactive
+    'public:
+        + <<typedef>> eLedState
+        + LedController()
+        + {abstract} ~LedController()
+        + initialize(index : uint8_t, ticksOn = RTC_125_MS : uint32_t, totalTimeTicks = RTC_1000_MS : uint32_t ) : void
+        + ledOn() : void
+        + ledOff() : void
+        + setTimings(timeOn : uint16_t, totalTime : uint16_t) : inline void 
+        '_ticksOn    = interval2TimerTick(timeOn)
+        '_ticksOff   = interval2TimerTick(totalTime) - _ticksOn
+        + setTicksTimings(ticksOn : uint32_t, totalTicks : uint32_t) : inline void 
+        '_ticksOn    = ticksOn
+        '_ticksOff   = totalTicks - ticksOn
+        + setTimerTicksforQuickStandardAndSlowBlinkingState(ticksOnQuick : uint32_t, totalTicksQuick : uint32_t,
+                                                            ticksOnStd   : uint32_t, totalTicksStd   : uint32_t,
+                                                            ticksOnSlow  : uint32_t, totalTicksSlow  : uint32_t) : void
+        + isBlinking() const : inline bool '{ return _blink; }
+        + isOn() const       : inline bool '{ return _currentState == ST_LED_ON; } 
+        + startBlinking(force = false : bool) : void
+        + startQuickBlinking() : void
+        + startStandardBlinking() : void
+        + startSlowBlinking() : void
+        + toggle() : void
+    'protected:
+        # <<typedef>> eTimeoutId
+        # {abstract} processEvent()    : EventStatus
+    'private:
+        - DEFAULT_TIME_ON_TICKS = RTC_125_MS : static const uint32_t 
+        - _currentState : eLedState
+        - _index : short    
+        - _ticksOn : uint32_t 
+        - _ticksOff : uint32_t 
+        - _blink : bool     
+        - _isTimerActive : bool     
+        - _quickOnTicks : uint32_t 
+        - _quickOffTicks : uint32_t 
+        - _stdOnTicks : uint32_t 
+        - _stdOffTicks : uint32_t 
+        - _slowOnTicks : uint32_t 
+        - _slowOffTicks : uint32_t 
+        - _setInternalTimings(on : uint32_t, off : uint32_t)   : void
+        - _stopBlinking() : void
+        - _startBlinking() : void
+        - _ST_LED_OFF_Action : void
+        - _ST_LED_ON_Action() : void
+    }
+
+    enum eLedState {
+        ST_UNKNOWN
+        ST_INIT
+        ST_LED_OFF
+        ST_LED_ON
+    }
+
+    enum eTimeoutId {
+        Timeout_LED_id
+        Timeout_end_of_list
+    }
+
+    LedController -> eLedState
+    LedController --> eTimeoutId
+@enduml
+
+@startuml buttonControlelr
+class ButtonController{
+'Public
+    + getInstance(void) : ButtonController*
+    + initialize(void) : void
+    +  initRelationTo(p_context : LedController*) : bool
+    +  {static} buttonEventWork(btnID : int) : void
+'Private
+    - registerButtons(void) : bool
+    - _Button : ButtonHal
+    - {static} _pLedList : list<gpio::LedController*>
+    - {static} _pInstance : ButtonController*
+}
+@enduml
+
+@startuml LedController
+class LedController{
+    + LedController() 
+    + {abstract} ~LedController()
+    + initialize(index : uint8_t, ticksOn : uint32_t , totalTimeTicks : uint32_t) : void
+    + lodOn(void) : void
+    + ledOff(void) : void
+
+    + {inline} setTimings(timeOn : uint16_t, totalTime : uint16_t ) : void
+    + {inline} setTicksTimings(ticksOn : uint32_t, totalTicks : uint32_t ) : void
+    + setTimerTicksforQuickStandardAndSlowBlinkingState(ticksOnQuick : uint32_t, totalTicksQuick : uint32_t , ticksOnStd : uint32_t, totalTicksStd : uint32_t, ticksOnSlow : uint32_t, totalTicksSlow : uint32_t) : void
+    + {inline} isBlinking(void) : bool
+    + {inline}  isOn(void) : bool
+    + startBlinking(force : bool)
+    + startQuickBlinking(void) : void
+    + startStandardBlinking(void) : void
+    + startSlowBlinking(void) : void
+    + toggle(void) : void
+
+    'Protected
+    # {abstract} processEvent(void) : EventStatus
+    'Private 
+    - {static}  DEFAULT_TIME_ON_TICKS : uint32_t
+
+    - _currentState : eLedState
+    - _index : short
+    - _ticksOn : uint32_t
+    - _ticksOff : uint32_t
+    - _blink : bool
+    - _isTimerActive : bool
+    - _quickOnTicks : uint32_t
+    - _quickOffTicks : uint32_t
+    - _stdOnTicks : uint32_t
+    - _stdOffTicks : uint32_t
+    - _slowOnTicks : uint32_t
+    - _slowOffTicks : uint32_t
+    - _setInternalTimings(on : uint32_t, off : uint32_t) : void
+    - _stopBlinking() : void
+    - _startBlinking() : void
+    - _ST_LED_OFF_Action() : void
+    - _ST_LED_ON_Action() : void
+}
+
+enum eTimeoutId{
+    Timeout_LED_id  := 1
+    Timeout_end_of_list
+}
+
+enum eLedState{
+    ST_UNKNOWN := 0
+    ST_INIT
+    ST_LED_OFF
+    ST_LED_ON
+}
+
+LedController -d-> eTimeoutId : # <<typedef>>
+LedController -d-> eLedState  : + <<typedef>>
+
+@enduml 
+
+@startuml ButtonHal
+class ButtonHal{
+    'Public
+    + {static} initButtons(buttonEvent : button_handler_t) : bool
+    + {static} addCustomButton(index : uint8_t) : bool
+    + ButtonHal() 
+    + ~ButtonHal() 
+}
+@enduml 
+
+@startuml LedHal
+class LedHal{
+'Public
+    - {static} initLeds(void) : bool
+    - {static} initLed(index : uint8_t) : bool
+    - {static} setLedOff(index : uint8_t) : bool
+    - {static} setLedOn(index : uint8_t) : bool
+    - {static} toggleLed(index : uint8_t) : bool
+'Procted 
+    # LedHal()
+    # ~LedHal()
+'Private
+}
+@enduml
+
+@startuml Factory
+class Factory{
+'Public
+    + {static} init(void) : void
+    + {static} build(void) : void
+    + {static} start(void) : void
+'Private
+    # Factory()
+    # ~Factory()
+
+    {static} AppController *pApp;
+
+    # {static} LedA : LedController
+    # {static} LedB : LedController
+    # {static} LedC : LedController
+    # {static} LedD : LedController
+
+    # {static} pbutton : ButtonController*
+}
+@enduml
+
+@startuml general_class_diagram
+
+namespace src{
+    namespace factory{
+        class Factory{
+
+        }
+    }
+    namespace app{
+        class AppController{
+
+        }
+
+
+    }
+}
+
+namespace common{
+    namespace hal{
+        class ButtonHal{
+
+        }
+        class LedHal{
+
+        }
+    }
+    namespace gpio{
+        class ButtonController{
+
+        }
+        class LedController{
+
+        }
+    }
+    namespace xf{
+        namespace adapt{
+            class XF_Adapter{
+                
+            }
+        }
+        namespace core{
+        class XFTimeoutManager{
+
+        }
+        class XF{
+
+        }
+        class XFReactive{
+
+        }
+        }
+        namespace queue{
+            class Queue{
+
+            }
+        }
+    }
+    namespace core{
+        class IsList{
+
+        }
+    }
+    namespace pool{
+        class MemoryPool{
+        }
+        class ObjectPool{
+        }
+    }
+}
+
+src.factory.Factory --* common.gpio.LedController : <<static>>
+src.factory.Factory --* common.gpio.ButtonController : <<static>>
+src.factory.Factory --* src.app.AppController : <<static>>
+
+common.gpio.ButtonController --* common.hal.ButtonHal : <<_Button>>
+common.gpio.LedController --o common.hal.LedHal 
+
+common.gpio.LedController --|> common.xf.core.XFReactive : <<public>>
+src.app.AppController --|> common.xf.core.XFReactive : <<public>>
+
+common.core.IsList --* common.pool.MemoryPool : <<*p>>
+common.core.IsList --o common.pool.ObjectPool : <<ItemObjectPool>>
+common.pool.MemoryPool --o  common.pool.ObjectPool : <<* PoolPtr>>
+common.xf.core.XFTimeoutManager --* common.core.IsList
+common.xf.core.XFTimeoutManager --* common.xf.core.XFTimeout
+common.xf.core.XFTimeoutManager --> common.xf.adapt.XF_Adapter
+common.xf.core.XFTimeout --|> common.xf.core.IXFEvent : <<public>>
+common.xf.core.XFTimeout --o common.xf.core.XFTimeoutManager : <<friend>>
+common.xf.core.IXFEvent --* common.xf.core.IXFReactive
+common.xf.core.IXFReactive --* common.xf.core.EventStatus : <<virtual>>
+common.xf.core.IXFEvent --> common.xf.core.XFTimeoutManager : <<friend>>
+
+common.xf.core.XFReactive --|> common.xf.core.IXFReactive : <<public>>
+common.xf.core.XFReactive --o common.xf.core.XFThread : <<*_pThread>>
+common.xf.core.XFReactive --o common.xf.core.IXFEvent : <<*_pCurrentEvent>>
+common.xf.core.XFReactive --o common.xf.core.EventStatus : <<virtual>>
+common.xf.core.XFNullTransition --|> common.xf.core.IXFEvent : <<public>>
+common.xf.core.XFNullTransition --> common.xf.core.XF
+common.xf.core.XFReactive --> common.xf.core.XFNullTransition 
+common.xf.core.XFReactive --o common.xf.core.XFTimeout 
+common.xf.core.XFThread --o common.xf.core.IXFEvent : <<IXFEvent*>>
+common.xf.core.XFThread --> common.xf.queue : <<_criticalEvents>>
+common.xf.core.InitialEvent --|> common.xf.core.IXFEvent : <<public>>
+common.xf.core.IXFReactive --> common.xf.core.IXFEvent  : <<virtual>>
+common.xf.core.IXFReactive -r-> common.xf.core.EventStatus : <<virtual>>
+common.xf.core.XF --o common.xf.core.XFThread  : <<static>>
+common.xf.core.XFEvent --|> common.xf.core.IXFEvent : <<public>>
+common.xf.core.XFEvent --> common.xf.core.XF
+@enduml
