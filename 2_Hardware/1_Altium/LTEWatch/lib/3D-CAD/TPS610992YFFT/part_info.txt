@@ -1,0 +1,9 @@
+Manufacturer=Texas Instruments
+PartNumber=TPS610992YFFT
+PartCategory=Integrated Circuit
+PackageCategory=BGA
+PinCount=6
+Version=1.1
+Released=2021-01-04 07:40:58
+Downloaded=2022-10-04 12:22:04
+3D=Y

@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP BQ27421YZFT-G1A
+D System-Side(tm) Fuel Gauge With Integrated Sense Resistor | Battery Gas Gauge
+K
+F http://www.ti.com/lit/ds/symlink/bq27421-g1.pdf
+$ENDCMP
+#
+#End Doc Library

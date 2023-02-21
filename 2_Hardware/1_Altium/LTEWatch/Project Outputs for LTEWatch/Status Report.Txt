@@ -1,0 +1,13 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [LTEWatch.PrjPcb]
+   Generated File[LTEWatch-RoundHoles.TXT]
+   Generated File[LTEWatch-SlotHoles.TXT]
+   Generated File[LTEWatch.LDP]
+   Generated File[LTEWatch.DRR]
+
+
+Files Generated   : 4
+Documents Printed : 0
+
+Finished Output Generation At 11:38:58 On 20.12.2022

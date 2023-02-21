@@ -1,0 +1,99 @@
+# Created by Ultra Librarian Gold 8.3.307 Copyright © 1999-2021
+# Frank Frank, Accelerated Designs
+
+StartFootprints
+
+Footprint (Name "YFG8_TEX")
+Pad (Name "A1") (Location -7.87401581, 23.625) (Surface True) (Rotation 0) (ExpandMask 0) (ExpandPaste 0)
+PadShape (Size 9, 9) (Shape Rounded) (Layer Top)
+EndPad
+Pad (Name "A2") (Location 7.8740139, 23.625) (Surface True) (Rotation 0) (ExpandMask 0) (ExpandPaste 0)
+PadShape (Size 9, 9) (Shape Rounded) (Layer Top)
+EndPad
+Pad (Name "B1") (Location -7.87401581, 7.875) (Surface True) (Rotation 0) (ExpandMask 0) (ExpandPaste 0)
+PadShape (Size 9, 9) (Shape Rounded) (Layer Top)
+EndPad
+Pad (Name "B2") (Location 7.8740139, 7.875) (Surface True) (Rotation 0) (ExpandMask 0) (ExpandPaste 0)
+PadShape (Size 9, 9) (Shape Rounded) (Layer Top)
+EndPad
+Pad (Name "C1") (Location -7.87401581, -7.875) (Surface True) (Rotation 0) (ExpandMask 0) (ExpandPaste 0)
+PadShape (Size 9, 9) (Shape Rounded) (Layer Top)
+EndPad
+Pad (Name "C2") (Location 7.8740139, -7.875) (Surface True) (Rotation 0) (ExpandMask 0) (ExpandPaste 0)
+PadShape (Size 9, 9) (Shape Rounded) (Layer Top)
+EndPad
+Pad (Name "D1") (Location -7.87401581, -23.625) (Surface True) (Rotation 0) (ExpandMask 0) (ExpandPaste 0)
+PadShape (Size 9, 9) (Shape Rounded) (Layer Top)
+EndPad
+Pad (Name "D2") (Location 7.8740139, -23.625) (Surface True) (Rotation 0) (ExpandMask 0) (ExpandPaste 0)
+PadShape (Size 9, 9) (Shape Rounded) (Layer Top)
+EndPad
+Line (Width 6) (Start -27, -41.5) (End 27, -41.5) (Layer TopOverlay) 
+Line (Width 6) (Start 27, -41.5) (End 27, 41.5) (Layer TopOverlay) 
+Line (Width 6) (Start 27, 41.5) (End -27, 41.5) (Layer TopOverlay) 
+Line (Width 6) (Start -27, 41.5) (End -27, -41.5) (Layer TopOverlay) 
+Text (Location -72.00000095, -1.375) (Height 50) (Width 3) (Rotation 0) (Layer TopOverlay) (Value "A")
+Text (Location -72.00000095, -48.625) (Height 50) (Width 3) (Rotation 0) (Layer TopOverlay) (Value "D")
+Text (Location 17.12598419, 61.5) (Height 50) (Width 3) (Rotation 90) (Layer TopOverlay) (Value "1")
+Text (Location 32.8740139, 61.5) (Height 50) (Width 3) (Rotation 90) (Layer TopOverlay) (Value "2")
+Line (Width 1) (Start -14.12598515, 36.5) (End -22, 28.625) (Layer Mechanical13) 
+Line (Width 1) (Start -22, -36.5) (End 22, -36.5) (Layer Mechanical13) 
+Line (Width 1) (Start 22, -36.5) (End 22, 36.5) (Layer Mechanical13) 
+Line (Width 1) (Start 22, 36.5) (End -22, 36.5) (Layer Mechanical13) 
+Line (Width 1) (Start -22, 36.5) (End -22, -36.5) (Layer Mechanical13) 
+Text (Location -72.00000095, -1.375) (Height 50) (Width 3) (Rotation 0) (Layer Mechanical13) (Value "A")
+Text (Location -72.00000095, -48.625) (Height 50) (Width 3) (Rotation 0) (Layer Mechanical13) (Value "D")
+Text (Location 17.12598419, 61.5) (Height 50) (Width 3) (Rotation 90) (Layer Mechanical13) (Value "1")
+Text (Location 32.8740139, 61.5) (Height 50) (Width 3) (Rotation 90) (Layer Mechanical13) (Value "2")
+Text (Location -47.00000095, -1.375) (Mirrored True) (Height 50) (Width 3) (Rotation 0) (Layer BottomOverlay) (Value "A")
+Text (Location -47.00000095, -48.625) (Mirrored True) (Height 50) (Width 3) (Rotation 0) (Layer BottomOverlay) (Value "D")
+Text (Location -32.87401581, 61.5) (Mirrored True) (Height 50) (Width 3) (Rotation -90) (Layer BottomOverlay) (Value "1")
+Text (Location -17.1259861, 61.5) (Mirrored True) (Height 50) (Width 3) (Rotation -90) (Layer BottomOverlay) (Value "2")
+Line (Width 6) (Start -32, -46.5) (End -32, 46.5) (Layer Mechanical15) 
+Line (Width 6) (Start -32, 46.5) (End 32, 46.5) (Layer Mechanical15) 
+Line (Width 6) (Start 32, 46.5) (End 32, -46.5) (Layer Mechanical15) 
+Line (Width 6) (Start 32, -46.5) (End -32, -46.5) (Layer Mechanical15) 
+Polygon (PointCount 4) (Layer Mechanical15) 
+Point (-32, -46.5)
+Point (-32, 46.5)
+Point (32, 46.5)
+Point (32, -46.5)
+EndPolygon
+Polygon (PointCount 4) (Layer Mechanical5) 
+Point (-37, -51.5)
+Point (-37, 51.5)
+Point (37, 51.5)
+Point (37, -51.5)
+EndPolygon
+Polygon (PointCount 4) (Layer KeepOutLayer) 
+Point (-33.24803162, 49)
+Point (33.24803162, 49)
+Point (33.24803162, -49)
+Point (-33.24803162, -49)
+EndPolygon
+Step (Name YFG8_TEX.step)
+EndFootprint
+EndFootprints
+
+StartComponents
+
+Component (Name "TPS63036YFGT") (PartCount 1) (DesPrefix "U?")
+Pin (Location 300, 0) (Rotation 180) (PinType Passive) (Length 300) (Width 0) (Designator Visible "A2") (Name Visible "EN") (PinSwap 0) (PartSwap 0) (PinSeq 1) (Part 1)
+Pin (Location 300, -100) (Rotation 180) (PinType Passive) (Length 300) (Width 0) (Designator Visible "D2") (Name Visible "FB") (PinSwap 0) (PartSwap 0) (PinSeq 2) (Part 1)
+Pin (Location 300, -200) (Rotation 180) (PinType Passive) (Length 300) (Width 0) (Designator Visible "B2") (Name Visible "PS/SYNC") (PinSwap 0) (PartSwap 0) (PinSeq 3) (Part 1)
+Pin (Location 300, -300) (Rotation 180) (PinType Passive) (Length 300) (Width 0) (Designator Visible "A1") (Name Visible "VIN") (PinSwap 0) (PartSwap 0) (PinSeq 4) (Part 1)
+Pin (Location 300, -700) (Rotation 180) (PinType Passive) (Length 300) (Width 0) (Designator Visible "C2") (Name Visible "GND") (PinSwap 0) (PartSwap 0) (PinSeq 5) (Part 1)
+Pin (Location 1500, 100) (Rotation 0) (PinType Output) (Length 300) (Width 0) (Designator Visible "D1") (Name Visible "VOUT") (PinSwap 0) (PartSwap 0) (PinSeq 6) (Part 1)
+Pin (Location 1500, -100) (Rotation 0) (PinType IO) (Length 300) (Width 0) (Designator Visible "B1") (Name Visible "L1") (PinSwap 0) (PartSwap 0) (PinSeq 7) (Part 1)
+Pin (Location 1500, -200) (Rotation 0) (PinType IO) (Length 300) (Width 0) (Designator Visible "C1") (Name Visible "L2") (PinSwap 0) (PartSwap 0) (PinSeq 8) (Part 1)
+Rectangle (Width 5) (Start 300, -900) (End 1500, 300) (Part 1)
+Parameter (Name "Copyright") (Location 0, 0) (Height 50) (Rotation 0) (Justification Center) (Value "Copyright (C) 2022 Ultra Librarian. All rights reserved.") (Part 1)
+Parameter (Name "Mfr_Name") (Location 0, 0) (Height 50) (Rotation 0) (Justification Center) (Value "Texas Instruments") (Part 1)
+Parameter (Name "Manufacturer_Part_Number") (Location 0, 0) (Height 50) (Rotation 0) (Justification Center) (Value "TPS63036YFGT") (Part 1)
+Parameter (Name "RefDes") (Location 900, 500) (Height 82) (Rotation 0) (Justification Center) (Value "RefDes") (Part 1)
+Parameter (Name "Type") (Location 900, 400) (Height 82) (Rotation 0) (Justification Center) (Value "DEV") (Part 1)
+Description (Value "No Description Available") (Part 1)
+Comment (Value "TPS63036YFGT") (Part 1)
+Footprint (Name "YFG8_TEX")
+EndComponent
+EndComponents

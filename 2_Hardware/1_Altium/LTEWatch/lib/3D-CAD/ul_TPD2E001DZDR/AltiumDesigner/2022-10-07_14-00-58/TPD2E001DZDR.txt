@@ -1,0 +1,81 @@
+# Created by Ultra Librarian Gold 8.3.307 Copyright © 1999-2021
+# Frank Frank, Accelerated Designs
+
+StartFootprints
+
+Footprint (Name "DZD4")
+Pad (Name "1") (Location -30.29527473, -40) (Surface True) (Rotation 0) (ExpandMask 0) (ExpandPaste 0)
+PadShape (Size 35, 51.55899811) (Shape Rectangular) (Layer Top)
+EndPad
+Pad (Name "2") (Location 37.79527664, -40) (Surface True) (Rotation 0) (ExpandMask 0) (ExpandPaste 0)
+PadShape (Size 20, 62.05899811) (Shape Rectangular) (Layer Top)
+EndPad
+Pad (Name "3") (Location 37.7953, 34.75) (Surface True) (Rotation 0) (ExpandMask 0) (ExpandPaste 0)
+PadShape (Size 20, 62.05899811) (Shape Rectangular) (Layer Top)
+EndPad
+Pad (Name "4") (Location -37.7953, 34.75) (Surface True) (Rotation 0) (ExpandMask 0) (ExpandPaste 0)
+PadShape (Size 20, 62.05899811) (Shape Rectangular) (Layer Top)
+EndPad
+Line (Width 1) (Start -47.79528046, 27.5) (End -27.79528046, 27.5) (Layer Mechanical13) 
+Line (Width 1) (Start -27.79528046, 27.5) (End -27.79528046, 52) (Layer Mechanical13) 
+Line (Width 1) (Start -27.79528046, 52) (End -47.79528046, 52) (Layer Mechanical13) 
+Line (Width 1) (Start -47.79528046, 52) (End -47.79528046, 27.5) (Layer Mechanical13) 
+Line (Width 1) (Start 27.79527283, 27.5) (End 47.79527283, 27.5) (Layer Mechanical13) 
+Line (Width 1) (Start 47.79527283, 27.5) (End 47.79527283, 52) (Layer Mechanical13) 
+Line (Width 1) (Start 47.79527283, 52) (End 27.79527283, 52) (Layer Mechanical13) 
+Line (Width 1) (Start 27.79527283, 52) (End 27.79527283, 27.5) (Layer Mechanical13) 
+Line (Width 1) (Start -12.79527473, -27.5) (End -47.79527473, -27.5) (Layer Mechanical13) 
+Line (Width 1) (Start -47.79527473, -27.5) (End -47.79527473, -52) (Layer Mechanical13) 
+Line (Width 1) (Start -47.79527473, -52) (End -12.79527473, -52) (Layer Mechanical13) 
+Line (Width 1) (Start -12.79527473, -52) (End -12.79527473, -27.5) (Layer Mechanical13) 
+Line (Width 1) (Start 47.79527664, -27.5) (End 27.79527664, -27.5) (Layer Mechanical13) 
+Line (Width 1) (Start 27.79527664, -27.5) (End 27.79527664, -52) (Layer Mechanical13) 
+Line (Width 1) (Start 27.79527664, -52) (End 47.79527664, -52) (Layer Mechanical13) 
+Line (Width 1) (Start 47.79527664, -52) (End 47.79527664, -27.5) (Layer Mechanical13) 
+Line (Width 1) (Start -60, 27.5) (End 60, 27.5) (Layer Mechanical13) 
+Line (Width 1) (Start 60, 27.5) (End 60, -27.5) (Layer Mechanical13) 
+Line (Width 1) (Start 60, -27.5) (End -60, -27.5) (Layer Mechanical13) 
+Line (Width 1) (Start -60, -27.5) (End -60, 27.5) (Layer Mechanical13) 
+Arc (Width 0) (Radius 5) (Location -50, -17.5) (StartAngle 0) (EndAngle 360) (Layer Mechanical13) 
+Line (Width 6) (Start -90, 80.77950287) (End 90, 80.77950287) (Layer Mechanical15) 
+Line (Width 6) (Start 90, 80.77950287) (End 90, -80.77950287) (Layer Mechanical15) 
+Line (Width 6) (Start 90, -80.77950287) (End -90, -80.77950287) (Layer Mechanical15) 
+Line (Width 6) (Start -90, -80.77950287) (End -90, 80.77950287) (Layer Mechanical15) 
+Polygon (PointCount 4) (Layer Mechanical15) 
+Point (-90, 80.77950287)
+Point (90, 80.77950287)
+Point (90, -80.77950287)
+Point (-90, -80.77950287)
+EndPolygon
+Polygon (PointCount 4) (Layer Mechanical5) 
+Point (85, 90.77950287)
+Point (85, -90.77950287)
+Point (-85, -90.77950287)
+Point (-85, 90.77950287)
+EndPolygon
+Line (Width 6) (Start -14.69529962, 27.5) (End 14.69529962, 27.5) (Layer TopOverlay) 
+Line (Width 6) (Start 14.69527626, -27.5) (End 0.30472565, -27.5) (Layer TopOverlay) 
+Line (Width 6) (Start -60, -9.4608065) (End -60, -1.03925828) (Layer TopOverlay) 
+Arc (Width 6) (Radius 5) (Location -110, -52) (StartAngle 0) (EndAngle 360) (Layer TopOverlay) 
+Step (Name DZD4.step)
+EndFootprint
+EndFootprints
+
+StartComponents
+
+Component (Name "TPD2E001DZDR") (PartCount 1) (DesPrefix "U?")
+Pin (Location 300, 0) (Rotation 180) (PinType Power) (Length 300) (Width 0) (Designator Visible "1") (Name Visible "GND") (PinSwap 0) (PartSwap 0) (PinSeq 1) (Part 1)
+Pin (Location 300, -100) (Rotation 180) (PinType IO) (Length 300) (Width 0) (Designator Visible "2") (Name Visible "IO1") (PinSwap 0) (PartSwap 0) (PinSeq 2) (Part 1)
+Pin (Location 1900, -100) (Rotation 0) (PinType IO) (Length 300) (Width 0) (Designator Visible "3") (Name Visible "IO2") (PinSwap 0) (PartSwap 0) (PinSeq 3) (Part 1)
+Pin (Location 1900, 0) (Rotation 0) (PinType Power) (Length 300) (Width 0) (Designator Visible "4") (Name Visible "VCC") (PinSwap 0) (PartSwap 0) (PinSeq 4) (Part 1)
+Rectangle (Width 5) (Start 300, -300) (End 1900, 200) (Part 1)
+Parameter (Name "Copyright") (Location 0, 0) (Height 50) (Rotation 0) (Justification Center) (Value "Copyright (C) 2022 Ultra Librarian. All rights reserved.") (Part 1)
+Parameter (Name "Mfr_Name") (Location 0, 0) (Height 50) (Rotation 0) (Justification Center) (Value "Texas Instruments") (Part 1)
+Parameter (Name "Manufacturer_Part_Number") (Location 0, 0) (Height 50) (Rotation 0) (Justification Center) (Value "TPD2E001DZDR") (Part 1)
+Parameter (Name "RefDes") (Location 1100, 400) (Height 82) (Rotation 0) (Justification Center) (Value "RefDes") (Part 1)
+Parameter (Name "Type") (Location 1100, 300) (Height 82) (Rotation 0) (Justification Center) (Value "DEV") (Part 1)
+Description (Value "No Description Available") (Part 1)
+Comment (Value "TPD2E001DZDR") (Part 1)
+Footprint (Name "DZD4")
+EndComponent
+EndComponents

@@ -1,0 +1,11 @@
+FILE_TYPE = MULTI_PHYS_TABLE;
+
+PART 'TPS610992YFFT'
+CLASS = IC
+{========================================================================================}
+:"MANUFACTURER_NAME", "MANUFACTURER_PART_NUMBER"= "PART_NUMBER", "JEDEC_TYPE", "PACK_TYPE", "MOUSER_PART_NUMBER", "MOUSER_PRICE/STOCK", "ARROW_PART_NUMBER", "ARROW_PRICE/STOCK", "MOUSER_TESTING_PART_NUMBER", "MOUSER_TESTING_PRICE/STOCK", "DESCRIPTION", "DATASHEET", "HEIGHT";
+{========================================================================================}
+ "Texas Instruments", "TPS610992YFFT" (!) = "", "BGA6C40P2X3_88X123X62", "BGA", "595-TPS610992YFFT", "https://www.mouser.co.uk/ProductDetail/Texas-Instruments/TPS610992YFFT?qs=1mbolxNpo8cSEKMr%252BGh28A%3D%3D", "TPS610992YFFT", "https://www.arrow.com/en/products/tps610992yfft/texas-instruments?region=nac", "", "", "Conv DC-DC 0.7V to 5.5V Synchronous Step Down Single-Out 1.8V to 5.5V 0.3A 6-Pin DSBGA T/R", "http://www.ti.com/general/docs/suppproductinfo.tsp?distId=10&gotoUrl=http%3A%2F%2Fwww.ti.com%2Flit%2Fgpn%2Ftps61099", "0.625 mm"
+END_PART
+
+END.

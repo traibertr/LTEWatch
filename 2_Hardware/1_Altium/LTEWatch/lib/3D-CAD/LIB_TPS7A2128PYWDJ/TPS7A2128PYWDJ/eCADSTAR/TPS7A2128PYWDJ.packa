@@ -1,0 +1,13 @@
+(unit MM)
+
+(package "TPS7A2128PYWDJ"
+    (type UNDEF)
+    (uver 2)
+    (cuser "SamacSys")
+    (uuser "SamacSys")
+    (utime 2022-03-16-09:28:29)
+    (mountForm default
+        (footprintRef "TPS7A2128PYWDJ")
+        (spec "System")
+    )
+)

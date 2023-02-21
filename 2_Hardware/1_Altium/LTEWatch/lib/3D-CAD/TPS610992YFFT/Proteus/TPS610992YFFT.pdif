@@ -1,0 +1,138 @@
+;Proteus Design Interchange Format
+(PDIF
+ (vendor "SamacSys Limited")
+ (version 1 0)
+ (library
+  (part "TPS610992YFFT"
+   (description "Conv DC-DC 0.7V to 5.5V Synchronous Step Down Single-Out 1.8V to 5.5V 0.3A 6-Pin DSBGA T/R")
+   (family "ANA")
+   (package "BGA6C40P2X3_88X123X62")
+   (attribute "Datasheet Link" "http://www.ti.com/general/docs/suppproductinfo.tsp?distId=10&gotoUrl=http%3A%2F%2Fwww.ti.com%2Flit%2Fgpn%2Ftps61099")
+   (attribute "Geometry.Height" "0.625mm")
+   (attribute "Manufacturer_Name" "Texas Instruments")
+   (attribute "Manufacturer_Part_Number" "TPS610992YFFT")
+   (attribute "Mouser Part Number" "595-TPS610992YFFT")
+   (attribute "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Texas-Instruments/TPS610992YFFT?qs=1mbolxNpo8cSEKMr%252BGh28A%3D%3D")
+   (attribute "Arrow Part Number" "TPS610992YFFT")
+   (attribute "Arrow Price/Stock" "https://www.arrow.com/en/products/tps610992yfft/texas-instruments?region=nac")
+   (attribute "Mouser Testing Part Number" "")
+   (attribute "Mouser Testing Price/Stock" "")
+   (gate
+    (symbol "TPS610992YFFT")
+    (pin "VIN" A1 PS)
+    (pin "GND" A2 PS)
+    (pin "SW" B1 PS)
+    (pin "VOUT" B2 PS)
+    (pin "EN" C1 PS)
+    (pin "FB" C2 PS)
+   )
+  )
+  (symbol "TPS610992YFFT"
+   (units THOU)
+   (origin (pt 0 0))
+   (graphic
+    (stroke 10)
+    (path (pt 200 100) (pt 900 100) (pt 900 -300) (pt 200 -300) (pt 200 100) (closed))
+   )
+   (terminal
+    (body (symbol "PIN") (pt 0 0) (rot 0) (mir 0) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 0 -100) (rot 0) (mir 0) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 0 -200) (rot 0) (mir 0) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 1100 0) (rot 0) (mir X) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 1100 -100) (rot 0) (mir X) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 1100 -200) (rot 0) (mir X) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+  )
+  (symbol "PIN"
+   (units THOU)
+   (origin (pt 0 0))
+   (graphic
+    (stroke 10)
+    (path (pt 0 0) (pt 200 0))))
+  (symbol "PINSHORT"
+   (units THOU)
+   (origin (pt 0 0))
+   (graphic
+    (stroke 10)
+    (path (pt 0 0) (pt 100 0))))
+  (package "BGA6C40P2X3_88X123X62"
+   (units MM)
+   (layer OCCA
+    (graphic
+     (stroke 0.05)
+     (path
+      (closed true)
+      (pt -1.457 1.628)
+      (pt 1.457 1.628)
+      (pt 1.457 -1.628)
+      (pt -1.457 -1.628)
+      (pt -1.457 1.628))))
+   (layer TASM
+    (graphic
+     (stroke 0.1)
+     (path
+      (closed true)
+      (pt -0.442 0.613)
+      (pt 0.442 0.613)
+      (pt 0.442 -0.613)
+      (pt -0.442 -0.613)
+      (pt -0.442 0.613))))
+   (layer TASM
+    (graphic
+     (stroke 0.1)
+     (path
+      (closed false)
+      (pt -0.442 0.299)
+      (pt -0.128 0.613))))
+   (layer TSLK
+    (graphic
+     (stroke 0.2)
+     (path
+      (closed false)
+      (pt -0.2 0.85)
+      (pt 0.65 0.85)
+      (pt 0.65 -0.85)
+      (pt -0.65 -0.85)
+      (pt -0.65 0.4)
+      (pt -0.2 0.85))))
+   (layer TSLK
+    (graphic
+     (stroke 0.2)
+     (circle
+      (pt -0.55 0.85) (pt -0.75 0.85)
+     )
+    )
+   )
+   (leg A1 (pt -0.2 0.4) (padstack 0))
+   (leg A2 (pt 0.2 0.4) (padstack 0))
+   (leg B1 (pt -0.2 0) (padstack 0))
+   (leg B2 (pt 0.2 0) (padstack 0))
+   (leg C1 (pt -0.2 -0.4) (padstack 0))
+   (leg C2 (pt 0.2 -0.4) (padstack 0))
+   (padstack 0
+    (plated false)
+    (pad (layer TCOP) (round 0.2))
+   )
+   (model "TPS610992YFFT.stp"
+    (euler 0 0 0)
+    (offset 0 0 0)
+   )
+  )
+ )
+)

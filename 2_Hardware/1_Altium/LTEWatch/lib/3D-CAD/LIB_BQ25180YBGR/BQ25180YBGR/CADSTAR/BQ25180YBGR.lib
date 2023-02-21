@@ -1,0 +1,21 @@
+.BQ25180YBGR :1 ;Charger IC Lithium Ion/Polymer, Lithium Iron Phosphate 8-DSBGA (1.6x1.1)
+BGA8C40P2X4_100X155X50
+*STM IC
+*NGS
+*PNM 1=A1 2=A2 3=B1 4=B2 5=C1 6=C2 7=D1 8=D2
+*PLB 1="'INT'" 2="IN" 3="SCL" 4="SYS" 5="SDA" 6="BAT" 7="TS/MR" 8="GND"
+*MXP 8
+*DFN BQ25180YBGR
+~!Manufacturer_Name (Texas Instruments)
+~!Manufacturer_Part_Number (BQ25180YBGR)
+~!Mouser Part Number (595-BQ25180YBGR)
+~!Link Mouser Price/Stock (https://www.mouser.co.uk/ProductDetail/Texas-Instruments/BQ25180YBGR?qs=doiCPypUmgEWjAK%252BJAX6Tw%3D%3D)
+~!Arrow Part Number (-)
+~!Arrow Price/Stock (-)
+~!Mouser Testing Part Number (-)
+~!Mouser Testing Price/Stock (-)
+~!Link Datasheet (https://www.ti.com/lit/ds/symlink/bq25180.pdf?ts=1650264094470&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252FBQ25180)
+~!Height (0.5mm)
+~!3D_Model (BQ25180YBGR)
+BQ25180YBGR
+1.1!U 2.1!U 3.1!U 4.1!U 5.1!U 6.1!U 7.1!U 8.1!U 

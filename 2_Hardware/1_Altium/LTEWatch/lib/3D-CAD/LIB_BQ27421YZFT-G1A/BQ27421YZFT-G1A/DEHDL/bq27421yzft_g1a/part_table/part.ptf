@@ -1,0 +1,11 @@
+FILE_TYPE = MULTI_PHYS_TABLE;
+
+PART 'BQ27421YZFT_G1A'
+CLASS = IC
+{========================================================================================}
+:"MANUFACTURER_NAME", "MANUFACTURER_PART_NUMBER"= "PART_NUMBER", "JEDEC_TYPE", "PACK_TYPE", "MOUSER_PART_NUMBER", "MOUSER_PRICE/STOCK", "ARROW_PART_NUMBER", "ARROW_PRICE/STOCK", "MOUSER_TESTING_PART_NUMBER", "MOUSER_TESTING_PRICE/STOCK", "DESCRIPTION", "DATASHEET", "HEIGHT";
+{========================================================================================}
+ "Texas Instruments", "BQ27421YZFT-G1A" (!) = "", "BGA9C50P3X3_162X158X62", "BGA", "595-BQ27421YZFT-G1A", "https://www.mouser.co.uk/ProductDetail/Texas-Instruments/BQ27421YZFT-G1A?qs=%252BrH4t%252BeVZ2Mb4Ofcz0kOjQ%3D%3D", "BQ27421YZFT-G1A", "https://www.arrow.com/en/products/bq27421yzft-g1a/texas-instruments?region=nac", "", "", "System-Side(tm) Fuel Gauge With Integrated Sense Resistor | Battery Gas Gauge", "http://www.ti.com/lit/ds/symlink/bq27421-g1.pdf", "0.625 mm"
+END_PART
+
+END.

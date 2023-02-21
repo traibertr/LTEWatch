@@ -1,0 +1,156 @@
+;Proteus Design Interchange Format
+(PDIF
+ (vendor "SamacSys Limited")
+ (version 1 0)
+ (library
+  (part "BQ27421YZFT-G1A"
+   (description "System-Side(tm) Fuel Gauge With Integrated Sense Resistor | Battery Gas Gauge")
+   (family "ANA")
+   (package "BGA9C50P3X3_162X158X62")
+   (attribute "Datasheet Link" "http://www.ti.com/lit/ds/symlink/bq27421-g1.pdf")
+   (attribute "Geometry.Height" "0.625mm")
+   (attribute "Manufacturer_Name" "Texas Instruments")
+   (attribute "Manufacturer_Part_Number" "BQ27421YZFT-G1A")
+   (attribute "Mouser Part Number" "595-BQ27421YZFT-G1A")
+   (attribute "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Texas-Instruments/BQ27421YZFT-G1A?qs=%252BrH4t%252BeVZ2Mb4Ofcz0kOjQ%3D%3D")
+   (attribute "Arrow Part Number" "BQ27421YZFT-G1A")
+   (attribute "Arrow Price/Stock" "https://www.arrow.com/en/products/bq27421yzft-g1a/texas-instruments?region=nac")
+   (attribute "Mouser Testing Part Number" "")
+   (attribute "Mouser Testing Price/Stock" "")
+   (gate
+    (symbol "BQ27421YZFT-G1A")
+    (pin "GPOUT" A1 PS)
+    (pin "SDA" A2 PS)
+    (pin "SCL" A3 PS)
+    (pin "BIN" B1 PS)
+    (pin "VSS_1" B2 PS)
+    (pin "VDD" B3 PS)
+    (pin "VSS_2" C1 PS)
+    (pin "SRX" C2 PS)
+    (pin "BAT" C3 PS)
+   )
+  )
+  (symbol "BQ27421YZFT-G1A"
+   (units THOU)
+   (origin (pt 0 0))
+   (graphic
+    (stroke 10)
+    (path (pt 200 100) (pt 1000 100) (pt 1000 -500) (pt 200 -500) (pt 200 100) (closed))
+   )
+   (terminal
+    (body (symbol "PIN") (pt 0 0) (rot 0) (mir 0) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 0 -100) (rot 0) (mir 0) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 0 -200) (rot 0) (mir 0) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 0 -300) (rot 0) (mir 0) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 0 -400) (rot 0) (mir 0) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 1200 0) (rot 0) (mir X) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 1200 -100) (rot 0) (mir X) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 1200 -200) (rot 0) (mir X) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 1200 -300) (rot 0) (mir X) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+  )
+  (symbol "PIN"
+   (units THOU)
+   (origin (pt 0 0))
+   (graphic
+    (stroke 10)
+    (path (pt 0 0) (pt 200 0))))
+  (symbol "PINSHORT"
+   (units THOU)
+   (origin (pt 0 0))
+   (graphic
+    (stroke 10)
+    (path (pt 0 0) (pt 100 0))))
+  (package "BGA9C50P3X3_162X158X62"
+   (units MM)
+   (layer OCCA
+    (graphic
+     (stroke 0.05)
+     (path
+      (closed true)
+      (pt -1.825 1.805)
+      (pt 1.825 1.805)
+      (pt 1.825 -1.805)
+      (pt -1.825 -1.805)
+      (pt -1.825 1.805))))
+   (layer TASM
+    (graphic
+     (stroke 0.1)
+     (path
+      (closed true)
+      (pt -0.81 0.79)
+      (pt 0.81 0.79)
+      (pt 0.81 -0.79)
+      (pt -0.81 -0.79)
+      (pt -0.81 0.79))))
+   (layer TASM
+    (graphic
+     (stroke 0.1)
+     (path
+      (closed false)
+      (pt -0.81 0.388)
+      (pt -0.408 0.79))))
+   (layer TSLK
+    (graphic
+     (stroke 0.2)
+     (path
+      (closed false)
+      (pt -0.5 0.995)
+      (pt 0.995 0.995)
+      (pt 0.995 -0.995)
+      (pt -0.995 -0.995)
+      (pt -0.995 0.5)
+      (pt -0.5 0.995))))
+   (layer TSLK
+    (graphic
+     (stroke 0.2)
+     (circle
+      (pt -0.895 0.995) (pt -1.095 0.995)
+     )
+    )
+   )
+   (leg A1 (pt -0.5 0.5) (padstack 0))
+   (leg A2 (pt 0 0.5) (padstack 0))
+   (leg A3 (pt 0.5 0.5) (padstack 0))
+   (leg B1 (pt -0.5 0) (padstack 0))
+   (leg B2 (pt 0 0) (padstack 0))
+   (leg B3 (pt 0.5 0) (padstack 0))
+   (leg C1 (pt -0.5 -0.5) (padstack 0))
+   (leg C2 (pt 0 -0.5) (padstack 0))
+   (leg C3 (pt 0.5 -0.5) (padstack 0))
+   (padstack 0
+    (plated false)
+    (pad (layer TCOP) (round 0.29))
+   )
+   (model "BQ27421YZFT-G1A.stp"
+    (euler 0 0 0)
+    (offset 0 0 0)
+   )
+  )
+ )
+)

@@ -1,0 +1,13 @@
+(unit MM)
+
+(package "BQ27421YZFT-G1A"
+    (type UNDEF)
+    (uver 2)
+    (cuser "SamacSys")
+    (uuser "SamacSys")
+    (utime 2022-06-13-08:59:41)
+    (mountForm default
+        (footprintRef "BGA9C50P3X3_162X158X62")
+        (spec "System")
+    )
+)

@@ -1,0 +1,110 @@
+;Proteus Design Interchange Format
+(PDIF
+ (vendor "SamacSys Limited")
+ (version 1 0)
+ (library
+  (part "TPS7A2128PYWDJ"
+   (description "TPS7A21 500-mA, Low-Noise, Low-IQ, High-PSRR LDO")
+   (family "ANA")
+   (package "TPS7A2128PYWDJ")
+   (attribute "Datasheet Link" "https://www.ti.com/lit/ds/symlink/tps7a21.pdf?ts=1647212175126")
+   (attribute "Geometry.Height" "0.3mm")
+   (attribute "Manufacturer_Name" "Texas Instruments")
+   (attribute "Manufacturer_Part_Number" "TPS7A2128PYWDJ")
+   (attribute "Mouser Part Number" "595-TPS7A2128PYWDJ")
+   (attribute "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Texas-Instruments/TPS7A2128PYWDJ?qs=MyNHzdoqoQJEpj%252BgRSc%252BRw%3D%3D")
+   (attribute "Arrow Part Number" "")
+   (attribute "Arrow Price/Stock" "")
+   (attribute "Mouser Testing Part Number" "")
+   (attribute "Mouser Testing Price/Stock" "")
+   (gate
+    (symbol "TPS7A2128PYWDJ")
+    (pin "IN" A1 PS)
+    (pin "OUT" A2 PS)
+    (pin "EN" B1 PS)
+    (pin "GND" B2 PS)
+   )
+  )
+  (symbol "TPS7A2128PYWDJ"
+   (units THOU)
+   (origin (pt 0 0))
+   (graphic
+    (stroke 10)
+    (path (pt 200 100) (pt 800 100) (pt 800 -200) (pt 200 -200) (pt 200 100) (closed))
+   )
+   (terminal
+    (body (symbol "PIN") (pt 0 0) (rot 0) (mir 0) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 1000 0) (rot 0) (mir X) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 0 -100) (rot 0) (mir 0) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 1000 -100) (rot 0) (mir X) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+  )
+  (symbol "PIN"
+   (units THOU)
+   (origin (pt 0 0))
+   (graphic
+    (stroke 10)
+    (path (pt 0 0) (pt 200 0))))
+  (symbol "PINSHORT"
+   (units THOU)
+   (origin (pt 0 0))
+   (graphic
+    (stroke 10)
+    (path (pt 0 0) (pt 100 0))))
+  (package "TPS7A2128PYWDJ"
+   (units MM)
+   (layer TASM
+    (graphic
+     (stroke 0.1)
+     (path
+      (closed true)
+      (pt -0.314 0.314)
+      (pt 0.314 0.314)
+      (pt 0.314 -0.314)
+      (pt -0.314 -0.314)
+      (pt -0.314 0.314))))
+   (layer OCCA
+    (graphic
+     (stroke 0.1)
+     (path
+      (closed true)
+      (pt -1.314 1.314)
+      (pt 1.314 1.314)
+      (pt 1.314 -1.314)
+      (pt -1.314 -1.314)
+      (pt -1.314 1.314))))
+   (layer TSLK
+    (graphic
+     (stroke 0.1)
+     (path
+      (closed true)
+      (pt -0.8 0.2)
+      (arc (pt -0.800 0.200) (pt -0.800 0.150) (pt -0.700 0.250) (start 180.0) (sweep 180.0))
+      (pt -0.7 0.2)
+      (arc (pt -0.700 0.200) (pt -0.800 0.150) (pt -0.700 0.250) (start 180.0) (sweep .0))
+      (pt -0.8 0.2))))
+   (leg A1 (pt -0.175 0.175) (padstack 0))
+   (leg A2 (pt 0.175 0.175) (padstack 0))
+   (leg B1 (pt -0.175 -0.175) (padstack 0))
+   (leg B2 (pt 0.175 -0.175) (padstack 0))
+   (padstack 0
+    (plated false)
+    (pad (layer TCOP) (square 0.165))
+   )
+   (model "TPS7A2128PYWDJ.stp"
+    (euler 0 0 0)
+    (offset 0 0 0)
+   )
+  )
+ )
+)

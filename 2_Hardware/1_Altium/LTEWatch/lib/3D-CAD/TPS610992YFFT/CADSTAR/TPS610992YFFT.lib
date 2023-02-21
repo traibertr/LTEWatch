@@ -1,0 +1,21 @@
+.TPS610992YFFT :1 ;Conv DC-DC 0.7V to 5.5V Synchronous Step Down Single-Out 1.8V to 5.5V 0.3A 6-Pin DSBGA T/R
+BGA6C40P2X3_88X123X62
+*STM IC
+*NGS
+*PNM 1=A1 2=A2 3=B1 4=B2 5=C1 6=C2
+*PLB 1="VIN" 2="GND" 3="SW" 4="VOUT" 5="EN" 6="FB"
+*MXP 6
+*DFN TPS610992YFFT
+~!Manufacturer_Name (Texas Instruments)
+~!Manufacturer_Part_Number (TPS610992YFFT)
+~!Mouser Part Number (595-TPS610992YFFT)
+~!Link Mouser Price/Stock (https://www.mouser.co.uk/ProductDetail/Texas-Instruments/TPS610992YFFT?qs=1mbolxNpo8cSEKMr%252BGh28A%3D%3D)
+~!Arrow Part Number (TPS610992YFFT)
+~!Link Arrow Price/Stock (https://www.arrow.com/en/products/tps610992yfft/texas-instruments?region=nac)
+~!Mouser Testing Part Number (-)
+~!Mouser Testing Price/Stock (-)
+~!Link Datasheet (http://www.ti.com/general/docs/suppproductinfo.tsp?distId=10&gotoUrl=http%3A%2F%2Fwww.ti.com%2Flit%2Fgpn%2Ftps61099)
+~!Height (0.625mm)
+~!3D_Model (TPS610992YFFT)
+TPS610992YFFT
+1.1!U 2.1!U 3.1!U 4.1!U 5.1!U 6.1!U 

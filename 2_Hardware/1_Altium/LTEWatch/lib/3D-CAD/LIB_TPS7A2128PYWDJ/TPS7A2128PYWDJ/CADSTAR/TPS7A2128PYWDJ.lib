@@ -1,0 +1,21 @@
+.TPS7A2128PYWDJ :1 ;TPS7A21 500-mA, Low-Noise, Low-IQ, High-PSRR LDO
+TPS7A2128PYWDJ
+*STM IC
+*NGS
+*PNM 1=A1 2=A2 3=B1 4=B2
+*PLB 1="IN" 2="OUT" 3="EN" 4="GND"
+*MXP 4
+*DFN TPS7A2128PYWDJ
+~!Manufacturer_Name (Texas Instruments)
+~!Manufacturer_Part_Number (TPS7A2128PYWDJ)
+~!Mouser Part Number (595-TPS7A2128PYWDJ)
+~!Link Mouser Price/Stock (https://www.mouser.co.uk/ProductDetail/Texas-Instruments/TPS7A2128PYWDJ?qs=MyNHzdoqoQJEpj%252BgRSc%252BRw%3D%3D)
+~!Arrow Part Number (-)
+~!Arrow Price/Stock (-)
+~!Mouser Testing Part Number (-)
+~!Mouser Testing Price/Stock (-)
+~!Link Datasheet (https://www.ti.com/lit/ds/symlink/tps7a21.pdf?ts=1647212175126)
+~!Height (0.3mm)
+~!3D_Model (TPS7A2128PYWDJ)
+TPS7A2128PYWDJ
+1.1!U 2.1!U 3.1!U 4.1!U 

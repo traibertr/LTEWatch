@@ -1,0 +1,22 @@
+----------------------------------------------------------------------------------------------------------------------------------
+NCDrill File Report For: LTEWatch.PcbDoc   20.12.2022  11:38:57
+----------------------------------------------------------------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII RoundHoles File : LTEWatch-RoundHoles.TXT
+ASCII SlotHoles File : LTEWatch-SlotHoles.TXT
+
+Tool       Hole Size               Hole Tolerance               Hole Type       Hole Count   Plated         Tool Travel
+----------------------------------------------------------------------------------------------------------------------------------
+T1      0.1mm (4mil)                                              Round             1178      PTH        3404.26mm (134.03inch)
+T2      0.9mm (35mil)                                             Round             49        PTH        444.64mm (17.51inch)
+T3      1mm (39mil)                                               Round             4         PTH        20.18mm (0.79inch)
+T4      0.65mm (26mil)                                            Round             1         NPTH       0.00mm (0.00inch)
+T5      0.65mm (26mil)                                            Slot              1         NPTH       0.50mm (0.02inch)
+T6      0.8mm (31mil)                                             Round             2         NPTH       30.84mm (1.21inch)
+T7      0.9mm (35mil)                                             Round             2         NPTH       6.80mm (0.27inch)
+T8      1.4mm (55mil)                                             Round             2         NPTH       3.50mm (0.14inch)
+----------------------------------------------------------------------------------------------------------------------------------
+Totals                                                                              1239
+
+Total Processing Time (hh:mm:ss) : 00:00:01

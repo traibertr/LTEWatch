@@ -1,0 +1,11 @@
+FILE_TYPE = MULTI_PHYS_TABLE;
+
+PART 'TPS7A2128PYWDJ'
+CLASS = IC
+{========================================================================================}
+:"MANUFACTURER_NAME", "MANUFACTURER_PART_NUMBER"= "PART_NUMBER", "JEDEC_TYPE", "PACK_TYPE", "MOUSER_PART_NUMBER", "MOUSER_PRICE/STOCK", "ARROW_PART_NUMBER", "ARROW_PRICE/STOCK", "MOUSER_TESTING_PART_NUMBER", "MOUSER_TESTING_PRICE/STOCK", "DESCRIPTION", "DATASHEET", "HEIGHT";
+{========================================================================================}
+ "Texas Instruments", "TPS7A2128PYWDJ" (!) = "", "TPS7A2128PYWDJ", "Other", "595-TPS7A2128PYWDJ", "https://www.mouser.co.uk/ProductDetail/Texas-Instruments/TPS7A2128PYWDJ?qs=MyNHzdoqoQJEpj%252BgRSc%252BRw%3D%3D", "", "", "", "", "TPS7A21 500-mA, Low-Noise, Low-IQ, High-PSRR LDO", "https://www.ti.com/lit/ds/symlink/tps7a21.pdf?ts=1647212175126", "0.3 mm"
+END_PART
+
+END.

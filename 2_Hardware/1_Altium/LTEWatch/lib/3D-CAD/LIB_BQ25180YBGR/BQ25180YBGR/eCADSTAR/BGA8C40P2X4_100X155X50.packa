@@ -1,0 +1,13 @@
+(unit MM)
+
+(package "BQ25180YBGR"
+    (type UNDEF)
+    (uver 2)
+    (cuser "SamacSys")
+    (uuser "SamacSys")
+    (utime 2022-04-19-04:06:08)
+    (mountForm default
+        (footprintRef "BGA8C40P2X4_100X155X50")
+        (spec "System")
+    )
+)

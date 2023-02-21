@@ -1,0 +1,9 @@
+Manufacturer=Texas Instruments
+PartNumber=BQ25180YBGR
+PartCategory=Integrated Circuit
+PackageCategory=BGA
+PinCount=8
+Version=1.1
+Released=2022-04-19 04:06:08
+Downloaded=2022-10-04 10:07:07
+3D=Y

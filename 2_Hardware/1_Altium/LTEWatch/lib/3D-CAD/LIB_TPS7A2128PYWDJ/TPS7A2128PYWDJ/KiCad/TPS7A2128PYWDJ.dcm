@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP TPS7A2128PYWDJ
+D TPS7A21 500-mA, Low-Noise, Low-IQ, High-PSRR LDO
+K
+F https://www.ti.com/lit/ds/symlink/tps7a21.pdf?ts=1647212175126
+$ENDCMP
+#
+#End Doc Library
