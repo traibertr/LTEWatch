@@ -1,0 +1,1625 @@
+# TM - Analog LTE-M / NB-IoT Watch
+
+- ### Date :  20.09.2022
+
+- ### Author: Tristan Traiber
+-----------------
+-----------------
+# Week 1 : 19.09.22 -> 23.09.22
+
+
+# Week 2 : 26.09.22 -> 30.09.22
+
+
+# Week 3 : 03.10.22 -> 07.09.22
+
+----
+----
+
+# Date : 10.10.22
+
+## RDV Medard
+
+### Work Done
+
+- Hardware Schematic :
+
+![Prototype Schematic](../2_Hardware/Prototye/Schematic/proto_schema.png)
+------------------------------------
+![Prototype Schematic](../2_Hardware/Prototye/Schematic/pwr_sup_blk_digrm.svg)
+
+  1. Power Management Circuit :
+     - Battery Charger IC : BQ25180 (Texas Instrument)
+       - Available : In Stock Mouser/Digikey
+       - Iq : max 5μA 
+
+|               |                 PARAMETER                |   |                                                TEST CONDITIONS                                               | MIN |  TYP |  MAX | UNIT |
+|---------------|:----------------------------------------|:-:|:------------------------------------------------------------------------------------------------------------|:---:|:----:|:----:|:----:|
+| IQ_IN         | Input supply quiescent current           |   | VBAT = 3.6V, VIN = 5V, Charge   enabled,      ICHG = 0mA, SYSREG = 4.5V                                      |     | 0.75 |   1  |  mA  |
+| IQ_IN         | Input supply quiescent current           |   | VBAT = 3.6V, VIN = 5V, Charge   enabled,      ICHG = 0mA, SYSREG = Passthrough                               |     |   1  | 0.85 |  mA  |
+| ISLEEP_IN     | SLEEP input current                      |   | VIN = 3.6V, VBAT = 3.7V                                                                                      |     |  30  |      |  μA  |
+| IQ_BAT        | Battery quiescent current                |   | VIN <VUVLO or floating,   Watchdog      disabled, Push button disabled, I2C functional. VBAT =3.6V TJ = 25°C |     |   3  |  3.5 |  μA  |
+| IQ_BAT        | Battery quiescent current                |   | VIN <VUVLO , VBAT =3.6V,   Push-button function enabled, 0°C < TJ < 85°C                                     |     |   4  |   5  |  μA  |
+| IBAT_SHUTDOWN | Battery discharge   current in Ship Mode |   | VIN = 0V, Ship Mode, VBAT =   3.6V, Adapter Sense wake enabled.                                              |     |  15  |      |  nA  |
+| IBAT_SHIP     | Battery discharge current   in Ship Mode |   | VBAT = 3.6V, Push button   function enabled (average current), 0°C < TJ < 85°C                               |     |  3.2 |  4.5 |  μA  |
+       - Settings :
+         - I2C 
+       - Bat Protection :
+         - Integreted Power Path (FET)
+         - BAT temp thermistor monitoring (JEITA profile)
+         - Bat UVP - Overdischarge protection
+         - Bat OVP - Overcharge protection
+         - Discharge current limit
+       - Circuit Portection
+         - IC thermal regulation
+         - INDPM (Input current limit)
+         - Input OVP
+         - VINDPM (Input voltage threshold to maximize adaptor power)
+     - Battery Level Monitoring : 
+       - nRF9160 ADC battery voltage measure
+       - Load switch to increase battery life : TPS22916xx (Texas Instrument)
+         - Iq 10-nA
+  |   |           PARAMETER           |   |               TEST CONDITIONS               | MIN | TYP | MAX | UNIT |
+|---|:-----------------------------|:-:|:-------------------------------------------|:---:|:---:|:---:|:----:|
+|   | IQ,VIN VIN Quiescent current  |   | Enabled, VOUT = Open                        |     | 0.5 |  1  |  μA  |
+|   | ISD,VIN VIN Shutdown current  |   | Disabled, VOUT = GND      (TPS22916B/C/CN)  |     |  10 | 100 |  nA  |
+|   | ISD,VIN VIN Shutdown current  |   | Disabled, VOUT = GND   (TPS22916BL/CL/ CNL) |     | 100 | 300 |  nA  |
+|   | ION ON Pin leakage            |   | Enabled                                     | -10 |     |  10 |  nA  |
+     - 3V3 Power Supply :
+       - Buck-Boost Converter : TPS63036 (Texas Instrument)
+
+|         PARAMETER        |      |                  TEST CONDITIONS                  | MIN | TYP | MAX | UNIT |
+|:------------------------|:----:|:-------------------------------------------------|:---:|:---:|:---:|:----:|
+| Iq   - Quiescent current | VIN  | OUT= 0 mA, VEN = VIN =   3.6 V,      VOUT = 3.3 V |     | 25  | 35  | μA   |
+| Iq   - Quiescent current | VOUT | OUT= 0 mA, VEN = VIN =   3.6 V,      VOUT = 3.3 V |     | 4   | 6   | μA   |
+| IS - Shutdown   current  |      | VEN = 0 V, VIN = 3.6 V                            |     | 0.1 | 0.9 | μA   |                           |     | 0.1 | 0.9 | μA   |
+
+  1. GPIO 1V8 Power supply : 
+     - [TPS7A03 Nanopower IQ, 200-nA, 200-mA, Low-Dropout Voltage Regulator With Fast Transient Response](https://www.ti.com/product/TPS7A03)
+     - [Datasheet](https://www.ti.com/lit/ds/symlink/tps7a03.pdf)
+
+|          |          PARAMETER          |   |                TEST CONDITIONS               | MIN | TYP | MAX | UNIT |
+|----------|:---------------------------|:-:|:--------------------------------------------|:---:|:---:|:---:|:----:|
+| IGND     | Ground current              |   | OUT = 0 mA                                   |     | 200 | 250 |  nA  |
+| IGND(DO) | Ground current in   dropout |   | IOUT = 0 mA, VIN = 95% x VOUT   (NOM)        |     | 220 |     |  nA  |
+| ISHDN    | Shutdown current            |   | VEN = 0 V, 1.5 V ≤ VIN ≤ 5.0 V,   TJ = 25°C  |     |  3  |  10 |  nA  |
+
+
+  2. Battery Cells: 503535 3.8v 580mAh round lipo battery cells
+   - Source : https://www.vatsbattery.com/product/503535-3-8v-580mah-round-lipo-battery-cells/
+   - Buying Solution : https://batteryzone.de/products/503535-580mah-hochspannung-3-8v-runde-polymer-smart-watch-moxibustion-instrument-auto-smart-box-batterie?_pos=1&_sid=59cfd2d74&_ss=r
+   - Manufacturer Source : https://www.lipolbattery.com/Round-LiPo-Battery.html
+  3. Display : Sharp Memory Display
+     - [Memory LCD - LS011B7DH03](https://www.sharpsde.com/products/displays/model/ls011b7dh03/)
+     - [Datasheet](https://www.sharpsde.com/fileadmin/products/Displays/Specs/LS011B7DH03_24Nov17_Spec_LD-29Y03.pdf)
+     - Ultra Low Power Consumption : Microwatt range (Typ.)
+     - High Readability : Viewable in any light, from edge-of-vision to brightest sunlight
+Reflective, plus Transflective models
+     -  [Buying Solution](https://www.aliexpress.com/item/1005001809102193.html?spm=a2g0o.productlist.0.0.13627c9fzwtL88&algo_pvid=e7408b49-0d96-404e-a75f-c72a422ecbca&algo_exp_id=e7408b49-0d96-404e-a75f-c72a422ecbca-3&pdp_ext_f=%7B%22sku_id%22%3A%2212000017704782492%22%7D&pdp_npi=2%40dis%21CHF%2115.44%2115.44%21%21%21%21%21%402101e9d516653908152311169e7c44%2112000017704782492%21sea&curPageLogUid=bFYOqxDm5Y1G)
+     - Design References :
+       - LVGL Zephyr - [Sharp memory display generic shield](https://developer.nordicsemi.com/nRF_Connect_SDK/doc/2.0.2/zephyr/boards/shields/ls0xx_generic/doc/index.html)
+       - Schematics and hardware : [LS011B7DH03 Sharp memory display breakout 1.1 inch 160x68 (3.3v only)](https://github.com/karnadii/sharp_memory_display_breakout)
+     - Demo :
+       - [sunlight readability test](https://www.youtube.com/watch?v=dkv0fAnsxM8)
+       - [E-ink vs Sharp memory display](https://www.youtube.com/watch?v=abkQcF7Kuv4)
+
+### Work To Do
+1. Hardware - Schematic
+   1. Interface Power Management circuit with nRF9160
+   2. Order Display and Battery while available
+
+### Questions
+1. Hardware - Schematic
+   1. . What's on the prototype board ?
+      1.  3V3 and 1.8V, others ?
+      2. eSim ?
+      3. nRF52840 ?
+      4. GNSS IC ?
+      5. Motors driver IC ?
+      6. Antenna ?
+         1. GNSS, BLE, LTE ?
+      7. Buttons, numbers ? 
+
+### To do
+1. [x] Find a GPS (GNSS) IC without module (external antena connector SMA) ultra low-power (gps ubloc)
+2. [x] Find how to connect multiple GPS driver on nRFConnect (See "COEXIST" on nRF doc)
+3. [x] Find an accelerometer ultra low-power
+4. [x] Connect USB-C connctore with J-TAG interface to programme the nRF9160
+5. [x] Finish schematic for 24.10.22
+   
+--------------------------------
+--------------------------------
+# ``Date : 11.10.22``
+
+# GPS/GNSS IC
+
+## U-BLOX
+
+   1. [MIA-M10Q Series](https://www.u-blox.com/en/product/mia-m10-series)
+      1. [MIA-M10Q Data Sheet](https://content.u-blox.com/sites/default/files/documents/MIA-M10Q_DataSheet_UBX-22015849.pdf)
+   2. [MAX-M10 Series](https://www.u-blox.com/en/product/max-m10-series)
+      1. [MAX-M10S Data Sheet](https://content.u-blox.com/sites/default/files/MAX-M10S_DataSheet_UBX-20035208.pdf)
+   
+## BROADCOM
+
+   1. [BCM4778](https://www.broadcom.com/products/wireless/gnss-gps-socs/bcm4778)
+      1. [Product Brief](https://docs.broadcom.com/doc/4778-PB1)
+
+# Reverse Polarity Protection
+
+Source : [11 Ways to Protect Your Power Path](https://www.ti.com/lit/eb/slyy168/slyy168.pdf?ts=1665394077965&ref_url=https%253A%252F%252Fwww.ti.com%252Fpower-management%252Fpower-switches%252F11-ways-to-protect-your-power-path.html%253FkeyMatch%253DOVERVOLTAGE%2BPROTECTION) from Texas Instrument Incorporated
+
+1. N-Channel MOSFET Reverse Polarity Protection
+  - [Reverse polarity protection Design](https://github.com/joric/nrfmicro/wiki/Batteries#reverse-polarity-protection)
+2. PMOS reverse polarity protection circuit
+  - It is advisable to use PMOS over NMOS. This is because PMOS is used in the positive rail of the circuit rather than the Negative rail. Therefore, PMOS cuts off the positive rails and the circuit will not have any positive voltage. But, NMOS is used in negative rails, thus disconnecting the negative rail do not disconnect the circuit from the batteries positive rail. Therefore, in the case of high voltage DC, disconnecting the positive rail is much safer than disconnecting the negative rail and there are fewer chances of harmful consequences like short circuits, electrocution, etc. will not happen.
+
+  A MOSFET has the following specs that are crucial for the circuit :
+  1. Drain Source Resistance (RDS)
+  2. Drain Current
+  3. Drain to source voltage
+  - [Design Guide - PMOS MOSFET for Reverse Voltage Polarity Protection](https://components101.com/articles/design-guide-pmos-mosfet-for-reverse-voltage-polarity-protection)
+
+  ![PMOS Reverse polarity Protection](https://components101.com/sites/default/files/inline-images/PMOS-Reverse-Polarity-Protection-Circuit.png)
+
+  ### P-MOSET Solution
+  - P-MOS : [SSM3J338R,LF](https://www.digikey.ch/en/products/detail/SSM3J338R,LF/SSM3J338RLFCT-ND/5810258?curr=usd&utm_campaign=buynow&utm_medium=aggregator&utm_source=octopart)
+    - P-Channel 12 V 6A (Ta) 1W (Ta) Surface Mount SOT-23F
+  - Zener Diode : [BZT52C9V1-7-F](https://octopart.com/opatz8j6/a1?t=cbZDX4rkCXJPbZ0ltjaqZx7UBX0AJuhebtuS3GtkBTvvT_59TTdhXa_-3Cjb4daxnPgGJrn0k5_y8JSfWSIPcvrv29zyMlmbDtweAkjwY3ay7hoIUnOktm-dM0UFxKthaigE_RBQZTH6RQUap34J0o7JEor9iEkQj2eeVbFD3GTo8mxhMmXIpB3jBwMwZyM7uP1OIxmImBY99U2UDgK7TUG6b6nV8ByN_G1tiFm9sn7EGsMoYIjRXYe9pmjLzdOktw)
+    - Zener Diode 9.1 V 500 mW ±6% Surface Mount SOD-123
+  ### ESD Protection
+  - TVS Diode : [SP1007-01ETG](https://www.digikey.ch/en/products/detail/SP1007-01ETG/F6187CT-ND/4251856?curr=usd&utm_campaign=buynow&utm_medium=aggregator&utm_source=octopart)
+    - 9.2V Clamp 5A (8/20µs) Ipp Tvs Diode Surface Mount SOD-882
+
+----
+----
+# ``Date : 12.10.22``
+
+# Display :
+## LS011B7DH03 Sharp memory display breakout 1.1 inch 160x68 (3.3v only)
+1. [Sharp Memory Display LS011B7DH03](https://www.sharpsde.com/products/displays/model/ls011b7dh03/)
+   1. [Display Breakout board and schematic](https://github.com/karnadii/sharp_memory_display_breakout)
+    ![Board_1](https://user-images.githubusercontent.com/18657277/194879312-87c62482-2db9-4534-9033-acd872659235.png)
+   ![Board_2](https://user-images.githubusercontent.com/18657277/194880081-31586033-c024-4c6c-9a80-d86add97a095.png)
+
+   ![Schematic](../2_Hardware/Prototye/Schematic/sharp_mem_lcd_breakout_board.png)
+
+   ## Schematic and board based on project [*"nice!view"*](https://nicekeyboards.com/docs/nice-view/) from **Nice Technologies LLC**
+
+   ![nice!view_project](https://nicekeyboards.com/static/6a3b123088ccdaf4e3022619d64ccf6b/6aca1/niceview.jpg)
+
+   The nice!view is a SSD1306 OLED replacement boasting >1,000x power savings while keeping a 30Hz refresh rate. It has a similar pinout to SSD1306 OLEDs with one extra pin making it easy to add on to existing boards.
+
+To get your nice!view up and running check out [Getting Started](https://nicekeyboards.com/docs/nice-view/getting-started).
+
+If you're a hardware designer interested to learn more about the pinout and schematic check out the [Pinout and Schematic](https://nicekeyboards.com/docs/nice-view/pinout-schematic).
+
+### Specifications
+
+- 160x68 pixel resolution with a diagonal size of 1.08"
+- 36x14x2.9mm dimensions
+- 30Hz refresh rate
+- <10uA typical power draw
+- Conformal coat to reduce the possibility of shorts
+- Socket and pins included
+- 3-wire SPI protocol
+- 3.3V voltage
+- Sharp LS011B7DH03 display
+  
+### Pinout
+
+![pinout](https://nicekeyboards.com/static/9989700f7a9d7328a636a149f94eb969/a6d36/niceview_pinout.png)
+
+## Software - Zephyr - [Sharp memory display generic shield]([Sharp memory display generic shield](https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/zephyr/boards/shields/ls0xx_generic/doc/index.html))
+
+### Overview
+
+This is a generic shield for Sharp memory pixel LCD. It supports displays of LS0XX type. These displays have an SPI interface and few other pins. Note that the SCS is active high for this display.
+
+The DISP pin controls whether to display memory contents or show all white pixels, this can be connected directly to VDD, to always display memory contents or connected to a gpio. If devicetree contains ``disp-en-gpios`` then it will be set to high during driver initialization. Display blanking apis can be used to control it.
+
+Sharp memory displays require toggling the VCOM signal periodically to prevent a DC bias occurring in the panel as mentioned in the `appnote` and `datasheet`. The DC bias can damage the LCD and reduce the life. This signal must be supplied from either serial input (sw) or an external signal on the EXTCOMIN pin.
+
+Currently the driver only supports VCOM toggling using the EXTCOMIN pin
+(EXTMODE pin is connected to VDD). When ``extcomin-gpios`` is defined, driver starts a thread which will toggle EXTCOMIN at ``extcomin-frequency`` frequency. Higher frequency gives better contrast while lower frequency saves power.
+
+To use a different method of toggling for example pwm, user may not define ``extcomin-gpios`` and implement their preferred method in application code.
+
+### Pins Assignment of the Generic Sharp memory Display Shield
+
+| Pin           | Function                                                |
+|:--------------|:--------------------------------------------------------|
+| SCS           | Serial Slave Select                                     |
+| SI            | Serial Data Input                                       |
+| SCLK          | Serial Clock Input                                      |
+| EXTCOMIN      | VCOM Inversion Polarity Input (VCOM can be controlled   |
+|               | through SW)                                             |
+| DISP          | Display ON/OFF switching signal (Can be connected       |
+|               | directly to VDD)                                        |
+| EXTMODE       | COM Inversion Selection                                 |
+
+
+### Current supported displays
+
+Following displays are supported but shield only exists for LS013B7DH03. Other shields can be added by using the LS013B7DH03 as a reference and changing the width, height, etc configurations.
+
+- LS012B7DD01
+- LS012B7DD06
+- LS013B7DH03
+- LS013B7DH05
+- LS013B7DH06
+- LS027B7DH01A
+- LS032B7DD02
+- LS044Q7DH01
+
+| Display              | Shield Designation           |
+|:---------------------|:-----------------------------|
+| LS013B7DH03          | ls013b7dh03                  |
+
+
+### Requirements
+
+This shield can only be used with a board that provides a configuration for Arduino connectors and defines node aliases for SPI and GPIO interfaces (see :ref:`shields` for more details).
+
+### Programming
+
+Set ``-DSHIELD=ls013b7dh03`` when you invoke ``west build``. For example:
+
+```bash 
+# From the root of the zephyr repository
+west build -b nrf52840dk_nrf52840 samples/subsys/display/lvgl -- -DSHIELD=ls013b7dh03
+```
+
+## Button and LED (user interface)
+
+Exemple from [*"nRF9160 DK Hardware v1.1.0 User Guide"*](https://infocenter.nordicsemi.com/pdf/nRF9160_DK_HW_User_Guide_v1.1.0.pdf) from Nordic SEMICONDUCTOR
+
+The buttons and switches are active low, meaning that the input will be connected to ground when the buttons are pushed or switches slid to the GND position. The buttons and switches have no external pullup resistor, and therefore the P0.06, P0.07, P0.08, and P0.09 pins must be configured as an input with an internal pull-up resistor.
+
+![*Buttons and switches*](Prototye/Schematic/SW_GPIO.png)
+
+The LEDs are active high, meaning that writing a logical one (1) to the output pin will illuminate the LED. The nRF9160 GPIOs control power transistors and LEDs are fed from a separate 3.0 V domain. Therefore, LED current will not be drawn from nRF9160 GPIOs or the nRF9160 supply.
+
+![*LEDs*](../2_Hardware/Prototye/Schematic/Led_GPIO.png)
+
+# nRF9160 Sim Card Interface :
+
+From documentation [*nRF9160 Product Specification v2.1*](https://infocenter.nordicsemi.com/pdf/nRF9160_PS_v2.1.pdf)
+
+LTE modem supports the UICC (universal integrated circuit card) interface.
+Only the UICCs with the electrical interface specified in ISO/IEC 7816-3 are supported, meaning that the UICCs with IC-USB, CLF or MMC interfaces are not supported.
+
+The supported UICC/eUICC interface is compliant with:
+- ETSI TS 102 221: Smart Cards; UICC-Terminal interface; Physical and logical characteristics
+- ETSI TS 103 383: Smart Cards; Embedded UICC; Requirements Specification
+
+The physical interface towards the eUICC is the same as towards the removable UICC.
+
+Only the class C (supply voltage 1.8 V nominal) operation is supported. Support for the legacy class B (supply voltage 3.0 V nominal) operation must be built with external components, including the external power supply and the level shifters towards the LTE modem UICC interface.
+LTE modem supports powering down the UICC during PSM and eDRX idle mode, when the UICC supports
+this feature as specified in 3GPP TS 24.301. To reach the lowest total power consumption of the complete cellular IoT product, only UICCs supporting power down mode during PSM and eDRX idle mode sleep intervals should be considered.
+
+LTE modem controls the physical interfaces towards the UICC and implements the transport protocol over the four-pin ISO/IEC 7816-3 interface:
+- VCC (power supply): LTE modem drives this
+- CLK (clock signal): LTE modem drives this
+- RST (reset signal): LTE modem drives this
+- I/O (input/output serial data): Bi-directional
+  
+The interface and the connections between LTE modem, UICC connector, and the ESD device is shown in the figure below.
+
+![Connections between LTE modem, card connector, and the ESD device](../2_Hardware/Prototye/Schematic/sim_interface.png)
+
+Only standard transmission speeds are supported as specified in ETSI TS 102 221.
+
+**Important: LTE modem must be stopped through the modem API, before removing the UICC.**
+
+An ESD (electrostatic discharge) protection device compatible with UICC cards must be used between the removable card and the LTE modem, to protect LTE modem against a harmful electrostatic discharge from the card connector.
+
+
+# nRF COEXIST (Multiple RF parallel Peripherals) :
+
+From **"7.3 LTE modem coexistence interface"** in documentation : [*nRF9160 Product Specification v2.1*](https://infocenter.nordicsemi.com/pdf/nRF9160_PS_v2.1.pdf)
+
+
+LTE modem uses a dedicated three-pin interface for RF interference avoidance towards a companion radio device e.g. an external positioning device or Bluetooth Low Energy device.
+
+The inputs and outputs for this interface:
+
+- COEX0: Input to the LTE modem from the external device. When active high, indicates that the external device transceiver is turned on.
+  - When internal GPS is used, COEX0 can be used as active high control for the external LNA component.
+- COEX1: Output from the LTE modem to the external device. Active high time mark pulse, which is
+synchronous to LTE system time.
+  - When internal GPS is used, COEX1 delivers the GPS 1PPS (one pulse per second) time mark pulse.
+- COEX2: Output from the LTE modem to the external device. When active high, indicates that the LTE modem transceiver is turned on.
+  - COEX2 can also be treated as active low grant from LTE modem to the external device, indicating grant to transmit and receive.
+
+**Note:** COEX2 pin requires an external pull-down resistor in 100 kΩ size range to be used.`` 
+
+**Note:** Please refer to nRF9160 modem firmware release notes found under nRF91 FW binaries
+downloads concerning availability of COEX signaling feature support".
+
+``COEX`` interface timing in relation to modem state is shown in the figure below:
+
+![COEX interface timing](../2_Hardware/Prototye/Schematic/coex_interface.png)
+
+## Exemple :
+
+
+----
+----
+# ``Date : 13.10.22``
+
+## Work done
+
+
+----
+----
+# ``Date : 17.10.22``
+
+## RDV - Medard
+
+### Functional Block Diagram
+![](../2_Hardware/Prototye/Schematic/prototype_schema.svg)
+
+### Project :
+- [x] Draw a quick functional bloc diagram of altium project
+- [x] Do a comparaison table between **u-blox** [*M10*](https://www.u-blox.com/en/product/max-m10-series) Series and [*M8*](https://www.u-blox.com/en/product/max-m8-series) series, compare to GregTracker module ([SE868K7-A
+](https://www.telit.com/devices/se868k7-a-se868k7-al/), [SE868K3-A & SE868K3-AL](https://www.telit.com/devices/se868k3-a-al/)) and **BROADCOM** [*BCM47*](https://www.broadcom.com/products/wireless/gnss-gps-socs) series ([BCM4778](https://www.broadcom.com/products/wireless/gnss-gps-socs/bcm4778),[BCM47765](https://www.broadcom.com/products/wireless/gnss-gps-socs/bcm47765))
+
+### To do
+1. GNSS-GPS :
+   - [x] Find an antenna for MAX-M10S chip
+   - [x] Implement MAX-M10S in Altium project
+   - [x] Root the external GPS module on nRF9160 MCU
+   - [x] Find solution to use COEX output of the MCU in order to use external GPS modul in parrallel of the LTE Modem
+2. LTE : 
+   - [x] Find LTE antenna (use the one from Tracker project)
+   - [x] Root the LTE antenna to the MCU
+   - [x] Add an eSim + SIM connector
+   - [x] Root everything on the MCU
+3. USB-C connector
+   - [x] Root USB-C connector to nRF9160 (use UART) to program and flash MCU 
+
+----
+----
+# ``Date : 18.10.22``
+## GNSS-GPS [MAX-M10S](https://www.u-blox.com/en/product/max-m10-series) ([Datasheet](https://content.u-blox.com/sites/default/files/MAX-M10S_DataSheet_UBX-20035208.pdf))
+
+### Description :
+**Ultra-low-power GNSS receiver for high-performance asset-tracking devices :**
+- Less than 25 mW power consumption without compromising GNSS performance
+- Maximum position availability with concurrent reception of 4 GNSS
+- Proven excellent performance, even with small antennas
+- Advanced spoofing and jamming detection
+- Pin-compatible with previous MAX products
+
+### Product characteristics :
+
+|     Feature         |	MAX-M10S                    |
+|------------------   |-----------                  |
+|**GNSS features**    |                             |
+| GNSS      |	BeiDou, Galileo, GLONASS, GPS / QZSS  |
+| Number of concurrent GNSS |	4                     |
+| GNSS Platform	      | Concurrent GNSS             |
+| Oscillators         |	TCXO                        |
+| Interfaces	        | UART, I2C                   |
+| **Electrical data** |                             |	 
+| Maximum supply [V]  | 3.6                         |
+| Minimum supply [V]  | 1.76                        |
+| **Environmental data, quality & reliability** |	  |
+| Maximum temperature [°C] |	85                    |
+| Minimum temperature [°C] |	-40                   |
+| Features | LNA, SAW, RTC crystal, Timepulse output|
+| Dimensions [mm]	| 9.7 x 10.1 x 2.5                |
+
+## Antenna Choice :
+**Documentation :**
+- [Design guide for small, high performance GNSS patch antenna applications](https://content.u-blox.com/sites/default/files/documents/SAM-M8Q_WhitePaper_%28UBX-16026689%29%20%281%29.pdf)
+- [Antenna integration - Antenna integration guidance](https://content.u-blox.com/sites/default/files/AntennaIntegration_ApplicationNote_UBX-18070466.pdf)
+- [GNSS antennas - RF design considerations for u-blox GNSS receivers](https://content.u-blox.com/sites/default/files/products/documents/GNSS-Antennas_AppNote_%28UBX-15030289%29.pdf)
+- [WEARABLE CONFORMAL ANTENNA DESIGN IN PRESENCE OF THE ANSYS HUMAN BODY MODEL](https://www.finiteelementanalysis.com.au/featured/wearable-conformal-antenna-design-in-presence-of-the-ansys-human-body-model/)
+
+-------
+# GNSS antennas - RF design considerations for u-blox GNSS receivers :
+
+Source : [*GNSS antennas - RF design considerations for u-blox GNSS receivers*](https://content.u-blox.com/sites/default/files/products/documents/GNSS-Antennas_AppNote_%28UBX-15030289%29.pdf)
+
+## Lexic:
+- GNSS :
+- TTFF : Time To First Fix ; Time required by GNSS to acquire satellite signals and navigation data, and calculate a position solution
+- dBiC: Is decibel above the gain of a isotrope antenna as a reference where the isotrope antenna has the same circular polarisation as the antenna of which the gain is expressed. [Source](http://radiomobile.pe1mew.nl/?The_program:Definitions:dBiC#:~:text=dBiC%20is%20decibel%20above%20the,pattern%20of%20a%20perfect%20sphere.)
+
+The isotrope antenna is a mathematical antenna with a radiation pattern of a perfect sphere.
+From this background it is calculated that a dipole antenna has a gain of 2.15 dB referenced to the isotrope antenna.
+
+-----
+## ``Introduction`` 
+-----
+
+Du to their extremely weak power, GNSS signals demand specific consideration and constraint on the antenna.
+
+In these conditions, the system performance is directly and mostly dependent to the implementation and choice of the used antenna.
+
+## Antenna basics
+### General considerations for best performances :
+**Good sky visibility is crucial :** 
+- GNSS receiver needs to receive signals from as many satellites as possible
+
+**Not ideal condition are :**
+- Narrow streets
+- Underground parking lots
+- Any object covering the antenna
+
+**Those bad conditions result in :**
+- Position drift
+- Longer TTFF (Time To First Fix)
+
+**GNSS receiver can achieve the specified performance only if :**
+- At least :  $\dfrac{C}{N_0} \geq 44 \; [dBHz]$, usually : $\boxed{ 44 \; dBHz \leq \dfrac{C}{N_0} \leq 50 \; dBHz}$
+ 
+  - *$\frac{C}{N_0}$ : Average carrie to noise power density ratio*
+- For exemple, standard active antennas easily achive $47\;dBHz$
+
+
+### Antenna Requirements
+**Optimal performances :**
+- High gain antennas (e.g. $>4\;dBic$)
+- Active antennas with an LNA with a low noisw figure ($<2\;dB$)
+**Idea Antenna :**
+- Low directivity level
+- Good sky visibility
+- Good matching load and line impedance
+- High gain
+- Filter
+### Antenna Placement
+To guaranty the best performance of the system, it is crucial to fullfile those constraints :
+- Patch antennas should always have their plane parrallel to the geographic horizon
+- Antenas must have full view of the sky ensuring a direct line-of-sight with satellites
+
+### ``Active and Passive Antennas``
+
+Antennas are available in two main categories :
+1. Passive antennas (ceramic patch, helix structure): 
+   - Only contain the radiating element
+   - Can also contain a 50 Ohms line impedance adaptation passive matching network
+2. Active antennas
+   - Integrated LNA (Low Noise Amplifier)
+     - Eliminate the line losses after the LNA which reduce the overall noise
+     - Reduce the overall noisde figure of the system resulting in better sensitivity
+   - Some receivers requier sactive antenna only
+   - Increase power consumption $\boxed{3 \ldots 20\;mA}$
+
+Active antennas are always advisable if antenna receiver line length exceeds $\boxed{10\;cm}$. The gain of the LNA inside the antenna must not lead to an overload condition at the receiver. For receivers that also work with passive antennas an antenna LNA gain of $\boxed{15\; dB}$ is usually sufficient, even for cable lengths up to 5 m. There is no need
+for the antenna LNA gain to exceed $\boxed{26\; dB}$ for use with u-blox receivers (at the RF input). With shorter
+cables and a gain above $\boxed{35\; dB}$, an overload condition might occur on some receivers.
+
+When comparing the gain figures of active and passive antennas, keep in mind that the gain of an
+active antenna is composed of two components :
+1. **Antenna gain** of **the passive radiator, given in $\boxed{dBic}$**
+2. **LNA power gain, given in $\boxed{dB}$**
+
+A low antenna gain cannot be compensated by high LNA gain. **It is not possible to judge the quality of the antenna if a manufacturer provides one total gain figure**. Information is needed on the antenna gain (in dBic), the amplifier gain, and the amplifier noise figure.
+
+**Active vs Passive antenna table**
+| Active antenna | Passive antenna |
+|---|---|
+|Needs more power (10 – 60 mW) than a passive antenna   | Does not add anything to the power budget |
+Is more tolerant to minor impedance miss-match or cable length than a passive antenna (see section 5.3) | Antenna must be connected with a carefully designed micro strip or strip line of maximum 10 cm to the GNSS receiver to ensure good GNSS performance. |
+Helps to keep the receiver noise figure low | Jamming signals coupled into the micro-strip or strip line negatively affect the performance. |
+Is less affected by jamming into the antenna cable than a passive antenna (if equipped with filter). | RF design experience is required to properly design a passive antenna |
+
+## Passive antenna types
+GNSS signal is right-hand circular polarized [(RHCP)](https://oscarliang.com/linear-circular-polarized-antenna-fpv/) which requier different antenna shape from more common linear polarized signal antenna (whip).
+
+-------
+## ``Patch antenna``
+---------
+
+![patchAntenna](https://www.inpaq.com.tw/upload/file/20160125020258534235875.png)
+- Most common antenna for GNSS applications
+- Flat antenna
+- Have a ceramic and metal body mounted on a metal base plate
+- Often cast in housing
+
+**Advantages**
+- Ideal for flat surface mounting
+- Very high gain capable
+- Low cost
+- Huge variation of available size ($40\times 40\; mm$ down to $10\times 10\; mm$)
+**Disavantages**
+- Require a large ground plane for best performance ($70\times 70\; mm$)
+- A smaller antenna equal a lower overall gain
+- Amplifying the signal after the antenna will not improve the **SNR** (Signal to Noise Ratio)
+
+**Practical values**
+Patch antennas size :
+- $size = (25 \times 25)$ :
+  - Optimal performance
+  - Cost-efficient
+- $size < (17 \times 17)$ :
+  - Moderate navigation performance (Unless enhanced by u-blox SuperSense® technology)
+
+**``!!! Performance is dependent on the ground plane size !!!``**
+
+------------------------------
+## ``Helix antenna``
+-------
+
+- Geometric size depends on the dielectric that fill the space between th active parts of the antenna.
+- If the dielectric is air :
+  - Large dimension ($l = 60\; mm$, $⌀ = 45\; mm$)
+- If higher dielectric constant (ceramics) :
+  - Much smaller form factor
+
+![Helix-Antenna1](https://www.researchgate.net/profile/George-Slade-2/publication/275828209/figure/fig2/AS:614143698685984@1523434676984/Backfire-resonant-quadrifilar-helix-antenna-popular-for-GNSS-communications-and-weather.png)
+
+**Advantages**
+- Like patch antennas, filling the antenna with a high dielectric constant material can reduce the size of helix antennas. Sizes with value like $l=18\; mm$ and $⌀ = 10\; mm$ are being available on the market.
+- 
+**Disavantages**
+- The smaller the dimensions of the antenna, the more performance-critical tight manufacturing tolerances become
+- Again, antenna gain will decrease with decreasing size of the antenna.
+
+**Practical values**
+
+### ``Monopole Antenna - Chip Antenna``
+
+   - More and more important for GNSS designs
+   - Very common in electronic applications such as mobile telephones and Personal-Navigation-Devices (``PNDs``)
+
+**Advantages**
+- Low cost
+- Extremely small size available ($3.2\times 1.6 \times 1.1 \; mm$)
+- High gain
+- Omni-directional radiation patterns
+
+**Disavantages**
+- A variety of factors influence their performance due to their miniatur size
+  - Footprint
+  - Ground plane size
+  - Isolation distance (typ. $5\;mm$) : The keep-out area can have an important impact on antenna efficiency and GNSS performance
+  - Mounting of the chip antenna and GNSS device
+- The design of the system require a carfull consideration
+- Isolation distances must be included to avoid deviations in antenna performance. 
+- The respect of all recomendation doesn't always be guaranteed performance due to potential detuning effects created by nearby objects.
+
+**Practical recommandations**
+- Even if the antenna manufacturers claim that a ground plane is not required, the available ground plane has a significant impact on the GNSS performance of a chip antenna. Therefore, not only the size of the chip but also the ground plane must be considered in the design. For designs with a sufficiently large ground plane a chip antenna can provide satisfactory GNSS performance. 
+- However, in designs with an inadequate ground plane and device layout their performance is insufficient for GNSS.
+- Chip antennas have a $3 \; dB$ loss compared to helical or patch antennas due to linear polarization and their performance is highly dependent on the size of the ground plane
+- Chip antennas are not recommended for use in devices where navigation is an essential feature
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-19%2014_00_11-GNSS-Antennas_AppNote_(UBX-15030289).pdf%20-%20Foxit%20PDF%20Reader.png)
+
+### ``Monopole Antenna - PCB Antenna``
+
+  - A linear polarized whip or a PCB strip antenna is a simple and economical antenna solution if the user is willing to accept significantly weaker signals. Compared to a patch or helix these antennas have additional losses due to:
+    - Polarization mismatch of about $-3 dB$ due to linear polarization
+    - Lower signals due to massively in-homogenous sensitivity pattern (directivity)
+    - Lower overall gain
+  - The PCB strip is perhaps the cheapest way to implement a GNSS antenna, but it has some definite drawbacks which must be considered :
+    -  Depending on the geometry chosen, the antenna has a high directivity
+    -  PCB antennas are typically bigger than chip antennas and usually have a larger bandwidth than chip or patch antennas.
+    -  In addition, implementing PCB strip antennas requires RF expertise.
+
+### ``Monopole Antenna - Fractal Element Antenna (FEA)``
+
+
+![FEA](https://www.mdpi.com/fractalfract/fractalfract-06-00402/article_deploy/html/images/fractalfract-06-00402-g019.png)
+
+   - A fractal antenna uses a self-similar design to maximize the length, or increase the perimeter on the inside sections or the outer structure
+   - Made of material that can receive or transmit electromagnetic signals within a given total surface area.
+   
+-------------------------------------
+## ``Dilpoe antenna``
+----
+
+**Advantages**
+- Very cost-effective solution, especialy when printed on PCB
+- Acceptable performance in indoor environnements
+- Field independant from any ground plane
+- Linear polarization increase the backlob sensitivity which is usefull for indoor reception
+  
+**Disavantages**
+- Linear (not circular polarized) antenna, which result in $3dB$ loss for GNSS in open space
+- Demonstrate similar drawbacks as PCB antennas
+- Require RF expertise
+
+![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRB4S4d3jyOxSPpJSQ62wsr5cMWyNFFFFPSfw&usqp=CAU)
+![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYVgRRuMzRAfNioV6sz69iqM-jJ5IpgcQErW29DwQ8D8ch8rFYB4pnlYpbBkAdiMSHE0E&usqp=CAU)
+
+**Practical recomandations**
+- Dipole antennas are not recommended for use in devices where navigation is an essential feature
+
+----
+## ``Dipole antennas - Loop antenna``
+----
+
+**Advantages**
+- Since dipole antenna's field is independent of a ground plane, its impedance and center frequency are not very sensitive
+to objects in the near field
+- If mounted on glass, loop antennas demonstrate good navigation performance.
+
+**Disavantages**
+- Not good for small embedded system
+
+----
+## ``Dipole antennas - Planar Inverted F Antenna (PIFA)``
+----
+
+The PIFA antenna looks like a 'F' lying on its side with the two shorter sections providing feed and ground points and the 'tail' (or top patch) providing the radiating surface. 
+
+**Advantages**
+- PIFAs are good embedded antennas because they creat a nearly omnidirectional pattern and can be made to radiate in more than one frequency band
+
+**Disavantages**
+- They are linearly polarized and their efficiency is only moderate 
+
+**Practical recomandations**
+- PIFAs are mainly used in cellular phones (E-911). Their use in devices where navigation is an
+essential feature is not recommended.
+
+----
+## ``Dipole antennas - High-end GNSS antennas``
+----
+
+For precision applications such as surveying or timing, some very high-end systems exist. 
+
+**Advantages**
+- Highly optimized to suppress multi-path signals reflected from the ground (choke ring antennas, multi-path limiting antennas, MLA)
+- Accurate determination of the phase center of the antenna
+- 
+
+**Disavantages**
+- Large size
+- High power consumption
+- High price
+
+**Practical recomandations**
+- For precision GNSS applications with position resolution in the millimeter range, it is important that signals from satellites at all elevations virtually meet at exactly the same point inside the antenna. For this type of application receivers with multiple antenna inputs are often required
+
+----
+## ``How to choose an antenna for an application``
+----
+- Helix and patch antennas are the most widely used types in GNSS applications
+
+### ``Helix or patch ?``
+
+For practical applications the possibilities of integrating a certain style of antenna into the actual device is of primary concern. Some designs naturally prefer the patch type of antenna, e.g. for rooftop applications. Others prefer the pole-like style of the helix antenna, which is quite similar to the style of mobile phone antennas. Furthermore, it is important that the antenna’s main lobe points to the sky in order to receive as many satellites as possible with the maximum antenna gain. If the application is a hand-held device, the antenna should be designed in a way that natural user operation results in optimum antenna orientation. The helix antenna seems to be more appropriate in this respect.
+
+However, keep in mind that comparable antenna gain requires comparable size of the antenna aperture, which will lead to a larger volume filled by a helix antenna in comparison to a patch antenna.
+Helix antennas with a “reasonable” size will therefore typically show a lower sensitivity compared to a
+“reasonably”-sized patch antenna. 
+
+A helix antenna might result in a “more satellites on the screen” situation in difficult signal environments when directly compared with a patch antenna. This is due to the fact that the helix will more easily pick up reflected signals through its omni-directional radiation pattern. However, the practical use of these signals is very limited because of the uncertain path of the reflected signals. Therefore, the receivers can see more satellites but the navigation solution will be degraded because of distorted range measurements in a multi-path environment.
+
+| Helix antennas | Patch antennas |
+|--|--|
+| omnidirectional | high gain |
+| robust | low cost |
+| cost | large variety of sizes available on market |
+| space requirements | less isolation between feed and antenna when compared to helix antenna |
+
+### ``Other antenna``
+In devices where navigation is not a core feature, chip, fractal, PCB, PIFA or dipole antennas can be an alternative to patch or helical antennas due to their small size and/or low cost. It is important to understand that these antennas do not provide the reception quality of patch or helical antennas. For this reason using patch or helical antennas is recommended in applications where navigation performance matters.
+
+----
+## ``Design considerations``
+----
+
+### Patch antennas
+- Ideal for applications that require the antenna to sit on a flat surface
+- Can demonstrate a very high gain, especially if they are mounted on top of a large ground plane. 
+- Ceramic patch antennas are very popular because of their small size, typically measuring $25 \times 25 \; mm^2$ down to $10 \times 10 \; mm^2$. 
+- Very cheap construction techniques
+-  Can use ordinary circuit board material such as FR-4 or even air as a dielectric, but this will result in a much larger size typically in the order of $10 \times 10 \; cm^2$.
+  
+**Ground plane**
+- A good allowance for ground plane size is typically in the area of $50\times 50$ to $70 \times 70 \; mm^2$
+- The ground plan size is largely independent of patch size itself (ceramic)
+- Patch antennas with small ground planes will also have a not negligible back lobe in their radiation pattern, making them sensitive to radiation coming from the backside of the antenna like multi-path signals reflected off the ground. The larger the size of the ground plane, the less severe this effect becomes.
+- Smaller-sized patches will usually reach their maximum gain with a slightly smaller ground plane compared to a larger size patch. However, the maximum gain of a small-sized patch with optimum ground plane may still be much lower than the gain of a large-size patch on a less than optimal ground plane
+
+**It is not only the gain and axial ratio of the patch antenna that is affected by the size of the ground
+plane but also the matching of the antenna to the 50 Ohms impedance of the receiver**
+
+![](../2_Hardware/Prototye/Components/gnss/2022-10-19%2015_13_04-GNSS-Antennas_AppNote_(UBX-15030289).pdf%20-%20Foxit%20PDF%20Reader.png)
+
+**Placement :**
+
+The performance of a patch antenna heavily depends on its placement and on the caracteristics of the ground plane :
+- Size of the ground plane.
+- Shape of the ground plane.
+- Symmetry of the ground plane.
+
+**Improper placement of the patch will yield poor antenna performance and strong directivity**
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-19%2015_12_04-GNSS-Antennas_AppNote_(UBX-15030289).pdf%20-%20Foxit%20PDF%20Reader.png)
+
+**In addition the following placement issues need to be taken into account for patch antennas :**
+
+- No components should be placed close to the patch antenna
+- Maintain a minimum distance between the antenna and the housing of the device
+- No signal lines should pass under or near the antenna
+
+**ESD issues**
+
+*!!! GNSS receivers are sensitive to Electrostatic Discharge (ESD). Special precautions are required when handling !!!*
+
+Most defects caused by ESD can be prevented by following strict ESD protection rules for production and handling. When implementing passive antenna patches or external antenna connection points, additional ESD measures can also avoid failures in the field.
+
+![](../2_Hardware/Prototye/Components/gnss/2022-10-19%2015_17_31-GNSS-Antennas_AppNote_(UBX-15030289).pdf%20-%20Foxit%20PDF%20Reader.png)
+
+- Protection measure A is preferred due to performance and protection-level consideration
+
+### Helix antenna
+
+Helix antennas can be designed for use with or without ground plane. If a helix antenna is designed without ground plane it can be tuned into such to show a more omni-directional radiation pattern.
+
+Although we can determine an axial ratio close to 9 dB between zero degree and 90 degrees elevation, which compares to the patch antenna, the back lobe of the helix generally degrades much smoother and does not show any sensitivity at the –180 degree direction. In contrast, the back lobe of a patch antenna depends very much on the size and shape of the ground plane.
+
+**Ground Plane :**
+
+Helix antennas typically do not require ground planes. However, a ground plane can significantly improve performance (e.g. $2-3\;dB$).
+
+Due to antenna near field radiation patterns, currents can be induced in ground planes in close proximity to the antenna. This can negatively affect the radiation pattern of the antenna and overall performance, and additionally increases the antenna’s susceptibility to hand loading and interference. For this reason ground planes should be kept a minimum distance from the radiating section of a helix antenna. See the recommendations of the manufacturer for more information (e.g. Sarantel).
+
+**Placement :**
+
+Helix antennas can either be placed internally in the GNSS device or used as a free space antenna.
+
+With free space antennas ground planes within 5 mm of the antenna radiating section can affect the performance of the antenna. In addition mechanical supports should be provided to hold the antenna in place. Certain system parts around the antenna, for example PCB or LCD screen, may lead to impairment of the antenna radiation pattern.
+
+----
+## ``Antenna matching``
+----
+
+All common GNSS antennas are designed for a 50 Ohms electrical load. Therefore, it is important to select a $50 Ohms$ cable to connect the antenna to the receiver. However, there are several circumstances under which the matching impedance of the antenna might shift considerably. This means that the antenna no longer presents a 50-Ohms source impedance. Typically what happens is that the center frequency of the antenna is shifted away from GNSS frequency - usually towards lower frequencies by some external influence. The reasons for this effect are primarily disturbances in the near field of the antenna. This can either be a ground plane that does not have the size for which the antenna was designed, or it can be an enclosure with a different dielectric constant than air.
+
+In order to analyze effects like this you can employ electrical field simulations, which will result in exact representation of the electric fields in the near field of the antenna. Furthermore, these distortions of the near field will also show their effect in the far field, changing the radiation pattern of the antenna. Unfortunately, there is no simple formula to calculate the frequency shift of a given antenna in any specified environment. So you must do either extensive simulation or experimental work. Usually, antenna manufacturers offer a selection of  pre-tuned antennas, so the user can test and select the version that best fits the given environment. However, testing equipment such as a scalar network analyzer is recommended to verify the matching.
+
+Again, it must be pointed out that the smaller the size of the antenna, the more sensitive it will be to distortions in the near field. Also the antenna bandwidth will decrease with decreasing antenna size, making it harder to achieve optimum tuning.
+
+An LNA placed very close to the antenna can help to relieve the matching requirements. If the interconnect length between the antenna and LNA is much shorter than the wavelength ($9.5\;cm$ on FR-4), the matching losses become less important. Under these conditions the matching of the input to the LNA becomes more important. Within a reasonable mismatch range, integrated LNAs can show a gain decrease in the order of a few dBs versus an increase of noise figure in the order of several tenths of a dB. If your application requires a very small antenna, an LNA can help to match the impedance of the antenna to a $50\;Ohms$ cable. This effect is indeed beneficial if the antenna cable between the antenna and the receiver is only short. In this case, there is no need for the gain of the LNA to exceed $10 - 15\;dB$. In this environment the sole purpose of the LNA is to provide impedance matching and not signal amplification.
+
+----
+## ``GSM Application``
+----
+GSM uses power levels up to $2\;W\;(+33\;dBm)$. The absolute maximum power input at the GNSS receiver is typically $-5\;dBm$
+
+### ``Isolation between GNSS and GSM antenna``
+
+For GSM applications :
+- Minimum isolation of $40\;dB$ is recommended 
+- Careful placement of the antenna can provide an isolation up to $\sim 20\;dB$ (**not sufficient**)
+- Additional input filter ([SAW filter](https://www.rfpage.com/what-is-saw-filter-working-and-applications)) is needed on the GNSS side to block the high energy from the GSM transmitter.
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-20%2009_05_21-GNSS-Antennas_AppNote_(UBX-15030289).pdf%20-%20Foxit%20PDF%20Reader.png)
+
+----
+## ``Dual antenna systems (!!!IMPORTANT!!!)``
+----
+Dual antenna systems consist in switching between an external active antenna and an internal passive one.
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-20%2015_30_56-GNSS-Antennas_AppNote_(UBX-15030289).pdf%20-%20Foxit%20PDF%20Reader.png)
+
+These kind of systems require to the be careful at the following design consideration :
+- Most switches require DC-blockers at every input, and when selecting the switch or Schmitt trigger, particular attention needs to be given to the switching thresholds function of the antenna being used. Depending on the switch an additional buffer may be necessary.
+- The LNA is placed before the SAW filter because LNAs can accept a maximum power between $10$ to $15 \;dBm$
+- Placing the LNA after the SAW filter will reduce sensitivity by $~1$ $dBm$ but the maximum input power will be higher (typically $25$ $dBm$)
+- It is recommended to power the LNA through VCC_RF
+- Selection of the ESD diode depends on the voltage supply of the receiver used
+- The antenna detection circuitry is the same as that in the Integration manual for the specific ublox receiver
+- Open Circuit Detection must be activated on the module so that the antenna supply can be switched off when there is no antenna
+
+As an alternative to the previous solution, a mechanical switch can also be used :
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-20%2015_40_00-GNSS-Antennas_AppNote_(UBX-15030289).pdf%20-%20Foxit%20PDF%20Reader.png)
+
+----
+## ``Interference issues``
+----
+
+A typical GNSS receiver has a very low dynamic range. This is because the antenna should only detect thermal noise in the GNSS frequency band, given that the peak power of the GNSS signal is $15$ $dB$ below the thermal noise floor. This thermal noise floor is usually very constant over time. Most receiver architectures use an automatic gain control (AGC) circuitry to automatically adjust to the input levels presented by different antenna and pre-amplifier combinations. The control range of these AGCs can be as large as $50$ $dB$. However, the dynamic range for a jamming signal exceeding the thermal noise floor is typically only $6$ to $12$ $dB$, due to the one or two-bit quantization schemes commonly used in GNSS receivers. If there are jamming signals present at the antenna and the levels of these signals exceed the thermal noise power, the AGC will regulate the jamming signal, suppressing the GNSS signal buried in thermal noise even further. Depending on the filter characteristics of the antenna and the front end of the GNSS receiver, the sensitivity to such in-band jamming signals decreases more or less rapidly if the frequency of the jamming signal moves away from GNSS signal frequency. To conclude, a jamming signal exceeding thermal noise floor within a reasonable bandwidth (e.g.$100$ $MHz$) around GNSS signal frequency will degrade the performance significantly.
+ 
+Even out-of-band signals can affect the GNSS receiver performance. If these jamming signals are strong enough so that even antenna and front-end filter attenuation are not sufficient, the AGC will still regulate the jamming signal. Moreover, very high jamming signal levels can result in non-linear effects in the pre-amplifier stages of the receiver, resulting in desensitizing of the whole receiver. One such particularly difficult scenario is the transmitting antenna of a DCS (digital communication system) handset (max. $30 dBm$ at $1710 MHz$) in close proximity to the GNSS antenna. When integrating GNSS with other RF transmitters, special care is necessary.
+
+If the particular application requires integration of the antenna with other digital systems, make sure that the jamming signal levels are kept to an absolute minimum. Even harmonics of a CPU clock can reach as high as $1.5 GHz$ and still exceed thermal noise floor.
+
+On the receiver side there is not much that can be done to improve the situation without significant effort. Of course, high price military receivers have integrated counter-measures against intentional jamming. But the methods employed are out of the scope of this document and might even conflict with export restrictions for dual-use goods.
+The recommendations and concepts in this section are completely dependent on the specific applications. In situations where an active antenna is used in a remote position, e.g. $>1 m$ away from other electronics, interference should not be an issue.
+
+If antenna and electronics are to be tightly integrated, read the following sections very carefully.
+
+### ``> Source of noise``
+
+Basically two sources are responsible for most of the interference with GNSS receivers :
+1. Strong RF transmitters close to GNSS frequency, e.g. DCS at $1710$ $MHz$ or radars at $1300$ $MHz$
+2. Harmonics of the clock frequency emitted from digital circuitry.
+
+The first problem can be very difficult to solve, but if GNSS and RF transmitter are to be integrated close to each other, there is a good chance that there is an engineer at hand who knows the specifications of the RF transmitter. In most cases, counter-measures such as filters will be required for the transmitter to limit disruptive emissions below the noise floor near the GNSS frequency.
+
+Even if the transmitter is quiet in the GNSS band, a very strong emission close to it can cause saturation in the front-end of the receiver. Typically, the receiver's front-end stage will reach its compression point, which will in turn increase the overall noise figure of the receiver. In that case, only special filtering between the GNSS antenna and receiver input will help to reduce signal levels to the level of linear operation at the front-end.
+
+The second problem is more common but also regularly proves to be hard to solve. Here, the emitting source is not well specified and the emission can be of broadband nature, making specific countermeasures very difficult. Moreover, the GNSS band is far beyond the $1-GHz$ limit that applies to almost all EMC regulations. So, even if a device is compliant with respect to EMC regulations it might severely disturb a GNSS receiver.
+
+If the GNSS antenna is to be placed very close to some other electronics, e.g. the GNSS receiver itself or a PDA-like appliance, the EMC issue must be taken very seriously right from the concept phase of the design. It is one of the most demanding tasks in electrical engineering to design a system that is essentially free of measurable emissions in a given frequency band.
+
+### ``> Eliminating digital noise sources``
+
+Digital noise is caused by the short rise-times of digital signals. Data and address buses with risetimes in the nanosecond range will emit harmonics up to several GHz. The following sections contain some general hints on how to decrease the level of noise emitted from a digital circuit board that is potentially in close proximity to the GNSS receiver or the antenna.
+
+**Power Ground Planes :**
+Use solid planes for power and ground interconnect. This will typically result in a PCB with at least four layers but will also result in a much lower radiation. Solid ground planes ensure that there is a defined return path for the signals routed on the signal layer. This will reduce the “antenna” area of the radiating loop. Planes should be solid in a sense that there are no slots or large holes inside the plane.
+
+The outer extent of the power plane should be within the extent of the ground plane. This prevents the edges of the two planes from forming a slot antenna at the board edges. It is a good idea to have a ground frame on the circumference of every layer that is connected to the ground plane with as many vias as possible. If necessary, a shield can then be easily mounted on top of this frame. Furthermore, free space on the outermost layers can be filled with ground shapes connected to the ground plane to shield radiation from internal layers.
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-20%2016_00_21-GNSS-Antennas_AppNote_(UBX-15030289).pdf%20-%20Foxit%20PDF%20Reader.png)
+
+**High-speed signal lines :**
+
+Keep high-speed lines as short as possible. This will reduce the area of the noise-emitting antenna, i.e. the conductor traces. Furthermore, the use of line drivers with controlled signal rise-time is suggested whenever driving large bus systems. Alternatively, high-speed signal lines can be terminated with resistors or even active terminations to reduce high-frequency radiation originating from overshoot and ringing on these lines. If dielectric layers are thick compared to the line width, route ground traces between the signal lines to increase shielding. This is especially important if only two layer boards are used
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-20%2016_02_13-GNSS-Antennas_AppNote_(UBX-15030289).pdf%20-%20Foxit%20PDF%20Reader.png)
+
+**Decoupling capacitors :**
+
+Use a sufficient number of decoupling capacitors in parallel between power and ground nets. Small size small-capacitance types reduce high-frequency emissions. Large size, high-capacitance types stabilize low frequency variations. It is preferred to have a large number of small value capacitors in parallel rather than having a small number of large value capacitors. Every capacitor has an internal inductance in series with the specified capacitance. In addition to resonance, the capacitor will also behave like an inductor. If many capacitors are connected in parallel, the total inductance will decrease while the total capacitance will increase.
+
+If the power and ground plane are not connected by an efficient capacitor network, the power plane may act as a radiating patch antenna with respect to the ground. Furthermore, ceramic capacitors come with different dielectric materials. These materials show different temperature behavior. For industrial temperature range applications, at least a X5R quality should be selected. Y5V or Z5U types may lose almost all of their capacitance at extreme temperatures, resulting in potential system failure at low temperatures because of excessive noise emissions from the digital part. Tantalum capacitors show good thermal stability, however, their high ESR (equivalent series resistance) limits the usable frequency range to some $100 kHz$.
+
+### ``> Shielding``
+
+If employing counter-measures cannot solve the EMI problems, the solution may be shielding of the noise source. In the real world, shields are not perfect. The shielding effectiveness you can expect from a solid metal shield is somewhere in the order of $30 - 40 dB$. If a thin PCB copper layer is used as a shield, these values can be even lower. Perforation of the shield will also lower its effectiveness.
+
+Be aware of the negative effects that holes in the shield can have on shielding effectiveness. Lengthy slots might even turn a shield into a radiating slot antenna. Therefore, a proper shield has to be tightly closed and very well connected to the circuit board.
+
+**Feed through capacitors :**
+
+The basic concept of shielding is that a metal box will terminate all electrical fields on its surface. In practice we have the problem that we need to route some signals from inside to outside of this box.
+
+A feed through capacitor removes all high-frequency content from the outgoing signal line. It is important to note that any conductor projecting through the shielding box is subject to picking up noise inside and re-radiating it outside, regardless of the actual signal it is intended to carry. Therefore, also DC lines (e.g. the power supply) should be filtered with feed through capacitors. When selecting feed through capacitors, it is important to choose components with appropriate frequency behavior. As with the ordinary capacitors, small-value types will show better attenuation at high frequencies (see Figure 36). For the GNSS frequency band the 470 pF capacitor is the optimum choice of the Murata NFM21C series.
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-20%2016_09_32-GNSS-Antennas_AppNote_(UBX-15030289).pdf%20-%20Foxit%20PDF%20Reader.png)
+
+Any feed through capacitor will only achieve its specified performance if it has a proper ground connection.
+
+If the use of a special feed through capacitor is not feasible for a particular design, a simple capacitor between the signal line and shielding ground placed very close to the feed through of the signal line will also help. A $12 pF$ SMD capacitor works quite well at the GNSS frequency range. Larger capacitance values will be less efficient.
+
+Keep in mind that a feed through capacitor is basically a high frequency “short” between the signal line and ground. If the ground point that the capacitor is connected to is not ideal, meaning the ground connection or plane has a finite resistance, noise will be injected into the ground net. Therefore, try to place any feed trough capacitor far away from the most noise-sensitive parts of the circuit. To emphasize this once again, make sure there is a very good ground connection for the feed through capacitor.
+
+If there is no good ground connection available at the point of the feed through, or injection of noise into the non-ideal ground net must be avoided totally, inserting a component with high resistance at high frequencies might be a good alternative. Ferrite beads are the components of choice if a high DC resistance cannot be accepted. Otherwise, for ordinary signal lines you can insert a $1K$ series resistor, which forms a low-pass filter together with the parasitic capacitance of the conductor trace.
+
+### ``> Increasing jamming immunity``
+
+Jamming signals come from in-band and out-band frequency sources.
+1. **In-band jamming  :** 
+   - The signal frequency is very close to the GPS frequency of 1575 MHz
+   - Typically caused by harmonics from displays, micro-controller, bus systems, etc.
+   - **Measures against in-band jamming include :**
+     -  Maintaining a good grounding concept in the design
+     -  Shielding
+     -  Layout optimization
+     -  Filtering
+     -  Placement of the GNSS antenna
+     -  Adding a CDMA, GSM, WCDMA bandpass filter before handset antenna
+   - ![](../2_Hardware/Prototye/Components/GNSS/2022-10-20%2016_17_19-GNSS-Antennas_AppNote_(UBX-15030289).pdf%20-%20Foxit%20PDF%20Reader.png)
+2. **Out-band jamming :**
+   - Out-band jamming is typically caused by signal frequencies that are different from the GNSS carrier. The sources are usually wireless communication systems such as GSM, CDMA, WCDMA, WiFi, BT, etc.
+   - ![](../2_Hardware/Prototye/Components/GNSS/2022-10-20%2016_22_14-GNSS-Antennas_AppNote_(UBX-15030289).pdf%20-%20Foxit%20PDF%20Reader.png)
+   - **Measures against out-band jamming include :** 
+     - Maintaining a good grounding concept in the design
+     - Adding a SAW or bandpass ceramic filter into the antenna input line to the GNSS receiver 
+     - ![](../2_Hardware/Prototye/Components/GNSS/2022-10-20%2016_22_32-GNSS-Antennas_AppNote_(UBX-15030289).pdf%20-%20Foxit%20PDF%20Reader.png)
+
+----
+## ``Performance tests``
+----
+
+### ``> Sky View``
+
+### ``> Statistic View``
+
+### ``> Supply voltage check``
+
+### ``> Sensitivity test``
+
+### ``> Startup test``
+
+# ``Design guide for small, high performance GNSS patch antenna applications``
+
+## Source : [Design guide for small, high performance GNSS patch antenna applications](https://content.u-blox.com/sites/default/files/documents/SAM-M8Q_WhitePaper_%28UBX-16026689%29%20%281%29.pdf)
+
+## ``Introduction``
+
+GNSS receivers are becoming smaller and smaller but the biggest physical component of a complete receiver is still  the antenna. Markets are in general driven by miniaturization and the designers are often exposed to deliver miracles when it comes to integration.
+
+However, small and medium sized companies can often not afford to have a dedicated RF engineer and may face difficulties designing-in small, yet good-performing products with integrated GNSS.
+
+**When integrating an antenna in a small form factor require to carefully consider the following parameters :**
+- Material
+- Size
+- Ground plane size
+- Position on the PCB 
+ 
+Such complexity very often leads to higher development costs and longer Time-to-Market, effectively reducing the profitability and chances of success of the final product.
+
+## ``Patch antenna theory and influencing factors``
+
+### ``> Intrinsic characteristics``
+
+A patch antenna belongs to the family of micro-strip antennas. The most common variant is a rectangular shaped patch with a length of approximately half of the wave length.
+
+**The element comprises the following parts:**
+- A ceramic substrate with a high dielectric constant $\boxed{\varepsilon_r}$ is used to electrically shorten the wavelength and make it possible to have a physically smaller antenna than the wavelength of $19\;cm$ would allow without a high relative permittivity.
+- A metal plate on top
+- Feed point
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-20%2016_35_34-SAM-M8Q_WhitePaper_(UBX-16026689)%20(1).pdf%20-%20Foxit%20PDF%20Reader.png)
+
+If the ceramic were replaced by air, the size of the patch would be roughly $9.5 \times 9.5 \;cm$ at $1.575$ $GHz$. Using a ceramic substrate we can reduce the physical size and have elements the size that we are used to see in GNSS receivers. The higher the $\boxed{\varepsilon_r}$, the smaller the antenna can be. There is however a drawback in increasing the $\boxed{\varepsilon_r}$ as the radiation efficiency drops.
+
+A patch element radiates thanks to the fringing electrical fields (in phase at the edges). Here the height of the substrate plays an important role as the fringing fields are bigger the higher the element is. That is why most of the commercial patch antennas are $4$ $mm$ high. Note also that the smaller the GND underneath the element is, the smaller the fringing fields become and hence lower radiation efficiency. There is also a risk that the polarization becomes linear if the element is placed asymmetrically on the GND plane.
+
+This means that most of the antennas have a dependency to a GND (ground) plane. The GND plane forms a vital part of a patch antenna and size does matter for both the antenna itself and the GND plane.
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-20%2016_40_34-SAM-M8Q_WhitePaper_(UBX-16026689)%20(1).pdf%20-%20Foxit%20PDF%20Reader.png)
+
+The feed-point is asymmetrically located to optimize the input impedance ($50$ $Ω$) and to achieve proper RHCP (Right Hand Circular Polarization). It is important to achieve RHCP on an antenna since GNSS signals have a Right Hand Circular Polarization themselves. A good polarization of the antenna is crucial to attenuate reflected signals in e.g. urban environments and achieve best performance in such environments. This is because signal polarization changes (from RHCP to LHCP or from LHCP to RHCP) each time it is reflected from a surface (like a building). A good RHCP antenna attenuates a single reflection as the signal changes polarity from RHCP to LHCP. As a consequence, dipole antennas (like chip antennas), which are by nature linearly polarized, receive equally both RHCP and LHCP signals and are not able to discriminate proper signal from reflections.
+
+On small elements, such as a $9 \times 9$ $mm$ patch, the resonance cannot be excited properly and thus it becomes more or less linearly polarized regardless of the GND plane size. 
+
+**Conclusion :** 
+An antenna is the entry point to the GNSS receiver. What is lost in the antenna, for instance due to poor radiation efficiency, cannot be recovered later on in the signal processing chain. Since patch antennas are highly affected by their size and the GND plane size, it is therefore imperative to balance size versus performance in the customer application.
+
+The table below compares the performance of a few typical antennas used in embedded applications
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-20%2016_45_01-SAM-M8Q_WhitePaper_(UBX-16026689)%20(1).pdf%20-%20Foxit%20PDF%20Reader.png)
+
+**Here are some details about each of the properties that describe the performance of an antenna: :**
+
+- **Axial Ratio :** This ratio is a dimensionless number describing how circular the polarization is. Anything below 3 is considered good and RHCP (Right Hand Circular Polarization) is achieved. Note that a patch element smaller than 12 x 12 mm cannot achieve good Axial Ratio even on a fairly large GND plane.
+- **Front-to-back ratio :** This ratio describes the directivity of the antenna, i.e. how much of the signal is received from the front side (facing upwards) versus the back side (facing downwards). Here the GND plane size plays a vital role.
+- **Radiation efficiency :** This number describes how much of the signal energy is captured by the antenna. To clarify, the smaller the efficiency, the more of the signal is lost in the antenna itself.
+Note: it is impossible to recover the loss of the signal in the antenna in the processing chain. The efficiency should obviously be as high as possible; more than 50% can be considered acceptable. The factors influencing radiation efficiency are: size of the element and the relative permittivity of the ceramic substrate upon which the antenna is built.
+- **Antenna gain :** This is sometimes also referred to as the radiation pattern. Antenna gain also includes the directivity of the antenna. It is usually defined as the gain of the antenna compared to a perfect isotropic antenna in three dimensions (the X, Y and Z axes). The GND plane plays a vital role here. As a consequence, the best gain towards the zenith (and hence best performance) will be achieved when the antenna is facing upwards. A small GND plane makes the antenna omni-directional, which gives more freedom to the placement of the antenna, but has smaller gain in all directions. Antenna size influences the gain as well. See section 3.2 for a radiation pattern of SAM-M8Q.
+- **GND dependency :** All patch elements and chip antennas are dependent on a GND plane. The helical antenna is an exception as it does not require a GND plane to operate. GND plane size plays a vital role which will be explained later in this document. On chip antennas the GND plane forms actually half of the dipole antenna. The chip element itself is the other half of the dipole antenna.
+- **Polarization :** RHCP or not. A good polarization of the antenna is crucial to attenuate reflected signals in e.g. urban environments and achieve best performance in such environments.
+- Polarization mismatch: Loss due to mismatch between transmitting and receiving antenna polarizations. E.g. when GNSS signals are received with a linearly polarized antenna, the loss is 3 dB.
+- **Max C/No :** This number shows the expected signal levels of various antennas taking all the parameters described above into account. A C/N0 value of 40 dBHz and above can be considered good whereas a level of 25-30 dBHz is an absolute minimum for GNSS operation.
+
+**In summary, the following factors influence the intrinsic performance of a patch element: :**
+- Element size and width
+- GND plane size
+- Radiation efficiency of the element
+- Polarization
+
+**There are also other external factors of influence, which will be discussed in the following section :**
+- Bandwidth and tuning
+- EMI
+
+### ``> External factors``
+**Antenna tuning :**
+A patch antenna is also to some extent sensitive to close-by materials such as plastic. If the enclosure is very close to the element itself, there will be a few MHz of de-tuning (down-wards) due to the enclosure. I.e. the resonant frequency of the antenna will be lowered. Antenna tuning is typically handled by the element vendor who tunes the resonance frequency for a given element size and ground plane size. No impedance tuning is needed as the
+feed-point of the element is typically 50 Ω.
+
+**The effect of EMI on GNSS reception :**
+
+All parameters described in the previous section influence the antenna performance. An equally vital part of system level verification is EMI (Electro Magnetic Interference). EMI is present in nearly all modern electronics designs.
+
+There are typically two types of in-band EMI that are harmful to GNSS reception :
+- **CW (Continuous Wave) :** typically generated by clock harmonics. A typical example is the 110th harmonic of a laptop oscillator (14.318 MHz) that generates CW interference 420 kHz below the L1 center frequency. u-blox receivers have on-chip CW detection and mitigation circuitry in order to minimize the effect of CW interference. One way to mitigate CW on system level is to choose an oscillator frequency such that there are no harmonics falling into the L1 band.
+- **Wideband Noise :** typically generated by cellular transmitters and high speed electronics located close-by
+the GNSS antenna. This is a more severe type of EMI as the receiver has no means to suppress the interference. The EMI must be minimized on the customer board with shielding for example.
+
+A typical source of EMI is a microprocessor with a memory bus. Such electronics can easily generate wideband noise on GNSS band and is thus considered in-band noise above the noise floor. If the in-band noise raises the noise floor by for example 8 dB, the C/N0 of the received GNSS signal is lowered by an equal amount. It is thus imperative to verify the antenna in the actual design and actual installation environment using live GNSS conditions.
+
+There are two different methods to measure wide band EMI on GNSS band :
+1. Active GNSS antenna + a spectrum analyzer in frequency domain
+2. Active GNSS antenna + a spectrum analyzer in time domain
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-20%2018_07_08-SAM-M8Q_WhitePaper_(UBX-16026689)%20(1).pdf%20-%20Foxit%20PDF%20Reader.png)
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-20%2018_07_33-SAM-M8Q_WhitePaper_(UBX-16026689)%20(1).pdf%20-%20Foxit%20PDF%20Reader.png)
+
+
+## ``Design checklist``
+1. Carefully choose the antenna size for the application
+2. Produce and compare different prototypes with different antenna placement and if possible different GND plane sizes
+3. Tune them at the right frequency and make the appropriate laboratory measurements ($S_{11}$, $\frac{C}{No}$, etc.)
+4. Measure the EMI levels at the antenna location
+5. Perform live signal tests outdoors to verify the signal levels
+6. Monitor the $\frac{C}{N_0}$ values with the unit installed in the envisioned installation
+
+### ``> Note``
+- An average signal level of $40$ $dBHz$ can be considered **good**
+- An average signal level of $25$ $dBHz$ and below will cause major performance issues
+- It is also important that the link budget is considered from the beginning of the project
+- Early prototypes should be tested in the envisioned installation using live GNSS signals.
+- A device tested in a laboratory environment using a GNSS re-radiator will only provide a relative indication of performance.
+
+----------------
+**Required characteristics :**
+  - Smallest size possible; must be contained in a $45$ $mm$ diameter circle
+  - On board SMD component
+  - Frequency : 1.561GHz, 1.575GHz, 1.602GHz
+  - Modulation or Protocol : BeiDou, Galileo, GLONASS, GPS, GNSS
+  - Sensitivity : -167dBm
+  - Voltage Supply : 2.7V ~ 3.6V
+
+---------------------
+# [MAX-M10S - Standard precision GNSS module - Integration manual](https://content.u-blox.com/sites/default/files/MAX-M10S_IntegrationManual_UBX-20053088.pdf)
+
+## ``System description``
+
+### ``> Ultra-low-power GNSS receiver for high-performance asset-tracking devices :``
+- Less than 25 mW power consumption without compromising GNSS performance
+- Maximum position availability with concurrent reception of 4 GNSS
+- Proven excellent performance, even with small antennas
+- Advanced spoofing and jamming detection
+- Pin-compatible with previous MAX products
+
+### ``> Product characteristics :``
+
+|     Feature         |	MAX-M10S                    |
+|------------------   |-----------                  |
+|**GNSS features**    |                             |
+| GNSS      |	BeiDou, Galileo, GLONASS, GPS / QZSS  |
+| Number of concurrent GNSS |	4                     |
+| GNSS Platform	      | Concurrent GNSS             |
+| Oscillators         |	TCXO                        |
+| Interfaces	        | UART, I2C                   |
+| **Electrical data** |                             |	 
+| Maximum supply [V]  | 3.6                         |
+| Minimum supply [V]  | 1.76                        |
+| **Environmental data, quality & reliability** |	  |
+| Maximum temperature [°C] |	85                    |
+| Minimum temperature [°C] |	-40                   |
+| Features | LNA, SAW, RTC crystal, Timepulse output|
+| Dimensions [mm]	| 9.7 x 10.1 x 2.5                |
+
+### > Overview
+The **MAX-M10S module** contains the *u-blox* M10 standard percision GNSS provides the following features :
+- Very good sensitivity and aquisition time for all L1 GNSS signals
+- Concurrent reception of four GNSS to maximise position availability in challenging and urban environnement
+  - GPS
+  - GLONASS
+  - Galileo
+  -  BeiDou
+-  Super-S (Super-Signal) technology for a great RF sensitivity and improved dynamic position accuracy in NLOS (non-line-of-sight) scearios.
+-  Low power consumption (25mW) in continous traking mode 
+-  Integrated LNA followed by a SAW filter in the RF path in order to maximise sensitivity for passive antenna designs
+
+### ``> Architecture``
+The MAX-M10S receiver provides all the necessary RF and baseband processing to enable multiconstellation operation.
+
+- **Block Diagram**
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2011_02_41-Window.png)
+
+- **Pin Assignment**
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2011_06_14-Window.png)
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2011_07_27-Window.png)
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2011_07_46-Window.png)
+
+## ``Consumption``
+All values in Table 14, Table 15, and Table 16 are measured at 25 °C ambient temperature and with the internal LNA set to low gain. SBAS and QZSS are activated in all measurements.
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2011_11_31-Window.png)
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2011_11_43-Window.png)
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2011_12_23-Window.png)
+
+## ``Hardware integration``
+
+### ``> Power supply``
+
+The module power supply have to be provided by the VCC and V_IO pins, these pins can either be connected toggether or supplied independently by the application. V_BCKP is optional and is only used to enable the hardware backup mode when the V_IO supply or both V_IO and VCC supplies ar off.
+
+**VCC :**
+- Provides power to :
+  - The core
+  - RF domains
+- Must be supplied :
+  - To start up the receiver
+  - Operation in continuous mode
+- Connection :
+  - To an internal DCDC converter (reducing power consumption)
+  - To the RF domain through a ferrite bead
+- IMPORTANT :
+  - Do not add series resistance greater than $0.2Ω$ on the supply line to avoid voltage ripple due to the dynamic current conditions.
+  - The output voltage at VCC_RF pin is derived from the VCC supply, and consequently, is interrupted if VCC supply is removed.
+
+**V_IO :**
+- Provides power to :
+  - All the digital IOs
+  - Clock
+  - Backup domain
+- The current drawn at V_IO depends on :
+  - The activity 
+  - Loading of the PIOs 
+  - The TCXO consumption
+- IMPORTANT :
+  - A power interruption on this pin will erase the battery-backed RAM (BBR) unless there is an external supply connected to V_BCKP
+  - V_IO allows two voltage ranges, $1.8 V$ or $3.3 V$ operation. For $1.8 V$ designs, the VIO_SEL pin must be connected to GND. For $3.3 V$ designs, it must be left open
+  - V_IO supply voltage must not be higher than $V_{CC} + 0.3 V$$
+  
+**V_BCKP :**
+
+Power supply at V_BCKP is optional. If the power supply at V_IO is interrupted, but the V_BCKP pin is supplied, the receiver enters the hardware backup mode.
+
+In hardware backup mode:
+- RTC time and GNSS orbit data in BBR are maintained
+- Valid time and GNSS orbit data at startup improves positioning performance by enabling :
+  - Hot starts
+  - Warm starts
+  - AssistNow Autonomous
+- This ensures faster TTFF (Time To First Fix) when V_IO is supplied again
+- Designs using an external battery as a power source at the V_BCKP pin must consider the battery capacity 
+- The GNSS satellite ephemeris data is typically valid for up to :
+  - 4 hours for hot starts
+  - a few days for warm starts and AssistNow (Offline and Autonomous)
+- IMPORTANT :
+  - Avoid high resistance on the V_BCKP line. During the switch to V_BCKP supply, a short current adjustment peak may cause a high voltage drop at the pin
+  - If the hardware backup mode is not used, leave the V_BCKP pin open
+
+**Supply design examples :**
+
+The two voltage ranges for VCC and V_IO allow three combinations when designing the receiver power supply. Depending on the chosen combination, there are certain requirements to be considered.
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2012_02_49-Window.png)
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2012_03_04-Window.png)
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2012_03_15-Window.png)
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2012_03_25-Window.png)
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2012_03_37-Window.png)
+
+### ``> RF interference``
+
+It is important to undetstant that GNSS signals power is very low compared to other wireless communication signals. Typically, the nominal received GNSS signal strength is $-130\;dBm$, which is bellow thermal noise floor, and consequently can make the receiver susceptible to interference nearby RF source of any kind.
+
+**Exemple of cellular interferences :**
+Cellular applications emit signals with power levels of approximately $+30\;dBm$ which is way over the strength of the GNSS signal reaching the antenna. This comparason make potential interference issues seems obvious. So, it is crucial to consider this point during the design phase.
+
+**In-band interference :**
+
+Although the radio communications standards prevent intentional RF signal sources from interfering the GNSS frequencies, many devices emit RF power into the GNSS band at levels much higher than the GNSS signal itself.
+
+One reason is that the frequency band above $1$ $GHz$ is not well regulated with regards to EMI, and even if permitted, signal levels are much higher than the GNSS signal power.
+In particular, all types of digital equipment, such as :
+- PCs
+- Digital cameras
+- LCD screens
+  
+Those equipements tend to emit a broad frequency spectrum up to several $GHz$ of frequency. Also wireless transmitters may generate spurious emissions that fall into the GNSS band.
+
+The main measures against in-band interference are part of the layout design.
+
+**Out-of-band interference :**
+
+Out-of-band interference is caused by signal frequencies that are different from the GNSS carrier frequency. The main sources are wireless communication systems such as :
+- LTE 
+- GSM 
+- CDMA 
+- WCDMA
+- Wi-Fi
+- BT
+  
+Typically, these systems may emit their specified maximum transmit power in close proximity to the GNSS receiving antenna, especially if such a system is integrated with the GNSS receiver. Even at reasonable antenna selectivity, destructive power levels may reach the RF input of the GNSS receiver. In addition, larger signal interferers may generate intermodulation products inside the GNSS receiver front-end that fall into the GNSS band and contribute to in-band interference.
+
+Measures against out-of-band interference include maintaining a good grounding concept in the design and adding a GNSS band-pass filter into the antenna input line to the receiver.
+
+**Spectrum analyzer :**
+
+The UBX-MON-SPAN message can be enabled in u-center to provide a low-resolution spectrum analyzer sufficient to identify noise or jammers in the reception band. Once enabled, u-center includes a real-time chart that is updated once per second with the message data.
+
+The shape of the spectrum as well as any RF interference in the form of a spur or intermodulation product can be easily analyzed with this graphical tool. The vertical axis compares the amplitude difference in dB for each frequency. A good spectrum shape is characterized by an even noise floor along with the GNSS band. For example, if any unwanted spur stands out, the vertical axis gives a rough approximation of the power level in dB compared to the noise floor.
+
+Next to the chart, the center frequency, span, and resolution values set for the spectrum, and the PGA value are also displayed. The PGA value represents the internal gain set by the receiver, which depends on the external amplification of the GNSS input signal.
+
+The vertical discontinuous lines in the chart area represent the offset to the center frequency in MHz. This helps to estimate the frequency of any spurious emission seen.
+
+In addition, u-center includes three functions commonly found in any spectrum analyzer. These features support the RF front-end design and help to spot out any jammer presence during the application operation.
+
+- View / hold: if selected, the current spectrum shape freezes in a colored line. This allows for a comparison between the time the spectrum was frozen and the real-time spectrum. This is particularly helpful in assessing the impact of running other onboard components.
+- Average: if selected, a colored line shows the averaged spectrum for each frequency. This supports the analysis over time and obtaining a less noisy shape.
+- Max hold: if selected, a colored line shows the maximum amplitude measured at each frequency. This option helps to spot out any jammer over a period of time
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2013_20_58-Window.png)
+
+NOTE :
+- By changing the number of constellations enabled, the span widens or narrows. This has a direct impact on the spectrum resolution, as the number of frequencies measured is fixed and equals to 256. For further details about this message and how to calculate each frequency, see the interface description.
+- A big spur may be visible in the center frequency. The signal comes internally from the receiver and it does not cause any degradation in the performance.
+
+### ``> RF front-end``
+
+GNSS receivers operate with very low signal levels, ranging from $-130$ $dBm$ to approximately $-167$ $dBm$. This alone is a challenge for the GNSS application design. Out-of-band sources of interference such as GSM, CDMA, WCDMA, LTE, Wi-Fi, or Bluetooth wireless systems with a much higher signal level require additional specific measures. The goal of the RF front-end design is to receive the in band signal with minimum loss and added noise while suppressing the out-of-band interference.
+
+The MAX-M10S RF front-end is designed for the highest sensitivity. The integrated RF circuit is matched to $50Ω$ and includes a built-in DC block, an LTE Band 13 notch filter, an LNA, and an SAW filter. Refer to the Block diagram for an overview of the RF front-end. The MAX-M10S offers the best GNSS performance for designs with low or moderate RF interference levels.
+
+For designs with other radio systems, an external SAW filter may be required to improve the
+immunity against RF interference. The external SAW filter converts the MAX-M10S RF front-end
+into an SAW - Band 13 notch - LNA - SAW circuit for the highest immunity, complete with built-in
+LTE Band 13 protection. The external SAW filter can be selected for an optimal trade-off between
+sensitivity and immunity.
+
+**Internal LNA modes :**
+
+The internal LNA in MAX-M10S has three operating modes :
+- normal gain :
+  - Normal-gain mode is not recommended for MAX-M10S because the integrated LNA already provides sufficient gain
+- low gain :
+  - By default, the internal LNA is configured for the low-gain mode for optimized sensitivity and immunity against RF interference
+- bypass mode :
+  - For RF front-end designs with $10 - 15$ $dB$ or higher total external gain, bypass mode is recommended to improve immunity. The power consumption is also slightly reduced in bypass mode
+
+The internal LNA mode can be configured at run time in BBR and RAM layers using the configuration item ``CFG-HW-RF_LNA_MODE`` and applying a reset or set permanently in the one-time-programmable (OTP) memory in production. The configuration in the OTP memory is automatically applied at every startup. Refer to Internal LNA mode configuration for more information.
+
+**Out-of-band blocking immunity :**
+
+Out-of-band RF interference may degrade the quality and availability of the navigation solution. Out-of-band immunity limit describes the maximum power allowed at the receiver RF input with no degradation in performance. Minor violation of the immunity limit may reduce $C/N_0$ of the received signals but does not necessarily affect the overall receiver performance. However, a significant violation may reduce receiver sensitivity or cause a complete loss of signal reception. The severity of the interference depends on the repetition rate, frequency, signal level, modulation, and bandwidth of the signal.
+
+In general, the immunity is lower close to the receiver's in-band. The narrow frequency bands with a lower immunity are related to the internal operation of the receiver. At $500MHz$ and $800MHz$ ranges, the reduced immunity is due to harmonic multiples generated at the integrated LNA input falling at the receiver's in-band. Adding an external SAW filter in front of the RF input protects the LNA suppressing the harmonic generation. The SAW filter also further improves the overall immunity of the design.
+
+If the out-of-band immunity limit is exceeded, it is recommended to verify that the receiver performance is not affected or is at an acceptable level in the presence of interference.
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2013_29_41-Window.png)
+
+On the figure, the internal LNA is in low-gain mode (default). The measurement is done at room temperature using a test signal with 64QAM modulation and 10 MHz bandwidth similar to an LTE signal.
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2014_04_16-Window.png)
+
+**Out-of-band rejection :**
+
+RF interference is typically first coupled into the antenna and subsequently conducted into the receiver input. Typical out-of-band interference sources include transmitting antennas of other radio systems.
+
+Estimation of the RF interference level coupled into the receiver antenna is a starting point for RF front-end design. For designs with other radio systems, the maximum power coupled into the antenna can be estimated from the maximum transmission power and the isolation between the antennas. Practical values for antenna isolation can range from $15-20$ $dB$ down to $6-10$ $dB$ for very small devices. RF interference may also couple from external sources such as nearby mobile devices or base stations.
+
+A simplified test board can be used to estimate the isolation between two antennas. The size of the board and the placement of the antennas must match the final design. Connect the RF cables to the antenna inputs and measure $S_{21}$ over the frequency band of interest with a vector network analyzer (VNA).
+
+The required out-of-band rejection or isolation is the difference of the maximum power coupled into the antenna input terminal and the immunity level of the receiver RF input. The required isolation is realized with appropriate filtering, typically with one or two SAW filters. Amplification on the RF path reduces the out-of-band rejection and needs to be considered in filter selection. The type and number of filters are selected based on the estimated interference level and the immunity of the receiver.
+
+**Antenna power supply :**
+
+**``Exemple of active antenna supply network :``**
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2014_13_18-Window.png)
+
+The inductance $L_3$ connects the antenna power supply to the RF signal line. The capacitance $C_{14}$ filters out high-frequency interference from the power supply and the resistor R8 limits the
+short-circuit current.
+
+The type and value of $L_3$ is selected to have a resonance peak at GNSS frequencies. This provides a high series impedance above $500Ω$ at GNSS frequencies, creating an impedance mismatch with respect to the $50Ω$ RF signal line. This minimizes the effect of the feed point on the RF signal line, and isolates the antenna supply from the RF signal line at GNSS frequencies. Both $R_8$ and $L_3$ must have sufficient current and power rating to withstand the short-circuit current. 
+
+Antenna supervisor can be used to detect open and short circuits on the antenna supply network
+and to turn off the antenna supply if a short circuit is detected.
+
+**Antenna supervisor :**
+
+An active antenna supervisor provides the means to check the antenna for open and short circuits and to shut off the antenna supply if a short circuit is detected. Once enabled, the active antenna supervisor produces status messages that are reported in NMEA and/or UBX protocols. MAX-M10S supports two antenna supervisor variants: three-pin and two-pin implementations. The three-pin antenna supervisor is able to detect short and open circuits. The two-pin antenna supervisor is a reduced version of the three-pin antenna supervisor and is only able to detect short circuits. It is recommended to make use of the full capabilities of the antenna supervisor (detect open and short circuits, and control the antenna supply).
+
+The antenna supervisor can be configured through the ``CFG-HW-ANT_*`` configuration items. This includes enabling and disabling as well as changing the polarity of each signal. The current configuration of the active antenna supervisor can also be checked by polling the related ``CFG-HW_ANT_*`` configuration items.
+
+The active antenna status can be determined by polling the ``UBX-MON-RF`` message or checking the NMEA notice messages. If an antenna is connected, the initial state after power-up is “Active Antenna OK" in the UBX-MON-RF message.
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2015_09_40-Window.png)
+
+- Three-pin antenna supervisor :
+  
+An active antenna supervisor circuit uses the ``ANT_DETECT``, ``ANT_OFF_N``, and ``ANT_SHORT_N signals``. The ``ANT_OFF_N`` signal is already enabled and assigned to the LNA_EN pin in MAX-M10S. The ``ANT_DETECT`` and ``ANT_SHORT_N`` signals can be assigned to any unused PIOs, which may require disabling the previous function of the PIOs. For example, the open circuit detection uses the ``ANT_DETECT`` signal, ``"high" = Antenna detected`` (antenna consumes current); ``"low" = Antenna not detected`` (no current drawn). To enable the three-pin antenna supervisor, the ``ANT_DETECT`` and ``ANT_SHORT_N`` signals must be enabled in the receiver configuration. The polarity of the ``ANT_DETECT`` and ``ANT_SHORT_N`` signals must also be defined in the receiver configuration based on the design use case.
+
+The antenna can be supplied by ``VCC_RF`` or an external supply. Note that the supply voltage must be clean, as any noise could directly couple into the RF part of the GNSS receiver which will affect the overall GNSS performance
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2015_13_46-Window.png)
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2015_14_31-Window.png)
+
+- Two-pin antenna supervisor
+The reduced functionality antenna supervisor circuit is connected to two signals: antenna control (``ANT_OFF_N``) and antenna status detection (``ANT_SHORT_N``). The ``ANT_OFF_N`` signal is already enabled and assigned to the ``LNA_EN`` pin in MAX-M10S and the ANT_SHORT_N signal can be assigned to any unused PIO, which may require disabling the previous function of the PIO. To enable the reduced antenna supervisor, the ``ANT_SHORT_N`` signal must be enabled in the receiver configuration. The polarity of the ``ANT_SHORT_N`` signal must also be defined in the receiver configuration based on the design use case.
+
+The antenna can be supplied by ``VCC_RF`` or an external supply. Note that the supply voltage must
+be clean, as any noise could directly couple into the RF part of the GNSS receiver which will affect
+the overall GNSS performance
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2015_18_03-Window.png)
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2015_18_17-Window.png)
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2015_18_33-Window.png)
+
+
+### ``> Layout (IMPORTANT)``
+
+GNSS signals on the surface of the earth have a very low signal strength and are about $15$ $dB$ below the thermal noise floor. When integrating a GNSS receiver into a PCB, the placement of the components, as well as grounding, shielding, and interference from other digital devices are crucial issues that need to be considered very carefully.
+
+An important factor in achieving high GNSS performance is the placement of the receiver with respect to other components on the PCB.
+
+To minimize signal loss on the RF connection from the antenna to the receiver input and to avoid possible coupled interference, the **connection to the antenna must be kept as short as possible**, **especially with passive antennas**.
+
+The RF section should not be subject to noisy digital supply currents running through its GND plane. Make sure that critical RF circuits are clearly separated from any other digital circuits on the system board. To achieve this, position the receiver digital part towards the digital section of the system PCB and place the RF section and antenna as far away as possible from the other digital circuits on the board. Keep at least a $5 mm$ distance to any RF component and ensure proper grounding.
+
+For applications using **cellular antennas**, increase the distance between both antennas as much as possible.
+
+Another very important factor in GNSS applications is the grounding concept. Ensure good ground reference to the host ground by **increasing the number of GND vias**. The GND vias will **improve the GND reference** between all the layers, and the pads will **serve as thermal relief**.
+
+Any stubs at the ground planes must be avoided or ended with a via to the reference ground.
+Otherwise, they could pick up and propagate interference.
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2014_39_07-Window.png)
+
+It is recommended to ground the area below the module, on the top and second layer. Avoid signal lines crossing below the module at these two layers.
+
+For the RF signal line, it is best to use the [co-planar waveguide](https://chemandy.com/calculators/coplanar-waveguide-with-ground-calculator.htm) with ground on the second layer. All the RF parts need a solid GND plane underneath in order to achieve the targeted impedance in the RF signal line.
+
+The length and geometry in the RF signal line must be carefully analyzed. The impedance of the RF signal line must be $50Ω$. Select accordingly the stack-up, copper, and dielectric properties of the PCB to fulfill this condition. The RF signal line should be as short as possible and the ground plane around should be filled with GND vias.
+
+Care must also be exercised with placing the receiver in proximity to circuitry that can emit heat. Temperature-sensitive components inside the module, like TCXOs and crystals, are sensitive to sudden changes in ambient temperature which can adversely impact satellite signal tracking. Sources can include co-located power devices, cooling fans or thermal conduction via the PCB.
+
+The GND planes can conduct heat to other elements, but they can act as heat dissipators as well. Increasing the number of GND vias helps to decrease sudden temperature changes.
+
+High temperature drift and air vents can affect the GNSS performance. For best performance, avoid high temperature drift and air vents near the module.
+
+## ``Reference designs``
+
+### ``> Typical Design``
+
+- VCC and V_IO are connected together to a single supply. In designs with 3.3 V supply, the VIO_SEL èin must be left open.
+- V_BCKP supply is optional. If present, the hardware backup mode is supported. This mode maintains the time and GNSS orbit data in the battery-backed RAM memory if the main supply is switched off. If there is no backup supply, the EXTINT pin can be used for time aiding and the GNSS orbit data can be aided using AssistNow services or downloaded to the host and fed back to the receiver at startup.
+- A passive or active antenna can be used. An active antenna can be supplied either with the VCC_RF output from MAX-M10S, or from an external supply. Nevertheless, the internal LNA provides enough gain for passive antennas.
+- MAX-M10S has an internal SAW filter and no additional RF front-end components are needed. However, in cellular applications, an external SAW filter can be added in front of RF_IN as shown in Figure 38, which allows an SAW-LNA-SAW RF front-end circuit for improved out-of-band immunity against RF interference from other sources.
+- UART and I2C communication interfaces are available.
+- For an absolute minimum design using UART, other PIOs (``RESET_N``, ``EXTINT``, ``TIMEPULSE``, ``SDA``, ``SCL``, ``SAFEBOOT_N``) can be left open
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2014_53_36-Window.png)
+
+### ``> Antenna supervisor designs``
+
+Here are Antenna supervisor designs key features:
+- VCC and V_IO are connected together to a single supply.
+- Supply at V_BCKP is optional. If present, the hardware backup mode is supported. This mode maintains the time and GNSS orbit data in the battery-backed RAM memory if the main supply is switched off. If there is no backup supply, the EXTINT pin can be used for time aiding and the GNSS orbit data can be aided using AssistNow services or downloaded to the host and fed back to the receiver at startup.
+- An external SAW filter can be placed on the RF path which allows an SAW-LNA-SAW RF front-end circuit for improving out-of-band immunity against RF interference from other sources. This is especially useful when MAX-M10S is used in cellular applications.
+- An active antenna can be supplied with the VCC_RF output from MAX-M10S or from an external supply. VCC_RF is a filtered output voltage supply, which outputs $VCC - 0.1 V$. In addition, the active antenna supply can be turned on/off by the LNA_EN signal, which also controls the internal LNA of MAX-M10S.
+- External open drain buffers and operational amplifiers are also needed depending on whether a 2-pin or 3-pin antenna supervisor design is used.
+- UART and I2C communication interfaces are available. I2C PIOs (SDA and SCL) can be used in a 3-pin antenna supervisor design. In this case, the I2C interface needs to be disabled before assigning the new function to the PIOs.
+- Disable the I2C interface with the ``CFG-I2C-ENABLED`` configuration key when I2C pins are used for antenna supervisor functions. Likewise, disable the UART interface (``CFG-UART1-ENABLED``) or TIMEPULSE (``CFG-TP-TP1_ENA``) when the pins are used for antenna supervisor functions
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2014_54_25-Window.png)
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2014_55_18-Window.png)
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2014_55_43-Window.png)
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2014_56_10-Window.png)
+
+### ``> Example component values``
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2014_18_13-Window.png)
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2014_18_26-Window.png)
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2014_18_40-Window.png)
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2014_18_52-Window.png)
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2014_19_03-Window.png)
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2014_19_14-Window.png)
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2014_19_24-Window.png)
+
+
+# ``Antenna Selection""
+
+## Required characteristics :
+  - Dimention :
+    - $L<45$
+    - $H<45$
+    - $W<45$
+  - Frequency :
+    - GPS/QZSS (L1C/A) : $1575.42$ $MHz$
+    - Galileo (E1-B/C) : $1575.42$ $MHz$
+    - GLONASS (L1OF) : $1602$ $MHz$ $+ k * 562.5$ $kHz$, $k = 7,...,5,6$
+    - BeiDou
+      - B1l : $1561.098$ $MHz$
+      - B1C : $1575,42$ $MHz$
+    - LTE-M (bande 20 800MHz) :
+
+## MAX-M10S Performances :
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2016_03_50-Window.png)
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2016_05_03-Window.png)
+
+## Supported GNSS
+
+MAX-M10S is a concurrent GNSS receiver that can receive and track multiple GNSS systems. The single RF front-end architecture enables concurrent reception of multiple GNSS constellations. The receiver can be configured for a subset of GNSS constellations to achieve lower power consumption. 
+
+The default configuration on MAX-M10S is concurrent reception of GPS, Galileo, and BeiDouB1I with QZSS and SBAS enabled
+
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2016_07_04-Window.png)
+![](../2_Hardware/Prototye/Components/GNSS/2022-10-21%2016_07_46-Window.png)
+
+# Virtual Antenna
+
+- [DUO mXTEND](https://ignion.io/product/duo-mxtend/)
+  - Do twice as much. The DUO mXTEND™ antenna booster features two independent radios in the smallest possible module. Thanks to its multiport nature, it can combine GNSS and Wi-Fi or Bluetooth and Wi-Fi in a single package.
+  - 1561 – 5875 MHz
+  - 7.0 x 3.0 x 2.0 mm
+- [TRIO mXTEND](https://ignion.io/product/trio-mxtend/)
+  - The power of 3. TRIO mXTEND™ can combine cellular connectivity, GNSS and Bluetooth in a single chip antenna component. Leverage the possibilities of three independent radios in a powerful, slimline solution.
+  - 698 – 3800 MHz
+  - 30.0 x 3.0 x 1.0 mm
+- [RUN mXTEND](https://ignion.io/product/run-mxtend/)
+  - Extend your design possibilities. The small, versatile RUN mXTEND™ is the perfect solution for devices where volume and cost is constrained but maximum performance is desired.
+  - 824 – 5875 MHz
+  - 12.0 x 3.0 x 2.4 mm
+
+# Date : 26.10.22
+
+
+# Date : 28.10.22
+
+## Cellular LTE Interface and Antenna :
+
+### Specification
+
+- [P822601 / P822602](https://datasheets.kyocera-avx.com/ethertronics/AVX-E_P822601-P822602.pdf)
+- Overview
+  - Universal Broadband FR4 Embedded LTE / LPWA Antenna
+  - 698 – 960 MHz / 1710 – 2200 MHz / 2300 – 2400 MHz / 2500 – 2700 MHz / 3300– 3800 MHz
+  - Supports: Broadband LTE (OCTA-BAND), LTE CAT-M, NB-IoT, SigFox, LoRa, Cellular LPWA, RPMA, CBRS
+  - Mirrored version variant offered as P822602
+- Stays in Tune 
+  - KYOCERA AVX antennas use patented IMD technology in many antenna configurations to provide high performance. IMD antennas requires a smaller design keep-out area, carry lower program development risk which yields a quicker time-to-market, without sacrificing RF performance.
+- **Electrical Specifications**
+  - Typical P822601/P822602 performance 140 x 50 mm PCB
+ 
+| Frequency (MHz) | 698-960 | 1710-2200 | 2500-2700 (B7) | 2300-2400 (Band 40) | 3300-3800 (n78) |
+| --------------- | :-----: | :-------: | :------------: | :-----------------: | :-------------: |
+| Peak Gain       | 2.6 dBi | 4.4 dBi  | 3.4 dBi | 1.8 dBi | 2.8 dBi |
+| Average Efficiency | 68% | 76% | 52% | 46% | 59% |
+| VSWR Match | < 2.5:1 | < 2.5:1 | < 2.5:1 | < 3.0:1  | < 2.5:1  |
+| Polarization | Linear | Linear | Linear | Linear | Linear |
+| Power Handling | 2 Watt CW | 2 Watt CW | 2 Watt CW | 2 Watt CW | 2 Watt CW |
+| Feed Point Impedance | 50 Ω unbalanced | 50 Ω unbalanced | 50 Ω unbalanced | 50 Ω unbalanced | 50 Ω unbalanced |
+
+- **Mechanical Specifications & Ordering Part Number**
+  
+| Ordering Part # | P822601 | P822602 |
+| --------------- | :-----: | :-------: |
+| Dimensions (mm) |$49.6 \times 8.0 \times 3.2$ | $49.6 \times 8.0 \times 3.2$  |
+| Mounting Type  | SMT (P&P) | SMT (P&P) |
+| Variant | P822602 : Mirrored | version of P822601 |
+| Weight (grams) | 2.63 | 2.63 |
+| Packaging | Tape and Reel | Tape and Reel |
+| Storage Temperature | +5°C to +35°C | +5°C to +35°C |
+| Humidity | 45~75% | 45~75% |
+| Operating Temperature | -40 to +85 C | -40 to +85 C |
+
+### [LTE Region Liste](https://en.wikipedia.org/wiki/List_of_country_groupings) :
+
+- Global  : Global...
+- NAM     : Non-Aligned Movement
+- APAC    : Asia-Pacific
+- EMEA    : Europe, the Middle East and Africa
+- Japan   : Japan...
+- EU      : The European Union
+
+### [VSWR](https://www.maximintegrated.com/en/glossary/definitions.mvp/term/VSWR/gpk/815)
+
+- Definition
+  - VSWR (Voltage Standing Wave Ratio) is a measure of how efficiently radio-frequency power is transmitted from a power source, through a transmission line, into a load (for example, from a power amplifier through a transmission line, to an antenna).
+  - In an ideal system, 100% of the energy is transmitted. This requires an exact match between the source impedance, the characteristic impedance of the transmission line and all its connectors, and the load's impedance. The signal's AC voltage will be the same from end to end since it runs through without interference.
+  - In real systems, mismatched impedances cause some of the power to be reflected back toward the source (like an echo). Reflections cause destructive interference, leading to peaks and valleys in the voltage at various times and distances along the line.
+  - VSWR measures these voltage variances. It is the ratio of the highest voltage anywhere along the transmission line to the lowest. Since the voltage doesn't vary in an ideal system, its VSWR is 1.0 (or, as commonly expressed, 1:1). When reflections occur, the voltages vary and VSWR is higher -- 1.2 (or 1.2:1), for instance.
+- Mathematically: 
+  - VSWR is the voltage ratio of the signal on the transmission line: 
+    - $\boxed{VSWR = \frac{|V_{max}|}{|V_{min}|}}$
+    - where V(max) is the maximum voltage of the signal along the line, and V(min) is the minimum voltage along the line.
+  - It can also be derived from the impedances:
+    - $\boxed{VSWR = \frac{(1+\Gamma)}{(1-\Gamma)}}$
+    - where $\Gamma$ (gamma) is the voltage reflection coefficient near the load, derived from the load impedance ($Z_L$) and the source impedance ($Z_o$):
+      - $\boxed{\Gamma = \frac{(Z_L-Z_o)}{(Z_L+Z_o)}}$
+
+If the load and transmission line are matched, gamma = 0, and VSWR = 1.0 (or 1:1).
+
+### Performance
+If this antenna is used for LTE-M ($800MHz$) this mean that the concerned frequency range is between : $\boxed{698\ldots960\;MHz}$
+In this case, the max expected performances are:
+- Peak Gain = $\underline{2.6\;dBi}$
+- Average Efficiency = $\underline{68\%}$   
+- VSWR Match = $\underline{< 2.5:1}$   
+- Polarization = $\underline{Linear}$   
+- Power Handling = $\underline{2 \;W\; (CW)}$   
+- Feed Point Impedance = $\underline{50\;\Omega \text{ (unbalanced)}}$  
+
+SWR Match = $< 2.5:1$  :
+$\boxed{VSWR = \frac{|V_{max}|}{|V_{min}|}}$
+$\boxed{VSWR = \frac{1+\Gamma}{1-\Gamma}}$
+$\boxed{\Gamma = \frac{Z_L-Z_o}{Z_L+Z_o}}$
+
+### Schematic
+
+![](../2_Hardware/Prototye/Components/GNSS/lte-nrf9169.png)
+    
+
+# Date : 04.11.2022
+
+## Antenna 
+
+### 1. Virtual Antenna :
+- [DUO mXTEND](https://ignion.io/product/duo-mxtend/)
+  - Do twice as much. The DUO mXTEND™ antenna booster features two independent radios in the smallest possible module. Thanks to its multiport nature, it can combine GNSS and Wi-Fi or Bluetooth and Wi-Fi in a single package.
+  - 1561 – 5875 MHz
+  - 7.0 x 3.0 x 2.0 mm
+- [TRIO mXTEND](https://ignion.io/product/trio-mxtend/)
+  - The power of 3. TRIO mXTEND™ can combine cellular connectivity, GNSS and Bluetooth in a single chip antenna component. Leverage the possibilities of three independent radios in a powerful, slimline solution.
+  - 698 – 3800 MHz
+  - 30.0 x 3.0 x 1.0 mm
+- [RUN mXTEND](https://ignion.io/product/run-mxtend/)
+  - Extend your design possibilities. The small, versatile RUN mXTEND™ is the perfect solution for devices where volume and cost is constrained but maximum performance is desired.
+  - 824 – 5875 MHz
+  - 12.0 x 3.0 x 2.4 mm
+  
+### 2. Chip Antenna :
+- [Antenova Agosti SR4G080](https://www.mouser.ch/pdfDocs/AgostiSR4G080-PS-101.pdf)
+  - SMD Antenna for all GNSS constellations (1559 – 1609 MHz)
+  - GPS (L1), GLONASS (L1), Galileo (E1), BeiDou (B1), IRNSS & QZSS
+  - Minimum ground plane size: 40x20mm
+  - Efficiency : 67% (80x30mm board)
+  - Dimensions: 9.0 x 5.8 x 1.7 (mm)
+- [Antenova Sinica SR4G008](https://www.mouser.ch/datasheet/2/23/Sinica_SR4G008_PS_2_01-3051546.pdf)
+  - Antenna for 1559 – 1609 MHz, GNSS for embedded applications
+  - GPS, GLONASS, Beidou and Galileo
+  - Minimum ground plane size:  60 x 20mm
+  - Efficiency : 60% (80x35mm board)
+  - Dimensions: 7.0 x 5.8 x 0.4 (mm)
+- [Antenova Raptor SR4G053](https://www.mouser.ch/datasheet/2/23/Raptor_GNSS_SR4G053_PS_1_1-3051749.pdf)
+  - Antenna for 1164-1249 MHz, 1559–1609 MHz, GNSS for embedded applications
+  - GPS L1, L2, L5; GLONASS L1, L2, L3; Galileo E1, E5a/b; BeiDou B1I, B2I, B3, B2a; QZSS L1, L1C, L1S, L2C, L5
+  - Minimum ground plane size: N/A  
+  - Efficiency : 65% (85x36mm board)
+  - Dimensions: 16.0 x 8.0 x 1.7 (mm)
+- [Abracon ACAR0301-SG3](https://www.mouser.ch/datasheet/2/3/ACAR0301-SG3-1670531.pdf)
+  - Multiband 1561~1610 MHz ceramic chip 
+  - GNSS, GPS, GLONASS, BEIDOU
+  - Minimum ground plane size: N/A
+  - Efficiency : 66% (40x80mm board)
+  - Dimensions: 3.05 x 1.6 x 0.55 (mm)
+- [Pulse W3011](https://www.mouser.ch/datasheet/2/447/plei_s_a0010453394_1-2904198.pdf)
+  - GNSS Ceramic Chip Antenna (1559-1606.6MHz)
+  - GNSS L1, Beidou, GPS, Galileo, Glonass
+  - Minimum ground plane size:  Ground clearance area 4.00 x 4.25 mm
+  - Efficiency : 60% (80x37mm board)
+  - Dimensions: 3.2 x 1.6 x 1.1 (mm)
+- [Ethertronics M830120](https://www.mouser.ch/datasheet/2/40/AVX_E_M830120-1480112.pdf)
+  - GPS / GLONASS / Beidou / Galileo or GPS L1,L2,L5 Ceramic Antenna
+  - Beidou, GPS, Galileo, Glonass, GPS L1/L2/L5
+  - Minimum ground plane size: N/A -  Ground clearance area 19.25 x 5.45 mm
+  - Efficiency :  80% (90x40mm board), 70% (80x40mm board)
+  - Dimensions: 8.00 x 3.00 x 1.33 (mm)
+- [TE Connectivity 2108824-1](https://www.mouser.ch/datasheet/2/418/8/ENG_DS_2108824_A-2509118.pdf)
+  - L1+G1 bands for GNSS Embedded Ceramic Chip Antenna
+
+----------------
+# ``11.11.2022`` - Electrical Schematic Review :
+
+## To do:
+- [x] Delet MOSFET power coupling for motor
+- [x] Connect total 9 motors gpio port
+- [x] Change Bat charger chip with IQ (QI) and maybe LDO and reverse connection protection 
+- [x] Replace Battery connector 2pin with 3 pin (TS port)
+
+## - QI (WPC) Wireless Charging
+
+Wireless charging functionality : bq51003
+
+![](../2_Hardware/Prototye/Components/GNSS/bq51003_app.png)
+![](../2_Hardware/Prototye/Components/GNSS/bq51003_elect_charact.png)
+
+
+![](../2_Hardware/Prototye/Components/GNSS/bq51003_pinout1.png)
+![](../2_Hardware/Prototye/Components/GNSS/bq51003_pinout2.png)
+
+
+# LTEWatch - PCB Rooting Instructions :
+
+## Introduction
+Nordic Semiconductor in Norway has developed the NRF91 family of cellular LTE-M / NB-IoT communication devices. The goal of this Master Thesis is to develop the prototype of an analog wristwatch using a such device. There are many challenges to overcome in this project, to name just the most difficult ones as the mechanical as well the energy consumption constraints.
+
+## LTEWatch Description:
+LTEWatch project consist in the design and the fabrication of an "*hybrid*" Smart-Watch. The "*hybrid*" qualification consist in integration of mechanical watch hands (H:M:S) in a smart connected wearable device. Since the project desirve a large amount of work, the idea is to first creat a prototype board as a Proof Of Concept (POC) enabling the design and developpment of the Smart-Watch application software and also to test and have a better idea of the device consumption and performance.
+
+The LTEWatch actual schematic is a prototype board, this mean that the PCB size and dimension is not really constraint by its final application, but the project includes several critical block and componant that require special attention, more precisely blocks like LTE transmission line and antenna and GNSS receiver, transmission line and antenna.
+
+To have a better idea of the overall board, a functionnal diagram is illustrated in the next section.
+
+### Functionnal Diagram
+
+![](fnct_blck_dgrm.svg)
