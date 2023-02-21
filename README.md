@@ -1,5 +1,8 @@
 # TM_Analog_LTE-M_NB-IoT_Watch
  Master Thesis - Smart Watch
+
+![](1_Document/2_Report/Include/Figure/LTEWatch_img/ltewatch_img_2.png)
+
 ## Abstract :
 Nordic Semiconductor in Norway has developed the NRF91 family of cellular LTE-M / NB-IoT communication devices. The goal of this Master Thesis is to develop the prototype of an analog wristwatch using a such device. There are many challenges to overcome in this project, to name just the most difficult ones as the mechanical as well the energy consumption constraints.
 
@@ -19,3 +22,7 @@ Nordic Semiconductor in Norway has developed the NRF91 family of cellular LTE-M 
   - [ ] Accelerometer usage
 - [x] **Prototype validation:** Test of the entire development
 - [x] **Documentation:** Establish a technical report enabling further developments
+
+## Documentation
+
+Full documentation about the project: [LTEWatch Report](1_Document/Traiber_MSE_TM_SA22.pdf)
