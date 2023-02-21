@@ -1,0 +1,42 @@
+# UBXLIB ``ubxlib.h``
+
+# Config
+
+## Device Config
+
+**Source files:** ``ubxlib/common/device/api/u_device.h`` 
+
+### The *u-blox* device handle
+
+```cpp
+/** The u-blox device handle; this is intended to be anonymous,
+ * the contents should never be referenced by the application.
+ */
+typedef void *uDeviceHandle_t;
+```
+### Device Type
+```cpp
+/** Device types.
+ */
+typedef enum {
+    U_DEVICE_TYPE_NONE,
+    U_DEVICE_TYPE_CELL,
+    U_DEVICE_TYPE_GNSS,
+    U_DEVICE_TYPE_SHORT_RANGE,
+    U_DEVICE_TYPE_SHORT_RANGE_OPEN_CPU,
+    U_DEVICE_TYPE_MAX_NUM
+} uDeviceType_t;
+```
+
+### Device transport types
+```cpp
+/** Device transport types.
+ */
+typedef enum {
+    U_DEVICE_TRANSPORT_TYPE_NONE,
+    U_DEVICE_TRANSPORT_TYPE_UART,
+    U_DEVICE_TRANSPORT_TYPE_I2C,
+    U_DEVICE_TRANSPORT_TYPE_MAX_NUM
+} uDeviceTransportType_t;
+
+```

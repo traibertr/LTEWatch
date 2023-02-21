@@ -1,0 +1,48 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"nrf-connect.applications": [
+			"${workspaceFolder}"
+		],
+		"nrf-connect.topdir": "${nrf-connect.sdk:2.1.2}",
+		"nrf-connect.toolchain.path": "${nrf-connect.toolchain:2.1.2}",
+		"files.associations": {
+			"lvgl_display.h": "c",
+			"display.h": "c",
+			"lvgl.h": "c",
+			"kernel.h": "c",
+			"string": "c",
+			"gnsscontroller.h": "c",
+			"disp-config.h": "c",
+			"random": "c",
+			"array": "c",
+			"string_view": "c",
+			"ranges": "c",
+			"functional": "c",
+			"factory.h": "c",
+			"picowatch.h": "c",
+			"mqttcontroller.h": "c",
+			"ledcontroller.h": "c",
+			"xfreactive.h": "c",
+			"xfeventstatus.h": "c",
+			"xftimeout.h": "c",
+			"memorypoolmacros.h": "c",
+			"memorypool.h": "c",
+			"objectpool.hpp": "c",
+			"bathal.h": "c",
+			"platform-config.h": "c",
+			"devicetree.h": "c",
+			"device.h": "c",
+			"picoireactive.h": "c",
+			"optional": "c",
+			"memory": "c",
+			"ibatteryobserver.h": "c",
+			"picoevent.h": "c",
+			"gnss-config.h": "c"
+		}
+	}
+}

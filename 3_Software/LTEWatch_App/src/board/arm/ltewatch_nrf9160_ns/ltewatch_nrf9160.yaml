@@ -1,0 +1,16 @@
+identifier: ltewatch_nrf9160
+name: LTEWatch-nRF9160
+type: mcu
+arch: arm
+toolchain:
+  - gnuarmemb
+  - xtools
+  - zephyr
+ram: 88
+flash: 256
+supported:
+  - gpio
+  - i2c
+  - spi
+  - watchdog
+  - counter

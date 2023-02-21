@@ -1,0 +1,7 @@
+/* This configuration is specifically modified for the tests as run on a NRF9160 board wired in the u-blox test system. */
+/* For default settings, refer to the file of the same name in the boards/arm directory of Zephyr. */
+
+&i2c1 {
+    status = "okay";
+    /* Otherwise board default settings are good. */
+};

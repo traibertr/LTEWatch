@@ -1,0 +1,137 @@
+// To get started, press Ctrl+Space to bring up the completion menu and view the available nodes.
+
+// You can also use the buttons in the sidebar to perform actions on nodes.
+// Actions currently available include:
+
+// * Enabling / disabling the node
+// * Adding the bus to a bus
+// * Removing the node
+// * Connecting ADC channels
+
+// For more help, browse the DeviceTree documentation at https://docs.zephyrproject.org/latest/guides/dts/index.html
+// You can also visit the nRF DeviceTree extension documentation at https://nrfconnect.github.io/vscode-nrf-connect/devicetree/nrfdevicetree.html
+
+///{
+//    rtc0: rtc@14000 {
+//        compatible = "nordic,nrf-rtc";
+//        reg = <0x14000 0x1000>;
+//        cc-num = <4>;
+//        interrupts = <20 NRF_DEFAULT_IRQ_PRIORITY>;
+//        status = "okay";
+//        clock-frequency = <32768>;
+//        prescaler = <1>;
+//    };
+//};
+
+// I2C Configuration
+
+&pinctrl {
+    /* configuration for i2c1 device, default state */
+	i2c1_default: i2c1_default {
+		group1 {
+			psels = <NRF_PSEL(TWIM_SDA, 0, 30)>,
+				<NRF_PSEL(TWIM_SCL, 0, 31)>;
+		};
+	};
+
+	i2c1_sleep: i2c1_sleep {
+		group1 {
+			psels = <NRF_PSEL(TWIM_SDA, 0, 30)>,
+				<NRF_PSEL(TWIM_SCL, 0, 31)>;
+			low-power-enable;
+		};
+	};
+
+	spi2_default: spi2_default {
+		group1 {
+			psels = <NRF_PSEL(SPIM_SCK, 0, 12)>,
+					<NRF_PSEL(SPIM_MISO, 0, 10)>,
+					<NRF_PSEL(SPIM_MOSI, 0, 11)>;
+		};
+	};
+
+	spi2_sleep: spi2_sleep {
+		group1 {
+			psels = <NRF_PSEL(SPIM_SCK, 0, 12)>,
+					<NRF_PSEL(SPIM_MISO, 0, 10)>,
+					<NRF_PSEL(SPIM_MOSI, 0, 11)>;
+			low-power-enable;
+		};
+	};
+
+};
+
+&i2c1 {
+    compatible = "nordic,nrf-twim";
+	status = "okay";
+    pinctrl-0 = <&i2c1_default>;
+    /* sleep state (only applicable if CONFIG_PM_DEVICE=y) */
+    pinctrl-1 = <&i2c1_sleep>;
+    /* state assigned to each pinctrl-N property by index */
+    pinctrl-names = "default", "sleep";
+    clock-frequency = <I2C_BITRATE_STANDARD>;
+};
+
+&i2c2 {
+    status = "disabled";
+};
+
+&spi3 {
+    status = "disabled";
+};
+
+
+&spi2 {
+	compatible = "nordic,nrf-spim";
+	status = "okay";
+    cs-gpios = <&gpio0 20 GPIO_ACTIVE_HIGH>;
+	pinctrl-0 = <&spi2_default>;
+	pinctrl-1 = <&spi2_sleep>;
+	pinctrl-names = "default", "sleep";
+	ls0xx: ls0xx@0 {
+		compatible = "sharp,ls0xx";
+		label = "DISPLAY";
+		spi-max-frequency = <2000000>;
+		width = <160>;
+		height = <68>;
+		reg = <0>;
+	};
+};
+
+/ {
+	chosen {
+		zephyr,display = &ls0xx;
+	};
+};
+
+// ADC
+
+/ {
+	zephyr,user {
+		io-channels = <&adc 3>; // P0.16 = AIN3
+		disp-en-gpios = <&gpio0 13 GPIO_ACTIVE_HIGH>;
+		batlvl-en-gpios = <&gpio0 14 GPIO_ACTIVE_HIGH>;
+		batchrg-int-gpios = <&gpio0 15 GPIO_ACTIVE_LOW>;
+	 };
+};
+
+&adc {
+	#address-cells = <1>;
+	#size-cells = <0>;
+
+	channel@0 {
+		reg = <0>;
+		zephyr,gain = "ADC_GAIN_1_5";
+		zephyr,reference = "ADC_REF_INTERNAL";
+		zephyr,acquisition-time = <ADC_ACQ_TIME_DEFAULT>;
+		zephyr,input-positive = <NRF_SAADC_AIN3>;  // P0.16 = AIN3
+		zephyr,resolution = <12>;
+	};
+};
+
+
+/ {
+
+};
+
+//BAT_CHRG_NINT
