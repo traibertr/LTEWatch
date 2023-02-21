@@ -1,0 +1,876 @@
+var tiComparePartsLangs = {
+	"local": {
+		"urls": {
+			"prodFolder": '!!en!!/product/!!gpn!!',
+			"sampleBuy": '!!en!!/product/!!gpn!!#order-quality',
+			"onlineDatasheet": "!!en!!/product/!!gpn!!/datasheet",
+			"tools": '!!en!!/product/!!gpn!!#design-development',
+			"datasheet": '!!en!!/lit/gpn/!!gpn!!',
+			"data": "!!en!!/selectiontool/paramdata/family/!!familyId!!/results?lang=en&output=json",
+			"settings": "!!en!!/selectiontool/paramdata/family/!!familyId!!/criteria?lang=en&output=json",
+			"relatedParts": "!!en!!/selectiontool/paramdata/gpn/!!gpn!!/relatedparts?lang=en",
+			"exchangeRates": "!!en!!/productmodel/!!gpn!!/currencyExchangeRate",
+			"badgeLabelUrl": "!!en!!/support-quality/quality-policies-procedures/product-life-cycle.html",
+			"inventory": "/productmodel/gpn/!!gpn!!/tistoresegmented?locale=en-US",
+			"rollupInventory": "/selectiontool/compare/!!familyId!!/tistoresegmented?output=json"
+		},
+		"strings": {
+			"print": 'Print',
+			"download": 'Download to Excel',
+			"sampleBuy": 'Order Now',
+			"onlineDatasheet": "Online data sheet",
+			"tools": 'Design &amp; development',
+			"datasheet": 'Data sheet',
+			"compare": 'Compare products',
+			"compareProductFolder": 'Compare products with ',
+			"findOther": "Find other ",
+			"statusBadge": {
+				"ACTIVE": {
+					"label": 'ACTIVE',
+					"tooltip": 'This product has been released to the market and is available for purchase. For some products, newer alternatives may be available.'
+				},
+				"PREVIEW": {
+					"label": 'PREVIEW',
+					"tooltip": 'This product is not in production, although prototype or experimental parts are available for purchase. This product may be subject to changes during engineering validation until it is released to production.'
+				}
+			},
+			"replacementStrings": {
+				"F": "Similar functionality",
+				"P": "Same functionality",
+				"Q": "Pin-for-pin",
+				"S": "Drop-in"
+			},
+			"loginToView": "Log in to view inventory"
+		}
+	},
+	"cn": {
+		"urls": {
+			"prodFolder": '!!cn!!/product/cn/!!gpn!!',
+			"sampleBuy": '!!cn!!/product/cn/!!gpn!!#order-quality',
+			"onlineDatasheet": "!!cn!!/product/cn/!!gpn!!/datasheet",
+			"tools": '!!cn!!/product/cn/!!gpn!!#design-development',
+			"datasheet": '!!cn!!/cn/lit/gpn/!!gpn!!',
+			"data": "!!cn!!/selectiontool/paramdata/family/!!familyId!!/results?lang=cn&output=json",
+			"settings": "!!cn!!/selectiontool/paramdata/family/!!familyId!!/criteria?lang=cn&output=json",
+			"relatedParts": "!!cn!!/productmodel/!!gpn!!/relatedparts?locale=zh-CN",
+			"exchangeRates": "!!cn!!/productmodel/!!gpn!!/currencyExchangeRate?locale=zh-CN",
+			"badgeLabelUrl": "http://www.ti.com.cn/zh-cn/support-quality/quality-policies-procedures/product-life-cycle.html",
+			"inventory": "/productmodel/gpn/!!gpn!!/tistoresegmented?locale=zh-CN",
+			"rollupInventory": "/selectiontool/compare/!!familyId!!/tistoresegmented?output=json"
+		},
+		"strings": {
+			"print": '打印此列表',
+			"download": '下载到电子表格中',
+			"sampleBuy": '立即下单',
+			"onlineDatasheet": "在线数据表",
+			"tools": '设计和开发',
+			"datasheet": '数据表',
+			"compare": '对比产品',
+			"compareProductFolder": '与!!gpn!!的产品对比',
+			"findOther": "查找其他 ",
+			"statusBadge": {
+				"ACTIVE": {
+					"label": '正在供货',
+					"tooltip": '此产品已上市，且可供购买。 可提供某些产品的较新替代品。'
+				},
+				"PREVIEW": {
+					"label": '预发布',
+					"tooltip": '此产品的原型/实验产品可供出售，但尚未量产。正式量产前，该产品在工程验证流程中可能会有变更。'
+				}
+			},
+			"replacementStrings": {
+				"F": "功能相似",
+				"P": "功能相同",
+				"Q": "引脚相同",
+				"S": "直接替换"
+			},
+			"loginToView": "登录以查看库存"
+		}
+	},
+	"de": {
+		"urls": {
+			"prodFolder": '!!en!!/product/!!gpn!!',
+			"sampleBuy": '!!en!!/product/!!gpn!!#order-quality',
+			"onlineDatasheet": "!!en!!/product/!!gpn!!/datasheet",
+			"tools": '!!en!!/product/!!gpn!!#design-development',
+			"datasheet": '!!en!!/lit/gpn/!!gpn!!',
+			"data": "!!en!!/selectiontool/paramdata/family/!!familyId!!/results?lang=en&output=json",
+			"settings": "!!en!!/selectiontool/paramdata/family/!!familyId!!/criteria?lang=en&output=json",
+			"relatedParts": "!!en!!/productmodel/!!gpn!!/relatedparts?locale=en-US",
+			"exchangeRates": "!!en!!/productmodel/!!gpn!!/currencyExchangeRate",
+			"badgeLabelUrl": "http://www.ti.com/de-de/support-quality/quality-policies-procedures/product-life-cycle.html",
+			"inventory": "/productmodel/gpn/!!gpn!!/tistoresegmented?locale=de-DE",
+			"rollupInventory": "/selectiontool/compare/!!familyId!!/tistoresegmented?output=json"
+		},
+		"strings": {
+			"print": 'Drucken',
+			"download": 'In Excel runterladen',
+			"sampleBuy": 'Jetzt bestellen',
+			"onlineDatasheet": "Online Datenblatt",
+			"tools": 'Design &amp; development',
+			"datasheet": 'Datenblatt',
+			"compare": 'Produkte vergleichen',
+			"compareProductFolder": 'Produkte mit !!gpn!! vergleichen',
+			"findOther": "Andere Suche ",
+			"statusBadge": {
+				"ACTIVE": {
+					"label": 'ACTIVE',
+					"tooltip": 'Dieses Produkt wurde auf den Markt gebracht und ist zum Kauf verfügbar.  Bei einigen Produkten sind möglicherweise neuere Alternativen verfügbar.'
+				},
+				"PREVIEW": {
+					"label": 'PREVIEW',
+					"tooltip": 'Dieses Produkt ist ein Prototyp/Experimentalprodukt und wurde nicht auf den Markt gebracht. Tests und abschließende Prozesse sind möglicherweise noch nicht abgeschlossen. Dieses Produkt kann geändert oder aus dem Verkaufsprogramm genommen werden.'
+				}
+			},
+			"replacementStrings": {
+				"F": "Ähnlich",
+				"P": "Gleiche Funktionalität",
+				"Q": "Gleiche Funktionalität und Anschlussbelegung",
+				"S": "Genau gleichwertig"
+			},
+			"loginToView": "Log in to view inventory"
+		}
+	},
+	"en": {
+		"urls": {
+			"prodFolder": '!!en!!/product/!!gpn!!',
+			"sampleBuy": '!!en!!/product/!!gpn!!#order-quality',
+			"onlineDatasheet": "!!en!!/product/!!gpn!!/datasheet",
+			"tools": '!!en!!/product/!!gpn!!#design-development',
+			"datasheet": '!!en!!/lit/gpn/!!gpn!!',
+			"data": "!!en!!/selectiontool/paramdata/family/!!familyId!!/results?lang=en&output=json",
+			"settings": "!!en!!/selectiontool/paramdata/family/!!familyId!!/criteria?lang=en&output=json",
+			"relatedParts": "!!en!!/productmodel/!!gpn!!/relatedparts?locale=en-US",
+			"exchangeRates": "!!en!!/productmodel/!!gpn!!/currencyExchangeRate",
+			"badgeLabelUrl": "!!en!!/support-quality/quality-policies-procedures/product-life-cycle.html",
+			"inventory": "/productmodel/gpn/!!gpn!!/tistoresegmented?locale=en-US",
+			"rollupInventory": "/selectiontool/compare/!!familyId!!/tistoresegmented?output=json"
+		},
+		"strings": {
+			"print": 'Print',
+			"download": 'Download to Excel',
+			"sampleBuy": 'Order now',
+			"onlineDatasheet": "Online data sheet",
+			"tools": 'Design &amp; development',
+			"datasheet": 'Data sheet',
+			"compare": 'Compare products',
+			"compareProductFolder": 'Compare products with !!gpn!!',
+			"findOther": "Find other ",
+			"statusBadge": {
+				"ACTIVE": {
+					"label": 'ACTIVE',
+					"tooltip": 'This product has been released to the market and is available for purchase. For some products, newer alternatives may be available.'
+				},
+				"PREVIEW": {
+					"label": 'PREVIEW',
+					"tooltip": 'This product is not in production, although prototype or experimental parts are available for purchase. This product may be subject to changes during engineering validation until it is released to production.'
+				}
+			},
+			"replacementStrings": {
+				"F": "Similar functionality",
+				"P": "Same functionality",
+				"Q": "Pin-for-pin",
+				"S": "Drop-in"
+			},
+			"loginToView": "Log in to view inventory"
+		}
+	},
+	"jp": {
+		"urls": {
+			"prodFolder": '!!jp!!/product/jp/!!gpn!!',
+			"sampleBuy": '!!jp!!/product/jp/!!gpn!!#order-quality',
+			"onlineDatasheet": "!!jp!!/product/jp/!!gpn!!/datasheet",
+			"tools": '!!jp!!/product/jp/!!gpn!!#design-development',
+			"datasheet": '!!jp!!/jp/lit/gpn/!!gpn!!',
+			"data": "!!jp!!/selectiontool/paramdata/family/!!familyId!!/results?lang=jp&output=json",
+			"settings": "!!jp!!/selectiontool/paramdata/family/!!familyId!!/criteria?lang=jp&output=json",
+			"relatedParts": "!!jp!!/productmodel/!!gpn!!/relatedparts?locale=ja-JP",
+			"exchangeRates": "!!jp!!/productmodel/!!gpn!!/currencyExchangeRate?locale=ja-JP",
+			"badgeLabelUrl": "http://www.tij.co.jp/ja-jp/support-quality/quality-policies-procedures/product-life-cycle.html",
+			"inventory": "/productmodel/gpn/!!gpn!!/tistoresegmented?locale=ja-JP",
+			"rollupInventory": "/selectiontool/compare/!!familyId!!/tistoresegmented?output=json"
+		},
+		"strings": {
+			"print": '印刷',
+			"download": 'Excelへダウンロード',
+			"sampleBuy": '今すぐ購入',
+			"onlineDatasheet": "オンライン・データシート",
+			"tools": '設計および開発',
+			"datasheet": 'データシート',
+			"compare": '製品を比較する',
+			"compareProductFolder": '製品を !!gpn!! と比較',
+			"findOther": "他を検索 ",
+			"statusBadge": {
+				"ACTIVE": {
+					"label": 'アクティブ',
+					"tooltip": 'この製品はすでに市場にリリースされており、購入いただけます。 一部の製品は、より新しい代替品を使用できる可能性があります。'
+				},
+				"PREVIEW": {
+					"label": 'プレビュー',
+					"tooltip": 'この製品は量産状態ではありませんが、プロトタイプまたは検証パーツとして購入が可能です。この製品は、量産向けにリリースされるまでに、技術検証の段階で変更される可能性があります。'
+				}
+			},
+			"replacementStrings": {
+				"F": "類似の機能",
+				"P": "同等の機能",
+				"Q": "ピン互換",
+				"S": "ドロップイン"
+			},
+			"loginToView": "ログインして在庫を確認"
+		}
+	},
+	"kr": {
+		"urls": {
+			"prodFolder": '!!en!!/product/!!gpn!!',
+			"sampleBuy": '!!en!!/product/!!gpn!!#order-quality',
+			"onlineDatasheet": "!!en!!/product/!!gpn!!/datasheet",
+			"tools": '!!en!!/product/!!gpn!!#design-development',
+			"datasheet": '!!en!!/lit/gpn/!!gpn!!',
+			"data": "!!en!!/selectiontool/paramdata/family/!!familyId!!/results?lang=en&output=json",
+			"settings": "!!en!!/selectiontool/paramdata/family/!!familyId!!/criteria?lang=en&output=json",
+			"relatedParts": "!!en!!/productmodel/!!gpn!!/relatedparts?locale=en-US",
+			"exchangeRates": "!!en!!/productmodel/!!gpn!!/currencyExchangeRate",
+			"badgeLabelUrl": "http://www.ti.com/ko-kr/support-quality/quality-policies-procedures/product-life-cycle.html",
+			"inventory": "/productmodel/gpn/!!gpn!!/tistoresegmented?locale=ko-KR",
+			"rollupInventory": "/selectiontool/compare/!!familyId!!/tistoresegmented?output=json"
+		},
+		"strings": {
+			"print": '인쇄',
+			"download": '엑셀 다운로드',
+			"sampleBuy": '지금 주문하세요.',
+			"onlineDatasheet": "온라인 데이터시트",
+			"tools": '툴 \& 소트프웨어',
+			"datasheet": '데이터시트 다운로드',
+			"compare": '비교',
+			"compareProductFolder": 'Compare products with !!gpn!!',
+			"findOther": "Find other ",
+			"statusBadge": {
+				"ACTIVE": {
+					"label": 'ACTIVE',
+					"tooltip": '이 제품은 시장에 출시되었으며 구매할 수 있습니다.  일부 제품의 경우 최신 대체 제품을 사용할 수 있습니다. '
+				},
+				"PREVIEW": {
+					"label": 'PREVIEW',
+					"tooltip": '이 제품은 프로토타입/실험용이며 아직 출시되지 않았습니다. 테스트 및 최종 프로세스가 완료되지 않을 수 있습니다. 이 제품은 추가 변경 또는 단종될 수 있습니다.'
+				}
+			},
+			"replacementStrings": {
+				"F": "비슷한",
+				"P": "동일한 기능",
+				"Q": "동일한 기능 및 핀아웃",
+				"S": "정확히 동등한"
+			},
+			"loginToView": "Log in to view inventory"
+		}
+	}
+};
+
+if (!window.console)
+	window.console = {
+		"log" : function() {
+		}
+	};
+if (!window.com)
+	com = new Object();
+if (!com.TI)
+	com.TI = new Object();
+
+function tiCompareParts(familyId, selectedParts, config, paramOrder, lang, domains, source, exchangeCurrency){//NOSONAR
+     var _me = this;
+	_me.loaded = false;
+
+	var $main = $('#mainTable');
+
+	var resultsData, resultsIndex, settingsData, settingsIndex, relatedPartsData, i, j, len, paramTotal, markup, a, tmp;
+	var inventoryIndex = {};
+	var selectionToolUrl = false;
+	var exchangeRateMap = {'USD' : 1};
+	var familyName = false;
+	var loggedOut = false;
+
+	function errorHandler(msg) {
+
+		var $errorMsg = $("#selToolError");
+		if ($errorMsg.length === 1)
+			$errorMsg.html(msg);
+	}
+
+	function loadAppData(url, loadCallback, errorCallback, reqType, reqBody) {
+		if (url === undefined || url === '') {
+			throw new Error('No url provided to load data');
+		}
+
+		if (loadCallback === undefined || typeof loadCallback !== 'function') {
+			throw new Error('No ajax load function provided');
+		}
+
+		if (errorCallback === undefined) {
+			errorCallback = function(xhr, txt) {
+				errorHandler('** ERROR ** Load app data error: ' + txt
+						+ '. URL: ' + this.url);
+			};
+		}
+
+		$.ajax({
+			async : true,
+			dataType : 'json',
+			cache : false,
+			timeout : 10000,
+			type : reqType || 'GET',
+			url : url,
+			success : loadCallback,
+			error : errorCallback,
+			data: reqBody,
+			contentType: 'application/json'
+		});
+	}
+
+	function validate() {
+		if (familyId === undefined || familyId === '') {
+			errorHandler('Invalid familyId');
+			return false;
+		}
+		if (selectedParts === undefined || selectedParts.length < 1) {
+			errorHandler('Invalid Parts');
+			return false;
+		}
+
+		return true;
+	}
+
+	function setDomains() {
+		for ( var item in config[lang].urls) {
+			if (!Object.prototype.hasOwnProperty.call(config[lang].urls, item))
+				continue;
+			config[lang].urls[item] = config[lang].urls[item].replace("!!en!!",
+					domains["en"]).replace("!!cn!!", domains["cn"]).replace(
+					"!!jp!!", domains["jp"]);
+		}
+	}
+
+	function processConfig() {
+		config[lang].urls.settings = config[lang].urls.settings.replace('!!familyId!!', familyId);
+		config[lang].urls.data = config[lang].urls.data.replace('!!familyId!!', familyId);
+		config[lang].urls.rollupInventory = config[lang].urls.rollupInventory.replace('!!familyId!!', familyId);
+		config[lang].urls.relatedParts = config[lang].urls.relatedParts.replace('!!gpn!!', selectedParts[0]);
+		config[lang].urls.exchangeRates = config[lang].urls.exchangeRates.replace('!!gpn!!', selectedParts[0]);
+	}
+
+	function loadWebServices() {
+		if (_me.loaded)
+			return true;
+
+		// get exchange rates
+		loadAppData(
+			config[lang].urls.exchangeRates,
+			function(data) {
+				if (data === null) {
+					throw new Error(
+							'Invalid data returned from exchange rate service');
+				}
+				exchangeRateMap = data;
+			}
+		);
+
+		// get related products
+		// check for alternate and replacement parts
+		loadAppData(
+			config[lang].urls.relatedParts,
+			function(data) {
+				if (data === null || (data.alternateParts === undefined && data.replacementParts === undefined))  {
+					throw new Error(
+							'Invalid data returned from part data call');
+				}
+				relatedPartsData = false;
+
+				try {
+					relatedPartsData = [];
+					if (data.alternateParts !== undefined && data.alternateParts.length > 0) {
+						relatedPartsData = data.alternateParts;
+					}
+					if (data.replacementParts !== undefined && data.replacementParts.length > 0) {
+                        relatedPartsData = data.replacementParts;
+	      			}
+					if (data.selectiontoolUrl) {
+						selectionToolUrl = data.selectiontoolUrl;
+					}
+					if (data.familyName) {
+						familyName = data.familyName;
+					}
+
+				} catch (e) {
+				}
+				checkProceed();
+			}
+		);
+
+		// get settings web service
+		loadAppData(config[lang].urls.settings, function(data) {
+			settingsData = data;
+			try {
+				if (settingsData.ParametricControl[0].errorCode !== undefined) {
+					settingsData = false;
+				}
+			} catch (e) {
+			}
+			checkProceed();
+		});
+
+		// get results web service
+		loadAppData(
+			config[lang].urls.data,
+			function (data) {
+				if (data === null || data.ParametricResults === undefined) {
+					throw new Error(
+						'Invalid data returned from part data call');
+				}
+
+				resultsData = data;
+
+				try {
+					if (resultsData.ParametricResults[0].errorDetails !== undefined) {
+						resultsData = false;
+					}
+				} catch (e) {
+				}
+				checkProceed();
+			}
+		);
+
+		// get inventory for selected parts
+		if (source === "prodfolder") {
+			len = selectedParts.length;
+			for (i = 0; i < len; i++) {
+				let url = config[lang].urls.inventory.replace('!!gpn!!', selectedParts[i]);
+				let partNum = selectedParts[i];
+				loadAppData(
+					url,
+					function(data) {
+						let totalInventory = 0;
+						if (data != null) {
+							Object.keys(data).forEach(key => {
+								totalInventory += data[key].inventory;
+							});
+						}
+						inventoryIndex[partNum] = totalInventory;
+						checkProceed();
+					},
+					function(jqXHR) {
+						loggedOut = loggedOut || jqXHR.status === 401;
+						inventoryIndex[partNum] = 0;
+						checkProceed();
+					}
+				);
+			}
+		}
+
+		// get roll up inventory for selected parts
+		if (source !== "prodfolder") {
+			loadAppData(
+				config[lang].urls.rollupInventory,
+				function(data) {
+					if (data !== null) {
+						inventoryIndex = data;
+					}
+					checkProceed();
+				},
+				function(jqXHR) {
+					loggedOut = loggedOut || jqXHR.status === 401;
+					checkProceed();
+				},
+				'POST',
+				JSON.stringify(selectedParts)
+			);
+		}
+	}
+
+	function getParamOrder() {
+
+		var type;
+
+		// if we got it in the url, use it
+		if (paramOrder !== undefined && $.isArray(paramOrder)
+				&& paramOrder.length > 1) {
+			settingsData = settingsData.ParametricControl.controls;
+			len = settingsData.length;
+		} else {
+			paramTotal = settingsData.ParametricControl.initialNumber;
+			settingsData = settingsData.ParametricControl.controls;
+			len = settingsData.length;
+			// if not, we create it
+			paramOrder = [];
+			for (i = 0; i < len; i++) {
+				type = settingsData[i].type;
+				if (type === 'P' || type === 'A')
+					paramOrder.push(settingsData[i].cid);
+				if (paramOrder.length === paramTotal + 1)
+					break;
+			}
+		}
+
+		// look for o1 and o4 and remove them
+		tmp = $.inArray('o1', paramOrder);
+		if (tmp > -1)
+			paramOrder.splice(tmp, 1);
+		tmp = $.inArray('o4', paramOrder);
+		if (tmp > -1)
+			paramOrder.splice(tmp, 1);
+
+		paramTotal = paramOrder.length;
+
+	}
+
+	function indexData() {
+		var thisPart, thisCid, thisInventory;
+		resultsData = resultsData.ParametricResults;
+		resultsIndex = {};
+		len = resultsData.length;
+		for (i = 0; i < len; i++) {
+			thisPart = resultsData[i].o1;
+			if ($.inArray(thisPart, selectedParts) > -1) {
+				resultsIndex[thisPart] = resultsData[i];
+				thisInventory = inventoryIndex[thisPart];
+				resultsIndex[thisPart]['p3318'] = thisInventory ? thisInventory.toString() : '0';
+			}
+		}
+
+        settingsIndex = {};
+		len = settingsData.length;
+		for (i = 0; i < len; i++) {
+			thisCid = settingsData[i].cid;
+			settingsIndex[thisCid] = settingsData[i];
+		}
+
+		if (relatedPartsData) {
+			relatedPartsData.forEach( function(part) {
+				relatedPartsData[part.genericPartNumber] = config[lang].strings.replacementStrings[part.replacementCode];
+			});
+		}
+	}
+
+	function displayPartStatus(partStatus) {
+		var marketingStatus={};
+
+		marketingStatus.status = (partStatus === "1" ? "ACTIVE" : "PREVIEW");
+		marketingStatus.label = config[lang].strings.statusBadge[marketingStatus.status].label;
+		marketingStatus.tooltip = config[lang].strings.statusBadge[marketingStatus.status].tooltip;
+
+		return marketingStatus;
+	}
+
+	function createTable() {
+		var gpn, cid, allBlank, val, rowCount, param;
+		a = 0;
+		markup = [];
+		len = selectedParts.length;
+
+		markup[a++] = '<div class="u-text-center u-margin-bottom-l u-margin-top-xxl">';
+		if(source === "prodfolder"){
+			markup[a++] = '<h1 class="u-header-2">' + config[lang].strings.compareProductFolder.replace('!!gpn!!', resultsIndex[selectedParts[0]].o2.toUpperCase()) + '</h1>';
+			if (selectionToolUrl) {
+				markup[a++] = "<div>" + "<a style='vertical-align: middle;' href='" + selectionToolUrl + "'>" + config[lang].strings.findOther + familyName + "</a></div>";
+			}
+		} else {
+			markup[a++] = '<h2>' + config[lang].strings.compare + " (" + selectedParts.length + ")" + '</h2>';
+		}
+
+		markup[a++] = '</div>';
+
+		markup[a++] = '<ti-table-controller class="rst-compare_table-controller" use-sticky-header="true" num-sticky-left-columns="' + (source === 'prodfolder' ? '2' : '1') + '" columns="params,' + selectedParts.join(',') + ', spacer">';
+		markup[a++] = '<table id="actualTable">';
+		markup[a++] = '<thead><tr class="partNameRow"><th class="rst-compare_sticky"></th>';
+
+		for (i = 0; i < len; i++) {
+			gpn = resultsIndex[selectedParts[i]].o2.toUpperCase();
+			markup[a++] = '<th>';
+			markup[a++] = '<h4 class="u-header-5 u-padding-top-m u-text-nowrap"><a target="_blank" href="';
+			markup[a++] = config[lang].urls.prodFolder.replace('!!gpn!!', gpn) + '">' + selectedParts[i] + '</a>';
+			if(resultsIndex[selectedParts[i]].o9 === "Y"){
+				markup[a++] = '<span name="newPart"> - <span class="ti_p-newBadge">NEW</span> </span>';
+			}
+			markup[a++] = '</h4>';
+			markup[a++] = '<ti-product-status compact status="' + resultsIndex[selectedParts[i]].o4 +
+								'" tooltip="' + displayPartStatus(resultsIndex[selectedParts[i]].o4).tooltip +
+								'" class="u-margin-bottom-s">' +
+								'<a target="_blank" href="' + config[lang].urls.badgeLabelUrl +
+								'" data-navtitle="' + displayPartStatus(resultsIndex[selectedParts[i]].o4).label +
+								'">' + displayPartStatus(resultsIndex[selectedParts[i]].o4).label +
+								'</a></ti-product-status>';
+			markup[a++] = '<ul class="u-list-unstyled u-margin-bottom-0">';
+			markup[a++] = '<li><a target="_blank" href="' + config[lang].urls.datasheet.replace('!!gpn!!', gpn) + '">' + config[lang].strings.datasheet + '</a></li>';
+			markup[a++] = '<li><a target="_blank" class="u-text-nowrap" href="' + config[lang].urls.onlineDatasheet.replace('!!gpn!!', gpn) + '">';
+			markup[a++] = config[lang].strings.onlineDatasheet + '</a></li>';
+			if( source === 'prodfolder' && relatedPartsData && relatedPartsData[gpn] ){
+				markup[a++] = '<li class="u-paragraph-medium">' + relatedPartsData[gpn] + '</li>';
+			}
+			markup[a++] = '</ul></th>';
+		}
+		//Empty column needed at end for consistent data column size
+		markup[a++] = '<th></th>';
+		markup[a++] = '</tr></thead>';
+		markup[a++] = '<tbody class="u-paragraph-medium">';
+		rowCount = 0;
+		tmp = paramTotal;
+		for (i = 0; i < tmp; i++) {
+			allBlank = true;
+			cid = paramOrder[i];
+			param = settingsIndex[cid];
+			for (j = 0; j < len; j++) {
+				val = resultsIndex[selectedParts[j]][cid];
+				if (val !== '') {
+					allBlank = false;
+					break;
+				}
+			}
+			if (!allBlank && cid !== 'o1' && cid !== 'o4') {
+				rowCount++;
+				markup[a++] = '<tr class="' + (rowCount % 2 === 0 ? 'odd' : 'even') + '"><td class="rst-compare_sticky">';
+				markup[a++] = param.name;
+				if (param.attribute !== undefined) {
+					markup[a++] = ' (' + param.attribute + ')';
+				}
+				if (param.units !== undefined) {
+					markup[a++] = ' (<span ' + (param.cid === 'p1130' ? 'class="js_compare_currency_label"':'') + '>' + param.units + '</span>)';
+				}
+				markup[a++] = '</td>';
+				for (j = 0; j < len; j++) {
+					val = resultsIndex[selectedParts[j]][cid];
+					markup[a++] = '<td ' + (j===0 && source === 'prodfolder' ? ' class="rst-compare_sticky"' : '')+ '>' + processVal(val, cid, selectedParts[j]) + '</td>';
+				}
+				//Empty column needed at end for consistent data column size
+				markup[a++] = '<td></td>';
+				markup[a++] = '</tr>';
+			}
+		}
+		markup[a++] = '</tbody></table></ti-table-controller>';
+        $main.append(markup.join(''));
+	}
+
+	function processVal(val, cid, pn) {
+		var cell = [], b = 0, valArr, lenArr, x, y;
+
+		if (loggedOut && cid === 'p3318') {
+			var loginToView =
+			`<a href="/secure-link-forward/?gotoUrl=${encodeURIComponent(window.location.href)}"
+				data-navtitle="${config.en.strings.loginToView}"
+                data-lid="indigo-${pn}"
+			>
+				<ti-svg-icon icon-set="objects" appearance="secondary" size="s">lock</ti-svg-icon>
+				<span>${config[lang].strings.loginToView}</span>
+			</a>`;
+			return loginToView;
+		} else if (typeof val === 'string' && val.indexOf('^') === -1) {
+			return val;
+		} else if (typeof val === 'string') {
+			valArr = val.split('^');
+			lenArr = valArr.length;
+			for (x = 0; x < lenArr; x++) {
+				cell[b++] = '<div>' + valArr[x] + '</div>';
+			}
+		} else {
+			// is object
+			for (y in val) {
+				cell[b++] = '<div>';
+				if (cid === 'p1811' || cid === 'p2954')
+					cell[b++] = val[y].l.replace('[pf]', '').replace('[/pf]',
+							'').replace('|', '\xa0' + '|' + '\xa0');
+				else if (cid === 'p1130') {
+					cell[b++] = '<span class="js_compare_product_pricing" data-pn="' + pn + '" data-usdprice="' + val[y].v + '">' + val[y].v + '</span>' + ' |' + (val[y].l.split('|'))[1];
+				} else {
+					cell[b++] = val[y].l;
+				}
+				cell[b++] = '</div>';
+			}
+		}
+		return cell.join('');
+	}
+
+	var initCurrencyHandlers = function() {
+
+		var currencyLangMap = {
+			"cn" : {"currency": "CNY", "locale": "zh-CN"},
+			"de" : {"currency": "EUR", "locale": "ko-KR"},
+			"en" : {"currency": "USD", "locale": "en-US"},
+			"jp" : {"currency": "JPY", "locale": "ja-JP"},
+			"kr" : {"currency": "KRW", "locale": "en-US"}
+		};
+
+		var comparePriceObj = document.querySelectorAll('span.js_compare_product_pricing');
+		var headerCurrency = document.querySelector('ti-header-currency-selection');
+		var headerLanguage = document.querySelector('ti-header-language-selection');
+		var userCurrency = exchangeCurrency || 'USD';
+		var userLocale = currencyLangMap[lang].locale || 'en-US';
+
+		if (headerCurrency) {
+			var currency = headerCurrency.getAttribute('value');
+			if (currency) {
+				userCurrency = currency;
+			}
+		}
+
+		if (headerLanguage) {
+			var locale = headerLanguage.getAttribute('value');
+			if (locale) {
+				userLocale = locale;
+			}
+		}
+
+		var changePrice = function () {
+			var compareCurrencyLabel = document.querySelector('span.js_compare_currency_label');
+			if (com && com.TI && com.TI.CurrencyFormat && compareCurrencyLabel) {
+				compareCurrencyLabel.innerHTML = exchangeRateMap[userCurrency] ? userCurrency : 'USD';
+				var exchangeRate = exchangeRateMap[userCurrency] ? exchangeRateMap[userCurrency] : 1;
+				var currencyType = exchangeRateMap[userCurrency] ? userCurrency : 'USD';
+				if (comparePriceObj.length > 0) {
+					comparePriceObj.forEach( function(priceObj) {
+						var new_price = com.TI.CurrencyFormat.convertAndFormat(priceObj.dataset['usdprice'], exchangeRate, true, currencyType, userLocale);
+						priceObj.innerHTML = new_price;
+					});
+				}
+			}
+		};
+
+		var currencyUpdate = function (e) {
+			userCurrency = (typeof (e.detail) !== "undefined" && typeof (e.detail) != null)
+				? e.detail
+				: 'USD';
+			changePrice();
+		};
+
+		var localeUpdate = function (e) {
+			userLocale = (typeof (e.detail) !== "undefined" && typeof (e.detail) != null)
+				? e.detail.locale
+				: 'en-US';
+			changePrice();
+		};
+
+		var prefsReceived = [];
+		var checkPrefsReceived = function (pref) {
+			prefsReceived.push(pref);
+			if (prefsReceived.length === 2) {
+				prefsReceived = [];
+				changePrice();
+			}
+		}
+
+		window.addEventListener("tiCurrencyChange", currencyUpdate);
+		window.addEventListener("tiLanguageChange", localeUpdate);
+
+		if (window.com && com.TI && com.TI.UserPreferences &&
+			com.TI.UserPreferences.isUserPreferenceReady && com.TI.UserPreferences.isUserPreferenceReady()) {
+
+			com.TI.UserPreferences.getUserCurrencyPreference().then(function(userCurrencyPreference) {
+				userCurrency = (userCurrencyPreference) ? userCurrencyPreference : 'USD';
+				checkPrefsReceived("currency");
+			});
+			com.TI.UserPreferences.getUserLanguagePreference().then(function(userLangPreference) {
+				userLocale = (userLangPreference) ? userLangPreference : 'en-US';
+				checkPrefsReceived("locale");
+			});
+
+		} else {
+			window.addEventListener("tiLanguageReady", localeUpdate);
+			window.addEventListener("tiCurrencyReady", currencyUpdate);
+		}
+	};
+
+	function checkProceed() {
+		var inventoryData = loggedOut || Object.keys(inventoryIndex).length === selectedParts.length;
+		if (settingsData && resultsData && relatedPartsData && inventoryData) {
+			_me.loaded = true;
+		} else {
+			return;
+		}
+        getParamOrder();
+		indexData();
+		createTable();
+		initCurrencyHandlers();
+	}
+
+	if (validate()) {
+		setDomains();
+		processConfig();
+		loadWebServices();
+
+		return true;
+	} else {
+		return false;
+	}
+}
+
+$(function() {
+
+	function getParams() {
+		var urlQuery = window.location.search.substring(1), urlArr = urlQuery
+				.split("&"), arrLen = urlArr.length, urlParams = {}, i, tmpPair;
+
+		if (arrLen === 1 && urlArr[0] === '')
+			return urlParams;
+
+		for (i = 0; i < arrLen; i++) {
+			tmpPair = urlArr[i].split("=");
+			urlParams[tmpPair[0]] = tmpPair[1];
+		}
+        return urlParams;
+	}
+
+	function toArr(arr) {
+		if (arr === undefined || arr === '')
+			arr = [];
+		else
+			arr = arr.split(',');
+		return arr;
+	}
+
+	// get params
+	var params = getParams(),
+		familyId = params['familyId'],
+		parts = params['parts'] || '',
+		cols = params['cols'] || '',
+		lang = params['lang'] || 'en',
+		source = params['source'] || '',
+        exchangeCurrency = params['currency'] || 'USD';
+		source = source.toLowerCase();
+
+	// get parts, make array
+
+	parts = toArr(parts);
+	cols = toArr(cols);
+	// determine domains to be used
+	// to be replaced with implementation of domain config management
+	var cDomain = document.domain, cPort = location.port, cProtocol = location.protocol
+			+ "//", domains = {
+		"en" : "www.ti.com",
+		"cn" : "www.ti.com.cn",
+		"jp" : "www.tij.co.jp"
+	};
+
+	// more than likely only to be used for workstation
+	// get port number
+	if (cPort !== "")
+		cPort = ":" + cPort;
+
+	if (cDomain.indexOf('www-int') > -1) {
+		domains["en"] = "www-int.itg.ti.com";
+		domains["cn"] = "www-int.ti.com.cn";
+		domains["jp"] = "www-int.tij.co.jp";
+	} else if (cDomain.indexOf('www-uat') > -1) {
+		domains["en"] = "www-uat.itg.ti.com";
+		domains["cn"] = "www-uat.ti.com.cn";
+		domains["jp"] = "www-uat.tij.co.jp";
+	} else if (cDomain.indexOf('www-sat') > -1) {
+		domains["en"] = "www-sat.itg.ti.com";
+		domains["cn"] = "www-sat.ti.com.cn";
+		domains["jp"] = "www-sat.tij.co.jp";
+	} else if (cDomain.indexOf('www.ti') === -1) {
+		domains["en"] = cDomain + cPort;
+		domains["cn"] = cDomain + cPort;
+		domains["jp"] = cDomain + cPort;
+	}
+    domains["en"] = cProtocol + domains["en"];
+	domains["cn"] = cProtocol + domains["cn"];
+	domains["jp"] = cProtocol + domains["jp"];
+
+	com.TI.compareParts = tiCompareParts(familyId, parts, window.tiComparePartsLangs, cols, lang, domains, source, exchangeCurrency);//NOSONAR
+
+});

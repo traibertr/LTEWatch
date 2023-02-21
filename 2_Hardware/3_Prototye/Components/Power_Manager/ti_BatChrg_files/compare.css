@@ -1,0 +1,209 @@
+/*
+* ==========================================================================
+* _polaris-variables.scss
+* This file contains global-css variables and is using component based naming.
+*
+* Naming structure: [application(namespacing)]-[type]-[function]-[property]
+* ==========================================================================
+*/
+/*
+* --------------------------------------------------------------------------
+* Color variables
+* --------------------------------------------------------------------------
+*/
+/*
+* Standard color palette
+* Ref: (http://polaris/01-ui-style-foundations.html#02-style-principles.01-color-palette)
+*/
+/*
+* Polaris Component color definitions
+*/
+/*
+* Polaris Card Background color definitions
+* Ref: (http://polaris/01-ui-style-foundations.html#02-style-principles.03-background-color)
+*/
+/*
+* --------------------------------------------------------------------------
+* shape variables
+* --------------------------------------------------------------------------
+*/
+/*
+* Polaris border radius definitions
+* Ref: (http://polaris/01-ui-style-foundations.html#02-style-principles.05-border-radius)
+*/
+/*
+* Polaris box shadow definitions
+* Ref: (http://polaris/01-ui-style-foundations.html#02-style-principles.06-box-shadow)
+*/
+/*
+* --------------------------------------------------------------------------
+* font variables
+* Ref: (http://polaris/01-ui-style-foundations.html#07-typography-fundamentals)
+* --------------------------------------------------------------------------
+*/
+/*
+* Font stack definitions
+*/
+/*
+* Font families
+*/
+/*
+* Root HTML and BODY tag values
+*/
+/*
+* Font size cadence values
+*/
+/*
+* Standard Paragraph font sizes
+*/
+/*
+* Header tag font sizes
+*/
+/*
+* Line height cadence values
+*/
+/*
+* Font weight values
+*/
+/*
+* --------------------------------------------------------------------------
+* spacing values variables
+* --------------------------------------------------------------------------
+*/
+/*
+* Base spacing cadence values
+* (base grid size x multiplier) / root font size = rem value
+*/
+/*
+* Layout specific vertical spacing
+*/
+/*
+* Component/element specific spacing
+*/
+/*
+* --------------------------------------------------------------------------
+* Page layout variables
+* --------------------------------------------------------------------------
+*/
+/*
+* --------------------------------------------------------------------------
+* Responsive breakpoints
+* --------------------------------------------------------------------------
+*/
+/*
+* --------------------------------------------------------------------------
+* animation variables
+* ref: (http://polaris/01-ui-style-foundations.html#04-motion)
+* --------------------------------------------------------------------------
+*/
+/*
+* Animation easing types
+*/
+/*
+* Animation timings
+*/
+/*
+* --------------------------------------------------------------------------
+* icon size variables
+* --------------------------------------------------------------------------
+*/
+/*
+* --------------------------------------------------------------------------
+* legacy variable names
+* --------------------------------------------------------------------------
+*/
+/* Font variables */
+/* Space size variables */
+.rst-compare {
+  min-width: 700px; }
+  .rst-compare ul > li {
+    margin-bottom: 0.25rem; }
+  .rst-compare td > div:not(:last-of-type) {
+    margin-bottom: 0.5rem; }
+  .rst-compare button {
+    background: none;
+    border: none;
+    border-radius: 0.2em;
+    color: #007c8c;
+    cursor: pointer;
+    font-weight: 500; }
+    .rst-compare button:hover {
+      background: #f0f0f0; }
+    .rst-compare button.print::before {
+      content: "\e555";
+      font-size: 1.2em;
+      margin: 0 .3em 0 0;
+      color: #555555;
+      vertical-align: -3px; }
+  .rst-compare .head {
+    overflow: hidden;
+    padding: .5em; }
+    .rst-compare .head button {
+      float: right; }
+  .rst-compare table {
+    border-top: 1px solid #cccccc;
+    width: 100%;
+    border-collapse: separate; }
+    .rst-compare table tbody td.rst-compare_sticky {
+      padding-left: 1.2rem; }
+    .rst-compare table th:last-child, .rst-compare table td:last-child {
+      width: 100%; }
+    .rst-compare table th:not(:first-child):not(:last-child), .rst-compare table td:not(:first-child):not(:last-child) {
+      max-width: 225px;
+      min-width: 225px; }
+    .rst-compare table td:first-child, .rst-compare table th:first-child {
+      white-space: nowrap; }
+    .rst-compare table th {
+      background: #f9f9f9;
+      text-align: left; }
+    .rst-compare table h4 a {
+      color: #007c8c; }
+    .rst-compare table .compareSampleBuy {
+      color: #cc0000; }
+
+/* New badge styles */
+.push-down-row .status {
+  position: relative; }
+
+.badge-status {
+  display: flex;
+  flex-direction: row;
+  z-index: -1; }
+
+.status-link {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  white-space: nowrap; }
+
+.ti_status-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: left;
+  color: #555555;
+  position: relative;
+  font-weight: 400;
+  text-transform: uppercase;
+  margin: -5px 0 10px 0;
+  top: 0; }
+  .ti_status-box svg {
+    margin-right: 4px; }
+  .ti_status-box path {
+    fill: #ff9933; }
+
+.rst-compare_table-controller {
+  background-color: #f9f9f9; }
+  .rst-compare_table-controller .ti-table-controller-scroll-container {
+    background-color: #ffffff; }
+
+.rst-compare_sticky {
+  text-align: left;
+  left: 0;
+  width: auto;
+  height: auto; }
+
+.findother {
+  margin-top: 10px; }
+  .findother svg {
+    margin-left: 15px; }

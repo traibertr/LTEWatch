@@ -1,0 +1,58 @@
+# LTEWatch - PCB Rooting Instructions :
+
+## Introduction
+Nordic Semiconductor in Norway has developed the NRF91 family of cellular LTE-M / NB-IoT communication devices. The goal of this Master Thesis is to develop the prototype of an analog wristwatch using a such device. There are many challenges to overcome in this project, to name just the most difficult ones as the mechanical as well the energy consumption constraints.
+
+## LTEWatch Description:
+LTEWatch project consist in the design and the fabrication of an "*hybrid*" Smart-Watch. The "*hybrid*" qualification consist in integration of mechanical watch hands (H:M:S) in a smart connected wearable device. Since the project desirve a large amount of work, the idea is to first creat a prototype board as a Proof Of Concept (POC) enabling the design and developpment of the Smart-Watch application software and also to test and have a better idea of the device consumption and performance.
+
+The LTEWatch actual schematic is a prototype board, this mean that the PCB size and dimension is not really constraint by its final application, but in a reasonable size, like the [nRF9160 DK board](https://www.nordicsemi.com/-/media/Software-and-other-downloads/Product-Briefs/nRF9160-DK-product-brief.pdf?la=en&hash=C37A8EFD5E8CB6DC82F79F81EC22E1473E6447E7) (150 x 60 mm). 
+
+The project includes several critical block and componant that require special attention, more precisely blocks like LTE transmission line and antenna and GNSS receiver, transmission line and antenna.
+
+To have a better idea of the overall board, a functionnal diagram is illustrated in the next section.
+
+--------------------------
+## Functionnal Diagram
+
+![](diagram/fnct_blck_dgrm.svg)
+
+--------------------------
+## Protoype Board Placement (Idea)
+
+The overall idea of prototype board structure is the following:
+
+![](diagram/board_struct.svg)
+
+--------------------------
+
+## Critical blocks and components list
+
+1. Power Supply Block :
+   1. Wireless Power Receiver (WPC/QI) :
+      1. BQ51003YFPT : [Refer to layout recommandation](https://www.ti.com/lit/ds/symlink/bq51003.pdf) in section *"11 Layout"* 
+   2. Battery connector : Must be accessible to connect this [LiPo Battery](https://www.vatsbattery.com/product/503535-3-8v-580mah-round-lipo-battery-cells/) (keep enough avaylable space to stick the battery to the PCB)
+2. MCU Block :
+   1. If possible, regroup the multiples jumpers to make their location easier
+   2. Follow the layout recommandation for the [nRF9160](https://infocenter.nordicsemi.com/pdf/nRF9160_PS_v2.0.pdf) from section *"Hardware and layout"* of the datasheet [*nRF9160 Product Specification v2.0*](https://infocenter.nordicsemi.com/pdf/nRF9160_PS_v2.0.pdf)
+   3. Sim and eSIM : Possible to follow the layout from [nRF9160 DK - RF Layout and BOM resources](https://www.nordicsemi.com/-/media/Software-and-other-downloads/Dev-Kits/nRF9160-DK/Hardware-files/nRF9160-DK---Hardware-files-1_1_0.zip)
+3. User Interface Block :
+   1. Try to keep LEDs and Buttons regrouped in a logical order. The LEDs represent some of the motors command lines
+   2. Keep enough space to stick the motor to the PCB (a bit bigger than the footprint)
+4. Radio Freq. Block :
+   1. u-blox Max-M10S : Follow the layout recomandation from :
+      1. Section *"3.4 Layout"* : [*MAX-M10S - Standard precision GNSS module - Integration manual*](https://content.u-blox.com/sites/default/files/MAX-M10S_IntegrationManual_UBX-20053088.pdf)
+      2. [*MAX-M10S-Standard precision GNSS module - Professional grade - Data sheet*](https://content.u-blox.com/sites/default/files/MAX-M10S_DataSheet_UBX-20035208.pdf)
+   2. LTE-M Antenna : follow the layout recommandation from 
+      1. [Antenna Layout (P822601)](https://datasheets.kyocera-avx.com/ethertronics/AVX-E_P822601-P822602.pdf)
+      2. [nRF9160 DK - RF Layout and BOM resources](https://www.nordicsemi.com/-/media/Software-and-other-downloads/Dev-Kits/nRF9160-DK/Hardware-files/nRF9160-DK---Hardware-files-1_1_0.zip)
+   3. GNSS Antenna : follow the layout recommandation from :
+      1. [Antenna Intelligence Cloud™ report](datasheet/LTEWatch_NNS1.0.pdf) in ``datasheet/LTEWatch_NNS1.0.pdf``
+      2. [DUO mXTENDTM (NN03-320) - GNSS SOLUTION (1-port)](https://ignion.io/files/DS_NN03-320.pdf)
+      3. [DUO mXTENDTM: TWO INDEPENDENT RADIOS IN THE SMALLEST ANTENNA FOOTPRINT](https://ignion.io/files/UM_NN03-320.pdf)
+      4. [A small antenna with big performance for asset tracking](https://ignion.io/files/AN_A-small-antenna-with-big-performance-for-tracking-devices.pdf)
+   4. RF transmission line : 
+      1. Must be kept as short as possible
+      2. Follow general instructions from [GNSS antennas : 3.3 Monopole antennas - Chip antenna](https://content.u-blox.com/sites/default/files/products/documents/GNSS-Antennas_AppNote_%28UBX-15030289%29.pdf)
+
+--------------------------

@@ -1,0 +1,67 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+'LAYOUT_LANDSCAPE()
+
+'Container(containerAlias, "Label", "Technology", "Optional Description")
+
+System_Ext(usb_port, "USB Charger")
+System_Ext(battCell, "Battery", "Li-Po : 503535 / 580mAh")
+
+Boundary(c1, "Power Supply") {
+    System(chrgPort, "Charging Port", "Connector : USB-C / micro-USB")
+    'System(batConn, "Battery Connector", "Coin Cell")
+    System(batlvl, "Battery Level")
+
+    Boundary(c2, "PMIC"){
+        'Battery Protection
+        System(ovp,"Over Voltage Protection Input Current Limit","BQ25180")
+        System(uvp, "Under Voltage Protection (UVP)","BQ25180")
+        'Battery Management
+        System(usbCurrentLim,"USB / Battery Switch", "BQ25180")
+        System(battChrg, "Battery Charger (PMIC)","BQ25180")
+        'Control Input
+        'System(mem,"Flash Memory", "...")
+    }
+    Boundary(c3, "OUTPUT"){
+        'Output
+        System(ldo,"LDO 1V8", "TPS7A21")
+        'System(buckConv,"Buck Converter", "...")
+        System(boostConv,"Buck Boost Converter", "TPS63036")
+    }
+    System(loadSwitch, "Load Switch", "TPS22916xx")
+}
+
+System_Ext(usr_disp, "Display", "LS011B7DH03 - Sharp Memory LCD")
+System_Ext(mcuSys, "MCU/SYSTEM Power", "nRF91xx")
+'System_Ext(periph, "Other Power", "...")
+
+'USB Source
+Rel_D(usb_port,chrgPort,"5-12V")
+Rel_D(chrgPort,ovp,"5-12V")
+Rel_D(ovp,usbCurrentLim,"5V - 1A")
+
+'Battery Source
+Rel(battCell,loadSwitch,"VBatt")
+Rel(loadSwitch,batlvl,"VBAT : 3.0...4.35V")
+Rel(batlvl,mcuSys,"ADCIN : 1.85V...2.98V")
+Rel(uvp,loadSwitch,"BATLVLEN : VGPIO 1.8V 200mA")
+
+BiRel_D(battCell,uvp,"VBatt")
+'BiRel(batConn,battGauge,"VBatt")
+Rel_D(uvp,usbCurrentLim,"3.0-4.2V")
+Rel_D(usbCurrentLim,battChrg,"5V - 500mA")
+
+'Output
+Rel(battChrg,ldo,"VSys : 3.25...4.35V / 1A")
+Rel(battChrg,uvp,"VBatt : 3.0...4.35V / 1A")
+Rel(battChrg,boostConv,"VSys : 3.25...4.35V / 1A")
+Rel(ldo,mcuSys," VGPIO 1.8V / 200mA")
+
+Rel(boostConv,mcuSys,"3V3 : 3.3V / 1A")
+Rel(boostConv,usr_disp,"3V3 : 3.3V / 1A")
+
+SHOW_FLOATING_LEGEND()
+Lay_Distance(LEGEND(), usr_disp)
+
+@enduml

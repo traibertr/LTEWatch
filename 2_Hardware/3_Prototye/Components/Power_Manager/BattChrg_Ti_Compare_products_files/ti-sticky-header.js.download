@@ -1,0 +1,101 @@
+(function ($, undefined) {
+    'use strict';
+    if ($.fn.tiStickyHeader == undefined) {
+        $.fn.tiStickyHeader = function (rows) {
+
+            var win = $(window);
+
+            if (rows == undefined) rows = 1;
+            rows = parseInt(rows);
+
+            if (!$.isNumeric(rows)) return false; //breaks off function
+
+            var thisTable = this,
+					tagName = thisTable.prop('tagName').toLowerCase();
+
+            if (tagName != 'table') return false;
+
+            var selectedRows = thisTable.find('tr:lt(' + rows + ')').clone(),
+                tableClassName = thisTable.prop('className'),
+                origCols = thisTable.find('tr:first').children('th,td'),
+                newCols,
+                thisStickyId = 'ti-sticky-' + thisTable.attr('id'),
+                stickyContainer,
+                newTable;
+
+            var stickyContainerHeight,
+                tableOffset,
+                tableBottom,
+                winTop,
+                winLeft;
+
+            thisTable.before('<div id="' + thisStickyId + '" class="ti-sticky-container"><table class="' + tableClassName + '"></table></div>');
+            stickyContainer = $('#' + thisStickyId);
+            newTable = stickyContainer.children('table:first');
+
+            newTable.append(selectedRows);
+            thisTable.attr('sticky', thisStickyId); //in case I need to gfet the related sticky somewhere else
+            newCols = newTable.find('tr:first').children('th,td');
+
+            function calcTableStuff(w) {
+                winTop = win.scrollTop();
+                winLeft = win.scrollLeft();
+                stickyContainerHeight = stickyContainer.outerHeight();
+                tableOffset = thisTable.offset();
+                tableBottom = tableOffset.top + thisTable.outerHeight();
+
+                stickyContainer.css('left', (tableOffset.left - winLeft) + 'px');
+
+                if (winTop < tableOffset.top) {
+					stickyContainer.css("visibility", 'hidden');
+				}
+                else if (winTop + stickyContainerHeight < tableBottom) {
+					stickyContainer.css('top', '0px');
+					stickyContainer.css("visibility", 'visible');
+				}
+                else stickyContainer.css("visibility", 'hidden');
+            }
+
+            function adjustCols() {
+                newCols.each(function (j, e) {
+                    origCols
+                    var thisCol = $(e);
+                    thisCol.width(origCols.eq(j).outerWidth());
+                });
+            }
+
+            win.scroll(function (e) {
+                calcTableStuff();
+            });
+
+            win.resize(function (e) {
+                stickyContainer.width(thisTable.outerWidth());
+                adjustCols();
+                calcTableStuff();
+            });
+
+            //for sort functionality, might have to switch this around or add some sort of verification
+            newCols.click(function (e) {
+                //e.preventDefault();
+                var thisCol = $(this),
+                    thisIndex = thisCol.index(),
+                    colUnder = origCols.eq(thisIndex);
+                colUnder.click();
+                newCols.not(this).removeClass('headerSortUp headerSortDown');
+                setTimeout(function () {
+                    if (colUnder.hasClass('headerSortUp')) thisCol.addClass('headerSortUp').removeClass('headerSortDown');
+                    else thisCol.addClass('headerSortDown').removeClass('headerSortUp');
+                }, 50);
+            });
+
+            setTimeout(function () {
+                stickyContainer.show();
+                stickyContainer.width(thisTable.outerWidth());
+                adjustCols();
+                calcTableStuff();
+            }, 1000);
+        };
+    }
+}(jQuery));
+
+

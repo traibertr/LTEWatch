@@ -1,0 +1,2 @@
+div.ti-sticky-container { display:none; position:fixed; z-index:3; }
+div.ti-sticky-container table { table-layout:fixed; }
