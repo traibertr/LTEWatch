@@ -1,0 +1,140 @@
+# TM — Analog LTE-M / NB-IoT Watch — Prototype
+
+- ### Date : 20.09.2022
+
+- ### Author : Tristan Traiber
+-------------------
+## Prototype schematic :
+![Prototype Schematic](Schematic/proto_schema.png)
+
+## Objectives :
+- This project require parallel development :
+    1) Hardware conception to make sofware development available
+    2) Software development to have a working solution  
+
+## To Do :
+The first step of this project is to draw the prototype schematic :
+
+1) [ x ] Find a compatible screen (40-50mm diamter) for graphical user interface. The screen must have a hole in the center to implement the clock needles
+
+2) [ x ] Find a power supply solution :
+- Li-Ion cell with inath capacity and small size (button battery) 
+- BMS (battery managment system) with a USB-C interface, charging manager, porotection, and fuel gauge system
+
+For the battery : Check nRF91xx comunication max current peak and screen max current. Also, check autonomy and consumption of principal components.
+
+3) [ ] Define Smart Watch Specifications
+
+-------------------
+
+# 23.09.22 : System specification
+
+## Battery
+
+### RJDxxxx Series - ``Cornell Dubilier/Illinois Capacitor``
+Source : https://www.mouser.ch/datasheet/2/88/RJD-2944769.pdf
+
+![alternative text](Components/Battery/illinois_capa_coin_cell_overview.png)
+
+![alternative text](Components/Battery/std_coin_cell_option.png)
+
+### LIR2450 series - ``MULTICOMP``
+
+![alternative text](Components/Battery/LIR2450_Multicomp.png)
+
+
+<!--
+## Battery Charger and Power Management
+### Nordic Semi - nPM6001
+
+Source : https://www.nordicsemi.com/Products/nPM6001
+
+![](Components/Power_Manager/nordic_semi_nPm6001.png)
+
+![](Components/Power_Manager/nPM6001_bloc_diagrm.png)
+
+### Texas Instrument - bq25120A
+
+Texas Instrument recomandation : https://www.ti.com/lit/ug/tidub09/tidub09.pdf?ts=1663759595872&ref_url=https%253A%252F%252Fwww.google.com%252F
+
+Source : https://www.ti.com/lit/ds/symlink/bq25120a.pdf
+
+![](Components/Power_Manager/ti_BQ25120A.png)-->
+
+
+## Power and Battery Management System Functional Block
+
+![alternative text](../../out/Hardware/Prototye/Schematic/pwr_sup_blk_digrm/pwr_sup_blk_digrm.svg)
+
+## Battery Charger and Power Management
+
+1. BQ24232HA (Ti)
+   1. Source : https://www.ti.com/product/BQ24232HA
+   2. IqBat = 9.5μA
+2. BQ25180 (Best) (Ti) 
+   1. Source : https://www.ti.com/product/BQ25180
+   2. IqBatmax = 5μA
+3. BQ25618 / BQ25619 (Ti) 
+   1. Source : https://www.ti.com/product/BQ25618
+   2. IqBat = 15μA
+
+##  0.8 V to 5.5 V DC/DC Regulator 
+1. TPS7A21 (Ti)
+   1. Source : https://www.ti.com/product/TPS7A21
+   2. Iqmax = 4-15μA
+
+## 5V Boost converter
+1. TPS61099
+   1. Source : https://www.ti.com/product/TPS61099
+   2. Iqmax = Iq_in + Iq_out = 1.1μA + 1.5μA = 2.6μA
+
+## Buck-Boost converter for longer battery life
+1. TPS63036
+   1. Source : https://www.ti.com/product/TPS63036
+   2. Iqmax = 35μA
+   3. 
+# Battery Level Monitoring
+- ## Fuel Gauge
+1. BQ27421YZFT-G1D (Ti)
+   1. Source : https://www.ti.com/product/BQ27421-G1
+   2. IIqmax = 0.6-93μA
+2. VBAT ADC measure on nRF9160
+
+- ## Load Switch for battery level monitoring
+1. TPS22916
+   1. Source : https://www.ti.com/product/TPS22916
+   2. Datasheet : https://www.ti.com/lit/ds/symlink/tps22916.pdf
+   3. Iqmax : 1.0µA (Enable), 100nA (Shutdown)
+
+![alternative text](Components/Power_Manager/ti_SwitchLoad/comp_table.png)
+
+![alternative text](Components/Power_Manager/ti_SwitchLoad/iq_consumption.png)
+
+---
+### Source for battery level monitoring : https://devzone.nordicsemi.com/nordic/nordic-blog/b/blog/posts/measuring-lithium-battery-voltage-with-nrf52
+---
+
+
+
+# Power Management IQ Estimation
+
+IQ_tot = 5μA + 93μA + 15μA (+3V3) + 15μA (+1V8) + 2.6 = 130.6μA
+
+-> if Q_Bat = 500mAh -> Bat Autonomy (with I_Load = 0) = 500/0.136 = 3676 hours = 153 days
+
+# Display
+1. Sharp Memory Display LS011B7DH03 
+   1. Source : https://github.com/karnadii/sharp_memory_display_breakout
+   2. Source 2 : https://www.sharpsde.com/products/displays/model/ls011b7dh03/
+
+# Battery Cell
+1.  503535 580mAh Hochspannung 3,8V runde Polymer Smart Watch Moxibustion Instrument Auto Smart Box Batterie
+    1.  Source : https://batteryzone.de/products/503535-580mah-hochspannung-3-8v-runde-polymer-smart-watch-moxibustion-instrument-auto-smart-box-batterie?_pos=1&_sid=59cfd2d74&_ss=r
+
+# USB-C Connector
+1. TPD2E001 : ESD Protection diode
+2. Source : https://www.ti.com/product/TPD2E001
+
+1. USB4110-GF-A : Connector
+2. Source : https://www.digikey.ch/fr/products/detail/gct/USB4110-GF-A/10384547
+
