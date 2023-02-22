@@ -3,8 +3,8 @@
  * All rights reserved.
  *
  * \file    motorevent.h
- * \class   MotorEvent
- * \brief   Event related to motor's operation
+ * @class   MotorEvent
+ * @brief   Event related to motor's operation
  *
  * This specialization of the XFEvent class transports information on the motors to move. This is
  * a static event. Read the documentation about MotorDriver and MotorController to undertstand
@@ -40,7 +40,7 @@ public:
     /* ************************************************************************************************************ */
 
     /* **********************************************************************************************************//**
-     * \brief   Constructor | Destructor
+     * @brief   Constructor | Destructor
      ****************************************************************************************************************/
     // --------------------------------------------------------------------------------------------------------------
     MotorEvent(bool calendarEvent = false, uint8_t id = EventId::MotorEvent)
@@ -49,12 +49,12 @@ public:
     virtual ~MotorEvent() {}
 
     /* **********************************************************************************************************//**
-     * \brief   Initialize the event with the indication of the calendar event
+     * @brief   Initialize the event with the indication of the calendar event
      ****************************************************************************************************************/
     inline void setCalendarEvent(bool calendarEvent = false) { _calendarEvent = calendarEvent; }
 
     /* **********************************************************************************************************//**
-     * \brief   Retrieves the Button Id carried by the event
+     * @brief   Retrieves the Button Id carried by the event
      ****************************************************************************************************************/
     inline bool fromCalendarEvent() { return _calendarEvent; }
 

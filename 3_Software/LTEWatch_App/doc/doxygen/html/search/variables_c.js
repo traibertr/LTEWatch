@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['radiusmillimetres_0',['radiusMillimetres',['../group___g_n_s_s.html#gaee88c3322a1b36e1ba453b11b7dc50ec',1,'GnssController']]],
+  ['reg_5frst_1',['REG_RST',['../structs_reg_ship_rst.html#a16a0b414bf5a793e7f6503e041152997',1,'sRegShipRst']]],
+  ['reserved_2',['RESERVED',['../structs_reg_stat1.html#a8dc8972994eaaa50f09ab7678c58f276',1,'sRegStat1::RESERVED()'],['../structs_reg_vbat_ctrl.html#a669c836edacc41311777b19215582898',1,'sRegVbatCtrl::RESERVED()'],['../structs_reg_chrg_ctrl0.html#acaa0a41b05b78a1d96b09ce7ec0c05a4',1,'sRegChrgCtrl0::RESERVED()'],['../structs_reg_sys_reg.html#a635dfd9240df578bcbf67dc09328ea7d',1,'sRegSysReg::RESERVED()']]],
+  ['rtc_5f100_5fms_3',['RTC_100_MS',['../group___x_f.html#ga0f8c2827ab72a85acf2f1e4d46030e62',1,'xf_adapter.h']]],
+  ['rtc_5f10_5fms_4',['RTC_10_MS',['../group___x_f.html#ga160b11e2064d358e3f7a5a8c506b1643',1,'xf_adapter.h']]],
+  ['rtc_5f125_5fms_5',['RTC_125_MS',['../group___x_f.html#ga96f9577e0cf9955569d9b8714bdcdd08',1,'xf_adapter.h']]],
+  ['rtc_5f15_5fms_5f625_6',['RTC_15_MS_625',['../group___x_f.html#gac304bdb4e530b01b581ab86bfc330e50',1,'xf_adapter.h']]],
+  ['rtc_5f16_5fms_7',['RTC_16_MS',['../group___x_f.html#ga161e0a2203bf106cc32b346541ff5a6f',1,'xf_adapter.h']]],
+  ['rtc_5f1_5fms_8',['RTC_1_MS',['../group___x_f.html#ga0d4847c2b37713393218464751acce56',1,'xf_adapter.h']]],
+  ['rtc_5f250_5fms_9',['RTC_250_MS',['../group___x_f.html#ga0cf4596761555d4f77357a5e1153a2d3',1,'xf_adapter.h']]],
+  ['rtc_5f250_5fus_10',['RTC_250_US',['../group___x_f.html#ga39cdc6f604b3b8d20409d45fdeda6891',1,'xf_adapter.h']]],
+  ['rtc_5f2_5fms_11',['RTC_2_MS',['../group___x_f.html#gad021ad75d1debbfcfeb4b91a2b8d713c',1,'xf_adapter.h']]],
+  ['rtc_5f31_5fms_5f25_12',['RTC_31_MS_25',['../group___x_f.html#gabf057f0c4a15b5979b15d8081db7d600',1,'xf_adapter.h']]],
+  ['rtc_5f32_5fms_13',['RTC_32_MS',['../group___x_f.html#ga311e703892fdd7c019c240cb30e355a0',1,'xf_adapter.h']]],
+  ['rtc_5f500_5fms_14',['RTC_500_MS',['../group___x_f.html#ga7d3b87e0fbc71ce50cd4a8760b1ee5e2',1,'xf_adapter.h']]],
+  ['rtc_5f500_5fus_15',['RTC_500_US',['../group___x_f.html#ga571c6049aad207ec9e32238a2e8e7ca6',1,'xf_adapter.h']]],
+  ['rtc_5f50_5fms_16',['RTC_50_MS',['../group___x_f.html#ga54c0f47125534c36381fb651b330454e',1,'xf_adapter.h']]],
+  ['rtc_5f62_5fms_5f5_17',['RTC_62_MS_5',['../group___x_f.html#ga26c572094df7042aa54514757599f5e5',1,'xf_adapter.h']]],
+  ['rtc_5f64_5fms_18',['RTC_64_MS',['../group___x_f.html#ga94b7e8ea5766410de48af3768e0e11db',1,'xf_adapter.h']]]
+];

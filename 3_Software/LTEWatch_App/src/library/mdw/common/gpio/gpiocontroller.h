@@ -22,8 +22,8 @@
  *
  *  - GPIO_DEBOUNCE_MS_DELAY: The debounce time [ms].
  *
- * In other words when an activity is detected on a gpio, it must be applied at least for a certain time 
- * at least to be considered as a real gpio's action. As soon as the debounce time is over the controller 
+ * In other words when an activity is detected on a gpio, it must be applied at least for a certain time
+ * at least to be considered as a real gpio's action. As soon as the debounce time is over the controller
  * keep and increase the duration of each gpio's action until a release and determines if it's a single click,
  * a long or very long press that has been applied.
  *
@@ -74,15 +74,15 @@ extern "C"
         /********************************************************************************************************//**
          * @brief   Timeout's handler of the `app_timer` module (library) (GPIO's Handler timer).
          *
-         * This function will be called each time the GPIO's handler interval timer expires. It will also wake up the 
-         * CPU and increment a variable. 
+         * This function will be called each time the GPIO's handler interval timer expires. It will also wake up the
+         * CPU and increment a variable.
          * It is also the callback method of the `app_timer` used by the GPIO controller.
          *
-         * @param   p_context   Pointer used for passing some arbitrary information (context) from the 
+         * @param   p_context   Pointer used for passing some arbitrary information (context) from the
          *                      `app_start_timer()` call to the timeout handler.
          ************************************************************************************************************/
         void gpioControllerTimeoutHandler(struct k_timer *timer_id);
-        
+
     }
 
 #if defined(__cplusplus)
@@ -94,7 +94,7 @@ extern "C"
 /* NAMESPACE Declaration                                                                                            */
 /*                                                                                                                  */
 /* **************************************************************************************************************** */
-namespace gpio 
+namespace gpio
 {
 
     /* ************************************************************************************************************ */
@@ -118,7 +118,7 @@ namespace gpio
          *
          * This method initializes the GPIOTE (hardware) used to handle the gpio events. To define which GPIOTE are
          * used for a gpio, see gpiohal.h.
-         * 
+         *
          * @param timerTickDelay    The tick delay to used for the timer of the debouncer given in [ms].
          * @param resetValue        Reset value to be set when reseting the counter delay of the gpio [ms].
          *
@@ -129,20 +129,20 @@ namespace gpio
         /********************************************************************************************************//**
          * @brief   Register a new gpio in the controller class.
          *
-         * This method `registerGpio` MUST be used to register a new Gpio. In fact, this method just save 
-         * the pointer to the instance of a gpio in an array to keep a reference and be able to detect a single 
+         * This method `registerGpio` MUST be used to register a new Gpio. In fact, this method just save
+         * the pointer to the instance of a gpio in an array to keep a reference and be able to detect a single
          * action on any gpio's instance.
          *
          * @param   gpio            Pointer to the new gpio to register.
-         * @param   useTimer        Specify if the GpioController will add a delay before notifying any gpio's 
+         * @param   useTimer        Specify if the GpioController will add a delay before notifying any gpio's
          *                          state change.
          * @param   debouncDelay    The debouncer's delay in [ms].
          * @param   eventHandler    Pointer to the method handling the GPIO Task and Events
          *
          * @return  `true` if the registration succeeds or `false otherwise`.
          ************************************************************************************************************/
-        bool registerGpio(Gpio* gpio, 
-                          bool useTimer = false, 
+        bool registerGpio(Gpio* gpio,
+                          bool useTimer = false,
                           uint32_t debounceDelay = APP_GPIO_MS_DELAY,
                           nrfx_gpiote_evt_handler_t eventHandler = gpio::gpioControllerTaskEventHandler);
         /********************************************************************************************************//**
@@ -293,7 +293,7 @@ namespace gpio
          * @param   gpio        Pointer to the new gpio to register.
          ************************************************************************************************************/
         inline void _removeGpio(Gpio* gpio);
-        
+
         /************************************************************************************************************
          * @brief   Delete all gpios from the controller
          *

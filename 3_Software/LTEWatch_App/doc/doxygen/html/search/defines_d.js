@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['nb_5fcoils_5fper_5fmotor_0',['NB_COILS_PER_MOTOR',['../motor-config_8h.html#a60bf546ed15fc64925bda1de9d8a2609',1,'motor-config.h']]],
+  ['nb_5fmax_5fgpios_1',['NB_MAX_GPIOS',['../gpio-config_8h.html#a0cc408e9c62bbd7c0e424a29d0ee46a9',1,'gpio-config.h']]],
+  ['nb_5fmax_5fmotors_2',['NB_MAX_MOTORS',['../platform-config_8h.html#a8f751a85ead26019ee0f56da88b8d855',1,'platform-config.h']]],
+  ['nb_5fsteps_5ffor_5fanimation_5fdivider_3',['NB_STEPS_FOR_ANIMATION_DIVIDER',['../motor-config_8h.html#a1ca9302653ac2822c7a85377f4db5bcc',1,'motor-config.h']]],
+  ['nb_5fsteps_5ffor_5fmotor_5finit_4',['NB_STEPS_FOR_MOTOR_INIT',['../platform-config_8h.html#a071a9458dbf43df63dc6cf5b5ae4ccab',1,'platform-config.h']]],
+  ['ncs_5fpatchlevel_5',['NCS_PATCHLEVEL',['../ncs__version_8h.html#aa6356453d48d38f7ab277769bd95d7fb',1,'ncs_version.h']]],
+  ['ncs_5fversion_6',['NCS_VERSION',['../ncs__version_8h.html#ac5d934f0d10204d25499d2d69e2c6ffc',1,'ncs_version.h']]],
+  ['ncs_5fversion_5fcode_7',['NCS_VERSION_CODE',['../ncs__version_8h.html#a867c653c44592ae774dee025b7eeff17',1,'ncs_version.h']]],
+  ['ncs_5fversion_5fmajor_8',['NCS_VERSION_MAJOR',['../ncs__version_8h.html#ad8683b9decea29e29800fed942868da9',1,'ncs_version.h']]],
+  ['ncs_5fversion_5fminor_9',['NCS_VERSION_MINOR',['../ncs__version_8h.html#a8e4325fb36989ba2ec5c842dac7d730c',1,'ncs_version.h']]],
+  ['ncs_5fversion_5fnumber_10',['NCS_VERSION_NUMBER',['../ncs__version_8h.html#abe753eac82e943a6c9606d14940fbac9',1,'ncs_version.h']]],
+  ['ncs_5fversion_5fstring_11',['NCS_VERSION_STRING',['../ncs__version_8h.html#a0ed03bb907f364e831680467111ca794',1,'ncs_version.h']]],
+  ['no_5factivity_5fdecrement_12',['NO_ACTIVITY_DECREMENT',['../picowatch_8h.html#aa99cf5a3ea0cf0032fedaf78678a1f6b',1,'picowatch.h']]],
+  ['no_5factivity_5fdelay_13',['NO_ACTIVITY_DELAY',['../picowatch_8h.html#a48571d960e84937ed1a1b2994dc5d14d',1,'picowatch.h']]],
+  ['no_5factivity_5ftimemout_5fstep_14',['NO_ACTIVITY_TIMEMOUT_STEP',['../picowatch_8h.html#a1c17932e61adac96cf79e687979f3f77',1,'picowatch.h']]],
+  ['nrfx_5frtc_5fdriver_15',['NRFX_RTC_DRIVER',['../platform-config_8h.html#a076048de2919ba326a61dd56b620c75e',1,'platform-config.h']]]
+];

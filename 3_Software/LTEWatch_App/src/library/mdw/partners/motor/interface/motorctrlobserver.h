@@ -5,11 +5,11 @@
  *
  * \file    motorctrlobserver.h
  *
- * \addtogroup Motor
+ * @addtogroup Motor
  * \{
  *
- * \class   motor::MotorCtrlObserver
- * \brief   Interface definition dedicated to the MotorController...
+ * @class   motor::MotorCtrlObserver
+ * @brief   Interface definition dedicated to the MotorController...
  *
  * Initial author: Patrice Rudaz
  * Creation date: 2016-08-18
@@ -38,7 +38,7 @@
 /* NAMESPACE Declaration                                                                                            */
 /*                                                                                                                  */
 /* **************************************************************************************************************** */
-namespace motor 
+namespace motor
 {
 
     /* ************************************************************************************************************ */
@@ -57,7 +57,7 @@ namespace motor
         /* ******************************************************************************************************** */
 
         /********************************************************************************************************//**
-         * \brief   Callback methods for the MotorDriver
+         * @brief   Callback methods for the MotorDriver
          ************************************************************************************************************/
         // ----------------------------------------------------------------------------------------------------------
         virtual void onMotorMoveEnd(MotorController* mCtrl) = 0;

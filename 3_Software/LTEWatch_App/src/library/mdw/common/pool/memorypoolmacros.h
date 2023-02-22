@@ -5,10 +5,10 @@
  *
  * \file    memorypoolmacros.h
  *
- * \addtogroup MemoryPool
+ * @addtogroup MemoryPool
  * \{
  *
- * \brief   Defines MACROS impementing the `new` operator using the MemoryPool
+ * @brief   Defines MACROS impementing the `new` operator using the MemoryPool
  *
  * Initial author: Thomas Sterren
  * Creation date: 2017-04-27

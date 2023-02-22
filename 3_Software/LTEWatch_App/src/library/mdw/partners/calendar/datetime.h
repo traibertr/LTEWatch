@@ -123,7 +123,7 @@ namespace cal
          * This method can be used to know the second of the current time. The value is retrieved in
          * `uint32_t` type.
          *
-         * \returns The second of the current time as `uint32_t`
+         * @returns The second of the current time as `uint32_t`
          ************************************************************************************************************/
         inline time_t       dateTimeInSeconds() const           { return _curDateTime; }
 
@@ -133,7 +133,7 @@ namespace cal
          * This method can be used to know the second of the current time. The value is retrieved in
          * `uint32_t` type.
          *
-         * \returns The second of the current time as `uint32_t`
+         * @returns The second of the current time as `uint32_t`
          ************************************************************************************************************/
         inline uint8_t      second() const                      { return _datetime.tm_sec; }
 
@@ -143,7 +143,7 @@ namespace cal
          * This method can be used to know the minute of the current time. The value is retrieved in
          * `uint32_t` type.
          *
-         * \returns The minute of the current time as `uint32_t`
+         * @returns The minute of the current time as `uint32_t`
          ************************************************************************************************************/
         inline uint8_t      minute() const                      { return _datetime.tm_min; }
 
@@ -153,7 +153,7 @@ namespace cal
          * This method can be used to know the hour of the current time. The value is retrieved in
          * `uint32_t` type.
          *
-         * \returns The hour of the current time as `uint32_t`
+         * @returns The hour of the current time as `uint32_t`
          ************************************************************************************************************/
         inline uint8_t      hour() const                        { return _datetime.tm_hour; }
 
@@ -162,7 +162,7 @@ namespace cal
          *
          * This method retrieves the current day of week. The value is retrieved in `eDayOfWeek` type.
          *
-         * \returns The day of week of the current date as `eDayOfWeek`
+         * @returns The day of week of the current date as `eDayOfWeek`
          ************************************************************************************************************/
         inline eDayOfWeek   dayOfWeek() const                   { return (DateTime::eDayOfWeek) _datetime.tm_wday; }
 
@@ -172,7 +172,7 @@ namespace cal
          * This method retrieves the first day of the week according to the week setting (ISO, ISO-2, US, ARABIC) of
          * the calendar. The value is retrieved in `eDayOfWeek` type.
          *
-         * \returns The first day of the week as `eDayOfWeek`
+         * @returns The first day of the week as `eDayOfWeek`
          ************************************************************************************************************/
         eDayOfWeek          firstDayOfWeek() const;
 
@@ -182,7 +182,7 @@ namespace cal
          *
          * This method retrieves the current day. The value is retrieved in `uint32_t` type.
          *
-         * \returns The day of the current date as `uint32_t`
+         * @returns The day of the current date as `uint32_t`
          ************************************************************************************************************/
         inline uint8_t      day() const                         { return _datetime.tm_mday; }
 
@@ -191,7 +191,7 @@ namespace cal
          *
          * This method retrieves the current month. The value is retrieved in `eMonth` type.
          *
-         * \returns The month of the current date as `eMonth`
+         * @returns The month of the current date as `eMonth`
          ************************************************************************************************************/
         eMonth              month() const;
 
@@ -200,7 +200,7 @@ namespace cal
          *
          * This method retrieves the current year. The value is retrieved in `uint16_t` type.
          *
-         * \returns The year of the current date as `uint16_t`
+         * @returns The year of the current date as `uint16_t`
          ************************************************************************************************************/
         inline uint16_t     year() const                        { return _datetime.tm_year + 1900; }
 
@@ -210,7 +210,7 @@ namespace cal
          * This method retrieves the current year in short format. If we are in 2013, the short format
          * will be `13`. The value is retrieved in `uint8_t` type.
          *
-         * \returns The year of the current date in short format as `uint8_t`
+         * @returns The year of the current date in short format as `uint8_t`
          ************************************************************************************************************/
         inline uint8_t      shortYear() const                   { return _shortYear; }
 
@@ -220,21 +220,21 @@ namespace cal
          * This method retrieves the number of days passed in the current year until today. The value is retrieved as an
          * `uint16_t`.
          *
-         * \returns The number of days of the current year until today as an `uint16_t` value.
+         * @returns The number of days of the current year until today as an `uint16_t` value.
          ************************************************************************************************************/
         inline uint16_t     daysInYear() const                  { return _datetime.tm_yday; }
 
         /********************************************************************************************************//**
          * @brief   Retrieves whether or not the current year is a leap year
          *
-         * \returns `true` if the current year is a leap year and `false` otherwise.
+         * @returns `true` if the current year is a leap year and `false` otherwise.
          ************************************************************************************************************/
         inline bool         isLeapYear() const                  { return _isLeapYear; }
 
         /********************************************************************************************************//**
          * @brief   Retrieves whether or not we are in daylight saving time.
          *
-         * \returns `true` means we are in daylight saving time and `false` we are not
+         * @returns `true` means we are in daylight saving time and `false` we are not
          ************************************************************************************************************/
         inline bool         isDaylightSavingTime() const        { return _datetime.tm_isdst; }
 
@@ -244,7 +244,7 @@ namespace cal
          * This method retrieves the week number for the current date and time.
          * The value is retrieved in `uint8_t` type.
          *
-         * \returns The week number for the current date and time as `uint8_t`
+         * @returns The week number for the current date and time as `uint8_t`
          ************************************************************************************************************/
         inline uint8_t      weekNumber() const                  { return _weekNumber; }
 
@@ -254,7 +254,7 @@ namespace cal
          * This method retrieves a pointer on the structure which maintains the information about the current date and
          * time.
          *
-         * \returns A pointer on the date and time's structure `struct tm`.
+         * @returns A pointer on the date and time's structure `struct tm`.
          ************************************************************************************************************/
         inline const tm_t &dateTime() const                    { return _datetime; }
 
@@ -264,7 +264,7 @@ namespace cal
          * This method can be used to know the current date. The date is retrieved in
          * DD.MM.YYY format.
          *
-         * \returns The actual date given in DD.MM.YYYY format.
+         * @returns The actual date given in DD.MM.YYYY format.
          ************************************************************************************************************/
         char*               strDate() const;
 
@@ -273,7 +273,7 @@ namespace cal
          *
          * This method can be used to know the current time. The time is retrieved in hh:mm:ss format.
          *
-         * \returns The actual date given in hh:mm:ss format.
+         * @returns The actual date given in hh:mm:ss format.
          ************************************************************************************************************/
         char*               strTime() const;
 
@@ -288,7 +288,7 @@ namespace cal
          * - `hh:mm:ss` the time
          * - `yyyy` the year.
          *
-         * \returns The actual date given in `Www Mmm dd hh:mm:ss yyyy` format.
+         * @returns The actual date given in `Www Mmm dd hh:mm:ss yyyy` format.
          ************************************************************************************************************/
         inline char*        strDateTime() const                 { return asctime(&_datetime); }
 

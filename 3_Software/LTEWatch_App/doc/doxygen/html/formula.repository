@@ -1,0 +1,3 @@
+\_form#0:\[
+     trigger = \frac{RTC2\_CONFIG\_FREQUENCY}{1000} * (\frac{duration}{1000});
+\]

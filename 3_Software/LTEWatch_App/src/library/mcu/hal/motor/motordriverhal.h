@@ -1,24 +1,25 @@
 /****************************************************************************************************************//**
- * Copyright (C) Hes-so VALAIS/WALLIS, HEI Sion, Infotronics. 2022
+ * Copyright (C) MSE Lausanne Hes-so VAUD/WAADT, Hes-so VALAIS/WALLIS, HEI Sion, Infotronics. 2023
+ * Modified by Tristan Traiber
  * Created by Thierry Hischier, Patrice Rudaz
  * All rights reserved.
  *
  * \file    motordriverhal.h
  *
- * \addtogroup LowHAL
+ * @addtogroup LowHAL
  * @{
  *
- * \class   hal::MotorDriverHal
- * \brief   Class of Hardware Abstraction Layer to handle the RTC 2 needed by the motorDriver.
+ * @class   hal::MotorDriverHal
+ * @brief   Class of Hardware Abstraction Layer to handle the RTC 2 needed by the motorDriver.
  *
- * This class handles the RTC events and toggle the needed GPIOs to apply some pulse on the motor's coils, based on 
+ * This class handles the RTC events and toggle the needed GPIOs to apply some pulse on the motor's coils, based on
  * Nordic SDK v15.0.0 and later...
  *
  * Initial author: Patrice Rudaz
  * Creation date: 2016-06-16
  *
- * \author  Patrice Rudaz (patrice.rudaz@hevs.ch)
- * \date    February 2022
+ * \author  Tristan Traiber (tristan.traiber@master.hes-so.ch)
+ * \date    December 2022
  ********************************************************************************************************************/
 #pragma once
 
@@ -36,17 +37,17 @@
 #include "motor-config.h"
 
 #if defined(__cplusplus)
-extern "C" 
+extern "C"
 {
 #endif
     namespace hal
     {
         /********************************************************************************************************//**
-         * \brief         Motor's RTC Timer event handler. (Callback Function)
+         * @brief         Motor's RTC Timer event handler. (Callback Function)
          *
          * This function will be called each time the RTC used for the motors thorw an event.
          *
-         * \param   intType     The event type of the used RTC.
+         * @param   intType     The event type of the used RTC.
          ************************************************************************************************************/
         #if(NRFX_RTC_DRIVER != 0)
             void motorTimerHandler(nrfx_rtc_int_type_t intType);
@@ -71,7 +72,7 @@ namespace hal
     /*                                                                                                              */
     /* ************************************************************************************************************ */
     class MotorDriverHal
-    { 
+    {
         #if(NRFX_RTC_DRIVER != 0)
             friend void motorTimerHandler(nrfx_rtc_int_type_t intType);
         #else
@@ -92,7 +93,7 @@ namespace hal
         /*																										    */
         /* ******************************************************************************************************** */
         /********************************************************************************************************//**
-         * \brief   Initializes the components needed by this class
+         * @brief   Initializes the components needed by this class
          *
          * This method initializes the timers (hardware) used to drive the stepper motors.
          *
@@ -101,21 +102,21 @@ namespace hal
         inline void initialize()                        { _timerInit(); }
 
         /********************************************************************************************************//**
-         * \brief   Clear the GPIOs used to do a motor's step.
+         * @brief   Clear the GPIOs used to do a motor's step.
          *
-         * \param   outCoils        The GPIOs to clear.
+         * @param   outCoils        The GPIOs to clear.
          ************************************************************************************************************/
         inline void clearMotorPulse()                   { hal::GpioHal::pinMaskClear(_gpioMask); }
 
         /********************************************************************************************************//**
-         * \brief   Applies the pulse on the GPIOs used to drive the motor's coils.
+         * @brief   Applies the pulse on the GPIOs used to drive the motor's coils.
          *
-         * \param   pulse           The specific pulse to be applied on the GPIOs.
+         * @param   pulse           The specific pulse to be applied on the GPIOs.
          ************************************************************************************************************/
         inline void setMotorPulse(uint64_t pulse)       { hal::GpioHal::pinMaskSet(pulse); }
 
         /********************************************************************************************************//**
-         * \brief   Configures the triggers for the timer according to the steppermotor's specs.
+         * @brief   Configures the triggers for the timer according to the steppermotor's specs.
          *
          * This method takes care of the stepper-motor's specifications to calculate the trigger to be used with the 
          * rtc for the duration of the pulse to be applied to make on1 step.
@@ -131,66 +132,66 @@ namespace hal
          * step, we check that the delay obtained is compatible with the motor's specifications. As long as the delay
          * is below the pulse specification, it's incremented.
          *
-         * \param   pulseLen        The duration of the pulse to be applied on the steppermotor's coil in [us]
+         * @param   pulseLen        The duration of the pulse to be applied on the steppermotor's coil in [us]
          ************************************************************************************************************/
         void setPulseTick(uint32_t pulseLen);
 
         /********************************************************************************************************//**
-         * \brief   Set up the GPIO's mask to be used to clear the pulse at the end motor's step
+         * @brief   Set up the GPIO's mask to be used to clear the pulse at the end motor's step
          *
-         * \param   motorCoils      All GPIOs used by the motors.
-         * \param   size            Amount of GPIOS used by all motors.
+         * @param   motorCoils      All GPIOs used by the motors.
+         * @param   size            Amount of GPIOS used by all motors.
          ************************************************************************************************************/
         void setGapTick(uint32_t gapTick);
 
         /********************************************************************************************************//**
-         * \brief   Set up the GPIO's mask to be used to clear the pulse at the end motor's step
+         * @brief   Set up the GPIO's mask to be used to clear the pulse at the end motor's step
          *
-         * \param   motorCoils      All GPIOs used by the motors.
-         * \param   size            Amount of GPIOS used by all motors.
+         * @param   motorCoils      All GPIOs used by the motors.
+         * @param   size            Amount of GPIOS used by all motors.
          ************************************************************************************************************/
         void setGpioMask(uint8_t* motorCoils, size_t size);
 
         /********************************************************************************************************//**
-         * \brief   Set up the GPIOs as outputs (for motor in series)
+         * @brief   Set up the GPIOs as outputs (for motor in series)
          *
-         * \param   motorCoils      All GPIOs used by the motors.
-         * \param   size            Amount of GPIOS used by all motors.
+         * @param   motorCoils      All GPIOs used by the motors.
+         * @param   size            Amount of GPIOS used by all motors.
          ************************************************************************************************************/
         void setGpioOutputs(uint8_t* motorCoils, size_t size);
 
         /********************************************************************************************************//**
-         * \brief   Starts the timer dedicated to skip the motors for a pulse's delay.
+         * @brief   Starts the timer dedicated to skip the motors for a pulse's delay.
          *
-         * \param   timeoutTicks    The duration of the timer to be used
+         * @param   timeoutTicks    The duration of the timer to be used
          ************************************************************************************************************/
 
         /********************************************************************************************************//**
-         * \brief   Starts the timer dedicated for the motor's pulse.
+         * @brief   Starts the timer dedicated for the motor's pulse.
          *
-         * \param   gapTicks
+         * @param   gapTicks
          ************************************************************************************************************/
         bool startTimerPulse();
 
         /********************************************************************************************************//**
-         * \brief   Starts the timer dedicated to skip the motors for a pulse's delay.
+         * @brief   Starts the timer dedicated to skip the motors for a pulse's delay.
          *
-         * \param   timeoutTicks    The duration of the timer to be used
+         * @param   timeoutTicks    The duration of the timer to be used
          ************************************************************************************************************/
         bool startTimerNoPulse();
 
         /********************************************************************************************************//**
-         * \brief   Disable the interrupt of the Gap Delay.
+         * @brief   Disable the interrupt of the Gap Delay.
          ************************************************************************************************************/
         bool enableGapPulse();
 
         /********************************************************************************************************//**
-         * \brief   Disable the interrupt of the Gap Delay.
+         * @brief   Disable the interrupt of the Gap Delay.
          ************************************************************************************************************/
         void disableGapPulse();
 
         /********************************************************************************************************//**
-         * \brief   Stops the RTC timer/counter used fot the motor's driver.
+         * @brief   Stops the RTC timer/counter used fot the motor's driver.
          ************************************************************************************************************/
         void stopTimer();
 

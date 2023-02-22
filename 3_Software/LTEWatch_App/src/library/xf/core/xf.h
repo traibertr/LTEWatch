@@ -5,11 +5,11 @@
  *
  * \file    xf.h
  *
- * \addtogroup XF eXecution Framework
+ * @addtogroup XF eXecution Framework
  * \{
  *
- * \class   XF
- * \brief   Execution Framework
+ * @class   XF
+ * @brief   Execution Framework
  *
  * \section sec_xf_intro Introduction
  *
@@ -88,19 +88,19 @@ public:
     /*                                                                                                              */
     /* ************************************************************************************************************ */
     /************************************************************************************************************//**
-     * \brief   Starts the execution of the framework. This
+     * @brief   Starts the execution of the framework. This
      *
      * Starts the execution of the framework. This results in processing the events in the main loop.
      ****************************************************************************************************************/
     static void start();
 
     /************************************************************************************************************//**
-     * \brief   Returns pointer the main thread.
+     * @brief   Returns pointer the main thread.
      ****************************************************************************************************************/
     static XFThread* getMainThread();
 
     /************************************************************************************************************//**
-     * \brief   Non-blocking version to processes events.
+     * @brief   Non-blocking version to processes events.
      ****************************************************************************************************************/
     static void execOnce();
 

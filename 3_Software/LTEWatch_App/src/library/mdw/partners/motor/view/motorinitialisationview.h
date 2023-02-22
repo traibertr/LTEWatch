@@ -5,11 +5,11 @@
  *
  * \file    motorinitialisationviewmodel.h
  *
- * \addtogroup Motor
+ * @addtogroup Motor
  * \{
  *
- * \class   MotorInitialisationView
- * \brief   Class updating the view depending on its resources
+ * @class   MotorInitialisationView
+ * @brief   Class updating the view depending on its resources
  *
  * Initial author: Thierry Hischier, Patrice Rudaz
  * Creation date: 2018-09-26
@@ -55,7 +55,7 @@
 /* NAMESPACE Declaration                                                                                            */
 /*                                                                                                                  */
 /* **************************************************************************************************************** */
-namespace motor 
+namespace motor
 {
     /* ************************************************************************************************************ */
     /*                                                                                                              */
@@ -63,8 +63,8 @@ namespace motor
     /*                                                                                                              */
     /* ************************************************************************************************************ */
     class MotorInitialisationController;
-    class MotorInitialisationView : 
-        public application::AppView<MotorInitialisationViewModel>, 
+    class MotorInitialisationView :
+        public application::AppView<MotorInitialisationViewModel>,
         public MotorCtrlObserver,
         public MotorInitialisationViewModelObserver
     {
@@ -76,7 +76,7 @@ namespace motor
         /* ******************************************************************************************************** */
         MotorInitialisationView();
         virtual ~MotorInitialisationView();
-        
+
         /* ******************************************************************************************************** */
         /*                                                                                                          */
         /* PUBLIC DECLARATION SECTION                                                                               */
@@ -84,7 +84,7 @@ namespace motor
         /* ******************************************************************************************************** */
         void addObserver();
         DECLARE_MEMORYPOOL_OPERATORS(MotorInitialisationView)
-        
+
     protected:
         /* ******************************************************************************************************** */
         /*                                                                                                          */
@@ -92,7 +92,7 @@ namespace motor
         /*                                                                                                          */
         /* ******************************************************************************************************** */
         // Attributes
-    
+
         // Methods
         void onActivated();
         void onDeactivated();
@@ -107,12 +107,12 @@ namespace motor
         void onUpdate();
 
         /********************************************************************************************************//**
-         * \brief   Implements Motor Controller Interface.
+         * @brief   Implements Motor Controller Interface.
          ************************************************************************************************************/
         void onMotorMoveEnd(MotorController* mCtrl);
 
         inline motor::MotorController &getMotorController() { ASSERT(_pMotorController); return *_pMotorController; }
-            
+
         #if (USE_TONE_MANAGER != 0)
             inline tone::ToneManager &getToneManager() { ASSERT(_pToneManager); return *_pToneManager; }
         #endif
@@ -126,8 +126,8 @@ namespace motor
         /*                                                                                                          */
         /* ******************************************************************************************************** */
         // Attributes
-    
-        // Methods    
+
+        // Methods
     };
 } // namespace watch
 

@@ -1,19 +1,20 @@
 /****************************************************************************************************************//**
- * Copyright (C) Hes-so VALAIS/WALLIS, HEI Sion, Infotronics. 2022
- * Created by Patrice Rudaz
+ * Copyright (C) Hes-so VALAIS/WALLIS, HEI Sion, Infotronics, MSE Master Lausanne, 2023
+ * Modified by Tristan Traiber
+ * Based on file created by Patrice Rudaz
  * All rights reserved.
  *
  * @file    factory.h
  * @class   Factory
- * @brief   Where everything starts from...
+ * @brief   Factory managing everything from here
  *
  * # Factory
  *
  * Here are instantiated and initialized all objects used in the current application.
  * The eXecution Framework's mainloop is also started from this class.
  *
- * @author  Patrice Rudaz (patrice.rudaz@hevs.ch)
- * @date    February 2022
+ * @author  Tristan Traiber (tristan.traiber@master.hes-so.ch)
+ * @date    January 2023
  ********************************************************************************************************************/
 #pragma once
 
@@ -182,24 +183,24 @@ public:
         static wdt::Watchdog                                watchdog;
     #endif // #if (USE_WATCHDOG != 0)
 
-    static application::PicoWatch* picoWatch()           { return application::PicoWatch::getInstance();}
+    static application::PicoWatch* picoWatch()  { return application::PicoWatch::getInstance();}
 
     #if (USE_MQTT != 0)
-        static MQTTController* mqtt()       { return &_mqtt; }
-        static LTE* lte()                   { return LTE::getInstance(); }
+        static MQTTController* mqtt()           { return &_mqtt; }
+        static LTE* lte()                       { return LTE::getInstance(); }
     #endif
 
     #if (USE_GNSS != 0)
-        static GnssController* gnss()       { return GnssController::getInstance(); }
+        static GnssController* gnss()           { return GnssController::getInstance(); }
     #endif
 
-    static PicoXF* picoXF()                 { return PicoXF::getInstance(); }
+    static PicoXF* picoXF()                     { return PicoXF::getInstance(); }
 
-    static DispController* dispCtrl()               { return DispController::getInstance(); }
+    static DispController* dispCtrl()           { return DispController::getInstance(); }
 
-    static BatHal*  bathal()                { return BatHal::getInstance(); }
+    static BatHal*  bathal()                    { return BatHal::getInstance(); }
 
-    static BatteryManager* batManager()     { return BatteryManager::getInstance(); }
+    static BatteryManager* batManager()         { return BatteryManager::getInstance(); }
 
     /* ************************************************************************************************************ */
     /*                                                                                                              */
@@ -216,7 +217,7 @@ public:
     /************************************************************************************************************//**
     * @brief   Execute the procedure to start the application in the corresponding mode
     *****************************************************************************************************************/
-    void launch(eProductMode mode);
+    void launch();
 
     /************************************************************************************************************//**
      * @brief   Observe when the motor finished the animation
@@ -239,11 +240,9 @@ public:
 
 private:
     #if defined(DEBUG_NRF_USER)
-        static Factory*                     _pInstance;
+        static Factory*                     _pInstance;     ///< Factory instance
     #endif
-    static eProductMode                     _mode;
-
     #if (USE_MQTT != 0)
-        static MQTTController               _mqtt;
+        static MQTTController               _mqtt;          ///< MQTT controller instance
     #endif
 };

@@ -1,11 +1,13 @@
-/**
+/****************************************************************************************************************//**
  * @file    drv_bq25180.h
  * @author  Tristan Traiber
+ *
  * @date    23.02.2023
  * @brief   Driver interface header for battery charger BQ25180 I2C Controlled,
  *          1-Cell, 1-A Linear Battery Charger with Power Path and Ship Mode
+ *
  * @see     https://www.ti.com/lit/ds/symlink/bq25180.pdf
-*/
+********************************************************************************************************************/
 
 #ifndef _DRV_BQ25180_H_
 #define _DRV_BQ25180_H_
@@ -22,7 +24,7 @@
 #define DRV_BQ25180_CFG_I2C_ADDR            (0x6A)
 #define DRV_BQ25180_CFG_I2C_ADDR_8B         (0xD4)
 #define DRV_BQ25180_START_ADDR              0
-#define DRV_BQ25180_NB_REG                  13 + DRV_BQ25180_START_ADDR
+#define DRV_BQ25180_NB_REG                  (13+DRV_BQ25180_START_ADDR)
 
 #define DRV_BQ25180_STAT0_DEFAULT_VAL       (0x00)
 #define DRV_BQ25180_STAT1_DEFAULT_VAL       (0x07)
@@ -88,7 +90,7 @@
  ********************************************************************************/
 typedef enum
 {
-    E_DRV_BQ25180_SYSPWR_NORMAl_OPERATION   = 0x0,
+    E_DRV_BQ25180_SYSPWR_NORMAL_OPERATION   = 0x0,
     E_DRV_BQ25180_SYSPWR_FORCE_BAT_POWER    = 0x1,
     E_DRV_BQ25180_SYSPWR_SYS_OFF_FLOATING   = 0x2,
     E_DRV_BQ25180_SYSPWR_SYS_OFF_PULLDOWN   = 0x3

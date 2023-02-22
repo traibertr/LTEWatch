@@ -1,4 +1,5 @@
-/* Copyright (c) 2022, HES-SO Valais
+/* Copyright (C) MSE Lausanne Hes-so VAUD/WAADT, Hes-so VALAIS/WALLIS, HEI Sion, Infotronics. 2023
+ * Created by Tristan Traiber
  * All rights reserved.
  */
 #ifndef BATT_CONFIG_H

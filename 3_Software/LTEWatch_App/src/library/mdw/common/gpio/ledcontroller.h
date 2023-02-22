@@ -102,7 +102,7 @@ namespace gpio
          * @brief   Initializes the components needed by this class
          *
          * This initialization method needs at least one parameter, which is the identifier of the LED to be
-         * controlled. The different timing ON and OFF time can also be given here. If they are not defined, the 
+         * controlled. The different timing ON and OFF time can also be given here. If they are not defined, the
          * default value of 1 second is applied for both of them.
          *
          * @param   index           The identifier of the LED to control
@@ -113,7 +113,7 @@ namespace gpio
          * \note    Requires pre-existing instances of classes listed in parameter list
          ************************************************************************************************************/
         void initialize(uint8_t index, uint32_t ticksOn = k_ms_to_ticks_near32(125), uint32_t totalTimeTicks = k_ms_to_ticks_near32(1000));
-        
+
         /********************************************************************************************************//**
          * @brief   Switch ON the LED.
          ************************************************************************************************************/
@@ -171,12 +171,12 @@ namespace gpio
         /********************************************************************************************************//**
          * @brief   Returns `true` or `false` according to the state of the LED.
          ************************************************************************************************************/
-        inline bool isOn() const            { return _currentState == ST_LED_ON; } 
+        inline bool isOn() const            { return _currentState == ST_LED_ON; }
 
         /********************************************************************************************************//**
          * @brief   Start to blink the LED.
          *
-         * This method will set ON the led and start the behaviour of the state machine by starting a timer with the 
+         * This method will set ON the led and start the behaviour of the state machine by starting a timer with the
          * `timeOn` value. This value should be set before.
          *
          * @param force If set, it forces the LED to start blinking again by restarting the timer...
@@ -186,11 +186,11 @@ namespace gpio
         /********************************************************************************************************//**
          * @brief   Start to blink the LED quickly.
          *
-         * This method will set ON the led and start the behaviour of the state machine by starting a timer with the 
+         * This method will set ON the led and start the behaviour of the state machine by starting a timer with the
          * `timeOn` value. This value is a default value for blinking quickly.
          ************************************************************************************************************/
         void startQuickBlinking();
-        
+
         /********************************************************************************************************//**
          * @brief   Start to blink the LED.
          *
@@ -198,7 +198,7 @@ namespace gpio
          * `timeOn` value. This value is a default value for blinking in a standard way.
          ************************************************************************************************************/
         void startStandardBlinking();
-        
+
         /********************************************************************************************************//**
          * @brief   Start to blink the LED.
          *
@@ -213,7 +213,7 @@ namespace gpio
          * This method will set ON the led if it is not and switch it OFF if it's ON.
          ************************************************************************************************************/
         void toggle();
-        
+
 
     protected:
         /* ******************************************************************************************************** */
@@ -243,7 +243,7 @@ namespace gpio
         /* ******************************************************************************************************** */
         // Constants
         uint32_t   DEFAULT_TIME_ON_TICKS = k_ms_to_ticks_near32(125);
-    
+
         // Attributes
         eLedState               _currentState;
 

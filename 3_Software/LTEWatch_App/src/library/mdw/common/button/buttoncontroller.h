@@ -1,5 +1,6 @@
 /****************************************************************************************************************//**
- * Copyright (C) Hes-so VALAIS/WALLIS, HEI Sion, Infotronics. 2022
+ * Copyright (C) MSE Lausanne Hes-so VAUD/WAADT, Hes-so VALAIS/WALLIS, HEI Sion, Infotronics. 2023
+ * Modified by Tristan Traiber
  * Created by Patrice Rudaz
  * All rights reserved.
  *
@@ -19,7 +20,7 @@
  * The purpose of this class is to know what kind of gestures has been applied on a button. We have identified four
  * of them:
  *
- *   - SINGLE, DOUBLE or TRIPLE CLICK: A simple, double or triple pressure on a button. `simple` means that a 
+ *   - SINGLE, DOUBLE or TRIPLE CLICK: A simple, double or triple pressure on a button. `simple` means that a
  *     pressure of less than `APP_BUTTON_CLICK_MS_DELAY` has been detected.
  *
  *   - LONG PRESS: A long click is a pressure on a button with a duration between `APP_BUTTON_CLICK_MS_DELAY` and
@@ -40,8 +41,8 @@
  * Initial author: Patrice Rudaz
  * Creation date: 2018-02-26
  *
- * @author  Patrice Rudaz (patrice.rudaz@hevs.ch)
- * @date    July 2018
+ * @author  Tristan Traiber (tristan.traiber@master.hes-so.ch)
+ * @date    December 2023
  ********************************************************************************************************************/
 #pragma once
 

@@ -3,8 +3,8 @@
  * Created by Patrice Rudaz (rut@hevs.ch)
  *
  * \file    motorinitevent.h
- * \class   MotorInitEvent
- * \brief   Event related to motor's operation
+ * @class   MotorInitEvent
+ * @brief   Event related to motor's operation
  *
  * This specialization of the XFEvent class transports information on the motors to move.
  *
@@ -40,7 +40,7 @@ public:
     /* ************************************************************************************************************ */
 
     /* **********************************************************************************************************//**
-     * \brief   Constructor | Destructor
+     * @brief   Constructor | Destructor
      ****************************************************************************************************************/
     // --------------------------------------------------------------------------------------------------------------
     MotorInitEvent() : XFEvent(EventId::MotorInitEvent, NULL, false) {}

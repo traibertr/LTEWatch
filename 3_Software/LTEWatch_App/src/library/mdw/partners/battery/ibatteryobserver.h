@@ -1,16 +1,16 @@
 /****************************************************************************************************************//**
- * Copyright (C) Hes-so VALAIS/WALLIS, HEI Sion, Infotronics
+ * Copyright (C) MSE Lausanne Hes-so VAUD/WAADT, Hes-so VALAIS/WALLIS, HEI Sion, Infotronics. 2023
  * Created by Tristan Traiber
  * All rights reserved.
  *
  * \file    ibatteryobserver.h
  *
  *
- * \addtogroup Bat
+ * @addtogroup Bat
  * \{
  *
- * \class   IBatteryObserver
- * \brief   Interface definition dedicated to the battery Object...
+ * @class   IBatteryObserver
+ * @brief   Interface definition dedicated to the battery Object...
  *
  * Initial author: Tristan Traiber
  * Creation date: 04.02.2023
@@ -50,7 +50,7 @@ public:
     /* ************************************************************************************************************ */
     /************************************************************************************************************//**
      * \name    BatteryObserver
-     * \brief   Callback methods for the Battery manager's event
+     * @brief   Callback methods for the Battery manager's event
      * \{
      ****************************************************************************************************************/
     // --------------------------------------------------------------------------------------------------------------

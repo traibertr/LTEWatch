@@ -5,11 +5,11 @@
  *
  * \file    motorinitialisationviewmodelobserver.h
  *
- * \addtogroup Motor
+ * @addtogroup Motor
  * \{
  *
- * \class   MotorInitialisationViewModelObserver
- * \brief   Interface reacting on the MotorInitialisation-Controller
+ * @class   MotorInitialisationViewModelObserver
+ * @brief   Interface reacting on the MotorInitialisation-Controller
  *
  * Initial author: Thierry Hischier, Patrice Rudaz
  * Creation date: 2018-09-26

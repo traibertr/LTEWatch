@@ -1,12 +1,14 @@
 /****************************************************************************************************************//**
- * Copyright (c) 2021, Hes-so VALAIS/WALLIS, HEI Sion
+ * Copyright (C) MSE Lausanne Hes-so VAUD/WAADT, Hes-so VALAIS/WALLIS, HEI Sion, Infotronics. 2023
  * All rights reserved.
  *
  * \file    hardware-revision.h
  *
- * \author  Patrice Rudaz (patrice.rudaz@hevs.ch)
- * \version 2.0.0
- * \date    October 2021
+ * Initial author: Patrice Rudaz (patrice.rudaz@hevs.ch)
+ *
+ * \author  Tristan Traiber (tristan.traiber@master.hes-so.ch)
+ * \version 2.0.1
+ * \date    January 2023
  ************************************************************************************************************/
 #ifndef MEMORYPOOL_CONFIG_H
 #define MEMORYPOOL_CONFIG_H

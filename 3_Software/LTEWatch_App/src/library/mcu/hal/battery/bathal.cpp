@@ -38,8 +38,6 @@
 // ------------------------------------------------------------------------------------------------------------------
 // static
 
-BatHal::adc_data2 BatHal::_adc;
-
 static const struct gpio_dt_spec batLvl = GPIO_DT_SPEC_GET(DT_PATH(zephyr_user), bat_lvl_gpios);
 static const struct gpio_dt_spec batLvlEn = GPIO_DT_SPEC_GET(DT_PATH(zephyr_user), batlvl_en_gpios);
 static const struct device *const i2c_dev = DEVICE_DT_GET(DT_NODELABEL(i2c1));
@@ -48,8 +46,6 @@ static const struct gpio_dt_spec batChrgInt = GPIO_DT_SPEC_GET(DT_PATH(zephyr_us
 
 static const struct device*         adc_dev     = DEVICE_DT_GET(ADC_DEVICE_NODE);
 static const struct adc_channel_cfg adc_ch_cfg  = ADC_CHANNEL_CFG_DT(DT_CHILD(ADC_DEVICE_NODE, ADC_1ST_CHANNEL_CHILD));
-
-uint8_t* BatHal::_buf;
 
 bool BatHal::_isInit;
 
@@ -296,7 +292,7 @@ int BatHal::read_bytes(const struct device *i2c_dev, uint8_t addr, uint8_t *data
 
 	/* Now try to read back from FRAM */
 
-/* FRAM address */
+    /* FRAM address */
 	wr_addr[0] = addr & 0xFF;
 
 	/* Setup I2C messages */
@@ -312,13 +308,6 @@ int BatHal::read_bytes(const struct device *i2c_dev, uint8_t addr, uint8_t *data
 	msgs[1].flags = I2C_MSG_READ | I2C_MSG_STOP;
 
 	return i2c_transfer(i2c_dev, &msgs[0], 2, FRAM_I2C_ADDR);
-}
-
-// ------------------------------------------------------------------------------------------------------------------
-
-uint8_t* BatHal::getBuffer(void)
-{
-   return _buf;
 }
 
 //BAT_LVL_EN_PIN

@@ -3,8 +3,8 @@
  * All rights reserved.
  *
  * \file    motorendevent.h
- * \class   MotorEndEvent
- * \brief   Event related to motor's operation
+ * @class   MotorEndEvent
+ * @brief   Event related to motor's operation
  *
  * This specialization of the XFEvent class transports information on the motors to move when no
  * more move is needed.
@@ -42,7 +42,7 @@ public:
     /* ************************************************************************************************************ */
 
     /* **********************************************************************************************************//**
-     * \brief   Constructor | Destructor
+     * @brief   Constructor | Destructor
      ****************************************************************************************************************/
     // --------------------------------------------------------------------------------------------------------------
     MotorEndEvent() : XFEvent(EventId::MotorEndEvent, NULL, false) {}

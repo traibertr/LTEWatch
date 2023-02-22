@@ -5,11 +5,11 @@
  *
  * \file    xftimeoutManager.h
  *
- * \addtogroup XF eXecution Framework
+ * @addtogroup XF eXecution Framework
  * \{
  *
- * \class   XFTimeoutManager
- * \brief   The TimeoutManager is responsible to handle time-outs used in the eXecution Framework.
+ * @class   XFTimeoutManager
+ * @brief   The TimeoutManager is responsible to handle time-outs used in the eXecution Framework.
  *
  * The TimeoutManager is responsible to handle time-outs used in state machines. It decrements them accordingly and 
  * inject them back to the state machine when time-outed.
@@ -86,32 +86,32 @@ public:
     /*                                                                                                              */
     /* ************************************************************************************************************ */
     /************************************************************************************************************//**
-     * \brief   Returns a pointer to the single instance of XFTimeoutManager.
+     * @brief   Returns a pointer to the single instance of XFTimeoutManager.
      ****************************************************************************************************************/
     static XFTimeoutManager* getInstance();
 
     /************************************************************************************************************//**
-     * \brief   Starts the time-out manager.
+     * @brief   Starts the time-out manager.
      ****************************************************************************************************************/
     void start();
 
     /************************************************************************************************************//**
-     * \brief   Adds a time-out to the time-out manager.
+     * @brief   Adds a time-out to the time-out manager.
      *
-     * \param   timeoutId   The time-out id known by the reactive parameter. Is needed by the reactive part to
+     * @param   timeoutId   The time-out id known by the reactive parameter. Is needed by the reactive part to
      *                      uniquely identify the time-out.
-     * \param   interval    The time in milliseconds or timer's ticks unit to wait until the time-out expires.
-     * \param   pReactive   The reactive instance where to inject the time-out when it time-outs.
+     * @param   interval    The time in milliseconds or timer's ticks unit to wait until the time-out expires.
+     * @param   pReactive   The reactive instance where to inject the time-out when it time-outs.
      ****************************************************************************************************************/
      void scheduleTimeout(uint8_t timeoutId, unsigned int interval, IXFReactive* pReactive);
 
     /************************************************************************************************************//**
-     * \brief   Removes all time-outs corresponding the given parameters.
+     * @brief   Removes all time-outs corresponding the given parameters.
      ****************************************************************************************************************/
     void unscheduleTimeout(uint8_t timeoutId, IXFReactive* pReactive);
 
     /************************************************************************************************************//**
-     * \brief   Called after expiration of the first timeout in list.
+     * @brief   Called after expiration of the first timeout in list.
      *
 	 * When this method is called, the first timeout in the list is time-outed and it has to be injected to the 
      * respective behavior.
@@ -130,17 +130,17 @@ protected:
 
     // Methods
     /************************************************************************************************************//**
-     * \brief   Adds the time-out to #_timeouts.
+     * @brief   Adds the time-out to #_timeouts.
      ****************************************************************************************************************/
     void addTimeout(XFTimeout* pNewTimeout);
 
     /************************************************************************************************************//**
-     * \brief   Removes all time-outs corresponding the given parameters.
+     * @brief   Removes all time-outs corresponding the given parameters.
      ****************************************************************************************************************/
     void removeTimeouts(uint8_t timeoutId, IXFReactive* pReactive);
 
     /************************************************************************************************************//**
-     * \brief   Returns the time-out back to the queue of the thread executing the behavioural instance.
+     * @brief   Returns the time-out back to the queue of the thread executing the behavioural instance.
      ****************************************************************************************************************/
     void returnTimeout(XFTimeout* pTimeout);
 

@@ -5,11 +5,11 @@
  *
  * \file    mqttcontroller.h
  *
- * \addtogroup MQTT
+ * @addtogroup MQTT
  * \{
  *
- * \class   MQTTContoller
- * \brief   PicoIReactive Class to control the MQTT Client one
+ * @class   MQTTContoller
+ * @brief   PicoIReactive Class to control the MQTT Client one
  *
  * Initial author: Patrice Rudaz
  * Creation date: 2022-10-05

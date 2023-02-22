@@ -5,11 +5,11 @@
  *
  * \file    memorypool.h
  *
- * \addtogroup MemoryPool
+ * @addtogroup MemoryPool
  * \{
  *
- * \class   MemoryPool
- * \brief   Class which handles the memorypool
+ * @class   MemoryPool
+ * @brief   Class which handles the memorypool
  *
  * Initial author: Thomas Sterren
  * Creation date: 2017-04-27

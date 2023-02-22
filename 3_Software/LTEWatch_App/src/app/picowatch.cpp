@@ -12,8 +12,8 @@
 #include <picoxf.h>
 #include <spinlock.h>
 #include "dispcontroller.h"
-/* Lock to protect the internal state of all work items, work queues,
- * and pending_cancels.*/
+
+#include "modem/modem_info.h"
 
 #if (USE_BUTTONS != 0)
     using gpio::ButtonId;
@@ -67,7 +67,13 @@ using application::PicoWatch;
 
 struct k_timer          PicoWatch::_picoTimers[T_NR_TIMERS];
 struct k_work           PicoWatch::_picoWorks[WRK_NR_WORKS];
-
+/*
+static void rsrp_cb(char rsrp_value)
+{
+    int32_t rsrp = RSRP_IDX_TO_DBM(rsrp_value);
+    PW_INFO("LTE RSRP : %d dBm", rsrp);
+}
+*/
 #if (USE_MQTT != 0)
     string              PicoWatch::_mqttData;
 #endif
@@ -96,10 +102,17 @@ void PicoWatch::picoWatchTaskHandler(struct k_work* work_id)
     {
         #if (USE_MQTT != 0)
             Factory::dispCtrl()->mqttDisp(Factory::dispCtrl()->DISP_MQTT_SENDING);
-            getInstance()->sendMqttLocation();
+            if(getInstance()->sendMqttLocation()){
+                Factory::dispCtrl()->mqttDisp(Factory::dispCtrl()->DISP_MQTT_CONNECTED);
+                k_timer_start(&_picoTimers[T_UPDATE_MQTT], K_MSEC(getInstance()->_updateMqttPeriode), K_NO_WAIT);
+            }
+            else{
+                Factory::dispCtrl()->mqttDisp(Factory::dispCtrl()->DISP_MQTT_DISCONNECT);
+                // Start LTE connection process
+                getInstance()->_currentButtonAction = BTN_A_TRPL;
+                getInstance()->pushEvent(&getInstance()->evRelease_);
+            }
             //getInstance()->sendMqttTimeDate();
-            Factory::dispCtrl()->mqttDisp(Factory::dispCtrl()->DISP_MQTT_CONNECTED);
-            k_timer_start(&_picoTimers[T_UPDATE_MQTT], K_MSEC(getInstance()->_updateMqttPeriode), K_NO_WAIT);
         #endif
     }
 }
@@ -449,21 +462,20 @@ bool PicoWatch::processEvent(PicoEvent* event)
             {
                 if (_currentButtonAction == BTN_A_TRPL)
                 {
-                    if(!isLteActive_)
-                    {
-                        isLteActive_ = true;
-                        _mqttCurrentState = ST_WAIT;
-                    }
+                    isLteActive_ = true;
+                    _mqttCurrentState = ST_WAIT;
+                    _currentState = ST_IDLE;
+                    pushDefaultEvent_();
                 }
-                if (_currentButtonAction == BTN_A_CLC)
+                else if (_currentButtonAction == BTN_A_CLC)
                 {
                     _currentState = ST_UPDATE_LOCAL_TIME;
                 }
-                if (_currentButtonAction == BTN_C_CLC)
+                else if (_currentButtonAction == BTN_C_CLC)
                 {
                     _currentState = ST_GET_BAT_MANAGER_CONFIG;
                 }
-                if (_currentButtonAction == BTN_C_DBL)
+                else if (_currentButtonAction == BTN_C_DBL)
                 {
                     if (batLvlMvMode_)
                     {
@@ -474,7 +486,7 @@ bool PicoWatch::processEvent(PicoEvent* event)
                         batLvlMvMode_ = true;
                     }
                 }
-                if (_currentButtonAction == BTN_C_TRPL)
+                else if (_currentButtonAction == BTN_C_TRPL)
                 {
                     _currentState = ST_SET_BAT_MANAGER_CONFIG;
                 }
@@ -625,6 +637,7 @@ bool PicoWatch::processEvent(PicoEvent* event)
                 // MQTT
                 isLteActive_ = true;
                 _mqttCurrentState = ST_WAIT;
+                //modem_info_rsrp_register(rsrp_cb);
 
                 _isMotorOn = true;
 
@@ -769,6 +782,11 @@ void PicoWatch::mqttInternalProcessEvent(PicoEvent* event)
                             PWS_ERROR("Factory::lte()->connect() FAILED !");
                             Factory::dispCtrl()->mqttDisp(Factory::dispCtrl()->DISP_MQTT_ERROR);
                         }
+                    }
+                    else
+                    {
+                        isLteConnectProcessActive_  = false;
+                        isMqttConnectProcessActive_ = false;
                     }
                 }
                 pushDefaultEvent_();
@@ -1004,7 +1022,7 @@ void PicoWatch::onError(MQTTController* mqtt, int error)
 }
 
 //------------------------------------------------------------------------------------------------------------------
-void PicoWatch::sendMqttLocation()
+bool PicoWatch::sendMqttLocation()
 {
     string json;
     if (_gnssLocation.svs > 0)
@@ -1035,77 +1053,110 @@ void PicoWatch::sendMqttLocation()
         LOG_INF("Push location messages to MQTT...");
         //Send Latitude in degree
         json = "{\"latitude\":" + std::to_string(_gnssLocation.latitudeX1e7) + "}";
-        sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC);
+        if(!sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC)){
+            return false;
+        }
 
         //Send Longitude in degree
         json = "{\"longitude\":" + std::to_string(_gnssLocation.longitudeX1e7) + "}";
-        sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC);
+        if(!sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC)){
+            return false;
+        }
 
         //Send altitude in meters
         json = "{\"altitude\":" + std::to_string((_gnssLocation.altitudeMillimetres/1000)) + "}";
-        sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC);
+        if(!sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC)){
+            return false;
+        }
 
         //Send radius in meters
         json = "{\"radius\":" + std::to_string((_gnssLocation.radiusMillimetres/1000)) + "}";
-        sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC);
+        if(!sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC)){
+            return false;
+        }
 
         //Send speed in m/s
         json = "{\"speed\":" + std::to_string((_gnssLocation.speedMillimetresPerSecond)) + "}";
-        sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC);
+        if(!sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC)){
+            return false;
+        }
 
         //Send timeutc
         json = "{\"timeUtc\":" + std::to_string(_gnssLocation.timeUtc) + "}";
-        sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC);
+        if(!sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC)){
+            return false;
+        }
     }
     //Send svs
     json = "{\"svs\":" + std::to_string(_gnssLocation.svs) + "}";
-    sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC);
+    if(!sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC)){
+        return false;
+    }
 
     //Send Battery statistics
     json = "{\"isBatCharging\":" + std::to_string(batData_.isBatCharging) + "}";
-    sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC);
+    if(!sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC)){
+        return false;
+    }
 
     json = "{\"batLvlInMV\":" + std::to_string(batData_.batLvlInMV) + "}";
-    sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC);
+    if(!sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC)){
+        return false;
+    }
 
     json = "{\"batLvlInPercent\":" + std::to_string(batData_.batLvlInPercent) + "}";
-    sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC);
+    if(!sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC)){
+        return false;
+    }
 
     _updateMqttPeriode = 4*DEFAULT_UPDATE_MQTT_P;
     _updateGnssPeriode = 4*DEFAULT_UPDATE_GNSS_P;
+    return true;
 }
 
 //------------------------------------------------------------------------------------------------------------------
-void PicoWatch::sendMqttTimeDate()
+bool PicoWatch::sendMqttTimeDate()
 {
     //Send year
     string json = "{\"year\":" + std::to_string(_gnssDateTime.year) + "}";
-    sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC);
+    if(!sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC)){
+        return false;
+    }
 
     //Send month
     json = "{\"month\":" + std::to_string(_gnssDateTime.month) + "}";
-    sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC);
+    if(!sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC)){
+        return false;
+    }
 
     //Send day
     json = "{\"day\":" + std::to_string((_gnssDateTime.day)) + "}";
-    sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC);
+    if(!sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC)){
+        return false;
+    }
 
     //Send hour
     json = "{\"hour\":" + std::to_string((_gnssDateTime.hour)) + "}";
-    sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC);
+    if(!sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC)){
+        return false;
+    }
 
     //Send day
     json = "{\"min\":" + std::to_string((_gnssDateTime.min)) + "}";
-    sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC);
+    if(!sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC)){
+        return false;
+    }
 
     //Send day
     json = "{\"sec\":" + std::to_string((_gnssDateTime.sec)) + "}";
-    sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC);
-
+    if(!sendMqttMessage_(Factory::mqtt(), json, CONFIG_MQTT_PUB_TOPIC)){
+        return false;
+    }
+    return true;
 }
 
 //------------------------------------------------------------------------------------------------------------------
-void PicoWatch::sendMqttMessage_(MQTTController* mqtt, string json, string topic)
+bool PicoWatch::sendMqttMessage_(MQTTController* mqtt, string json, string topic)
 {
     if (Factory::lte()->isConnected())
     {
@@ -1113,18 +1164,19 @@ void PicoWatch::sendMqttMessage_(MQTTController* mqtt, string json, string topic
         {
             LOG_DBG("pushing MQTT message: %s...", json.c_str());
             mqtt->addMessage(json, topic);
+            return true;
         }
         else
         {
             LOG_WRN("MQTT not connected, %s", json.c_str());
             pushEvent(&evError_);
+            return false;
         }
     }
     else
     {
         LOG_WRN("LTE is not connected -> Try to Reconnect...");
-        k_timer_stop(&_picoTimers[T_UPDATE_MQTT]);
-        pushEvent(&evError_);
+        return false;
     }
 }
 
@@ -1135,7 +1187,7 @@ void PicoWatch::startConnectionTimeout_()
     Factory::picoXF()->unscheduleTM(&evConnectionTimeout_);
 
     evConnectionTimeout_.setDelay(LTE_CONNECTION_TIMEOUT);
-    LOG_DBG("Starting Connection's check timeout of %d [ms]...", evConnectionTimeout_.getDelay());
+    LOG_WRN("Starting Connection's check timeout of %d [ms]...", evConnectionTimeout_.getDelay());
     Factory::picoXF()->pushEvent(&evConnectionTimeout_);
 }
 

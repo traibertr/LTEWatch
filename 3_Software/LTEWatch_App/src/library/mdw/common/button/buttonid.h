@@ -55,7 +55,7 @@ namespace gpio
         /*                                                                                                          */
         /* ******************************************************************************************************** */
         /********************************************************************************************************//**
-         * Enumeration of button's id available in the current application 
+         * Enumeration of button's id available in the current application
          ************************************************************************************************************/
         typedef enum
         {
@@ -69,10 +69,10 @@ namespace gpio
             Button6         = 0x20,      // ... and so on ...
             Button7         = 0x40,
             Button8         = 0x80,
-            
+
             TopEnumButtonId = 0xff      ///< Last entry of the enum, should not be used !
         } eButtonId;
-        
+
         /********************************************************************************************************//**
         * @brief   Returns the GpioID matching the given button's identifier
         *

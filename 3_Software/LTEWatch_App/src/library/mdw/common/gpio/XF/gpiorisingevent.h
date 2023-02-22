@@ -37,7 +37,7 @@ public:
     // -------------------------------------------------------------------------------------------------------
     GpioRisingEvent(gpio::GpioId::eGpioId gpioId = gpio::GpioId::UnknownGpioId)
         : GpioEvent(gpioId, EventId::GpioRisingEvent) {};
-		
+
 	// -------------------------------------------------------------------------------------------------------
     virtual ~GpioRisingEvent() {};
 };

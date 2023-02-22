@@ -5,11 +5,11 @@
  *
  * \file    xfnulltransition.h
  *
- * \addtogroup XF eXecution Framework
+ * @addtogroup XF eXecution Framework
  * \{
  *
- * \class   XFNullTransition
- * \brief   Represents a transition in a state machine having no trigger.
+ * @class   XFNullTransition
+ * @brief   Represents a transition in a state machine having no trigger.
  *
  * Initial author: Thomas Sterren
  * Creation date: 2010-11-26
@@ -44,9 +44,9 @@ public:
     /*                                                                                                              */
     /* ************************************************************************************************************ */
     /************************************************************************************************************//**
-     * \brief   Constructor
+     * @brief   Constructor
      *
-     * \param   pBehaviour  Behaviour in which the null transition will be executed.
+     * @param   pBehaviour  Behaviour in which the null transition will be executed.
      ****************************************************************************************************************/
     XFNullTransition(IXFReactive * pBehaviour = NULL);
 

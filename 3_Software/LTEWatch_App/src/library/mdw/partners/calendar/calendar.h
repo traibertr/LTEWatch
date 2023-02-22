@@ -43,7 +43,7 @@
 #if (USE_CALENDAR != 0)
 
 #if defined(__cplusplus)
-extern "C" 
+extern "C"
 {
 #endif
 
@@ -78,7 +78,7 @@ extern "C"
 /* NAMESPACE Declaration                                                                                            */
 /*                                                                                                                  */
 /* **************************************************************************************************************** */
-namespace cal 
+namespace cal
 {
 
     /* ************************************************************************************************************ */
@@ -172,7 +172,7 @@ namespace cal
          * This method can be used to know the second of the time of the calendar identified by its identifier. The 
          * value is retrieved in `uint8_t` type.
          *
-         * \returns The second of the time of the calendar identified by the given index as `uint8_t`
+         * @returns The second of the time of the calendar identified by the given index as `uint8_t`
          ************************************************************************************************************/
         uint8_t                     second(uint8_t index);
 
@@ -182,7 +182,7 @@ namespace cal
          * This method can be used to know the minute of the time of the calendar identified by its identifier. The
          * value is retrieved in `uint8_t` type.
          *
-         * \returns The minute of the time of the calendar identified by the given index as `uint8_t`
+         * @returns The minute of the time of the calendar identified by the given index as `uint8_t`
          ************************************************************************************************************/
         uint8_t                     minute(uint8_t index);
 
@@ -192,7 +192,7 @@ namespace cal
          * This method can be used to know the hour of the time of the calendar identified by its identifier. The
          * value is retrieved in `uint8_t` type.
          *
-         * \returns The hour of the time of the calendar identified by the given index as `uint8_t`
+         * @returns The hour of the time of the calendar identified by the given index as `uint8_t`
          ************************************************************************************************************/
         uint8_t                     hour(uint8_t index);
 
@@ -202,7 +202,7 @@ namespace cal
          * This method retrieves the day of week of the calendar identified by its identifier. The value is retrieved
          * in `eDayOfWeek` type.
          *
-         * \returns The day of week of the date of the calendar identified by the given index as `eDayOfWeek`
+         * @returns The day of week of the date of the calendar identified by the given index as `eDayOfWeek`
          ************************************************************************************************************/
         cal::DateTime::eDayOfWeek  dayOfWeek(uint8_t index);
 
@@ -212,7 +212,7 @@ namespace cal
          * This method retrieves the day of the calendar identified by its identifier. The value is retrieved in
          * `uint8_t` type.
          *
-         * \returns The day of the date of the calendar identified by the given index as `uint8_t`
+         * @returns The day of the date of the calendar identified by the given index as `uint8_t`
          ************************************************************************************************************/
         uint8_t                     day(uint8_t index);
 
@@ -222,7 +222,7 @@ namespace cal
          * This method retrieves the month of the calendar identified by its identifier. The value is retrieved in
          * `eMonth` type.
          *
-         * \returns The month of the date of the calendar identified by the given index as `eMonth`
+         * @returns The month of the date of the calendar identified by the given index as `eMonth`
          ************************************************************************************************************/
         cal::DateTime::eMonth      month(uint8_t index);
 
@@ -232,7 +232,7 @@ namespace cal
          * This method retrieves the year of the calendar identified by its identifier. The value is retrieved in
          * `uint16_t` type.
          *
-         * \returns The year of the date of the calendar identified by the given index as `uint16_t`
+         * @returns The year of the date of the calendar identified by the given index as `uint16_t`
          ************************************************************************************************************/
         uint16_t                    year(uint8_t index);
 
@@ -242,7 +242,7 @@ namespace cal
          * This method retrieves the year of the calendar identified by its identifier. The value is retrieved in
          * `uint16_t` type.
          *
-         * \returns The year of the current date of the calendar identified by the given index as `uint16_t`
+         * @returns The year of the current date of the calendar identified by the given index as `uint16_t`
          ************************************************************************************************************/
         bool                        isLeapYear(uint8_t index);
 
@@ -252,7 +252,7 @@ namespace cal
          * This method retrieves the year of the calendar identified by its identifier in short format. If we are in
          * 2013, the short format will be `13`. The value is retrieved in `uint8_t` type.
          *
-         * \returns The year of the current date in short format as `uint8_t`
+         * @returns The year of the current date in short format as `uint8_t`
          ************************************************************************************************************/
         uint8_t                     shortYear(uint8_t index);
 
@@ -261,7 +261,7 @@ namespace cal
          *
          * This method retrieves the pointer to the date and time structure of the given index.
          *
-         * \returns The pointer to the date and time structure of the given index.
+         * @returns The pointer to the date and time structure of the given index.
          ************************************************************************************************************/
         cal::DateTime*              getDateTime(uint8_t index);
 
@@ -350,7 +350,7 @@ namespace cal
          * local date and time.
          ************************************************************************************************************/
         void                        inhibitCrystal();
-        
+
     private:
         /* ******************************************************************************************************** */
         /*                                                                                                          */

@@ -17,8 +17,6 @@
 /* Declaration section                                                                                              */
 /* **************************************************************************************************************** */
 // Global objects
-eProductMode                                Factory::_mode;
-
 #if (USE_LEDS != 0) && (LEDS_NUMBER > 0)
     gpio::LedController                     Factory::ledA;
     #if (LEDS_NUMBER > 1)
@@ -87,49 +85,30 @@ eProductMode                                Factory::_mode;
 // ------------------------------------------------------------------------------------------------------------------
 Factory::Factory()
 {
-    _mode = PROD_UNKNOWN_MODE;
+    // Nothing...
 }
 
 /* **************************************************************************************************************** */
 /* PUBLIC SECTION                                                                                                   */
 /* **************************************************************************************************************** */
 // ------------------------------------------------------------------------------------------------------------------
-void Factory::launch(eProductMode mode)
+void Factory::launch(void)
 {
     bool hotReset = false;  // HotReset parameter for motor controller
-    _mode = mode;           // Not used...
 
-    switch(_mode)
-        {
-            case PROD_DEFAULT_MODE:
-            {
-                appInit();
-                appBuild(hotReset);
-                appBind();
-                appCheck();
-                appPrepare();
-                appStart();
-                break;
-            }
-            default:
-                break;
-        }
-
+    appInit();
+    appBuild(hotReset);
+    appBind();
+    appCheck();
+    appPrepare();
+    appStart();
 }
 
 //------------------------------------------------------------------------------------------------------------
 #if (USE_MOTORS != 0)
     void Factory::onMotorMoveEnd(motor::MotorController* mCtrl)
     {
-        switch(_mode)
-        {
-            case PROD_DEFAULT_MODE:
-            {
-                motorController.delObserver(this);
-                appStart();
-            }
-            default:
-                break;
-        }
+        motorController.delObserver(this);
+        appStart();
     }
 #endif

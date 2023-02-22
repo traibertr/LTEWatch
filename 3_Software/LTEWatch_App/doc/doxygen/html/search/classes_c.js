@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['s_5fdrv_5fbq25180_5fi2c_5freg_5ft_0',['s_drv_bq25180_i2c_reg_t',['../structs__drv__bq25180__i2c__reg__t.html',1,'']]],
+  ['sdktools_1',['SDKTools',['../classtools_1_1_s_d_k_tools.html',1,'tools']]],
+  ['shiprst_5fu8_2',['shipRst_u8',['../unionship_rst__u8.html',1,'']]],
+  ['sregchrgctrl0_3',['sRegChrgCtrl0',['../structs_reg_chrg_ctrl0.html',1,'']]],
+  ['sregchrgctrl1_4',['sRegChrgCtrl1',['../structs_reg_chrg_ctrl1.html',1,'']]],
+  ['sregflag0_5',['sRegFlag0',['../structs_reg_flag0.html',1,'']]],
+  ['sregicctrl_6',['sRegIcCtrl',['../structs_reg_ic_ctrl.html',1,'']]],
+  ['sregichgctrl_7',['sRegIchgCtrl',['../structs_reg_ichg_ctrl.html',1,'']]],
+  ['sregmaskid_8',['sRegMaskId',['../structs_reg_mask_id.html',1,'']]],
+  ['sregshiprst_9',['sRegShipRst',['../structs_reg_ship_rst.html',1,'']]],
+  ['sregstat0_10',['sRegStat0',['../structs_reg_stat0.html',1,'']]],
+  ['sregstat1_11',['sRegStat1',['../structs_reg_stat1.html',1,'']]],
+  ['sregsysreg_12',['sRegSysReg',['../structs_reg_sys_reg.html',1,'']]],
+  ['sregtmrilim_13',['sRegTmrILim',['../structs_reg_tmr_i_lim.html',1,'']]],
+  ['sregtsctrl_14',['sRegTsCtrl',['../structs_reg_ts_ctrl.html',1,'']]],
+  ['sregvbatctrl_15',['sRegVbatCtrl',['../structs_reg_vbat_ctrl.html',1,'']]],
+  ['stat0_5fu8_16',['stat0_u8',['../unionstat0__u8.html',1,'']]],
+  ['stat1_5fu8_17',['stat1_u8',['../unionstat1__u8.html',1,'']]],
+  ['sysreg_5fu8_18',['sysReg_u8',['../unionsys_reg__u8.html',1,'']]]
+];

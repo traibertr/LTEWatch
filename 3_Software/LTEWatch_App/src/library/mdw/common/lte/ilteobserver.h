@@ -5,14 +5,14 @@
  *
  * \file    ilteobserver.h
  *
- * \addtogroup com
+ * @addtogroup com
  * \{
  *
- * \addtogroup LTE
+ * @addtogroup LTE
  * \{
  *
- * \class   ILTEObserver
- * \brief   Interface definition dedicated to the LTE Object...
+ * @class   ILTEObserver
+ * @brief   Interface definition dedicated to the LTE Object...
  *
  * Initial author: Patrice Rudaz
  * Creation date: 2022-10-06
@@ -52,7 +52,7 @@ public:
     /* ************************************************************************************************************ */
     /************************************************************************************************************//**
      * \name    LTEObservers 
-     * \brief   Callback methods for the LTE's event
+     * @brief   Callback methods for the LTE's event
      * \{
      ****************************************************************************************************************/
     // --------------------------------------------------------------------------------------------------------------

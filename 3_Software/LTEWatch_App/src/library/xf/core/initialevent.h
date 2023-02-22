@@ -5,11 +5,11 @@
  *
  * \file    initialevent.h
  *
- * \addtogroup XF eXecution Framework
+ * @addtogroup XF eXecution Framework
  * \{
  *
- * \class   InitialEvent
- * \brief   Represents the first transition executed in a state machine.
+ * @class   InitialEvent
+ * @brief   Represents the first transition executed in a state machine.
  *
  * Initial author: Thomas Sterren
  * Creation date: 2010-11-26

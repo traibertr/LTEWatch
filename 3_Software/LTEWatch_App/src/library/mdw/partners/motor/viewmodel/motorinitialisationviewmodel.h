@@ -5,11 +5,11 @@
  *
  * \file    motorinitialisationviewmodel.h
  *
- * \addtogroup Motor
+ * @addtogroup Motor
  * \{
  *
- * \class   MotorInitialisationViewModel
- * \brief   Class which contains all data for the MotorInitialisation-Feature
+ * @class   MotorInitialisationViewModel
+ * @brief   Class which contains all data for the MotorInitialisation-Feature
  *
  * Initial author: Thierry Hischier, Patrice Rudaz
  * Creation date: 2018-09-26
@@ -45,16 +45,16 @@
 /* NAMESPACE Declaration                                                                                            */
 /*                                                                                                                  */
 /* **************************************************************************************************************** */
-namespace motor 
+namespace motor
 {
     /* ************************************************************************************************************ */
     /*                                                                                                              */
     /* Class Declaration                                                                                            */
     /*                                                                                                              */
     /* ************************************************************************************************************ */
-    class MotorInitialisationViewModel : 
-        public application::AppViewModel, 
-        public ISubject<MotorInitialisationViewModelObserver, MOTOR_INIT_VIEW_MODEL_MAX_OBSERVERS> 
+    class MotorInitialisationViewModel :
+        public application::AppViewModel,
+        public ISubject<MotorInitialisationViewModelObserver, MOTOR_INIT_VIEW_MODEL_MAX_OBSERVERS>
     {
     public:
         /* ******************************************************************************************************** */
@@ -71,11 +71,11 @@ namespace motor
         /*                                                                                                      */
         /********************************************************************************************************/
         void initialize();
-    
+
         // ViewModel Interface
         void onActivated();
         void onDeactivated();
-        
+
         void motorInitialisationStart();
         void motorAnimationStart(uint8_t motorId);
         void motorAnimationEnd(uint8_t motorId);
@@ -85,7 +85,7 @@ namespace motor
         void setMotorStepsForFastInit(uint8_t motorId);
         void cancelMotorInit();
         void update();
-        
+
     private:
         /********************************************************************************************************/
         /*                                                                                                      */
@@ -94,7 +94,7 @@ namespace motor
         /********************************************************************************************************/
         //Attributes
         uint8_t _currentIndex;
-    
+
         // Methods
     };
 

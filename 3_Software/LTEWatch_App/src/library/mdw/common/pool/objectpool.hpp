@@ -5,11 +5,11 @@
  *
  * \file    objectpool.h
  *
- * \addtogroup MemoryPool
+ * @addtogroup MemoryPool
  * \{
  *
- * \class   ObjectPool
- * \brief   Class which handles the objectpool
+ * @class   ObjectPool
+ * @brief   Class which handles the objectpool
  *
  * Initial author: Thomas Sterren
  * Creation date: 2017-04-27
@@ -155,7 +155,7 @@ public:
     }
 
     /********************************************************************************************************//**
-     * \brief   Releases the resources used by this pool in the case the memory was allocated dynamically.
+     * @brief   Releases the resources used by this pool in the case the memory was allocated dynamically.
      ************************************************************************************************************/
     #if !defined(OBJECTPOOL_OMIT_DESTRUCTOR) or (OBJECTPOOL_OMIT_DESTRUCTOR == 0)
         virtual ~ObjectPool()

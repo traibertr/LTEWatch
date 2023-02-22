@@ -317,7 +317,7 @@ bool BatteryManager::isBatteryCharging(void)
 // ----------------------------------------------------------------------------------------------------------
 void BatteryManager::getBatData(BatData* batData)
 {
-    batData->batLvlInPercent    = getBatteryLevelPercent();
+    batData->batLvlInPercent    = getBatteryLevelInPercent();
     batData->batLvlInMV         = getBatteryLevelInMV();
     batData->isBatCharging      = isBatteryCharging();
 }
@@ -328,19 +328,19 @@ bool BatteryManager::getBatteryChargerConfig(void)
     int err = Factory::bathal()->readI2C(_BatChrgReadRegBuff, DRV_BQ25180_NB_REG);
     if(err == 0)
     {
-        BAT_WARN("STAT0: 0x%02X", _BatChrgReadRegBuff[E_DRV_BQ25180_I2C_REG_OFFSET_STAT0]);
-        BAT_WARN("STAT1: 0x%02X", _BatChrgReadRegBuff[E_DRV_BQ25180_I2C_REG_OFFSET_STAT1]);
-        BAT_WARN("FLAG0: 0x%02X", _BatChrgReadRegBuff[E_DRV_BQ25180_I2C_REG_OFFSET_FLAG0]);
-        BAT_WARN("VBAT_CTRL: 0x%02X", _BatChrgReadRegBuff[E_DRV_BQ25180_I2C_REG_OFFSET_VBAT_CTRL]);
-        BAT_WARN("ICHG_CTRL: 0x%02X", _BatChrgReadRegBuff[E_DRV_BQ25180_I2C_REG_OFFSET_ICHG_CTRL]);
-        BAT_WARN("CHARGECTRL0: 0x%02X", _BatChrgReadRegBuff[E_DRV_BQ25180_I2C_REG_OFFSET_CHARGECTRL0]);
-        BAT_WARN("CHARGECTRL1: 0x%02X", _BatChrgReadRegBuff[E_DRV_BQ25180_I2C_REG_OFFSET_CHARGECTRL1]);
-        BAT_WARN("IC_CTRL: 0x%02X", _BatChrgReadRegBuff[E_DRV_BQ25180_I2C_REG_OFFSET_IC_CTRL]);
-        BAT_WARN("TMR_ILIM: 0x%02X", _BatChrgReadRegBuff[E_DRV_BQ25180_I2C_REG_OFFSET_TMR_ILIM]);
-        BAT_WARN("SHIP_RST: 0x%02X", _BatChrgReadRegBuff[E_DRV_BQ25180_I2C_REG_OFFSET_SHIP_RST]);
-        BAT_WARN("SYS_REG: 0x%02X", _BatChrgReadRegBuff[E_DRV_BQ25180_I2C_REG_OFFSET_SYS_REG]);
-        BAT_WARN("TS_CONTROL: 0x%02X", _BatChrgReadRegBuff[E_DRV_BQ25180_I2C_REG_OFFSET_TS_CONTROL]);
-        BAT_WARN("MASK_ID: 0x%02X", _BatChrgReadRegBuff[E_DRV_BQ25180_I2C_REG_OFFSET_MASK_ID]);
+        BAT_DEBUG("STAT0: 0x%02X", _BatChrgReadRegBuff[E_DRV_BQ25180_I2C_REG_OFFSET_STAT0]);
+        BAT_DEBUG("STAT1: 0x%02X", _BatChrgReadRegBuff[E_DRV_BQ25180_I2C_REG_OFFSET_STAT1]);
+        BAT_DEBUG("FLAG0: 0x%02X", _BatChrgReadRegBuff[E_DRV_BQ25180_I2C_REG_OFFSET_FLAG0]);
+        BAT_DEBUG("VBAT_CTRL: 0x%02X", _BatChrgReadRegBuff[E_DRV_BQ25180_I2C_REG_OFFSET_VBAT_CTRL]);
+        BAT_DEBUG("ICHG_CTRL: 0x%02X", _BatChrgReadRegBuff[E_DRV_BQ25180_I2C_REG_OFFSET_ICHG_CTRL]);
+        BAT_DEBUG("CHARGECTRL0: 0x%02X", _BatChrgReadRegBuff[E_DRV_BQ25180_I2C_REG_OFFSET_CHARGECTRL0]);
+        BAT_DEBUG("CHARGECTRL1: 0x%02X", _BatChrgReadRegBuff[E_DRV_BQ25180_I2C_REG_OFFSET_CHARGECTRL1]);
+        BAT_DEBUG("IC_CTRL: 0x%02X", _BatChrgReadRegBuff[E_DRV_BQ25180_I2C_REG_OFFSET_IC_CTRL]);
+        BAT_DEBUG("TMR_ILIM: 0x%02X", _BatChrgReadRegBuff[E_DRV_BQ25180_I2C_REG_OFFSET_TMR_ILIM]);
+        BAT_DEBUG("SHIP_RST: 0x%02X", _BatChrgReadRegBuff[E_DRV_BQ25180_I2C_REG_OFFSET_SHIP_RST]);
+        BAT_DEBUG("SYS_REG: 0x%02X", _BatChrgReadRegBuff[E_DRV_BQ25180_I2C_REG_OFFSET_SYS_REG]);
+        BAT_DEBUG("TS_CONTROL: 0x%02X", _BatChrgReadRegBuff[E_DRV_BQ25180_I2C_REG_OFFSET_TS_CONTROL]);
+        BAT_DEBUG("MASK_ID: 0x%02X", _BatChrgReadRegBuff[E_DRV_BQ25180_I2C_REG_OFFSET_MASK_ID]);
         return true;
     }
     else
@@ -396,7 +396,7 @@ uint32_t BatteryManager::getBatteryLevelInMV(void)
 }
 
 // ----------------------------------------------------------------------------------------------------------
-uint32_t BatteryManager::getBatteryLevelPercent(void)
+uint32_t BatteryManager::getBatteryLevelInPercent(void)
 {
     BAT_DEBUG("Start reading battery level");
 

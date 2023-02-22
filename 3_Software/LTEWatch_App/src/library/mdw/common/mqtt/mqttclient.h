@@ -5,11 +5,11 @@
  *
  * \file    mqttclient.h
  *
- * \addtogroup MQTT
+ * @addtogroup MQTT
  * \{
  *
- * \class   MQTTCleint
- * \brief   Class which handles a client connection using MQTT protocol
+ * @class   MQTTCleint
+ * @brief   Class which handles a client connection using MQTT protocol
  *
  * Initial author: Patrice Rudaz
  * Creation date: 2022-10-05
@@ -77,7 +77,7 @@ public:
     bool disconnectFromHost();
 
     /**
-     * \brief this method polls the TCP stream for incmming MQTT
+     * @brief this method polls the TCP stream for incmming MQTT
      * 
      * This method polls the TCP stream for incmming MQTT message and also sends the periodical pings to keep the connection alive.
      */

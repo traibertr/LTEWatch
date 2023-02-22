@@ -5,11 +5,11 @@
  *
  * \file    motorid.h
  *
- * \addtogroup Motor
+ * @addtogroup Motor
  * \{
  *
- * \class   motor::MotorId
- * \brief   Class to specify the available ID for the motors
+ * @class   motor::MotorId
+ * @brief   Class to specify the available ID for the motors
  *
  * This class is responsible to distribute to every motor used in the project a different motor's idenfifier.
  *
@@ -37,7 +37,7 @@
 /* Namespace Declaration                                                                                            */
 /*                                                                                                                  */
 /* **************************************************************************************************************** */
-namespace motor 
+namespace motor
 {
 
     /* ************************************************************************************************************ */
@@ -57,17 +57,17 @@ namespace motor
         /**!< Enumeration of event's id available in the current application */
         typedef enum
         {
-            UnknownMotor    = 0x00,         ///< \brief Unknown motor (not initialized).
-            Motor1          = 0x01,         ///< \brief Motor ID for the first motor.
-            Motor2          = 0x02,         ///< \brief Motor ID for the second motor.
-            Motor3          = 0x04,         ///< \brief ... and so on
+            UnknownMotor    = 0x00,         ///< @brief Unknown motor (not initialized).
+            Motor1          = 0x01,         ///< @brief Motor ID for the first motor.
+            Motor2          = 0x02,         ///< @brief Motor ID for the second motor.
+            Motor3          = 0x04,         ///< @brief ... and so on
             Motor4          = 0x08,
             Motor5          = 0x10,
             Motor6          = 0x20,
             Motor7          = 0x40,
-            Motor8          = 0x80 
+            Motor8          = 0x80
         } eMotorId;
-        
+
         static eMotorId fromInt(uint8_t id)
         {
             switch(id)
@@ -85,9 +85,9 @@ namespace motor
         }
 
         /********************************************************************************************************//**
-        * \brief   Returns the string which describes the given Motor.
+        * @brief   Returns the string which describes the given Motor.
         *
-        * \param   id   The given Motor to translate in string.
+        * @param   id   The given Motor to translate in string.
         ************************************************************************************************************/
         static const char* toString(eMotorId id)
         {

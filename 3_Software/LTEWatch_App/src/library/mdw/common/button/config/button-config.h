@@ -1,4 +1,5 @@
-/* Copyright (c) 2021, HES-SO Valais
+/* Copyright (C) MSE Lausanne Hes-so VAUD/WAADT, Hes-so VALAIS/WALLIS, HEI Sion, Infotronics. 2023
+ * Modified by Tristan Traiber
  * All rights reserved.
  */
 #ifndef MDW_BUTTON_CONFIG_H
@@ -74,8 +75,8 @@
 
 //==========================================================
 // <o> LONG PRESS delay [ms]
-// <i> If the button's pressure lasts between `APP_BUTTON_CLICK_MS_DELAY` and this value (`APP_BUTTON_LONG_PRESS_MS_DELAY`), 
-// <i> it's considered as a `LONG PRESS`. If the pressure lasts more than this value, it's a `VERY LONG PRESS` 
+// <i> If the button's pressure lasts between `APP_BUTTON_CLICK_MS_DELAY` and this value (`APP_BUTTON_LONG_PRESS_MS_DELAY`),
+// <i> it's considered as a `LONG PRESS`. If the pressure lasts more than this value, it's a `VERY LONG PRESS`
 #ifndef APP_BUTTON_LONG_PRESS_MS_DELAY
     #define APP_BUTTON_LONG_PRESS_MS_DELAY  3000
 #endif

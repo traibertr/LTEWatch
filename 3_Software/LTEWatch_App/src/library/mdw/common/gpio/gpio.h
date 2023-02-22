@@ -225,7 +225,7 @@ namespace gpio
         uint32_t                            _rtcCounterFalling;
         uint32_t                            _rtcCounterRising;
 
-        void                                _notifyObservers(); 
+        void                                _notifyObservers();
     };
 
 } // namespace gpio

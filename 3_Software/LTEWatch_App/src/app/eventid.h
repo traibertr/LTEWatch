@@ -51,10 +51,10 @@ public:
 
         UartEvent,                      ///< Event ID to identify an event due to an UART activity...
         UartOnDataReadyEvent,           ///< Event ID to identify when some data are ready to be read from UART buffer
-        
+
         UsbdEvent,                      ///< Event ID to identify an event due to an USB activity...
         UsbdOnDataReadyEvent,           ///< Event ID to identify when some data are ready to be read from USB buffer
-        
+
         CalendarEvent,                  ///< Event ID related to a change in date and time
 
         MotorEvent,                     ///< Event ID dealing with motor's movement

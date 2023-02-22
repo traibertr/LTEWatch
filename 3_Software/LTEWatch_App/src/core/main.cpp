@@ -40,7 +40,7 @@ int main(void)
     hal::GpioHal::init();
 
     LOG_DBG("Lunch Factory\n");
-    factory.launch(PROD_DEFAULT_MODE);
+    factory.launch();
 
     LOG_DBG("Start XF");
     XF::start();

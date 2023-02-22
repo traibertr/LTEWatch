@@ -1,22 +1,23 @@
 /****************************************************************************************************************//**
- * Copyright (C) Hes-so VALAIS/WALLIS, HEI Sion, Infotronics. 2022
+ * Copyright (C) MSE Lausanne Hes-so VAUD/WAADT, Hes-so VALAIS/WALLIS, HEI Sion, Infotronics. 2023
+ * Modified by Tristan Traiber
  * Created by Patrice Rudaz
  * All rights reserved.
  *
  * \file    gpiohal.h
  *
- * \addtogroup LowHAL
+ * @addtogroup LowHAL
  * @{
  *
- * \class   hal::GpioHal
- * \brief   Class of Hardware Abstraction Layer to handle the different GPIO's of the Nordic nRf5 series chips.
+ * @class   hal::GpioHal
+ * @brief   Class of Hardware Abstraction Layer to handle the different GPIO's of the Nordic nRf5 series chips.
  *
  * Class of Hardware Abstraction Layer to handle the different GPIO's of the nRf5 series chips based on Nordic SDK
  * v15.0.0 and later. This file contains all functions necessary for the use of any GPIO. It starts with the function
  * `gpioInit()` to initialize all GPIO to disable unwanted current consumptions.
  *
- * \author  Patrice Rudaz (patrice.rudaz@hevs.ch)
- * \date    February 2022
+ * \author  Tristan Traiber (tristan.traiber@master.hes-so.ch)
+ * \date    January 2023
  ********************************************************************************************************************/
 #pragma once
 
@@ -42,7 +43,7 @@
 /* NAMESPACE Declaration                                                                                            */
 /*                                                                                                                  */
 /* **************************************************************************************************************** */
-namespace hal 
+namespace hal
 {
     /* ***************************** ZEPHYR GPIO HAL FLAG LIST *****************************
     -----------------------------------------
@@ -76,7 +77,7 @@ namespace hal
     -------------------------------
     -- GPIO_ACTIVE_LOW  : GPIO pin is active (has logical value ‘1’) in low state
     -- GPIO_ACTIVE_HIGH : GPIO pin is active (has logical value ‘1’) in high state.
-    
+
     ------------------------
     - GPIO pin drive flags -
     ------------------------
@@ -126,7 +127,7 @@ namespace hal
         /*                                                                                                          */
         /* ******************************************************************************************************** */
         /********************************************************************************************************//**
-         * \brief   Initialiaze all GPIOs
+         * @brief   Initialiaze all GPIOs
          *
          * Setup all GPIOs to disable unwated current consumptions. The default value at startup is :
          *  - All GPIO as Input
@@ -137,173 +138,173 @@ namespace hal
         static void init();
 
         /********************************************************************************************************//**
-         * \brief   Configure the PIN as an input
+         * @brief   Configure the PIN as an input
          *
          * This method configures the PIN specified by `pinNbr` as an input and setup its drive's capability and
          * connection's state.
          *
-         * \param   pinNbr      Identify the pin to configure
-         * \param   drive       Set the current drive capacity (high or low drain capability).
-         * \param   pullSetup   Configure the input with an active pullup, pulldown or no pull at all.
-         * \param   connect     Specify if the pin is connected or disconnected.
+         * @param   pinNbr      Identify the pin to configure
+         * @param   drive       Set the current drive capacity (high or low drain capability).
+         * @param   pullSetup   Configure the input with an active pullup, pulldown or no pull at all.
+         * @param   connect     Specify if the pin is connected or disconnected.
          ************************************************************************************************************/
         static void cfgPinInput(uint32_t pinNbr, uint32_t drive, uint32_t pullSetup, uint32_t connect);
 
         /********************************************************************************************************//**
-         * \brief   Configure the PIN as an input with neither pullup or pulldown, standard drive and connected.
+         * @brief   Configure the PIN as an input with neither pullup or pulldown, standard drive and connected.
          *
          * This method configures the PIN specified by `pinNbr` as an input and takes `NOPULL`, `S0S1` and `CONNECTED`
          * as default values. It is dedicated to configure GPIO for button's usage.
          *
-         * \param   pinNbr      Identify the pin to configure
+         * @param   pinNbr      Identify the pin to configure
          ************************************************************************************************************/
         static void cfgPinInputNoPull(uint32_t pinNbr);
 
         /********************************************************************************************************//**
-         * \brief   Configure the PIN as an input using the pullup on chip, the standard drive and connected.
+         * @brief   Configure the PIN as an input using the pullup on chip, the standard drive and connected.
          *
          * This method configures the PIN specified by `pinNbr` as an input and takes `PULLUP`, `S0S1` and `CONNECT`
          * as default values. It is dedicated to configure GPIO for button's usage.
          *
-         * \param   pinNbr      Identify the pin to configure
+         * @param   pinNbr      Identify the pin to configure
          ************************************************************************************************************/
         static void cfgPinInputPullup(uint32_t pinNbr);
 
         /********************************************************************************************************//**
-         * \brief   Configure the PIN as an input using the pulldown on chip, the standard drive and connected.
+         * @brief   Configure the PIN as an input using the pulldown on chip, the standard drive and connected.
          *
          * This method configures the PIN specified by `pinNbr` as an input and takes `PULLDOWN`, `S0S1` and `CONNECT`
          * as default values. It is dedicated to configure GPIO for button's usage.
          *
-         * \param   pinNbr      Identify the pin to configure
+         * @param   pinNbr      Identify the pin to configure
          ************************************************************************************************************/
         static void cfgPinInputPullDown(uint32_t pinNbr);
 
         /********************************************************************************************************//**
-         * \brief   Configure the PIN as an output
+         * @brief   Configure the PIN as an output
          *
          * This method configures the PIN specified by `pinNbr` as an output and setup its drive's capability and
          * connection's state.
          *
-         * \param   pinNbr      Identify the pin to configure
-         * \param   drive       Set the current drive capacity (high or low drain capability).
-         * \param   pullSetup   Configure the output with an active pullup, pulldown or idsabled.
-         * \param   connect     Specify if the pin is connected or disconnected.
+         * @param   pinNbr      Identify the pin to configure
+         * @param   drive       Set the current drive capacity (high or low drain capability).
+         * @param   pullSetup   Configure the output with an active pullup, pulldown or idsabled.
+         * @param   connect     Specify if the pin is connected or disconnected.
          ************************************************************************************************************/
         static void cfgPinOutput(uint32_t pinNbr, uint32_t drive, uint32_t pullSetup, uint32_t connect);
 
         /********************************************************************************************************//**
-         * \brief   Configure the PIN as an output with pulldown or pullup disabled
+         * @brief   Configure the PIN as an output with pulldown or pullup disabled
          *
          * This method configures the PIN specified by `pinNbr` as an output and takes `PULLDOWN`, the given drive
          * capability and `DISCONNECT` as default values.
          *
-         * \param   pinNbr      Identify the pin to configure
-         * \param   drive       Set the current drive capacity (high or low drain capability).
+         * @param   pinNbr      Identify the pin to configure
+         * @param   drive       Set the current drive capacity (high or low drain capability).
          ************************************************************************************************************/
         static void cfgQuickOutput(uint32_t pinNbr, uint32_t drive = GPIO_DEFAULT_DRIVE);
 
         /********************************************************************************************************//**
-         * \brief   Clears the output PINs specified by their mask.
+         * @brief   Clears the output PINs specified by their mask.
          *
-         * \param   pinMask     Identify the pins to clear
+         * @param   pinMask     Identify the pins to clear
          ************************************************************************************************************/
         static void pinMaskClear(uint64_t pinMask);
 
         /********************************************************************************************************//**
-         * \brief   Set the output PINs specified by their mask.
+         * @brief   Set the output PINs specified by their mask.
          *
-         * \param   pinMask     Identify the pins to set
+         * @param   pinMask     Identify the pins to set
          ************************************************************************************************************/
         static void pinMaskSet(uint64_t pinMask);
 
         /********************************************************************************************************//**
-         * \brief   Toggle the output  PINs specified by their mask.
+         * @brief   Toggle the output  PINs specified by their mask.
          *
-         * \param   pinMask     Identify the pins to toggle
+         * @param   pinMask     Identify the pins to toggle
          ************************************************************************************************************/
         static void pinMaskToggle(uint64_t pinMask);
 
         // ZEPHYR -> int gpio_port_toggle_bits(const struct device *port, gpio_port_pins_t pins)
 
         /********************************************************************************************************//**
-         * \brief   Set the output PIN at low level
+         * @brief   Set the output PIN at low level
          *
-         * \param   pinNbr      Identify the pin to clear
-         * \param   activeHigh  To precise the way the pin should set at low level
+         * @param   pinNbr      Identify the pin to clear
+         * @param   activeHigh  To precise the way the pin should set at low level
          ************************************************************************************************************/
         static void pinClear(uint32_t pinNbr, bool activeHigh = true);
 
 
         /********************************************************************************************************//**
-         * \brief   Set the output PIN at high level
+         * @brief   Set the output PIN at high level
          *
-         * \param   pinNbr      Identify the pin to set
-         * \param   activeHigh  To precise the way the pin should set at high level
+         * @param   pinNbr      Identify the pin to set
+         * @param   activeHigh  To precise the way the pin should set at high level
          ************************************************************************************************************/
         static void pinSet(uint32_t pinNbr, bool activeHigh = true);
 
         // ZEPHYR -> static inline int gpio_pin_set(const struct device *port, gpio_pin_t pin, 1)
 
         /********************************************************************************************************//**
-         * \brief   Toggle the output PIN
+         * @brief   Toggle the output PIN
          *
-         * \param   pinNbr      Identify the pin to toggle
+         * @param   pinNbr      Identify the pin to toggle
          ************************************************************************************************************/
         static void pinToggle(uint32_t pinNbr);
 
         // ZEPHYR -> static inline int gpio_pin_toggle(const struct device *port, gpio_pin_t pin)
 
         /********************************************************************************************************//**
-         * \brief   Write the given value to the output PIN
+         * @brief   Write the given value to the output PIN
          *
-         * \param   pinNbr      Identify the pin to write to
-         * \param   value       The value to write to the output pin.
+         * @param   pinNbr      Identify the pin to write to
+         * @param   value       The value to write to the output pin.
          ************************************************************************************************************/
         static void pinWrite(uint32_t pinNbr, uint8_t value);
 
         // ZEPHYR -> static inline int gpio_pin_set(const struct device *port, gpio_pin_t pin, int value)
 
         /********************************************************************************************************//**
-         * \brief   Read the state of the input PIN and returns `true` if the PIN is set and `false` otherwise.
+         * @brief   Read the state of the input PIN and returns `true` if the PIN is set and `false` otherwise.
          *
-         * \param   pinNbr      Identify the pin to read
-         * \param   activeHigh  To know if the pin is active at high level or not. The result will be different...
+         * @param   pinNbr      Identify the pin to read
+         * @param   activeHigh  To know if the pin is active at high level or not. The result will be different...
          *                      For example, if the PIN is active low, the method will return `true` when the signal
-         *                      on the PIN is low, whereas if it is set to active high, the method will return 
+         *                      on the PIN is low, whereas if it is set to active high, the method will return
          *                      `false`.
          *                      Default value: `true`
          *
-         * \return  `true` if the PIN is set and `false` otherwise.
+         * @return  `true` if the PIN is set and `false` otherwise.
          ************************************************************************************************************/
         static bool pinRead(uint32_t pinNbr, bool activeHigh = true);
 
         // ZEPHYR -> static inline int gpio_pin_get(const struct device *port, gpio_pin_t pin)
 
         /********************************************************************************************************//**
-         * \brief   Read the input PINs specified by their mask.
+         * @brief   Read the input PINs specified by their mask.
          *
-         * \param   pinMask     Identify the pins to read
+         * @param   pinMask     Identify the pins to read
          ************************************************************************************************************/
         static uint64_t pinMaskRead(uint64_t pinMask);
 
         // ZEPHYR -> static inline int gpio_port_get(const struct device *port, gpio_port_value_t *value & pinMask)
         #if defined(DEBUG_NRF_USER)
         /********************************************************************************************************//**
-         * \brief   Initializes the Hardware GPIO assign to the pin number as an output.
+         * @brief   Initializes the Hardware GPIO assign to the pin number as an output.
          *
          * For DEBUG usage, this function allows the developer to initialize a specific GPIO as an output.
          *
-         * \param   pinNbr      Identify the pin to configure
+         * @param   pinNbr      Identify the pin to configure
          ************************************************************************************************************/
         static void initDebugGPIO(uint8_t pinNbr);
 
         /********************************************************************************************************//**
-         * \brief   Toggle the state of the DEBUG GPIO
+         * @brief   Toggle the state of the DEBUG GPIO
          *
          * For DEBUG usage, toggles the state of GPIO...
          *
-         * \param   pinNbr      Identify the pin to configure
+         * @param   pinNbr      Identify the pin to configure
          ************************************************************************************************************/
         static void toggleDebugGPIO(uint8_t pinNbr);
         #endif  // #if defined(DEBUG_NRF_USER)

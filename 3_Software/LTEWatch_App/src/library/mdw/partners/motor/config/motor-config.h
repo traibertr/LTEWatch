@@ -1,4 +1,4 @@
-/* Copyright (c) 2021, HES-SO Valais
+/* Copyright (C) MSE Lausanne Hes-so VAUD/WAADT, Hes-so VALAIS/WALLIS, HEI Sion, Infotronics. 2023
  * All rights reserved.
  */
 #pragma once
@@ -71,7 +71,7 @@
     #define GPIO_PIN_CONNECTION             GPIO_DISCONNECTED
 #else
     #define GPIO_PIN_CONNECTION             GPIO_CONNECTED
-#endif    
+#endif
 #define GPIO_PIN_DRIVE                      GPIO_DEFAULT_DRIVE
 
 // ------------------------------------------------------------------------------------------------------------------

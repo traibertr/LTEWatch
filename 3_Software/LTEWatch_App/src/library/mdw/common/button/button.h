@@ -1,5 +1,6 @@
 /****************************************************************************************************************//**
- * Copyright (C) Hes-so VALAIS/WALLIS, HEI Sion, Infotronics. 2022
+ * Copyright (C) MSE Lausanne Hes-so VAUD/WAADT, Hes-so VALAIS/WALLIS, HEI Sion, Infotronics. 2023
+ * Modified by Tristan Traiber
  * Created by Patrice Rudaz
  * All rights reserved.
  *
@@ -25,8 +26,8 @@
  * Initial author: Patrice Rudaz
  * Creation date: 2018-02-26
  *
- * @author  Patrice Rudaz (patrice.rudaz@hevs.ch)
- * @date    July 2018
+ * @author  Tristan Traiber (tristan.traiber@master.hes-so.ch)
+ * @date    December 2022
  ********************************************************************************************************************/
 #pragma once
 
@@ -59,7 +60,7 @@ namespace gpio
     /* Class Declaration                                                                                            */
     /*                                                                                                              */
     /* ************************************************************************************************************ */
-    class Button : public ISubject<ButtonObserver, APP_BUTTON_MAX_OBSERVERS> 
+    class Button : public ISubject<ButtonObserver, APP_BUTTON_MAX_OBSERVERS>
     #if (USE_FLASH != 0)
         , public flash::Persister
     #endif  // #if (USE_FLASH != 0)
@@ -119,7 +120,7 @@ namespace gpio
         /********************************************************************************************************//**
          * @return  Transform and returns the current button event as string.
          ************************************************************************************************************/
-        static const char* stateToString(eButtonState state) 
+        static const char* stateToString(eButtonState state)
         {
             switch(state)
             {
@@ -133,7 +134,7 @@ namespace gpio
                 default:                    return "Released";
             }
         }
-        
+
         /********************************************************************************************************//**
          * @brief   Initializes the components needed by this class
          *
@@ -151,12 +152,12 @@ namespace gpio
         void initialize(uint8_t pinNumber,
                         ButtonId::eButtonId buttonId,
                         nrf_gpio_pin_pull_t pullSetup = BUTTON_PULL_SETUP);
-        
+
         /********************************************************************************************************//**
          * @return  Retrieves a pointer to the GPIO used by the button.
          ************************************************************************************************************/
         inline Gpio* gpio()                                         { return &_gpio; }
-        
+
         /********************************************************************************************************//**
          * @return  Retrieves the identifier of the Button
          ************************************************************************************************************/
@@ -215,7 +216,7 @@ namespace gpio
          * @return  Retrieves the last known state of the Button
          ************************************************************************************************************/
         inline Button::eButtonState buttonLastState()               { return _lastState; }
-        
+
         /********************************************************************************************************//**
          * @return  Retrieves the counter of single-click done during all the live of the product.
          ************************************************************************************************************/
@@ -245,7 +246,7 @@ namespace gpio
          * @return  Retrieves the counter of release action done during all the live of the product.
          ************************************************************************************************************/
         inline uint32_t releaseCounter() const                      { return _persistentParams.releaseCounter(); }
-        
+
         /********************************************************************************************************//**
          * @return  Returns the Button's identifier to string... For DEBUG purpose
          ************************************************************************************************************/

@@ -5,11 +5,11 @@
  *
  * \file    ixfevent.h
  *
- * \addtogroup XF eXecution Framework
+ * @addtogroup XF eXecution Framework
  * \{
  *
- * \class   IXFEvent
- * \brief   Interface for an event.
+ * @class   IXFEvent
+ * @brief   Interface for an event.
  *
  * Interface for an event. The abstract methods defined in this interface need to be reimplemented in its derived
  * classes. These methods are used by other classes in the framework (ex. XFThread, XFReactive).
@@ -50,7 +50,7 @@ public :
     /*                                                                                                              */
     /* ************************************************************************************************************ */
     /************************************************************************************************************//**
-     * \brief   Defines the types of events.
+     * @brief   Defines the types of events.
      ****************************************************************************************************************/
     typedef enum
     {
@@ -69,13 +69,13 @@ public :
     /*                                                                                                              */
     /* ************************************************************************************************************ */
     /************************************************************************************************************//**
-     * \brief   Default class constructor
+     * @brief   Default class constructor
      ****************************************************************************************************************/
     IXFEvent(eEventType eventType, uint8_t id, IXFReactive * pBehaviour, bool deleteMe = true) 
         : _eventType(eventType), _id(id), _pBehaviour(pBehaviour), _deleteMe( deleteMe ) {}
 
     /************************************************************************************************************//**
-     * \brief   Class destructor
+     * @brief   Class destructor
      ****************************************************************************************************************/
     virtual ~IXFEvent() {}
 
@@ -86,31 +86,31 @@ public :
     /*                                                                                                              */
     /* ************************************************************************************************************ */
     /************************************************************************************************************//**
-     * \brief   Returns the type of the event.
+     * @brief   Returns the type of the event.
      *          Can be used to distinguish between an event or a time-out.
      ****************************************************************************************************************/
     inline eEventType getEventType() const              { return _eventType; }
 
     /************************************************************************************************************//**
-     * \brief   Returns pointer to behavioural class.
+     * @brief   Returns pointer to behavioural class.
      *          Returns a pointer to the behavioural class processing the event (see #_pBehaviour).
      ****************************************************************************************************************/
     inline IXFReactive* getBehaviour() const            { return _pBehaviour; }
 
     /************************************************************************************************************//**
-     * \brief   Returns pointer to behavioural class.
+     * @brief   Returns pointer to behavioural class.
      *          Returns a pointer to the behavioural class processing the event (see #_pBehaviour).
      ****************************************************************************************************************/
     inline bool mustBeDeleted() const                   { return _deleteMe; }
 
     /************************************************************************************************************//**
-     * \brief   Sets pointer to behavioural class (see #_pBehaviour).
+     * @brief   Sets pointer to behavioural class (see #_pBehaviour).
      *          Sets the behaviour in which the event should be executed.
      ****************************************************************************************************************/
     inline void setBehaviour(IXFReactive* pBehaviour)   { _pBehaviour = pBehaviour; }
 
     /************************************************************************************************************//**
-     * \brief   Returns #_id identifying the event in the behaviours context.
+     * @brief   Returns #_id identifying the event in the behaviours context.
      ****************************************************************************************************************/
     inline int getId() const                            { return _id; }
 
@@ -121,11 +121,11 @@ protected:
     /*                                                                                                              */
     /* ************************************************************************************************************ */
     // Attributes
-    const eEventType    _eventType;         ///< \brief Holds the type of the event.
-    uint8_t             _id;                ///< \brief Event id
+    const eEventType    _eventType;         ///< @brief Holds the type of the event.
+    uint8_t             _id;                ///< @brief Event id
 
-    IXFReactive*        _pBehaviour;        ///< \brief Pointer to behavioural class processing the event.
-    bool                _deleteMe;          ///< \brief To know if the event has to be deleted after consumption
+    IXFReactive*        _pBehaviour;        ///< @brief Pointer to behavioural class processing the event.
+    bool                _deleteMe;          ///< @brief To know if the event has to be deleted after consumption
 };
 
 /** \} */

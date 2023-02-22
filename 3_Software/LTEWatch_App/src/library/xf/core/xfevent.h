@@ -5,11 +5,11 @@
  *
  * \file    xfevent.h
  *
- * \addtogroup XF eXecution Framework
+ * @addtogroup XF eXecution Framework
  * \{
  *
- * \class   XFEvent
- * \brief   Base class for all events.
+ * @class   XFEvent
+ * @brief   Base class for all events.
  *
  * Base class for all events. When intending to signal an event, derive a new class from this class.
  *
@@ -46,10 +46,10 @@ public:
     /*                                                                                                              */
     /* ************************************************************************************************************ */
     /************************************************************************************************************//**
-     * \brief   Constructor
+     * @brief   Constructor
      *
-     * \param   id          Identifier uniquely identifying the event in the context of the behaviour.
-     * \param   pBehaviour  The behaviour for which the event was constructed (will consume the event).
+     * @param   id          Identifier uniquely identifying the event in the context of the behaviour.
+     * @param   pBehaviour  The behaviour for which the event was constructed (will consume the event).
      ****************************************************************************************************************/
     XFEvent( uint8_t id, IXFReactive * pBehaviour = NULL, bool deleteMe = true );
     virtual ~XFEvent();

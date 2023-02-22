@@ -5,7 +5,7 @@
 #define MDW_DEBUG_CONFIG_H
 
 //==========================================================
-// <h> General DEBUG Configuration Tool 
+// <h> General DEBUG Configuration Tool
 // ---------------------------------------------------------
 // <i> With this file, the developer can easily enable or disable the LOG trace of each module
 #ifndef DEBUG_NRF_USER

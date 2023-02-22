@@ -1,16 +1,17 @@
 /****************************************************************************************************************//**
- * Copyright (C) Hes-so VALAIS/WALLIS, HEI Sion, Infotronics. 2018
+ * Copyright (C) MSE Lausanne Hes-so VAUD/WAADT, Hes-so VALAIS/WALLIS, HEI Sion, Infotronics. 2023
+ * Modified by Tristan Traiber
  * Created by Patrice Rudaz
  * All rights reserved.
  *
  * \file    platform-config.h
- * \brief   This file is used to enable/disable all the different peripherals and features for PCA10056 project
+ * @brief   This file is used to enable/disable all the different peripherals and features for PCA10056 project
  *
  * Initial author: Patrice Rudaz
  * Creation date: 2018-01-11
  *
- * \author  Tristan Traiber
- * \date    Mai 2022
+ * \author  Tristan Traiber (tristan.traiber@master.hes-so.ch)
+ * \date    December 2022
  ********************************************************************************************************************/
 #pragma once
 

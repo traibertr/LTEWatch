@@ -75,9 +75,9 @@ public:
      * @param   data    Pointer to the new values to append
      * @param   size    Amount of data to append to the buffer
      *
-     * \retval  BUFFER_SUCCESS          For a successfull process
-     * \retval  BUFFER_ERROR_NO_MEM     If there is not enough room keft in the buffer
-     * \retval  BUFFER_ERROR_NULL       If the buffer is full
+     * @retval  BUFFER_SUCCESS          For a successfull process
+     * @retval  BUFFER_ERROR_NO_MEM     If there is not enough room keft in the buffer
+     * @retval  BUFFER_ERROR_NULL       If the buffer is full
      ****************************************************************************************************************/
     uint32_t append(const uint8_t* data, size_t* size)
     {
@@ -110,8 +110,8 @@ public:
      *
      * @param   value   The value to be put at the end of the buffer.
      *
-     * \retval  BUFFER_SUCCESS          For a successfull process
-     * \retval  BUFFER_ERROR_NO_MEM     If there is not enough room keft in the buffer
+     * @retval  BUFFER_SUCCESS          For a successfull process
+     * @retval  BUFFER_ERROR_NO_MEM     If there is not enough room keft in the buffer
      ****************************************************************************************************************/
     uint32_t put(uint8_t value)
     {
@@ -135,8 +135,8 @@ public:
      * @param   value   The `byte` value to be set. 
      * @param   offset  The position where to set the new value.
      *
-     * \retval  BUFFER_SUCCESS          For a successfull process
-     * \retval  BUFFER_ERROR_NO_MEM     If there is not enough room keft in the buffer
+     * @retval  BUFFER_SUCCESS          For a successfull process
+     * @retval  BUFFER_ERROR_NO_MEM     If there is not enough room keft in the buffer
      ****************************************************************************************************************/
     uint32_t putAtOffset(uint8_t value, size_t offset) {
         if (offset >= S)
@@ -154,8 +154,8 @@ public:
      *
      * @param   value   The 16bits value to be put at the end of the buffer.
      *
-     * \retval  BUFFER_SUCCESS          For a successfull process
-     * \retval  BUFFER_ERROR_NO_MEM     If there is not enough room keft in the buffer
+     * @retval  BUFFER_SUCCESS          For a successfull process
+     * @retval  BUFFER_ERROR_NO_MEM     If there is not enough room keft in the buffer
      ****************************************************************************************************************/
     uint32_t putShort(uint16_t value)
     {
@@ -178,8 +178,8 @@ public:
      *
      * @param   value   The 32 bits value to be put at the end of the buffer.
      *
-     * \retval  BUFFER_SUCCESS          For a successfull process
-     * \retval  BUFFER_ERROR_NO_MEM     If there is not enough room keft in the buffer
+     * @retval  BUFFER_SUCCESS          For a successfull process
+     * @retval  BUFFER_ERROR_NO_MEM     If there is not enough room keft in the buffer
      ****************************************************************************************************************/
     uint32_t putLong(uint32_t value)
     {

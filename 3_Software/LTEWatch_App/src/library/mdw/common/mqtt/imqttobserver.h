@@ -5,11 +5,11 @@
  *
  * \file        imqttclientobserver.h
  *
- * \addtogroup  MQTT
+ * @addtogroup  MQTT
  * \{
  *
  * \interface   IMQTTClientObserver
- * \brief       Interface of any MQTT Client
+ * @brief       Interface of any MQTT Client
  *
  * Initial author: Patrice Rudaz
  * Creation date: 2022-10-05

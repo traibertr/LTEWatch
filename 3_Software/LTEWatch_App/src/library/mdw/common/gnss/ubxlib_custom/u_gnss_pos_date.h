@@ -1,3 +1,18 @@
+/****************************************************************************************************************//**
+ * Copyright (C) MSE Lausanne Hes-so VAUD/WAADT, Hes-so VALAIS/WALLIS, HEI Sion, Infotronics. 2023
+ * Modified by Tristan Traiber
+ * Created by u-blox
+ * All rights reserved.
+ *
+ * @brief  Functions to get date and position form GNSS receiver `MAX-M10S` from u-blox (asynchronous)
+ *
+ * Initial author: Tristan Traiber
+ * Creation date: 06.01.2023
+ *
+ * @author  Tristan Traiber (tristan.traiber@master.hes-so.ch)
+ * @date    January 2023
+ ********************************************************************************************************************/
+
 /*
  * Copyright 2019-2022 u-blox
  *
@@ -25,7 +40,7 @@
 #include "ubxlib.h"
 #include "u_device.h"
 
-/** \addtogroup _GNSS
+/** @addtogroup _GNSS
  *  @{
  */
 

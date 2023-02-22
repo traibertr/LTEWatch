@@ -11,8 +11,8 @@
  * \defgroup Motor
  * \{
  *
- * \class   MotorInitialisation
- * \brief   Class which handles the initialisation of the different motors
+ * @class   MotorInitialisation
+ * @brief   Class which handles the initialisation of the different motors
  *
  * # MotorInitialisation
  *
@@ -80,16 +80,16 @@ namespace motor
         /*                                                                                                          */
         /* ******************************************************************************************************** */
         /********************************************************************************************************//**
-         * \brief   Enumeration used to have a unique identifier for every button action.
+         * @brief   Enumeration used to have a unique identifier for every button action.
          ************************************************************************************************************/
         enum buttonActions
         {
-            MOTOR_INITIALISATION_SINGLE_STEP = 1, 
+            MOTOR_INITIALISATION_SINGLE_STEP = 1,
             MOTOR_INITIALISATION_CONTINUES_STEPS,
             MOTOR_INITIALISATION_CONTINUES_STOP,
             MOTOR_INITIALISATION_CHANGE_MOTOR
         };
-        
+
         void initialize();
         void bind(MotorController* motorController,
                   MotorInitialisationViewModel* viewModel
@@ -106,7 +106,7 @@ namespace motor
         /*                                                                                                          */
         /* ******************************************************************************************************** */
         /********************************************************************************************************//**
-         * \brief   Enumeration used to have a unique identifier for every state in the state machine.
+         * @brief   Enumeration used to have a unique identifier for every state in the state machine.
          ************************************************************************************************************/
         typedef enum
         {
@@ -123,24 +123,24 @@ namespace motor
             ST_MOTORINITIALISATION_TOP_ENUM
         } eState;
 
-        
+
         /********************************************************************************************************//**
-         * \brief   Timeout identifier(s) for this state machine
+         * @brief   Timeout identifier(s) for this state machine
          ************************************************************************************************************/
         typedef enum
         {
             TimeoutAnimationId  = 1,
-            TimeoutActivationId, 
+            TimeoutActivationId,
             TimeoutTopEnumId
         } eTimeoutId;
 
         /********************************************************************************************************//**
-         * \brief   Implements state machine behavior.
+         * @brief   Implements state machine behavior.
          ************************************************************************************************************/
         EventStatus processEvent();
 
         /********************************************************************************************************//**
-         * \brief   Implements Function View Interface.
+         * @brief   Implements Function View Interface.
          ************************************************************************************************************/
         void onViewActionChanged(::ActionId::eActionId actionId);
 
@@ -160,7 +160,7 @@ namespace motor
         uint8_t                                 _currentMotorId;
         bool                                    _fastMotorInit;
 
-        // Methods  
+        // Methods
         void                                    _startTimeoutAnimation();
         void                                    _onMotorMoveEnd();
 

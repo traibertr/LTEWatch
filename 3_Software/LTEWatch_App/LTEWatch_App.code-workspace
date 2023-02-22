@@ -42,7 +42,10 @@
 			"memory": "c",
 			"ibatteryobserver.h": "c",
 			"picoevent.h": "c",
-			"gnss-config.h": "c"
+			"gnss-config.h": "c",
+			"modem_info.h": "c",
+			"chrono": "c",
+			"limits": "c"
 		}
 	}
 }

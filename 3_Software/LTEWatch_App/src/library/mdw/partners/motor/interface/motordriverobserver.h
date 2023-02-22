@@ -5,11 +5,11 @@
  *
  * \file    motordriverobserver.h
  *
- * \addtogroup Motor
+ * @addtogroup Motor
  * \{
  *
- * \class   motor::MotorDriverObserver
- * \brief   Interface definition dedicated to the MotorDriver...
+ * @class   motor::MotorDriverObserver
+ * @brief   Interface definition dedicated to the MotorDriver...
  *
  * Initial author: Patrice Rudaz
  * Creation date: 2016-08-18
@@ -33,7 +33,7 @@
 /* NAMESPACE defintion                                                                                              */
 /*                                                                                                                  */
 /* **************************************************************************************************************** */
-namespace motor 
+namespace motor
 {
 
     /* ************************************************************************************************************ */
@@ -52,11 +52,10 @@ namespace motor
         /* ******************************************************************************************************** */
 
         /* ******************************************************************************************************//**
-         * \brief   Callback methods for the MotorDriver
+         * @brief   Callback methods for the MotorDriver
          ************************************************************************************************************/
         // ----------------------------------------------------------------------------------------------------------
         virtual void onStepsEnd(MotorDriver* mDriver) = 0;
-
     };
 
 }   // namespace motor

@@ -5,11 +5,11 @@
  *
  * \file    motorpersistor.h
  *
- * \addtogroup Motor
+ * @addtogroup Motor
  * \{
  *
- * \class   motor::MotorPersistor
- * \brief   Class that handles motor's parameters to be saved and restore before and after DFU...
+ * @class   motor::MotorPersistor
+ * @brief   Class that handles motor's parameters to be saved and restore before and after DFU...
  *
  * Initial author: Patrice Rudaz
  * Creation date: 2017-05-17
@@ -67,32 +67,32 @@ namespace motor
         /*                                                                                                          */
         /* ******************************************************************************************************** */
         /********************************************************************************************************//**
-         * \brief   Serialisation of the class
+         * @brief   Serialisation of the class
           ***********************************************************************************************************/
         inline uint32_t*    data()                          { return reinterpret_cast<uint32_t*>(this); }
 
         /********************************************************************************************************//**
-         * \brief   Gives the current position.
+         * @brief   Gives the current position.
          ************************************************************************************************************/
         inline uint16_t     position() const                { return _position; }
 
         /********************************************************************************************************//**
-         * \brief   Returns the counter of steps made during the complete life of the motor.
+         * @brief   Returns the counter of steps made during the complete life of the motor.
          ************************************************************************************************************/
         inline uint32_t     stepCounter() const             { return _stepCounter; }
 
         /********************************************************************************************************//**
-         * \brief   Returns the counter of steps made during the complete life of the motor.
+         * @brief   Returns the counter of steps made during the complete life of the motor.
          ************************************************************************************************************/
         inline uint8_t      alim() const                    { return _alim & 0x01; }
 
         /********************************************************************************************************//**
-         * \brief   Set the new position of hte motor
+         * @brief   Set the new position of hte motor
          ************************************************************************************************************/
         inline void         setPosition(uint16_t position)  { _position = position; }
 
         /********************************************************************************************************//**
-         * \brief   Toggle the state of the alimentation's controller and increment the counter of steps
+         * @brief   Toggle the state of the alimentation's controller and increment the counter of steps
          ************************************************************************************************************/
         inline void         toggleAlim()                    { _alim++; _stepCounter++;}
 

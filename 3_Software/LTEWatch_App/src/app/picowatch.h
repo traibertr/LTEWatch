@@ -1,5 +1,5 @@
 /***************************************************************************************************************//**
- * Copyright (C) Hes-so, MSE Lausanne, Colaboration with Hes-so VALAIS/WALLIS, HEI Sion, Infotronics. 2022
+ * Copyright (C) Hes-so, MSE Lausanne, Colaboration with Hes-so VALAIS/WALLIS, HEI Sion, Infotronics. 2023
  * Created by Tristan Traiber and based on Patrice Rudaz Source Code from Moskito Project
  * All rights reserved.
  *
@@ -10,15 +10,15 @@
  * @class   PicoWatch
  * @brief   LTEWatch Master Thesis simple LTE/GNSS Hybrid Smart-Watch
  *
- * \mainpage PicoWatch
+ * @mainpage PicoWatch
  *
- * # Moskito
+ * # PicoWatch
  *
- * This class has been developed for the Specific project called Moskito. It uses the eXecution Framework designed 
+ * This class is a small LTE-M/NB-IoT & GNSS smart-watch application. It uses the eXecution Framework designed
  * and developed by the HEI Sion, member of HES-SO Valais.
  *
  * @author  Tristan Traiber (tristan.traiber@master.hes-so.ch)
- * @date    February 2022
+ * @date    February 2023
  ********************************************************************************************************************/
 #pragma once
 
@@ -109,12 +109,10 @@ namespace application
             , public IBatteryObserver
     {
         public:
-
         /* ******************************************************************************************************** */
-        /*                                                                                                          */
         /* PUBLIC DECLARATION SECTION                                                                               */
-        /*                                                                                                          */
         /* ******************************************************************************************************** */
+
         /********************************************************************************************************//**
          * @brief   Enumeration used to have a unique identifier for every button action.
          ************************************************************************************************************/
@@ -175,23 +173,40 @@ namespace application
             #endif  // #if (USE_BUTTONS != 0) && (BUTTONS_NUMBER != 0)
             );
 
+        /********************************************************************************************************//**
+        * @brief   Implements state machine behavior
+        *
+        * @param   event    Event identifier
+        *
+        * @retval `true`    When event processed successfully
+        * @retval `false`   Otherwise
+        ************************************************************************************************************/
         bool processEvent(PicoEvent* event);
 
+        /********************************************************************************************************//**
+        * @brief   Starts PicoWatch executive framework (start behaviour)
+        ************************************************************************************************************/
         void startBehaviour();
 
-        /********************************************************************************************************//**
-         * @brief   Get the application Instance (Singleton)
-        ************************************************************************************************************/
         // Singleton
+        /********************************************************************************************************//**
+        * @brief    Creat/use singleton instance of PicoWatch
+        *
+        * @return   PicoWatch instance pointer
+        ************************************************************************************************************/
         static PicoWatch* getInstance();
 
         /********************************************************************************************************//**
          * @brief   Zephyr kernel work handler (callback) for application's work
+         *
+         * @param   work    Kernel work identifier
          ************************************************************************************************************/
         static void picoWatchTaskHandler(struct k_work* work);
 
         /********************************************************************************************************//**
          * @brief   Zephyr kernel timer handler (callback) for application's timeout
+         *
+         * @param   timer_id    Kernel timer identifier
          ************************************************************************************************************/
         static void picoWatchTimeoutHandler(struct k_timer *timer_id);
 
@@ -224,6 +239,9 @@ namespace application
         void onError(BatteryManager* batterManager, int error);
 
 protected:
+/* ******************************************************************************************************** */
+/* PROTECTED DECLARATION SECTION                                                                            */
+/* ******************************************************************************************************** */
         /********************************************************************************************************//**
          * @brief   Enumeration used to identifiy application's works (k_work_q).
          ************************************************************************************************************/
@@ -289,25 +307,32 @@ protected:
             ST_GPS_TRACKING_MODE,
             ST_NR_STATE
         } ePicoWatchState;
+
         /********************************************************************************************************//**
-         * @brief   Process a work from the application's workqueue
-         *
-         * @param   stateId The identificator of the work to be processed
-         *
-         * @return  true if the work was seccessfully processed
-         ************************************************************************************************************/
+        * @brief Push event to the executive framework
+        *
+        * @param   event     event identifier
+        ************************************************************************************************************/
         void pushEvent(PicoEvent* event);
 
+        /********************************************************************************************************//**
+        * @brief   Implements state machine behavior
+        *
+        * @param   event    Event identifier
+        *
+        * @retval `true`    When event processed successfully
+        * @retval `false`   Otherwise
+        ************************************************************************************************************/
         void mqttInternalProcessEvent(PicoEvent* event);
 
-        ePicoWatchState _mqttCurrentState;
-        ePicoWatchState _mqttOldState;
-        ePicoWatchState _currentState;
+        ePicoWatchState _mqttCurrentState;          ///< MQTT internal state machine current state
+        ePicoWatchState _mqttOldState;              ///< MQTT internal state machine old state
+        ePicoWatchState _currentState;              ///< PicoWatch state machine current state
 
-        PicoEvent evInitial_;
-        PicoEvent evDefault_;
-        PicoEvent evRelease_;
-        PicoEvent evLongPress_;
+        PicoEvent evInitial_;                       ///< Initial event
+        PicoEvent evDefault_;                       ///< Default event
+        PicoEvent evRelease_;                       ///< Button release event
+        PicoEvent evLongPress_;                     ///< Button longpress event
 
         #if (USE_MQTT != 0)
 
@@ -320,27 +345,52 @@ protected:
                               evLTEConnected,
                               evLTEError} LTEEvents;
 
-            PicoEvent evConnectionTimeout_;
+            PicoEvent evConnectionTimeout_;         ///< LTE connection timeout event
 
-            uint8_t conAttemptcounter_;
+            uint8_t conAttemptcounter_;             ///< LTE connection attempts counter
 
-            bool isLteConnectProcessActive_;
-            bool isMqttConnectProcessActive_;
-            bool isLteActive_;
+            bool isLteConnectProcessActive_;        ///< LTE connection process active flag
+            bool isMqttConnectProcessActive_;       ///< MQTT connection process active flag
+            bool isLteActive_;                      ///< LTE status flag
 
-            void sendMqttLocation();
+            /********************************************************************************************************//**
+            * @brief   Send location data to MQTT broker (LTE-M/NB-IoT)
+            *
+            * @retval `true`    When successful
+            * @retval `false`   Otherwise
+            ************************************************************************************************************/
+            bool sendMqttLocation(void);
 
-            void sendMqttTimeDate();
+            /********************************************************************************************************//**
+            * @brief   Send time and date data to MQTT broker (LTE-M/NB-IoT)
+            *
+            * @retval `true`    When successful
+            * @retval `false`   Otherwise
+            ************************************************************************************************************/
+            bool sendMqttTimeDate(void);
 
-            void sendMqttMessage_(MQTTController* mqtt, string json, string topic);
+            /********************************************************************************************************//**
+            * @brief    Send data to MQTT broker (LTE-M/NB-IoT)
+            *
+            * @param    mqtt      MQTT client instance
+            * @param    json      MQTT data buffer
+            * @param    topic     MQTT topic identifier
+            *
+            * @retval   `true`    When successful
+            * @retval   `false`   Otherwise
+            ************************************************************************************************************/
+            bool sendMqttMessage_(MQTTController* mqtt, string json, string topic);
 
-            void startConnectionTimeout_();
+            /********************************************************************************************************//**
+            * @brief    Start LTE-M/NB-IoT and MQTT connection process
+            ************************************************************************************************************/
+            void startConnectionTimeout_(void);
 
-            uint8_t connectionKeepAliveCounter_;
+            uint8_t connectionKeepAliveCounter_;    ///< LTE connection keep alive flag
         #endif
 
-        PicoEvent evConnected_;
-        PicoEvent evError_;
+        PicoEvent evConnected_;                     ///< LTE connected event
+        PicoEvent evError_;                         ///< LTE error event
 
         struct  EvElement
         {
@@ -348,8 +398,8 @@ protected:
             uint8_t type;
         };
 
-        EvElement   _currentEvent;
-        uint8_t     _currentButtonAction;
+        EvElement   _currentEvent;                  ///< Current recieved event
+        uint8_t     _currentButtonAction;           ///< Last button event registered
 
         #if (USE_BUTTONS != 0)
             void onButtonSingleClick(gpio::Button* button);
@@ -360,36 +410,51 @@ protected:
             void onButtonTripleLongPress(gpio::Button* button);
             void onButtonVeryLongPress(gpio::Button* button);
             void onButtonReleased(gpio::Button* button);
-
             const gpio::Button* button(int index) const;
             gpio::Button* button(int index);
         #endif  // #if (USE_BUTTONS != 0)
 
+        /********************************************************************************************************//**
+        * @brief    Increment a variable  content inside in selected range
+        *
+        * @param    pID     Variable to increment
+        * @param    MAX     Maximal variable value
+        * @param    MIN     Minimal variable value
+        ************************************************************************************************************/
         void nextID(uint8_t* pID, uint8_t MAX, uint8_t MIN = 0);
+
+        /********************************************************************************************************//**
+        * @brief    Decrement a variable  content inside in selected range
+        *
+        * @param    pID     Variable to decreament
+        * @param    MAX     Maximal variable value
+        * @param    MIN     Minimal variable value
+        ************************************************************************************************************/
         void previousID(uint8_t* pID, uint8_t MAX, uint8_t MIN = 0);
 
     private:
         /* ******************************************************************************************************** */
-        /*                                                                                                          */
         /* PRIVATE DECLARATION SECTION                                                                              */
-        /*                                                                                                          */
         /* ******************************************************************************************************** */
 
         /* ******************************************************************************************************** */
-        /*                                                                                                          */
         /* CONSTRUCTOR SECTION                                                                                      */
-        /*                                                                                                          */
         /* ******************************************************************************************************** */
         PicoWatch();
         virtual ~PicoWatch() {}
 
         // ---- Attributes ------------------------------------------------------------------------------------------
 
+        /********************************************************************************************************//**
+        * @brief    Push default event
+        *
+        * @param    delay     Event delay value
+        ************************************************************************************************************/
         void pushDefaultEvent_(int delay = 0);
 
         // Timer and WorQueue
-        static struct k_work    _picoWorks[application::PicoWatch::WRK_NR_WORKS];
-        static struct k_timer   _picoTimers[application::PicoWatch::T_NR_TIMERS];
+        static struct k_work    _picoWorks[application::PicoWatch::WRK_NR_WORKS];   ///< PicoWatch kernel work list
+        static struct k_timer   _picoTimers[application::PicoWatch::T_NR_TIMERS];   ///< PicoWatch kernel timer list
 
         #if (USE_LEDS != 0) && (LEDS_NUMBER != 0)
             gpio::LedController*                _ledA;
@@ -423,17 +488,17 @@ protected:
         #endif
 
         #if (USE_GNSS != 0)
-            uLocation_t                     _gnssLocation;
-            GnssController::gDate_t         _gnssDateTime;
+            uLocation_t                     _gnssLocation;          ///< GNSS location data
+            GnssController::gDate_t         _gnssDateTime;          ///< GNSS date and time data
         #endif
 
-        uint32_t                            _updateGnssPeriode;
-        uint32_t                            _updateMqttPeriode;
+        uint32_t                            _updateGnssPeriode;     ///< GNSS position update refresh periode
+        uint32_t                            _updateMqttPeriode;     ///< MQTT message publish refresh periode
 
         //flag
-        bool                                _isMotorOn;
-        bool                                batLvlMvMode_;
-        BatteryManager::BatData             batData_;
+        bool                                _isMotorOn;             ///< Motor status flag
+        bool                                batLvlMvMode_;          ///< Battery level mode (mV/percent)
+        BatteryManager::BatData             batData_;               ///< Battery information data
         // state machine's Actions
         void 		                        _ST_SYSTEM_OFF_Action();
     };

@@ -1,4 +1,5 @@
-/* Copyright (c) 2018, HES-SO Valais
+/* Copyright (C) MSE Lausanne Hes-so VAUD/WAADT, Hes-so VALAIS/WALLIS, HEI Sion, Infotronics. 2023
+ * Modified by Tristan Traiber
  * All rights reserved.
  */
 #ifndef MDW_GPIO_CONFIG_H

@@ -4,7 +4,7 @@
  * All rights reserved.
  *
  * \file    critical.h
- * \brief   Methods to enter or exit critical section and to know if we already are inside an interrupt service
+ * @brief   Methods to enter or exit critical section and to know if we already are inside an interrupt service
  *          routine.
  *
  * Initial author: Thomas Sterren
@@ -21,17 +21,17 @@ extern "C"
 {
 #endif
     /************************************************************************************************************//**
-     * \brief   Returns true if code is executed inside an interrupt service routine (ISR).
+     * @brief   Returns true if code is executed inside an interrupt service routine (ISR).
      ****************************************************************************************************************/
     int inIsr(void);
 
     /************************************************************************************************************//**
-     * \brief   Enters critical region. May also be called inside an ISR.
+     * @brief   Enters critical region. May also be called inside an ISR.
      ****************************************************************************************************************/
     void enterCritical(void);
 
     /************************************************************************************************************//**
-     * \brief   Exits critical region. May also be called inside an ISR.
+     * @brief   Exits critical region. May also be called inside an ISR.
      ****************************************************************************************************************/
     void exitCritical(void);
 #if defined(__cplusplus)

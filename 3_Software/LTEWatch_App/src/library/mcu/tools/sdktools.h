@@ -1,5 +1,6 @@
 /****************************************************************************************************************//**
- * Copyright (C) Hes-so VALAIS/WALLIS, HEI Sion, Infotronics. 2022
+ * Copyright (C) MSE Lausanne Hes-so VAUD/WAADT, Hes-so VALAIS/WALLIS, HEI Sion, Infotronics. 2023
+ * Modified by Tristan Traiber
  * Created by Patrice Rudaz
  * All rights reserved.
  *
@@ -14,8 +15,8 @@
  * Initial author: Patrice Rudaz
  * Creation date: 2016-06-16
  *
- * @author  Patrice Rudaz (patrice.rudaz@hevs.ch)
- * @date    February 2022
+ * @author  Tristan Traiber (tristan.traiber@master.hes-so.ch)
+ * @date    December 2022
  ********************************************************************************************************************/
 #pragma once
 
@@ -93,7 +94,7 @@ namespace tools
         /********************************************************************************************************//**
          * @brief   Process the conversion from \c float to IEEE-11073 FLOAT (32 bits) or IEEE-11073 SFLOAT (16 bits).
          *
-         * This function will convert any `float` value to IEEE-11073 32bit FLOAT (16-bit SFLOAT) and retrieve it as 
+         * This function will convert any `float` value to IEEE-11073 32bit FLOAT (16-bit SFLOAT) and retrieve it as
          * an array of `uint8_t` to be able to sent it through BLE.
          ************************************************************************************************************/
         static uint8_t floatToIEEE11073Float(float value, uint8_t precision, uint8_t* encodedValue);
@@ -194,7 +195,7 @@ namespace tools
 
         /********************************************************************************************************//**
          * \name    Arithmetics
-         * @brief   Compute the Greatest Common Divisor, rounded devision or ceiled division for integer value of 
+         * @brief   Compute the Greatest Common Divisor, rounded devision or ceiled division for integer value of
          *          two numbers
          *
          * @param   a   First number
@@ -256,7 +257,7 @@ namespace tools
 
         /********************************************************************************************************//**
          * \name   HandleString
-         * \brief  Methods to handle string
+         * @brief  Methods to handle string
          *
          * \{
          ************************************************************************************************************/

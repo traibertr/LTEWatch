@@ -13,7 +13,7 @@
  *
  * # BaseController
  *
- * This class handles all counters and delays, and their getters and setters, used by the GpioCOntroller and the 
+ * This class handles all counters and delays, and their getters and setters, used by the GpioCOntroller and the
  * ButtonController.
  *
  * Initial author: Patrice Rudaz

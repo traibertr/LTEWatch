@@ -5,11 +5,11 @@
  *
  * \file    xftimeout.h
  *
- * \addtogroup XF eXecution Framework
+ * @addtogroup XF eXecution Framework
  * \{
  *
- * \class   XFTimeout
- * \brief   Interface to be implemented by time-outs.
+ * @class   XFTimeout
+ * @brief   Interface to be implemented by time-outs.
  *
  * Interface to be implemented by time-outs. Defined methods are needed by the framework classes 
  * (see also: \ref XFTimeoutManager).
@@ -58,7 +58,7 @@ public:
     /*                                                                                                              */
     /* ************************************************************************************************************ */
     /************************************************************************************************************//**
-     * \brief   Operator checks if #_pBehaviour and #_id are equal.
+     * @brief   Operator checks if #_pBehaviour and #_id are equal.
      *
      * Operator checks if #_pBehaviour and #_id are equal and returns true if so. All other attributes get no
      * attention.
@@ -67,44 +67,44 @@ public:
 
 #if (XF_TM_USE_MEMORYPOOL_FOR_TIMEOUTS != 0)
     /************************************************************************************************************//**
-     * \brief   Create custom new and delete operators using memory pool
+     * @brief   Create custom new and delete operators using memory pool
      ****************************************************************************************************************/
     DECLARE_MEMORYPOOL_OPERATORS(XFTimeout)
 #endif // XF_TM_USE_MEMORYPOOL_FOR_TIMEOUTS
 
     /************************************************************************************************************//**
-     * \brief   Returns the interval value set for the current timeout
+     * @brief   Returns the interval value set for the current timeout
      ****************************************************************************************************************/
     //inline uint32_t interval() const        { return _interval; }
 
     /************************************************************************************************************//**
-     * \brief   Returns the timer tick's counter computed from the interval of the current timeout
+     * @brief   Returns the timer tick's counter computed from the interval of the current timeout
      ****************************************************************************************************************/
     inline uint32_t ticks() const           { return _ticks; }
 
     /************************************************************************************************************//**
-     * \brief   Returns the relative tick's counter coming from the gap between the current timeout and hte previous
+     * @brief   Returns the relative tick's counter coming from the gap between the current timeout and hte previous
      *          one.
      ****************************************************************************************************************/
     inline uint32_t relTicks() const        { return _relTicks; }
 
     /************************************************************************************************************//**
-     * \brief   Returns the difference between the relative Tick's number and the one it should be for very short timer
+     * @brief   Returns the difference between the relative Tick's number and the one it should be for very short timer
      ****************************************************************************************************************/
     inline uint32_t minGapOverflow() const  { return _minGapOverflow; }
 
     /************************************************************************************************************//**
-     * \brief   Returns the difference between the relative Tick's number and the one it should be for very short timer
+     * @brief   Returns the difference between the relative Tick's number and the one it should be for very short timer
      ****************************************************************************************************************/
     inline void clearMinGapOverflow()       { _minGapOverflow = 0; }
 
     /************************************************************************************************************//**
-     * \brief   Increments the ticks value with the given parameter
+     * @brief   Increments the ticks value with the given parameter
      ****************************************************************************************************************/
     void incrRelativeTicks(uint32_t toAdd);
 
     /************************************************************************************************************//**
-     * \brief   Decrement the ticks value...
+     * @brief   Decrement the ticks value...
      ****************************************************************************************************************/
     void decrRelativeTicks(uint32_t toSubstract);
 
@@ -115,20 +115,20 @@ protected:
     /*                                                                                                              */
     /* ************************************************************************************************************ */
     // Attributes
-    uint32_t _ticks;             ///< \brief Duration of the timeout expressed in number of Tick counter.
-    uint32_t _relTicks;          ///< \brief Used by the \ref XFTimeoutManager "TimeoutManager"  to calculate remaining time. Can get negative!
-    uint32_t _minGapOverflow;    ///< \brief Stores the differnce between _relticks and XF_TIMER_MIN_TIMEOUT_TICKS, if the _relTicks is lower than this limit.
+    uint32_t _ticks;             ///< @brief Duration of the timeout expressed in number of Tick counter.
+    uint32_t _relTicks;          ///< @brief Used by the \ref XFTimeoutManager "TimeoutManager"  to calculate remaining time. Can get negative!
+    uint32_t _minGapOverflow;    ///< @brief Stores the differnce between _relticks and XF_TIMER_MIN_TIMEOUT_TICKS, if the _relTicks is lower than this limit.
 
     // Methods
     /************************************************************************************************************//**
-     * \brief   Protected Constructor
+     * @brief   Protected Constructor
      *
      * \warning Creating copies of XFTimeout is not allowed.
      ****************************************************************************************************************/
     XFTimeout(const XFTimeout & timeout);
 
     /************************************************************************************************************//**
-     * \brief   Operator overload for XFTimeout
+     * @brief   Operator overload for XFTimeout
      *
      * \warning Creating copies of XFTimeout is not allowed.
      ****************************************************************************************************************/

@@ -4,8 +4,8 @@
  * All rights reserved.
  *
  * \file    islist.hpp
- * \class   IsList
- * \brief   IsList is an Interrupt Safe List. It can  be called inside an ISR (Interrupt Service Routine).
+ * @class   IsList
+ * @brief   IsList is an Interrupt Safe List. It can  be called inside an ISR (Interrupt Service Routine).
  *
  * Initial author: Christopher Metrailler, Patrice Rudaz, Thomas Sterren
  * Creation date: 2016-08-18

@@ -5,11 +5,11 @@
  *
  * \file    xfeventstatus.h
  *
- * \addtogroup XF eXecution Framework
+ * @addtogroup XF eXecution Framework
  * \{
  *
- * \class   EventStatus
- * \brief   The EventStatus is used after consumption of an event.
+ * @class   EventStatus
+ * @brief   The EventStatus is used after consumption of an event.
  *
  * The EventStatus is used after consumption of an event. It gives an information on how the event was consumed and 
  * how the framework should react.
@@ -42,7 +42,7 @@ public:
     /*                                                                                                              */
     /* ************************************************************************************************************ */
     /************************************************************************************************************//**
-     * \brief   Status values about the event processed.
+     * @brief   Status values about the event processed.
      * \see     XFReactive::process
      ****************************************************************************************************************/
     typedef enum
@@ -60,9 +60,9 @@ public:
     /*                                                                                                              */
     /* ************************************************************************************************************ */
     /************************************************************************************************************//**
-     * \brief   Constructor
+     * @brief   Constructor
      *
-     * \param   eventStatus Initial value of the event status.
+     * @param   eventStatus Initial value of the event status.
      ****************************************************************************************************************/
     EventStatus(eEventStatus eventStatus = Unknown) : _status(eventStatus) {}
 
@@ -73,7 +73,7 @@ public:
     /*                                                                                                              */
     /* ************************************************************************************************************ */
     /************************************************************************************************************//**
-     * \brief   Checks if both variables contain the same event status.
+     * @brief   Checks if both variables contain the same event status.
      ****************************************************************************************************************/
     bool operator == (const eEventStatus & eventStatus) const
     {
@@ -82,7 +82,7 @@ public:
 
 public:
     // Attributes
-    eEventStatus _status;                   ///< \brief Attribute containing the status of the event.
+    eEventStatus _status;                   ///< @brief Attribute containing the status of the event.
 };
 
 typedef EventStatus::eEventStatus eEventStatus;

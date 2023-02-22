@@ -8,8 +8,8 @@
  * \defgroup Motor
  * \{
  *
- * \class   motor::Motor
- * \brief   Class that manages a bidirectional stepper motor
+ * @class   motor::Motor
+ * @brief   Class that manages a bidirectional stepper motor
  *
  * Soprod developed bidirectional stepper motors for high-end watch movements.
  *
@@ -78,7 +78,7 @@
 /* **************************************************************************************************************** */
 namespace motor
 {
-    
+
     /* ************************************************************************************************************ */
     /*                                                                                                              */
     /* Class Declaration                                                                                            */
@@ -96,7 +96,7 @@ namespace motor
         /*                                                                                                          */
         /* ******************************************************************************************************** */
         /********************************************************************************************************//**
-         * \brief   Enumeration of the number of steps available for the Soprod motor.
+         * @brief   Enumeration of the number of steps available for the Soprod motor.
          ************************************************************************************************************/
         typedef enum
         {
@@ -109,7 +109,7 @@ namespace motor
         } eNbSteps;
 
         /********************************************************************************************************//**
-         * \brief   Initializes the components needed by this class
+         * @brief   Initializes the components needed by this class
          *
          * This initialization method needs some parameters:
          *   - the motor's index to identify the motor,
@@ -122,16 +122,16 @@ namespace motor
          * the second. Therefore for each second, the motor has to do three steps and therefore `nbStepsForTick`
          * will have the value of 3.
          *
-         * \param   hotReset            To know if a `reset` has occured at runtime...
-         * \param   id                  The identifier of the motor to control
-         * \param   nbSteps             Number of steps to complete a full rotation, default value is 180
-         * \param   nbStepsForTick      The number of steps necessary to give significant information, the default
+         * @param   hotReset            To know if a `reset` has occured at runtime...
+         * @param   id                  The identifier of the motor to control
+         * @param   nbSteps             Number of steps to complete a full rotation, default value is 180
+         * @param   nbStepsForTick      The number of steps necessary to give significant information, the default
          *                              value is 1.
-         * \param   coilA               The PIN number assign to the connector A of the motor's coils.
-         * \param   coilB               The PIN number assign to the connector B of the motor's coils.
-         * \param   coilC               The PIN number assign to the connector C of the motor's coils.
-         * \param   inverseRotation     This parameter defines the default direction of motor rotation.
-         * \param   nbStepsForFastInit  Defines how many steps should be done in fast initialisation mode and
+         * @param   coilA               The PIN number assign to the connector A of the motor's coils.
+         * @param   coilB               The PIN number assign to the connector B of the motor's coils.
+         * @param   coilC               The PIN number assign to the connector C of the motor's coils.
+         * @param   inverseRotation     This parameter defines the default direction of motor rotation.
+         * @param   nbStepsForFastInit  Defines how many steps should be done in fast initialisation mode and
          *                              during the animation when switching motors.
          *
          * \warning Must be called before any other method of this class
@@ -146,162 +146,162 @@ namespace motor
                         uint8_t           coilC              = 2,
                         bool              inverseRotation    = false,
                         uint8_t           nbStepsForFastInit = 15);
-                        
+
 
         /********************************************************************************************************//**
-         * \brief   Gives the motor's ID
+         * @brief   Gives the motor's ID
          *
          * This method retrieves the value of the identifier of the motor. This value MUST be unique
          * and contained in the enumerate values `tMotorIdType`
          *
-         * \return  The identifier of the motor
+         * @return  The identifier of the motor
          ************************************************************************************************************/
         inline uint8_t id() const                       { return _id; }
 
         /********************************************************************************************************//**
-         * \brief   Gives the motor's index
+         * @brief   Gives the motor's index
          *
          * This method retrieves the value of the index of the motor. This value MUST be unique
          * and is a positive number from to 0 to the number of registered motors in the Watch caliber.
          *
-         * \return  The index of the motor
+         * @return  The index of the motor
          ************************************************************************************************************/
         inline uint8_t motorPositionIndex() const       { return _motorPosIndex; }
 
         /********************************************************************************************************//**
-         * \brief   Gives the current position.
+         * @brief   Gives the current position.
          *
          * This method retrieves the current position of the motor. This value can not exceed the
          * `nbSteps` value.
          *
-         * \return  The current position of the motor
+         * @return  The current position of the motor
          ************************************************************************************************************/
         inline uint16_t position() const                { return _persistentParams.position(); }
 
         /********************************************************************************************************//**
-         * \brief   Gives the destination.
+         * @brief   Gives the destination.
          *
          * This method retrieves the next destination of the current motor. This value can not exceed
          * the `nbSteps` value.
          *
-         * \return  The next position of the current motor
+         * @return  The next position of the current motor
          ************************************************************************************************************/
         inline uint16_t destination() const             { return _destination; }
 
         /********************************************************************************************************//**
-         * \brief   Gives the number of steps of the stepper motor
+         * @brief   Gives the number of steps of the stepper motor
          *
          * This method retrieves the number of steps required to do a complete turn.
          *
-         * \return  The number of steps of this motor to complete one turn
+         * @return  The number of steps of this motor to complete one turn
          ************************************************************************************************************/
         inline uint16_t nbSteps() const                 { return _nbSteps; }
 
         /********************************************************************************************************//**
-         * \brief   Gives the number of steps of the stepper motor
+         * @brief   Gives the number of steps of the stepper motor
          *
          * This method retrieves the number of steps required to do a half turn.
          *
-         * \return  The number of steps of this motor to complete a half turn
+         * @return  The number of steps of this motor to complete a half turn
          ************************************************************************************************************/
         inline uint16_t nbStepsHalf() const             { return _nbStepsHalf; }
 
         /********************************************************************************************************//**
-         * \brief   Gives the number of steps of the stepper motor
+         * @brief   Gives the number of steps of the stepper motor
          *
          * This method retrieves the number of steps required to do a ond and a half turn.
          *
-         * \return  The number of steps of this motor to complete one and a half turn
+         * @return  The number of steps of this motor to complete one and a half turn
          ************************************************************************************************************/
         inline uint16_t nbStepsThreeHalf() const        { return _nbStepsThreeHalf; }
 
         /********************************************************************************************************//**
-         * \brief   Gives the number of steps necessary to give significant information
+         * @brief   Gives the number of steps necessary to give significant information
          *
          * This method retrieves the number of steps necessary to give significant information.
          *
-         * \return  The number of steps necessary to give significant information
+         * @return  The number of steps necessary to give significant information
          ************************************************************************************************************/
         inline uint8_t nbStepsForTick() const           { return _nbStepsForTick; }
 
         /********************************************************************************************************//**
-         * \brief   Retrieves the number of steps for fast initialization.
+         * @brief   Retrieves the number of steps for fast initialization.
          *
          * This method retrieves the number of steps used during the motor's initlialization at high
          * speed. At that speed more than one steps are applied on the motor to reach the initial
          * position.
          *
-         * \return  The number of steps for high speed motor's initialization
+         * @return  The number of steps for high speed motor's initialization
          ************************************************************************************************************/
         inline uint16_t nbStepsForFastInit() const      { return _nbStepsForFastInit; }
 
         /********************************************************************************************************//**
-         * \brief   Retrieves the number of steps for animation when switching motor in initialization.
+         * @brief   Retrieves the number of steps for animation when switching motor in initialization.
          *
          * This method retrieves the number of steps used for the animation during the motor's initlialization when
          * switching between motors. During this animation, more than one steps are applied on the motor on each
          * direction.
          *
-         * \return  The number of steps for animation during motor's initialization
+         * @return  The number of steps for animation during motor's initialization
          ************************************************************************************************************/
         inline uint16_t nbStepsForAnimation() const     { return _nbStepsForAnimation; }
 
         /********************************************************************************************************//**
-         * \brief   Gives the direction of the motor.
+         * @brief   Gives the direction of the motor.
          *
          * This method retrieves the direction expected for the next step of the motor. It returns
          * `TRUE` if the next step is clockwise. If we should go back (counterclockwise), it will
          * return `FALSE`.
          *
-         * \return  `TRUE` if the direction expected for the next step is clockwise, `FALSE` otherwise
+         * @return  `TRUE` if the direction expected for the next step is clockwise, `FALSE` otherwise
          ************************************************************************************************************/
         inline bool isGoingForward() const              { return _clockwise; }
 
         /********************************************************************************************************//**
-         * \brief   Gives the coilA PIN number.
+         * @brief   Gives the coilA PIN number.
          *
          * This method retrieves the number of the PIN assign to the point A of the motor's coils.
          *
-         * \return  The PIN number of the point A of the motor's coils.
+         * @return  The PIN number of the point A of the motor's coils.
          ************************************************************************************************************/
         inline uint8_t coilA() const                    { return _coilA; }
 
         /********************************************************************************************************//**
-         * \brief   Gives the coilB PIN number.
+         * @brief   Gives the coilB PIN number.
          *
          * This method retrieves the number of the PIN assign to the point B of the motor's coils.
          *
-         * \return  The PIN number of the point B of the motor's coils.
+         * @return  The PIN number of the point B of the motor's coils.
          ************************************************************************************************************/
         inline uint8_t coilB() const                    { return _coilB; }
 
         /********************************************************************************************************//**
-         * \brief   Gives the coilC PIN number.
+         * @brief   Gives the coilC PIN number.
          *
          * This method retrieves the number of the PIN assign to the point C of the motor's coils.
          *
-         * \return  The PIN number of the point C of the motor's coils.
+         * @return  The PIN number of the point C of the motor's coils.
          ************************************************************************************************************/
         inline uint8_t coilC() const                    { return _coilC; }
 
         /********************************************************************************************************//**
-         * \brief   Retrieves the three coils of the motor.
+         * @brief   Retrieves the three coils of the motor.
          *
          * This method retrieves the 3 values which are the pin numbers identifying the GPIOs to be used to
          * drive the coils of the active motor. According to the `Common Coil` configuration (C or B), it retrieves
          * the pin number of GPIO of coil A, C and B or A, B and C.
          *
-         * \return  The array of PIN number of the points A, B or C.
+         * @return  The array of PIN number of the points A, B or C.
          ************************************************************************************************************/
         inline uint8_t* activeCoilEndPoints()          { return _activeCoilEndPoint; }
 
         /********************************************************************************************************//**
-         * \brief   Retrieves the signal to be applied on coils to move the motor in the selected direction.
+         * @brief   Retrieves the signal to be applied on coils to move the motor in the selected direction.
          *
          * This method retrieves the array of 3 boolean values which are the pulse wave to be used to drive the 
          * coils of the active motor in the desired direction.
          *
-         * \return  The pulse of the motor's coils
+         * @return  The pulse of the motor's coils
          ************************************************************************************************************/
         inline const uint8_t* activePulse()
         {
@@ -310,7 +310,7 @@ namespace motor
         }
 
         /********************************************************************************************************//**
-         * \brief   Retrieve the value of `_stepThreshold` private parameter.
+         * @brief   Retrieve the value of `_stepThreshold` private parameter.
          *
          * Watch movement don't always use motors with the same step's number. To give the impression
          * that all motors are rotating simultaneously, the motors with the less of motor's steps
@@ -320,127 +320,127 @@ namespace motor
         inline uint8_t stepThreshold() const            { return _stepThreshold; }
 
         /********************************************************************************************************//**
-         * \brief   Retrieves the reversed confivguration of the motor
+         * @brief   Retrieves the reversed confivguration of the motor
          *
          * This method retrieves `TRUE` if the motor is configured to rotate counter clockwise to
          * go forward, due to mechanicla construction and `FALSE` otherwise.
          *
-         * \return  The rotation directions inversion due to machanical construction
+         * @return  The rotation directions inversion due to machanical construction
          ************************************************************************************************************/
         inline bool  isReversed() const                 { return _inverseRotation; }
 
         /********************************************************************************************************//**
-         * \brief   Returns an uint32_t bitfield containing the GPIOs used for the motor's coils.
+         * @brief   Returns an uint32_t bitfield containing the GPIOs used for the motor's coils.
          *
-         * \return  The mask of the GPIOs used to drive the coils of the current motor.
+         * @return  The mask of the GPIOs used to drive the coils of the current motor.
          ************************************************************************************************************/
         inline uint64_t motorGpioMask() const           { return _motorGpioMask; }
 
         /********************************************************************************************************//**
-         * \brief   Returns the delay to wait between two steps of the current motor when it is alone to move.
+         * @brief   Returns the delay to wait between two steps of the current motor when it is alone to move.
          *
          * Returns the delay to wait between two steps of the current motor when it is alone to move. The value is
          * already converted in ticks of 32kHz.
          *
-         * \return  The number of ticks to wait between two single motor's steps.
+         * @return  The number of ticks to wait between two single motor's steps.
          ************************************************************************************************************/
         inline uint32_t singleGapTick() const           { return _singleGapTick; }
 
         /********************************************************************************************************//**
-         * \brief   Returns the number of steps the motor has done during is life...
+         * @brief   Returns the number of steps the motor has done during is life...
          ************************************************************************************************************/
         inline uint32_t stepCounter() const             { return _persistentParams.stepCounter(); }
 
         /********************************************************************************************************//**
-         * \brief   Returns wether the direction of the specific motor is forced (-1 for ccw ,1 for cw) or not (0)
+         * @brief   Returns wether the direction of the specific motor is forced (-1 for ccw ,1 for cw) or not (0)
          ************************************************************************************************************/
         inline int8_t forceDirection() const            { return _forceDirection; }
 
         /********************************************************************************************************//**
-         * \brief   Set the destination to the actual position
+         * @brief   Set the destination to the actual position
          ************************************************************************************************************/
         inline void resetDestination()                  { _destination = _persistentParams.position(); }
-        
+
         /********************************************************************************************************//**
-         * \return  Returns the Motor's identifier to string... For DEBUG purpose
+         * @return  Returns the Motor's identifier to string... For DEBUG purpose
          ************************************************************************************************************/
         inline const char* toString() const             { return MotorId::toString(MotorId::fromInt(_id)); }
 
-        
+
         /********************************************************************************************************//**
-         * \brief   Set the position of the motor
+         * @brief   Set the position of the motor
          *
          * This method checks that the given position is in the motor step's range and store it in the persistent 
-         * memory. 
+         * memory.
          *
-         * \param   position. This is the new position to be stored as the actual one.
+         * @param   position. This is the new position to be stored as the actual one.
          ************************************************************************************************************/
         void setPosition(uint16_t position);
-        
+
         /********************************************************************************************************//**
-         * \brief   Set the destination of the motor
+         * @brief   Set the destination of the motor
          *
          * This method computes the next destination. The new given position can be any value, evennegative. This
          * method supports all possible values ??and converts them to a destination between 0 and `nbSteps`.
          *
-         * \param   destination This is the goal the motor has to reach.
+         * @param   destination This is the goal the motor has to reach.
          ************************************************************************************************************/
         void setDestination(uint16_t destination);
 
         /********************************************************************************************************//**
-         * \brief   Changes the configuration of the direction according to given parameter
+         * @brief   Changes the configuration of the direction according to given parameter
          ************************************************************************************************************/
         void setDirectionConfiguration(bool clockwise);
 
         /********************************************************************************************************//**
-         * \brief   Set the direction for the next step.
+         * @brief   Set the direction for the next step.
          *
          * This method update the direction for the next step according the `forward` parameter. A `TRUE` given as
          * parameter means that the next step will be clockwise. For a counterclockwise step, `FALSE` should be
          * passed.
          *
-         * \param   clockwise `TRUE` to go clockwise and `FALSE` otherwise.
+         * @param   clockwise `TRUE` to go clockwise and `FALSE` otherwise.
          ************************************************************************************************************/
         void setDirection(bool clockwise);
 
         /********************************************************************************************************//**
-         * \brief   set the forceDirection parameter of the motor for the next destination
+         * @brief   set the forceDirection parameter of the motor for the next destination
          *
          * This method update the direction behaviour of the motor. It will then be fetched by MotorDriver to know
          * what to call \ref setDirection(bool clockwise) with.
          *
-         * \param   forceDirection `-1` to go clockwise and `1` otherwise. `0` means the direction to choose is the
+         * @param   forceDirection `-1` to go clockwise and `1` otherwise. `0` means the direction to choose is the
          *                         closest
          ************************************************************************************************************/
         void setForceDirection(int8_t forceDirection);
 
         /********************************************************************************************************//**
-         * \brief   Set the number of steps necessary to give significant information
+         * @brief   Set the number of steps necessary to give significant information
          *
-         * \param   nbStepsForTick The new value to be recorded.
+         * @param   nbStepsForTick The new value to be recorded.
          ************************************************************************************************************/
         void setNbStepsForTick(uint8_t nbStepsForTick);
 
         /********************************************************************************************************//**
-         * \brief   Setup the index used for this motor to update the buffer of motor's position when
+         * @brief   Setup the index used for this motor to update the buffer of motor's position when
          *          using the `Motor Position` characterisitic.
          *
-         * \param   index Reference to the motor's index of the motor driver array...
+         * @param   index Reference to the motor's index of the motor driver array...
          ************************************************************************************************************/
         void setMotorPositionIndex(uint8_t index);
 
         /********************************************************************************************************//**
-         * \brief   FIXME : Add some comments
+         * @brief   FIXME : Add some comments
          ************************************************************************************************************/
         void setMotorSteps(uint16_t steps);
 
         /********************************************************************************************************//**
-         * \brief   FIXME : Add some comments
+         * @brief   FIXME : Add some comments
          ************************************************************************************************************/
         void setMotorStepsForFastInit(uint16_t stepsForFastInit);
 
         /********************************************************************************************************//**
-         * \brief   Set the new value for `_stepThreshold` private parameter.
+         * @brief   Set the new value for `_stepThreshold` private parameter.
          *
          * Watch movement don't always use motors with the same step's number. To give the impression that all motors
          * are rotating simultaneously, the motors with the less of motor's steps should not make a step at each
@@ -452,7 +452,7 @@ namespace motor
 
 
         /********************************************************************************************************//**
-         * \brief   Toggle the state of the outputs
+         * @brief   Toggle the state of the outputs
          *
          * This method is used to switch the state (high or low) of the outputs connected to the coil
          * of the current motor.
@@ -460,7 +460,7 @@ namespace motor
         inline void toggleAlim()                        { _persistentParams.toggleAlim(); }
 
         /********************************************************************************************************//**
-         * \brief   Increase the destination of `nbStepsForTick`.
+         * @brief   Increase the destination of `nbStepsForTick`.
          *
          * Increase the destination of `nbStepsForTick` to reach the next significant position. As reminder,
          * `nbStepsForTick` represents the number of steps to do to reach a position with any interest... For a
@@ -469,12 +469,12 @@ namespace motor
         void stepForward();
 
         /********************************************************************************************************//**
-         * \brief   Move the motor of one step forward.
+         * @brief   Move the motor of one step forward.
          ************************************************************************************************************/
         void singleStepForward();
 
         /********************************************************************************************************//**
-         * \brief   Decrease the destination of `nbStepsForTick`.
+         * @brief   Decrease the destination of `nbStepsForTick`.
          *
          * Decrease the destination of `nbStepsForTick` to reach the previous significant position. As reminder,
          * `nbStepsForTick` represents the number of steps to do to reach a position with any interest... For a
@@ -483,22 +483,22 @@ namespace motor
         void stepBackward();
 
         /********************************************************************************************************//**
-         * \brief   Move the motor of one step forward.
+         * @brief   Move the motor of one step forward.
          ************************************************************************************************************/
         void singleStepBackward();
 
         /********************************************************************************************************//**
-         * \brief   Update the number of steps to do for the default animation.
+         * @brief   Update the number of steps to do for the default animation.
          *
          * This method let change the number of steps to be done in both direction during the default animation.
          * According to the state of the Synchronous Mode, this number should adjusted
          *
-         * \param   nbSteps     The new number of steps to be used.
+         * @param   nbSteps     The new number of steps to be used.
          ************************************************************************************************************/
         void updateNbStepsForAnimation(bool synchronousModeEnabled, uint8_t factor);
 
         /********************************************************************************************************//**
-         * \brief   Update the current position of the motor
+         * @brief   Update the current position of the motor
          *
          * This method update the current position after a completed step. It takes into account the direction and
          * maximum number of steps `nbSteps`.
@@ -506,19 +506,19 @@ namespace motor
         void updatePosition();
 
         /********************************************************************************************************//**
-         * \brief   Returns the delay to wait between two steps of the current motor when it is alone to move.
+         * @brief   Returns the delay to wait between two steps of the current motor when it is alone to move.
          *
          * Returns the delay to wait between two steps of the current motor when it is alone to move. The value is
          * already converted in ticks of 32kHz.
          *
-         * \return  The number of ticks to wait between two single motor's steps.
+         * @return  The number of ticks to wait between two single motor's steps.
          ************************************************************************************************************/
         void setSingleGapTick(uint32_t gapTick);
 
     #if (USE_FLASH != 0)
         /********************************************************************************************************//**
          * \name   FlashPersiterInheritance
-         * \brief  Inherit from FlashPersiter.
+         * @brief  Inherit from FlashPersiter.
          * \{
          ************************************************************************************************************/
         virtual uint32_t* save(uint16_t* size);

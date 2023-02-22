@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['safety_5ftimer_0',['SAFETY_TIMER',['../structs_reg_ic_ctrl.html#a6c795ceb4da7304b135e0b3101f96439',1,'sRegIcCtrl']]],
+  ['safety_5ftmr_5ffault_5fflag_1',['SAFETY_TMR_FAULT_FLAG',['../structs_reg_stat1.html#a263a062e58d176e34393cc84315a1568',1,'sRegStat1']]],
+  ['sec_2',['sec',['../group___g_n_s_s.html#gacaaacc85c8ebaee3ab55216b86f96759',1,'GnssController::gDate_t']]],
+  ['services_3',['services',['../structpartition__tfm__sp__crypto__load__info__t.html#ad78bbbdcb0ab5d3a6c17da119275ce43',1,'partition_tfm_sp_crypto_load_info_t::services()'],['../structpartition__tfm__sp__platform__load__info__t.html#aa043ef0129a290fff8d47ad2fb6e0dbf',1,'partition_tfm_sp_platform_load_info_t::services()'],['../load__info__tfm__crypto_8c.html#ac861a4f7aa0fcd873ba70207259c642e',1,'services():&#160;load_info_tfm_crypto.c'],['../load__info__tfm__platform_8c.html#a8c5154ef1833165bcc4c2957779a993b',1,'services():&#160;load_info_tfm_platform.c']]],
+  ['ship_5frst_4',['SHIP_RST',['../structs__drv__bq25180__i2c__reg__t.html#a80c5078542c27f21a33843cc5b09ded6',1,'s_drv_bq25180_i2c_reg_t']]],
+  ['size_5',['size',['../structtfm__read__service__range.html#a1a65301a3919d1dd60f79e809611cc96',1,'tfm_read_service_range']]],
+  ['speedmillimetrespersecond_6',['speedMillimetresPerSecond',['../group___g_n_s_s.html#ga7c732b675a4b4c3dd939a54ab82cb809',1,'GnssController']]],
+  ['srv_5fid_7',['srv_id',['../structtfm__crypto__pack__iovec.html#a3d4f507b078b4413c2821069c13ac224',1,'tfm_crypto_pack_iovec']]],
+  ['stack_5faddr_8',['stack_addr',['../structpartition__tfm__sp__crypto__load__info__t.html#a207f13a5241e97a6e195aa670fa7099e',1,'partition_tfm_sp_crypto_load_info_t::stack_addr()'],['../structpartition__tfm__sp__platform__load__info__t.html#a477fb7f78bc640859c6025c058abf29f',1,'partition_tfm_sp_platform_load_info_t::stack_addr()'],['../load__info__tfm__crypto_8c.html#ae120e349ca3a9caab86af094e85e35a2',1,'stack_addr():&#160;load_info_tfm_crypto.c'],['../load__info__tfm__platform_8c.html#ae120e349ca3a9caab86af094e85e35a2',1,'stack_addr():&#160;load_info_tfm_platform.c']]],
+  ['start_9',['start',['../structtfm__read__service__range.html#ac6ac4817c7416669569237edec543e3b',1,'tfm_read_service_range']]],
+  ['stat0_10',['STAT0',['../structs__drv__bq25180__i2c__reg__t.html#a0ffecd62765e18528abc51b7d2a6939c',1,'s_drv_bq25180_i2c_reg_t']]],
+  ['stat1_11',['STAT1',['../structs__drv__bq25180__i2c__reg__t.html#a841b601365fac9e501e5c40b04ce74f5',1,'s_drv_bq25180_i2c_reg_t']]],
+  ['step_12',['step',['../structtfm__crypto__pack__iovec.html#a8c914c6b3a657d71be3163aafeb6fafc',1,'tfm_crypto_pack_iovec']]],
+  ['svs_13',['svs',['../group___g_n_s_s.html#gab97746fe54fd547a724f580e2fd8911b',1,'GnssController']]],
+  ['sys_5fmode_14',['SYS_MODE',['../structs_reg_sys_reg.html#a0f221c897658284869899635fc1c0294',1,'sRegSysReg']]],
+  ['sys_5freg_15',['SYS_REG',['../structs__drv__bq25180__i2c__reg__t.html#a614d883daea47b683d25f1da4be94880',1,'s_drv_bq25180_i2c_reg_t']]],
+  ['sys_5freg_5fctrl_16',['SYS_REG_CTRL',['../structs_reg_sys_reg.html#aff8cb5e6a389f6e50723ca939c51d338',1,'sRegSysReg']]]
+];

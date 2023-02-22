@@ -5,11 +5,11 @@
  *
  * \file    ixfreactive.h
  *
- * \addtogroup XF eXecution Framework
+ * @addtogroup XF eXecution Framework
  * \{
  *
- * \class   IXFReactive
- * \brief   Interface that needs to be implemented by every class having a behaviour.
+ * @class   IXFReactive
+ * @brief   Interface that needs to be implemented by every class having a behaviour.
  *
  * Interface that needs to be implemented by every class having a behaviour. Interface methods are needed by the 
  * other parts of the XF.
@@ -54,9 +54,9 @@ public:
     /* PUBLIC DECLARATION SECTION                                                                                   */
     /*                                                                                                              */
     /* ************************************************************************************************************ */
-    virtual void startBehaviour() = 0;                  ///< \brief Starts the behaviour.
-    virtual void pushEvent(IXFEvent* pEvent) = 0;       ///< \brief Injects an event into the class.
-    virtual EventStatus process(IXFEvent* pEvent) = 0;  ///< \brief Called by the thread to process an event.
+    virtual void startBehaviour() = 0;                  ///< @brief Starts the behaviour.
+    virtual void pushEvent(IXFEvent* pEvent) = 0;       ///< @brief Injects an event into the class.
+    virtual EventStatus process(IXFEvent* pEvent) = 0;  ///< @brief Called by the thread to process an event.
 };
 
 /** \} */
