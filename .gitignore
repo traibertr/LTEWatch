@@ -2,6 +2,7 @@
 2_Hardware/Altium/AltiumLib_HEVS/*
 3_Software/LTEWatch_App/build/*
 3_Software/LTEWatch_App/build_cb/*
+3_Software/LTEWatch_App/doc/doxygen/latex/*
 *.aux
 *.log
 *.out
