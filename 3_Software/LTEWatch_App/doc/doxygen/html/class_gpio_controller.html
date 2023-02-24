@@ -20,6 +20,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="LTEWatch_Logo_White_Small.png"/></td>
   <td id="projectalign">
    <div id="projectname">LTEWatch<span id="projectnumber">&#160;1.0</span>
    </div>
@@ -80,9 +81,9 @@ $(function() {
 <p><code>#include &lt;<a class="el" href="gpiocontroller_8h_source.html">gpiocontroller.h</a>&gt;</code></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >This class is the controller of gpios used as inputs. </p>
-<h1><a class="anchor" id="autotoc_md16"></a>
+<h1><a class="anchor" id="autotoc_md17"></a>
 GPIO Controller</h1>
-<h2><a class="anchor" id="autotoc_md17"></a>
+<h2><a class="anchor" id="autotoc_md18"></a>
 De-bouncer</h2>
 <p >to be sure that a pressure has been applied on a gpio, we have implemented a de-bouncer which use an <code>app_timer</code> with the parameters:</p>
 <ul>
@@ -90,7 +91,7 @@ De-bouncer</h2>
 <li>GPIO_DEBOUNCE_MS_DELAY: <a class="el" href="class_the.html" title="Our PicoEvent processing machine.">The</a> debounce time [ms].</li>
 </ul>
 <p >In other words when an activity is detected on a gpio, it must be applied at least for a certain time at least to be considered as a real gpio's action. As soon as the debounce time is over the controller keep and increase the duration of each gpio's action until a release and determines if it's a single click, a long or very long press that has been applied.</p>
-<h2><a class="anchor" id="autotoc_md18"></a>
+<h2><a class="anchor" id="autotoc_md19"></a>
 Notification</h2>
 <p >When the gesture is identified, the controller will notify the observer of that fact !</p>
 <p >Initial author: Patrice Rudaz Creation date: 2016-01-09</p>

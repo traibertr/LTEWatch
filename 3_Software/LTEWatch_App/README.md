@@ -2,7 +2,7 @@
  Smart Watch Application
 
 ## LTEWatch prototype Board v1.0:
-![LTEWatch Prototype Board v1.0](/doc/img/ltewatch_img_1.png)
+![LTEWatch Prototype Board v1.0](doc/img/ltewatch_img_1.png)
 ### Description:
 
 ### Board Pin Assignment:
@@ -53,7 +53,11 @@
 
 ### LTEWatch Firmware Diagram:
 
-![](/doc/img/software_diag.svg)
+![](doc/img/software_diag.svg)
 
 ### LTEWatch Firmware Layers Decomposition Diagram:
-![](/doc/img/software_layers.svg)
+![](doc/img/software_layers.svg)
+
+
+## Project Documentation
+**LTEWatch application documentation:** ``LTEWatch/3_Software/LTEWatch_App/doc/doxygen/html/index.html``

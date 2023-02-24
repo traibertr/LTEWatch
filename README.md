@@ -1,5 +1,10 @@
+
 # **Master Thesis - MSE Master - HES-SO**
 # Analog LTE-M / NB-IoT Watch
+
+![Logo](/1_Document/4_Logo/LTEWatch_Logo_White_Small.png)
+
+-----------------------
 
 ![](1_Document/2_Report/Include/Figure/LTEWatch_img/ltewatch_img_2.png)
 

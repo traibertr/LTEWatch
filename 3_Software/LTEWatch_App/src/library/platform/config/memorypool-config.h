@@ -26,7 +26,7 @@
 // Amount of objects to be handled by the memory pool
 #define MP_SMALL_OBJECTS_COUNT      24//20      ///< Amount of small objects
 #define MP_MEDIUM_OBJECTS_COUNT     16//16      ///< Amount of medium objects
-#define MP_BIG_OBJECTS_COUNT        24//20      ///< Amount of big objects
+#define MP_BIG_OBJECTS_COUNT        32//20      ///< Amount of big objects
 #define MP_HUGE_OBJECTS_COUNT       4//4       ///< Amount of huge objects
 #define MP_VAST_OBJECTS_COUNT       16//16      ///< Amount of huge objects
 

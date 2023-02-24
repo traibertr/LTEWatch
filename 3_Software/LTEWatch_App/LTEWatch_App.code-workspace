@@ -45,7 +45,8 @@
 			"gnss-config.h": "c",
 			"modem_info.h": "c",
 			"chrono": "c",
-			"limits": "c"
+			"limits": "c",
+			"memorypool-config.h": "c"
 		}
 	}
 }
